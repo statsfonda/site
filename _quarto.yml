@@ -41,6 +41,7 @@ book:
      - content/references.qmd
      - content/ref.qmd
      - content/app1.qmd
+     - content/app3.qmd
      - content/app2.qmd
 
 

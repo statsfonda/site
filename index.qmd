@@ -38,6 +38,7 @@ Ces notes sont mises en lignes et totalement accessibles via [Quarto](https://qu
 
 
 <!--\newcommand{\bx}{\boldsymbol{x}}
+\newcommand{\bmu}{\boldsymbol{\mu}}
 \newcommand{\bt}{\boldsymbol{\theta}}
 \newcommand{\dkl}{\mathrm{d}_{\mathrm{KL}}}
 \newcommand{\dtv}{\mathrm{d}_{\mathrm{TV}}}-->
