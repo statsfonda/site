@@ -288,8 +288,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../content/app3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Formules d’inversion</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../content/app2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">50&nbsp;nuances de TCL</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">50&nbsp;nuances de TCL</span></span></a>
   </div>
 </li>
     </ul>
@@ -314,6 +320,7 @@ ul.task-list li input[type="checkbox"] {
 $$
 \newcommand{\bx}{\boldsymbol{x}}
 \newcommand{\bt}{\boldsymbol{\theta}}
+\newcommand{\bmu}{\boldsymbol{\mu}}
 \newcommand{\dkl}{\mathrm{d}_{\mathrm{KL}}}
 \newcommand{\dtv}{\mathrm{d}_{\mathrm{TV}}}
 \newcommand{\emv}{\hat{\theta}_{\mathrm{emv}}}
@@ -362,15 +369,23 @@ $$
 </section>
 <section id="test-de-significativité-globale-de-fisher" class="level2" data-number="12.3">
 <h2 data-number="12.3" class="anchored" data-anchor-id="test-de-significativité-globale-de-fisher"><span class="header-section-number">12.3</span> Test de significativité globale de Fisher</h2>
-<p>La significativité <em>globale</em> de la régression consiste à tester si tous les coefficients sont significatifs, sauf la constante. Il s’agit donc du test de l’hypothèse nulle <span class="math display">\[ \theta_2 = \dotsb = \theta_d = 0.\]</span> Il s’agit bien d’un test de contraintes linéaires au sens du paragraphe précédent : il y a exactement <span class="math inline">\(d-1\)</span> contraintes linéaires. En notant <span class="math inline">\(C\)</span> la matrice de taille <span class="math inline">\((d-1, d)\)</span> <span class="math display">\[C = \begin{pmatrix}0 &amp; 1 &amp;&amp; 0 \\ \vdots \\&nbsp;0 &amp; \dots &amp;&amp; 1 \end{pmatrix}, \]</span> on teste bien <span class="math inline">\(C\bt = 0\)</span>. La matrice <span class="math inline">\(C(X^\top X)^{-1}C^\top\)</span> n’est autre que le bloc <span class="math inline">\(B_X\)</span> obtenu à partir de <span class="math inline">\((X^\top X)^{-1}\)</span> en lui enlevant la première ligne et la première colonne (qui correspondent à la constante). La statistique de test devient alors <span id="eq-statfisher1"><span class="math display">\[ \frac{\langle \hat{\bt'}, B_X^{-1} \hat{\bt'} \rangle}{(d-1)\hat{\sigma}^2_n}. \tag{12.2}\]</span></span> Cette quantité peut sembler difficile à calculer : elle ne l’est pas, et s’exprime à l’aide du coefficient de détermination <a href="ch5_0.html#def-rdeux">Définition&nbsp;<span>9.1</span></a>.</p>
+<p>La significativité <em>globale</em> de la régression consiste à tester si tous les coefficients sont significatifs, sauf la constante. Il s’agit donc du test de l’hypothèse nulle <span class="math display">\[ \theta_2 = \dotsb = \theta_d = 0.\]</span> Il s’agit d’un test de contraintes linéaires au sens du paragraphe précédent : il y a <span class="math inline">\(d-1\)</span> contraintes linéaires. En notant <span class="math inline">\(C\)</span> la matrice de taille <span class="math inline">\((d-1, d)\)</span> <span class="math display">\[C = \begin{pmatrix}0 &amp; 1 &amp;&amp; 0 \\ \vdots \\&nbsp;0 &amp; \dots &amp;&amp; 1 \end{pmatrix}, \]</span> on teste bien <span class="math inline">\(C\bt = 0\)</span>. Dans la statistique de Wald associée à cette contrainte, la matrice <span class="math inline">\(C(X^\top X)^{-1}C^\top\)</span> est le bloc <span class="math inline">\(B_X\)</span> obtenu à partir de <span class="math inline">\((X^\top X)^{-1}\)</span> en enlevant la première ligne et la première colonne (qui correspondent à la constante). Il se trouve que ce test possède une expression plus simple.</p>
 <div id="thm-fisher-sig" class="theorem">
 <p><span class="theorem-title"><strong>Théorème 12.3 </strong></span><span class="math display">\[\frac{R^2}{1-R^2}\frac{n-d}{d-1} \sim \mathscr{F}_{d-1, n-d}. \]</span></p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Preuve</em>. </span>Il suffit de montrer que l’expression dans <a href="#eq-statfisher1">Équation&nbsp;<span>12.2</span></a> est égale à <span class="math inline">\((n-d)R^2/(d-1)(1-R^2)\)</span>.</p>
+<p><span class="proof-title"><em>Preuve</em>. </span>Il existe une formule qui permet d’inverser des matrices par blocs :&nbsp;la formule de Schur (<a href="app3.html#thm-schur">Théorème&nbsp;<span>21.1</span></a>). Commençons par décomposer <span class="math inline">\(X\)</span> sous la forme<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="math inline">\([\mathbf{1}, X_0]\)</span>, avec <span class="math inline">\(X_0\)</span> de taille <span class="math inline">\(n \times (d-1)\)</span> et <span class="math inline">\(\mathbf{1}\)</span> le vecteur constant égal à 1. La matrice <span class="math inline">\(X^\top X\)</span> vaut <span class="math display">\[\begin{bmatrix} n &amp; u \\ v &amp; X_0^\top X_0 \end{bmatrix}\]</span> où <span class="math inline">\(u\)</span> est le vecteur ligne <span class="math inline">\(\mathbf{1}^\top X_0\)</span> et <span class="math inline">\(v\)</span> est le vecteur colonne <span class="math inline">\(X_0^\top \mathbf{1}\)</span>. La formule de Schur dit que l’inverse de cette matrice est <span class="math display">\[\begin{bmatrix}* &amp; * \\ * &amp; (X_0^\top X_0 - vu/n)^{-1}\end{bmatrix} \]</span> La matrice <span class="math inline">\(uv/n\)</span> s’écrit <span class="math inline">\(X_0^\top E X_0\)</span>, où <span class="math inline">\(E = \mathbf{1}\mathbf{1}^\top / n\)</span> est la projection orthogonale sur le sous-espace vectoriel engendré par <span class="math inline">\(\mathbf{1}\)</span>. Comme <span class="math inline">\((I-E)^2=I-E\)</span>, on peut écrire <span class="math inline">\((X_0^\top X_0 - vu/n)^{-1}\)</span> sous la forme <span class="math inline">\(X_1^\top X_1\)</span>, où <span class="math inline">\(X_1 = (I-E)X_0\)</span>. La statistique de Wald s’écrit alors <span id="eq-statfisher2"><span class="math display">\[\frac{\langle \hat{\bt}_1, X_1^\top X_1 \hat{\bt}_1\rangle}{(d-1)\hat{\sigma}^2_n}  \tag{12.2}\]</span></span> où <span class="math inline">\(\hat{\bt}_1 = C\hat{\bt}\)</span> est composé des entrées de <span class="math inline">\(\hat{\bt}\)</span> sauf la première. On reconnaît, en haut, la norme <span class="math inline">\(|X_1 \hat{\bt}_1|^2\)</span>.</p>
+<p>Il suffit de montrer que l’expression dans <a href="#eq-statfisher2">Équation&nbsp;<span>12.2</span></a> est égale à <span class="math inline">\((n-d)R^2/(d-1)(1-R^2)\)</span>. On rappelle que <span class="math inline">\(R^2 = 1 - |\hat{Y} - Y|^2 / |\bar{y}\mathbf{1} - Y|^2\)</span>. L’expression <span class="math inline">\(R^2/(1-R^2)\)</span> devrait donc valoir <span class="math display">\[\frac{|\bar{y}\mathbf{1} - Y|^2 - |\hat{Y} - Y|^2}{|\hat{Y} - Y|^2}.\]</span> Au vu de <a href="#eq-statfisher2">Équation&nbsp;<span>12.2</span></a> et du fait que <span class="math inline">\(\hat{\sigma}^2_n = |\hat{Y} - Y|^2 / (n-d)\)</span>, il suffit de montrer que <span class="math inline">\(|X_1 \hat{\bt}_1|^2\)</span> et <span class="math inline">\(|\bar{y}\mathbf{1} - Y|^2 - |\hat{Y} - Y|^2\)</span> sont égales.</p>
+<p>Le vecteur <span class="math inline">\(\bar{y}\mathbf{1}\)</span> est la projection orthogonale de <span class="math inline">\(Y\)</span> sur <span class="math inline">\(\mathbf{1}\)</span>. Ainsi, on a <span class="math display">\[ Y = \hat{\varepsilon} + \bar{y}\mathbf{1} + (\hat{Y} - \bar{y}\mathbf{1})\]</span> et ces trois vecteurs sont orthogonaux. Le théorème de Pythagore dit que <span class="math inline">\(|\bar{y}\mathbf{1} - Y|^2 - |\hat{Y} - Y|^2\)</span> est égal à <span class="math inline">\(|\hat{Y} - \bar{y}\mathbf{1}|^2\)</span>. On reconnaît la projection orthogonale de <span class="math inline">\(Y - \bar{y}\mathbf{1} = (I-E)Y\)</span> sur l’espace vectoriel engendré par les colonnes de la matrice <span class="math inline">\(X_1 = (I-E)X_0\)</span>. Si l’on note <span class="math inline">\(\tilde{\bt}_1\)</span> l’estimateur des MCO de la régression de <span class="math inline">\((I-E)Y\)</span> vers <span class="math inline">\((I-E)X_0\)</span>, il suffit donc de montrer que <span class="math inline">\(\tilde{\bt}_1 = \hat{\bt}_1\)</span> pour terminer la démonstration. C’est exactement le théorème de Frish-Waugh <a href="ch5_0.html#thm-fw">Théorème&nbsp;<span>9.2</span></a>.</p>
 </div>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Ne pas oublier que sauf mention contraire, nous faisons des régressions avec constantes, d’où la présence de <span class="math inline">\(\mathbf{1}\)</span> en tant que colonne de <span class="math inline">\(X\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->

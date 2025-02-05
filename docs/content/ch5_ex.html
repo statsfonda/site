@@ -288,8 +288,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../content/app3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Formules d’inversion</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../content/app2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">50&nbsp;nuances de TCL</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">50&nbsp;nuances de TCL</span></span></a>
   </div>
 </li>
     </ul>
@@ -313,6 +319,7 @@ ul.task-list li input[type="checkbox"] {
 $$
 \newcommand{\bx}{\boldsymbol{x}}
 \newcommand{\bt}{\boldsymbol{\theta}}
+\newcommand{\bmu}{\boldsymbol{\mu}}
 \newcommand{\dkl}{\mathrm{d}_{\mathrm{KL}}}
 \newcommand{\dtv}{\mathrm{d}_{\mathrm{TV}}}
 \newcommand{\emv}{\hat{\theta}_{\mathrm{emv}}}
@@ -381,7 +388,7 @@ $$
 <p><span class="theorem-title"><strong>Exercice 4 </strong></span>Soient <span class="math inline">\((x_1, y_1), \dotsc, (x_n, y_n)\)</span> des points dans <span class="math inline">\(\mathbb{R}^2\)</span>. Comparer l’ajustement affine des <span class="math inline">\(x\)</span> vers les <span class="math inline">\(y\)</span>, et l’ajustement affine des <span class="math inline">\(y\)</span> vers les <span class="math inline">\(x\)</span> (sans constantes).</p>
 </div>
 <div id="exr-fw" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 5 (Théorème de Frish-Waugh) </strong></span>Soit <span class="math inline">\(Y\)</span> un vecteur de variables à expliquer de taille <span class="math inline">\(n\)</span>, et soient <span class="math inline">\(X,Z\)</span> deux matrices de variables explicatives, de dimensions <span class="math inline">\((n,d)\)</span> et <span class="math inline">\((n,f)\)</span>. Soient <span class="math inline">\(\hat{\bt}\)</span> et <span class="math inline">\(\hat{\bt}_X\)</span> les estimateurs des moindres carrés des deux régressions <span class="math inline">\(Y = X\bt + Z{\boldsymbol \mu} + \varepsilon\)</span> d’une part, et <span class="math inline">\(PY = PX\bt + P\varepsilon\)</span> d’autre part, où <span class="math inline">\(P\)</span> est la matrice de projection sur le sous-espace vectoriel orthogonal aux colonnes de <span class="math inline">\(Z\)</span>. Montrer que <span class="math inline">\(\hat{\bt} = \hat{\bt}_X\)</span>.</p>
+<p><span class="theorem-title"><strong>Exercice 5 (Théorème de Frish-Waugh) </strong></span>Soit <span class="math inline">\(Y\)</span> un vecteur de variables à expliquer de taille <span class="math inline">\(n\)</span>, et soient <span class="math inline">\(X,Z\)</span> deux matrices de variables explicatives, de dimensions <span class="math inline">\((n,d)\)</span> et <span class="math inline">\((n,f)\)</span>. Soient <span class="math inline">\(\hat{\bt}\)</span> et <span class="math inline">\(\hat{\bt}_X\)</span> les estimateurs des moindres carrés des deux régressions <span class="math inline">\(Y = X\bt + Z\bmu + \varepsilon\)</span> d’une part, et <span class="math inline">\(PY = PX\bt + P\varepsilon\)</span> d’autre part, où <span class="math inline">\(P\)</span> est la matrice de projection sur le sous-espace vectoriel orthogonal aux colonnes de <span class="math inline">\(Z\)</span>. Montrer que <span class="math inline">\(\hat{\bt} = \hat{\bt}_X\)</span>.</p>
 </div>
 <div id="exr-chow" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercice 6 (Test de Chow) </strong></span>On dispose de deux jeux de données, disons <span class="math inline">\((X^1_1, Y^1_1), \dotsc, (X^1_n, Y^2_n)\)</span> et <span class="math inline">\((X^2_{1}, Y^2_{1}), \dotsc, (X^2_m, Y^2_m)\)</span>. Dans les deux régressions <span class="math inline">\(Y^1 = X^1 \bt^1+ \varepsilon^1\)</span> et <span class="math inline">\(Y^2 = X^2\bt^2+\varepsilon^2\)</span>, on souhaite tester si <span class="math inline">\(\bt^1 = \bt^2\)</span>.</p>

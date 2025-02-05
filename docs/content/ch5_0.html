@@ -288,8 +288,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../content/app3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Formules d’inversion</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../content/app2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">50&nbsp;nuances de TCL</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">50&nbsp;nuances de TCL</span></span></a>
   </div>
 </li>
     </ul>
@@ -305,6 +311,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#ajustement-affine-en-une-dimension." id="toc-ajustement-affine-en-une-dimension." class="nav-link active" data-scroll-target="#ajustement-affine-en-une-dimension."><span class="header-section-number">9.1</span> Ajustement affine en une dimension.</a></li>
   <li><a href="#moindres-carrés-ordinaires" id="toc-moindres-carrés-ordinaires" class="nav-link" data-scroll-target="#moindres-carrés-ordinaires"><span class="header-section-number">9.2</span> Moindres carrés ordinaires</a></li>
   <li><a href="#résidus-et-r2" id="toc-résidus-et-r2" class="nav-link" data-scroll-target="#résidus-et-r2"><span class="header-section-number">9.3</span> Résidus et <span class="math inline">\(R^2\)</span></a></li>
+  <li><a href="#théorème-de-cohérence" id="toc-théorème-de-cohérence" class="nav-link" data-scroll-target="#théorème-de-cohérence"><span class="header-section-number">9.4</span> Théorème de cohérence</a></li>
   </ul>
 </nav>
     </div>
@@ -314,6 +321,7 @@ ul.task-list li input[type="checkbox"] {
 $$
 \newcommand{\bx}{\boldsymbol{x}}
 \newcommand{\bt}{\boldsymbol{\theta}}
+\newcommand{\bmu}{\boldsymbol{\mu}}
 \newcommand{\dkl}{\mathrm{d}_{\mathrm{KL}}}
 \newcommand{\dtv}{\mathrm{d}_{\mathrm{TV}}}
 \newcommand{\emv}{\hat{\theta}_{\mathrm{emv}}}
@@ -376,6 +384,16 @@ $$
 <p><img src="../images/bad_regression.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Cet ajustement affine est vraiment très très mauvais.</figcaption>
 </figure>
+</div>
+</section>
+<section id="théorème-de-cohérence" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="théorème-de-cohérence"><span class="header-section-number">9.4</span> Théorème de cohérence</h2>
+<p>On cherche à faire une régression linéaire de <span class="math inline">\(Y\)</span> sur deux ensembles de variables explicatives <span class="math inline">\(X\in \mathbb{R}^{n,d}\)</span> et <span class="math inline">\(Z \in \mathbb{R}^{n,k}\)</span>. L’estimateur des MCO qui utilise toutes ces variables est <span id="eq-frishwaugh"><span class="math display">\[(\hat{\bt}, \hat{\bmu}) \in \arg\min_{\bt, \bmu}|Y - X \bt - Z\bmu|^2. \tag{9.4}\]</span></span></p>
+<p>Si j’avais omis la variable explicative <span class="math inline">\(Z\)</span> et que j’avais effectué la régression de <span class="math inline">\(Y\)</span> vers <span class="math inline">\(X\)</span>, j’aurais obtenu <span class="math display">\[\hat{\boldsymbol \beta} = \arg \min_{\boldsymbol \beta} |Y - X{\boldsymbol \beta}|^2.\]</span> Les deux estimateurs <span class="math inline">\(\hat{\bt}\)</span> et <span class="math inline">\(\hat{\boldsymbol \beta}\)</span> capturent l’effet de <span class="math inline">\(X\)</span> sur <span class="math inline">\(Y\)</span> :&nbsp;ils devraient donc être égaux.</p>
+<p><em>C’est faux en général</em>.</p>
+<p>Si l’on omet les variables <span class="math inline">\(Z\)</span>, il faut « enlever <span class="math inline">\(Z\)</span> de <span class="math inline">\(Y\)</span> et de <span class="math inline">\(X\)</span> », c’est-à-dire projeter sur l’orthogonal de l’espace des colonnes de <span class="math inline">\(Z\)</span>. On notera <span class="math inline">\(Y_Z\)</span> et <span class="math inline">\(X_Z\)</span> les projections de <span class="math inline">\(Y\)</span> et <span class="math inline">\(X\)</span> sur cet espace.</p>
+<div id="thm-fw" class="theorem">
+<p><span class="theorem-title"><strong>Théorème 9.2 (Théorème de Frish-Waugh) </strong></span>L’estimateur <span class="math inline">\(\hat{\bt}\)</span> obtenu dans la régression <a href="#eq-frishwaugh">Équation&nbsp;<span>9.4</span></a> de <span class="math inline">\(Y\)</span> sur <span class="math inline">\(X\)</span> et <span class="math inline">\(Z\)</span> est égal au <span class="math inline">\(\hat{\bt}_X\)</span> obtenu dans la régression de <span class="math inline">\(Y_Z\)</span> sur <span class="math inline">\(X_Z\)</span>, <span class="math display">\[\hat{\bt}_X = \arg \min_{\bt} |Y_Z - X_Z \bt |^2.\]</span></p>
 </div>
 
 
