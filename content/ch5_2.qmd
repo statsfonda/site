@@ -59,11 +59,11 @@ où $f$ est le quantile d'ordre $1-\alpha$ de la loi $\mathscr{F}_{r,n-d}$.
 
 La significativité *globale* de la régression consiste à tester si tous les coefficients sont significatifs, sauf la constante. Il s'agit donc du test de l'hypothèse nulle
 $$ \theta_2 = \dotsb = \theta_d = 0.$$
-Il s'agit bien d'un test de contraintes linéaires au sens du paragraphe précédent : il y a exactement $d-1$ contraintes linéaires. En notant $C$ la matrice de taille $(d-1, d)$
+Il s'agit d'un test de contraintes linéaires au sens du paragraphe précédent : il y a $d-1$ contraintes linéaires. En notant $C$ la matrice de taille $(d-1, d)$
 $$C = \begin{pmatrix}0 & 1 && 0 \\ \vdots \\ 0 & \dots && 1 \end{pmatrix}, $$
-on teste bien $C\bt = 0$. La matrice $C(X^\top X)^{-1}C^\top$ n'est autre que le bloc $B_X$ obtenu à partir de $(X^\top X)^{-1}$ en lui enlevant la première ligne et la première colonne (qui correspondent à la constante). La statistique de test devient alors 
-$$ \frac{\langle \hat{\bt'}, B_X^{-1} \hat{\bt'} \rangle}{(d-1)\hat{\sigma}^2_n}.$${#eq-statfisher1}
-Cette quantité peut sembler difficile à calculer : elle ne l'est pas, et s'exprime à l'aide du coefficient de détermination @def-rdeux. 
+on teste bien $C\bt = 0$. Dans la statistique de Wald associée à cette contrainte, la matrice $C(X^\top X)^{-1}C^\top$ est le bloc $B_X$ obtenu à partir de $(X^\top X)^{-1}$ en enlevant la première ligne et la première colonne (qui correspondent à la constante). Il se trouve que ce test possède une expression plus simple.
+
+
 
 :::{#thm-fisher-sig}
 
@@ -72,6 +72,30 @@ $$\frac{R^2}{1-R^2}\frac{n-d}{d-1} \sim \mathscr{F}_{d-1, n-d}. $$
 :::
 
 :::{.proof}
-Il suffit de montrer que l'expression dans @eq-statfisher1 est égale à $(n-d)R^2/(d-1)(1-R^2)$. 
+
+
+Il existe une formule qui permet d'inverser des matrices par blocs : la formule de Schur (@thm-schur). Commençons par décomposer $X$ sous la forme[^1] $[\mathbf{1}, X_0]$, avec $X_0$ de taille $n \times (d-1)$ et $\mathbf{1}$ le vecteur constant égal à 1. La matrice $X^\top X$ vaut
+$$\begin{bmatrix} n & u \\ v & X_0^\top X_0 \end{bmatrix}$$
+où $u$ est le vecteur ligne $\mathbf{1}^\top X_0$ et $v$ est le vecteur colonne $X_0^\top \mathbf{1}$. La formule de Schur dit que l'inverse de cette matrice est
+$$\begin{bmatrix}* & * \\ * & (X_0^\top X_0 - vu/n)^{-1}\end{bmatrix} $$
+La matrice $uv/n$ s'écrit $X_0^\top E X_0$, où $E = \mathbf{1}\mathbf{1}^\top / n$ est la projection orthogonale sur le sous-espace vectoriel engendré par $\mathbf{1}$. Comme $(I-E)^2=I-E$, on peut écrire $(X_0^\top X_0 - vu/n)^{-1}$ sous la forme $X_1^\top X_1$, où $X_1 = (I-E)X_0$. La statistique de Wald s'écrit alors
+$$\frac{\langle \hat{\bt}_1, X_1^\top X_1 \hat{\bt}_1\rangle}{(d-1)\hat{\sigma}^2_n} $${#eq-statfisher2}
+où $\hat{\bt}_1 = C\hat{\bt}$ est composé des entrées de $\hat{\bt}$ sauf la première. On reconnaît, en haut, la norme $|X_1 \hat{\bt}_1|^2$. 
+
+
+Il suffit de montrer que l'expression dans @eq-statfisher2 est égale à $(n-d)R^2/(d-1)(1-R^2)$. On rappelle que $R^2 = 1 - |\hat{Y} - Y|^2 / |\bar{y}\mathbf{1} - Y|^2$. L'expression $R^2/(1-R^2)$ devrait donc valoir 
+$$\frac{|\bar{y}\mathbf{1} - Y|^2 - |\hat{Y} - Y|^2}{|\hat{Y} - Y|^2}.$$ 
+Au vu de @eq-statfisher2 et du fait que $\hat{\sigma}^2_n = |\hat{Y} - Y|^2 / (n-d)$, il suffit de montrer que $|X_1 \hat{\bt}_1|^2$ et $|\bar{y}\mathbf{1} - Y|^2 - |\hat{Y} - Y|^2$ sont égales. 
+
+Le vecteur $\bar{y}\mathbf{1}$ est la projection orthogonale de $Y$ sur $\mathbf{1}$. Ainsi, on a 
+$$ Y = \hat{\varepsilon} + \bar{y}\mathbf{1} + (\hat{Y} - \bar{y}\mathbf{1})$$
+et ces trois vecteurs sont orthogonaux. 
+Le théorème de Pythagore dit que $|\bar{y}\mathbf{1} - Y|^2 - |\hat{Y} - Y|^2$ est égal à $|\hat{Y} - \bar{y}\mathbf{1}|^2$. On reconnaît la projection orthogonale de $Y - \bar{y}\mathbf{1} = (I-E)Y$ sur l'espace vectoriel engendré par les colonnes de la matrice $X_1 = (I-E)X_0$. Si l'on note $\tilde{\bt}_1$ l'estimateur des MCO de la régression de $(I-E)Y$ vers $(I-E)X_0$, il suffit donc de montrer que $\tilde{\bt}_1 = \hat{\bt}_1$ pour terminer la démonstration. C'est exactement le théorème de Frish-Waugh @thm-fw.
 
 :::
+
+
+
+
+
+[^1]: Ne pas oublier que sauf mention contraire, nous faisons des régressions avec constantes, d'où la présence de $\mathbf{1}$ en tant que colonne de $X$. 

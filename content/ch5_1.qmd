@@ -37,7 +37,7 @@ La transformée de Fourier de $MX$ est $\mathbb{E}[\exp(i\langle t, MX\rangle)]$
 ## Conditionnement gaussien
 
 Soit $(X,Y)$ un vecteur gaussien de dimension $n+m$, avec $X \in \mathbb{R}^n$ et $Y \in \mathbb{R}^m$. On peut écrire sa moyenne $\mu$ en deux blocs
-$$ \mu = \begin{bmatrix}\mu_1 \\ \mu_2 \end{bmatrix}$$
+$$ \mu = \begin{bmatrix}\mu_1 \\ \mu_2 \end{bmatrix}$${#eq-condgaussesp}
 et sa covariance $\Sigma$ en quatre blocs 
 $$ \Sigma = \begin{bmatrix}\Sigma_{1,1} & \Sigma_{1,2} \\ \Sigma_{2,1} & \Sigma_{2,2} \end{bmatrix}$$
 où , par symétrie, $\Sigma_{2,1} = \Sigma_{1,2}^\top$. 
@@ -45,15 +45,22 @@ où , par symétrie, $\Sigma_{2,1} = \Sigma_{1,2}^\top$.
 :::{#thm-condgaussien}
 
 La loi de $X$ conditionnellement à $Y$ est une loi gaussienne de moyenne
-$$\mu_1 + \Sigma_{1,2}\Sigma_{2,2}^{-1}(X_2-\mu_2) $$
+$$\mu_1 + \Sigma_{1,2}\Sigma_{2,2}^{-1}(Y-\mu_2) $$
 et de covariance
 $$ \Sigma_{1,1} - \Sigma_{2,1}\Sigma_{2,2}^{-1}\Sigma_{1,2}.$${#eq-schur}
 :::
-La formule @eq-schur est appelée *complément de Schur*. Son inverse est égal au bloc inférieur-droit de l'inverse de $\Sigma$. Cette formule permet d'inverser des matrices par blocs. 
+La formule @eq-schur est appelée *complément de Schur*. Son inverse est égal au bloc inférieur-droit de l'inverse de $\Sigma$ comme expliqué dans @sec-al2. 
 
-L'expression *loi conditionnelle* signifie ici que, pour toute fonction test $\varphi : \mathbb{R}^n \to \mathbb{R}$, l'espérance conditionnelle $\mathbb{E}[\varphi(X)\mid Y]$, qui est une variable aléatoire $Y$-mesurable, vaut
-$$\frac{1}{(2\pi \det(S^{-1}))^{n/2}}\int_{\mathbb{R}^n} \varphi(x) e^{-\frac{\langle X-1 - (\mu_1 + \Sigma_{1,2}\Sigma_{2,2}^{-1}(X_2-\mu_2)) S^{-1}(X_1 - (\mu_1 + \Sigma_{1,2}\Sigma_{2,2}^{-1}(X_2-\mu_2)))\rangle}{2}}dx $$
-où $S = \Sigma_{1,1} - \Sigma_{2,1}\Sigma_{2,2}^{-1}\Sigma_{1,2}$. 
+
+:::{.proof}
+
+Je préfère laisser mon lecteur confiant méditer lui-même sur le fait que la loi conditionnelle d'une partie $X$ d'un vecteur gaussien contre l'autre partie $Y$ du même vecteur est elle-même une loi gaussienne, dont il suffit par conséquent de calculer l'espérance et la variance pour l'identifier. On peut le faire par une technique puissante : on cherche à « enlever Y de X ». Plus précisément, on va essayer d'écrire $$X = Z + AY$$ où $Z$ est indépendante de $Y$ et $A$ est une matrice à trouver. Comme $\mathrm{Cov}(X,Y) = \Sigma_{1,2}$ et qu'on cherche $Z,A$ tels que $\mathrm{Cov}(Z,Y)=0$, on voit vite que $A$ doit vérifier $\Sigma_{1,2} = A \Sigma_{2,2}$, et donc que 
+$$ Z = X - \Sigma_{1,2}\Sigma_{2,2}^{-1}Y.$$
+Comme $Z$ et $Y$ sont décorrélées et conjointement gaussiennes, elles sont indépendantes, et $\mathbb{E}[Z|Y]=\mathbb{E}[Z] = \mu_1 - A\mu_2$. Ainsi, $\mathbb{E}[X|Y] = \mathbb{E}[Z] - AY$ et on en déduit tout de suite @eq-condgaussesp. Pour la variance conditionnelle, $\mathrm{Var}(X|Y) = \mathrm{Var}(Z) + A\mathrm{Var}(Y)A^\top$ et @eq-schur en découle facilement.
+
+
+
+:::
 
 
 ## Théorème de Cochran

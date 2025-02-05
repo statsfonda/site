@@ -94,3 +94,28 @@ Plus le coefficient de détermination est proche de 1, meilleure est la régress
 ![Cet ajustement affine est vraiment très très mauvais.](/images/bad_regression.png){width=70%}
 
 :::
+
+
+## Théorème de cohérence
+
+On cherche à faire une régression linéaire de $Y$ sur deux ensembles de variables explicatives $X\in \mathbb{R}^{n,d}$ et $Z \in \mathbb{R}^{n,k}$. L'estimateur des MCO qui utilise toutes ces variables est 
+$$(\hat{\bt}, \hat{\bmu}) \in \arg\min_{\bt, \bmu}|Y - X \bt - Z\bmu|^2.$${#eq-frishwaugh}
+
+
+Si j'avais omis la variable explicative $Z$ et que j'avais effectué la régression de $Y$ vers $X$, j'aurais obtenu 
+$$\hat{\boldsymbol \beta} = \arg \min_{\boldsymbol \beta} |Y - X{\boldsymbol \beta}|^2.$$
+Les deux estimateurs $\hat{\bt}$ et $\hat{\boldsymbol \beta}$ capturent l'effet de $X$ sur $Y$ : ils devraient donc être égaux.  
+
+*C'est faux en général*. 
+
+Si l'on omet les variables $Z$, il faut « enlever $Z$ de $Y$ et de $X$ », c'est-à-dire projeter sur l'orthogonal de l'espace des colonnes de $Z$. On notera $Y_Z$ et $X_Z$ les projections de $Y$ et $X$ sur cet espace. 
+
+:::{#thm-fw}
+
+## Théorème de Frish-Waugh
+
+
+L'estimateur $\hat{\bt}$ obtenu dans la régression @eq-frishwaugh de $Y$ sur $X$ et $Z$ est égal au $\hat{\bt}_X$ obtenu dans la régression de $Y_Z$ sur $X_Z$, 
+$$\hat{\bt}_X = \arg \min_{\bt} |Y_Z - X_Z \bt |^2.$$
+
+:::

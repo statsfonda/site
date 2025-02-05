@@ -1,0 +1,73 @@
+# Formules d'inversion {#sec-al2}
+
+## Inversion par blocs 
+
+On considère une matrice $M$ qui s'écrit par blocs de la façon suivante : 
+$$M = \begin{bmatrix}A & B \\ C & D \end{bmatrix}$${#eq-matbloc}
+Les formules de Schur permettent d'écrire l'inverse de la matrice $M$, s'il existe, en fonction des blocs. Essayons d'inverser la matrice $M$ par un pivot de Gauss. Si $D$ est inversible, en multipliant les colonnes des deux blocs à droite par $-D^{-1}C$ et en les enlevant aux colonnes des blocs de gauche, on arrive à éliminer le bloc $C$ : 
+$$ \begin{bmatrix}A & B \\ C & D \end{bmatrix} \times \begin{bmatrix}I & 0 \\ -D^{-1}C & I \end{bmatrix} = \begin{bmatrix}A - BD^{-1}C & B \\ 0 & D\end{bmatrix}.$${#eq-pivot1}
+On voit que le terme $A - BD^{-1}C$ va jouer un rôle important, puisque s'il est inversible, alors $M$ le sera aussi. 
+
+
+:::{#def-schur}
+
+Le complément de Schur est 
+$$ S = A - BD^{-1}C. $$
+
+:::
+
+Continuons le pivot de Gauss. En faisant la même chose pour éliminer le bloc $B$ par manipulation des lignes, on voit que 
+
+
+$$\begin{bmatrix}I & -BD^{-1} \\ 0 & I \end{bmatrix}\times \begin{bmatrix}S & B \\ 0 & D\end{bmatrix} = \begin{bmatrix}S& 0 \\ 0 & D\end{bmatrix}.$$
+
+On a donc démontré que 
+$$\begin{bmatrix}I & -BD^{-1} \\ 0 & I \end{bmatrix}\times \begin{bmatrix}A & B \\ C & D\end{bmatrix} \times \begin{bmatrix}I & 0 \\ -D^{-1}C & I \end{bmatrix} = \begin{bmatrix}S & 0 \\ 0 & D\end{bmatrix}$$
+L'inverse d'une matrice de la forme 
+$$\begin{bmatrix}I & X \\ 0 & I \end{bmatrix}$$ 
+est 
+$$\begin{bmatrix}I & -X \\ 0 & I \end{bmatrix}$$ 
+donc on obtient la décomposition
+$$ M = \begin{bmatrix}I & BD^{-1} \\ 0 & I \end{bmatrix}\times \begin{bmatrix}S & 0 \\ 0 & D\end{bmatrix} \times \begin{bmatrix}I & 0 \\ D^{-1}C & I \end{bmatrix}.$$
+Enfin, pour inverser $M$ il suffit d'inverser chacune de ces matrices et d'inverser l'ordre[^1], donc
+$$ M^{-1} = \begin{bmatrix}I & 0 \\ -D^{-1}C & I \end{bmatrix}\times \begin{bmatrix}S^{-1} & 0 \\ 0 & D^{-1}\end{bmatrix} \times \begin{bmatrix}I & -BD^{-1} \\ 0 & I \end{bmatrix}.$$
+En faisant cette multiplication matricielle, on obtient la forme générale de l'inverse d'une matrice par blocs. En regroupant tous ces calculs, on obtient le théorème suivant. 
+
+
+
+
+
+:::{#thm-schur}
+
+## Théorème d'inversion de Schur
+
+Si $D$ est inversible et si $A - BD^{-1}C$ est inversible, alors la matrice
+$$M = \begin{bmatrix}A & B \\ C & D\end{bmatrix}$$
+ est inversible et son inverse est donné par
+$$M^{-1} = \begin{bmatrix} (A - BD^{-1}C)^{-1} & -(A - BD^{-1}C)^{-1}BD^{-1} \\ -D^{-1}C(A - BD^{-1}C)^{-1} & D^{-1} + D^{-1}C(A - BD^{-1}C)^{-1}BD^{-1}\end{bmatrix}.$$
+
+:::
+
+En regardant de plus près les identités qui viennent de la démonstration du théorème, on peut tirer beaucoup de choses non triviales. D'abord, la formule @eq-pivot1 montre que le rang de $M$ est égal au rang d'une matrice triangulaire supérieure, qui est lui-même la somme des rangs des blocs diagonaux, et ceci est valable même si $S$ ou $M$ ne sont pas inversibles : 
+
+$$\mathrm{rang}(M) = \mathrm{rang}(A - BD^{-1}C) + \mathrm{rang}(D).$$
+
+La même formule permet de voir immédiatement que le déterminant de $M$ se calcule très simplement : 
+$$\det(M) = \det(D)\det(A - BD^{-1}C).$$
+
+
+## Inversion des perturbations de rang faible
+
+Soit $A\in \mathbb{R}^{n,n}, B \in \mathbb{R}^{r,r}, X\in\mathbb{R}^{n,r}, Y\in\mathbb{R}^{r,n}$. La matrice $XBY$ a un rang plus petit que $r$.  
+
+$$(A + XBY)^{-1} = A^{-1} - A^{-1}X(B^{-1} + YA^{-1}X)^{-1}YA^{-1}$${#eq-woodbury}
+
+Par exemple, si $u,v$ sont deux vecteurs de taille $n$, cette formule permet de calculer l'inverse de $A+uv$, qui est une perturbation de rang 1 de la matrice $A$ : 
+$$ (A + uv^\top)^{-1} = A^{-1} - \frac{1}{1 + \langle v, A^{-1}u\rangle}A^{-1}uv^\top A^{-1}.$$  
+
+## Formule de la résolvante
+
+$$ Y^{-1} - X^{-1} = X^{-1}(X-Y)Y^{-1}$$
+
+
+[^1]: on rappelle que $(XY)^{-1} = Y^{-1}X^{-1}$. 
