@@ -130,15 +130,17 @@ La détermination de $z'$ dépendra du niveau de confiance que l'on veut se donn
 
 
 
-## Une borne sur la variation totale
+## Variation totale et distance informationnelle
 
 *Ce chapitre n'a pas été vu en cours et n'est pas au programme.*
 
 La construction du test optimal au sens de l'affinité nécessite le calcul de la distance en variation totale, laquelle peut être notoirement difficile : 
-- d'abord, parce que la formule @eq-dtvformule peut être impossible à calculer même si $P$ et $Q$ sont connues ; 
-- ensuite, parce que $Q$ elle-même peut parfois être très difficile à calculer (le calcul peut être de complexité exponentielle).
 
-En pratique, on peut chercher à *borner* cette distance par d'autres quantités plus faciles à calculer. Parmi ces quantités, la *divergence de Kullback-Leibler* joue un rôle extrêmement important, notamment pour son lien avec le maximum de vraisemblance que nous verrons plus tard. 
+- d'abord, parce que la formule @eq-dtvformule peut être impossible à calculer même si $P$ et $Q$ sont connues ; 
+- ensuite, parce que $Q$ elle-même peut parfois être très difficile à calculer (le calcul peut être de complexité exponentielle). 
+
+
+En pratique, on peut chercher à *borner* cette distance par d'autres quantités plus faciles à calculer. Parmi ces quantités, la *divergence de Kullback-Leibler* joue un rôle extrêmement important, notamment pour son lien avec l'entropie et maximum de vraisemblance que nous verrons plus tard. 
 
 
 :::{#def-dkl}
@@ -180,8 +182,42 @@ $$-\dkl \leqslant - \ln \left((1 + \dtv)(1 - \dtv\right)$$
 soit $-\dkl \leqslant -\ln(1 - \dtv^2)$, c'est-à-dire @eq-bh.
 :::
 
+On peut se demander s'il existe une inégalité dans l'autre sens, permettant de borner la distance KL par quelque chose qui dépend de la distance en variation totale. La réponse est oui, et dépend d'une quantité importante en théorie de l'information, la *varentropie*. 
+
+:::{#def-varentropie}
+
+La varentropie de $Q$ par rapport à $P$ est la variance de $\ln(\mathrm{d}P/\mathrm{d}Q)$ par rapport à $P$ :  
+$$\mathrm{Varent}(P | Q) = \int \ln\left(\frac{\mathrm{d}P}{\mathrm{d}Q}\right)^2 dP - \left( \int \ln\left(\frac{\mathrm{d}P}{\mathrm{d}Q}\right)dP\right)^2.$$
+
+:::
+
+La varentropie mesure à quel point l'information est concentrée autour de l'entropie. 
 
 
+:::{#thm-reversepinsker}
+
+## Borne entropique inférieure
+
+$$ \dkl(P\mid Q) \leqslant \frac{1 + \sqrt{\mathrm{Varent(P\mid Q)}}}{1 - \dtv(P,Q)}$$
+
+:::
+
+
+:::{.proof}
+
+Introduisons l'événement $E = \{x : P(x) \geqslant Q(x)e^{d}\}$ où $d = \dkl - \sqrt{\mathrm{Varent}} / (1-\dtv)$. Il est clair que $$P(E)\geqslant e^d Q(E).$$ L'espérance sous $P$ de la variable aléatoire $X = \ln \mathrm{d}P / \mathrm{d}Q$ est $\dkl$, et sa variance est $\mathrm{Varent}$ ; le complémentaire de $E$ est $\{X < d\} = \{X - \dkl < -\sqrt{\mathrm{Varent}}/(1-\dtv)\}$, donc l'inégalité de Bienaymé-Tchebychev dit que 
+$$P(\bar{E}) \leqslant (1-\dtv)^2.$$ 
+En combinant les deux inégalités, on voit que 
+$$P(E) - Q(E) \geqslant (1 - (1 - \dtv)^2)(1-e^{-d}).$$
+Or, le membre de gauche est lui-même plus petit que $\dtv$. Par conséquent, 
+$$ \dtv \geqslant (1 - (1 - \dtv)^2)(1 - e^{-d}).$$
+Il est très simple de réarranger les termes de cette inégalité, pour finalement trouver qu'elle est équivalente à 
+$$e^d \leqslant 1 + \frac{1}{1 - \dtv}.$$
+En revenant à la définition de $d$ et en utilisant $\ln(1+x)\leqslant x$, on voit immédiatement que 
+$$\dkl \leqslant \frac{1}{1 - \dtv} + \frac{\sqrt{\mathrm{Varent}}}{1 - \dtv}$$
+ce qui est l'inégalité demandée. 
+
+:::
 
 [^1]: Si $P$ est [absolument continue](https://fr.wikipedia.org/wiki/Th%C3%A9or%C3%A8me_de_Radon-Nikodym-Lebesgue) par rapport à $Q$ (ce qu'on note $P \ll Q$), alors la dérivée de Radon-Nikodym existe, et c'est une fonction mesurable positive $f$ (unique à un ensemble $Q$-négligeable près) qui vérifie $P(A) = \int f(x)\mathbf{1}_{x\in A}\mathrm{d}Q$. On appelle cette fonction *densité* de $P$ par rapport à $Q$. 
 
