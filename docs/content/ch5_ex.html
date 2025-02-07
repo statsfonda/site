@@ -388,7 +388,11 @@ $$
 <p><span class="theorem-title"><strong>Exercice 4 </strong></span>Soient <span class="math inline">\((x_1, y_1), \dotsc, (x_n, y_n)\)</span> des points dans <span class="math inline">\(\mathbb{R}^2\)</span>. Comparer l’ajustement affine des <span class="math inline">\(x\)</span> vers les <span class="math inline">\(y\)</span>, et l’ajustement affine des <span class="math inline">\(y\)</span> vers les <span class="math inline">\(x\)</span> (sans constantes).</p>
 </div>
 <div id="exr-fw" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 5 (Théorème de Frish-Waugh) </strong></span>Soit <span class="math inline">\(Y\)</span> un vecteur de variables à expliquer de taille <span class="math inline">\(n\)</span>, et soient <span class="math inline">\(X,Z\)</span> deux matrices de variables explicatives, de dimensions <span class="math inline">\((n,d)\)</span> et <span class="math inline">\((n,f)\)</span>. Soient <span class="math inline">\(\hat{\bt}\)</span> et <span class="math inline">\(\hat{\bt}_X\)</span> les estimateurs des moindres carrés des deux régressions <span class="math inline">\(Y = X\bt + Z\bmu + \varepsilon\)</span> d’une part, et <span class="math inline">\(PY = PX\bt + P\varepsilon\)</span> d’autre part, où <span class="math inline">\(P\)</span> est la matrice de projection sur le sous-espace vectoriel orthogonal aux colonnes de <span class="math inline">\(Z\)</span>. Montrer que <span class="math inline">\(\hat{\bt} = \hat{\bt}_X\)</span>.</p>
+<p><span class="theorem-title"><strong>Exercice 5 (Théorème de Frish-Waugh) </strong></span>&nbsp;</p>
+<ol type="1">
+<li>À&nbsp;quelle condition sur les variables <span class="math inline">\(X,Z\)</span> a-t-on <span class="math inline">\(\hat{\bt}_X = \hat{\bt}\)</span> ?</li>
+<li>Montrer que centrer les variables explicatives d’un modèle revient à enlever la constante.</li>
+</ol>
 </div>
 <div id="exr-chow" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercice 6 (Test de Chow) </strong></span>On dispose de deux jeux de données, disons <span class="math inline">\((X^1_1, Y^1_1), \dotsc, (X^1_n, Y^2_n)\)</span> et <span class="math inline">\((X^2_{1}, Y^2_{1}), \dotsc, (X^2_m, Y^2_m)\)</span>. Dans les deux régressions <span class="math inline">\(Y^1 = X^1 \bt^1+ \varepsilon^1\)</span> et <span class="math inline">\(Y^2 = X^2\bt^2+\varepsilon^2\)</span>, on souhaite tester si <span class="math inline">\(\bt^1 = \bt^2\)</span>.</p>
