@@ -108,7 +108,7 @@ Les deux estimateurs $\hat{\bt}$ et $\hat{\boldsymbol \beta}$ capturent l'effet 
 
 *C'est faux en général*. 
 
-Si l'on omet les variables $Z$, il faut « enlever $Z$ de $Y$ et de $X$ », c'est-à-dire projeter sur l'orthogonal de l'espace des colonnes de $Z$. On notera $Y_Z$ et $X_Z$ les projections de $Y$ et $X$ sur cet espace. 
+Si l'on omet les variables $Z$, il faut « enlever $Z$ de $Y$ et de $X$ », c'est-à-dire projeter sur l'orthogonal de l'espace des colonnes de $Z$. On notera $Y_Z$ et $X_Z$ les projections de $Y$ et $X$ sur cet espace. C'est le théorème de *cohérence*, dû à Frish et Waugh : omettre des variables explicatives dans un modèle aboutit nécessairement à un estimateur biaisé si ces variables ne sont pas enlevées du modèle. 
 
 :::{#thm-fw}
 
@@ -119,3 +119,20 @@ L'estimateur $\hat{\bt}$ obtenu dans la régression @eq-frishwaugh de $Y$ sur $X
 $$\hat{\bt}_X = \arg \min_{\bt} |Y_Z - X_Z \bt |^2.$$
 
 :::
+
+:::{.proof}
+
+La matrice des variables explicatives dans la régression « totale » est $[X,Z]$, de taille $(n,d+k)$. La formule donnant @eq-frishwaugh est donc 
+$$\begin{bmatrix}\hat{\bt}\\ \hat{\bmu}\end{bmatrix} = \begin{bmatrix}X^\top X & X^\top Z \\ Z^\top X & Z^\top Z\end{bmatrix}^{-1}\begin{bmatrix}X^\top Y \\ Z^\top Y\end{bmatrix}$$
+La formule d'inversion des matrices par bloc (@thm-schur) dit que 
+$$\begin{bmatrix}X^\top X & X^\top Z \\ Z^\top X & Z^\top Z\end{bmatrix}^{-1} = \begin{bmatrix}S^{-1} & -S^{-1}X^\top Z(Z^\top Z)^{-1} \\ * & *\end{bmatrix}$$
+où $S = X^\top X - X^\top Z(Z^\top Z)^{-1}Z^\top X$ est le complément de Schur. Par conséquent, $\hat{\bt}$ est donné par
+$$S^{-1}X^\top Y - S^{-1}X^\top Z(Z^\top Z)^{-1}Z^\top Y$$
+ce qui se factorise en 
+$$S^{-1}X^\top (I - Z(Z^\top Z)^{-1}Z^\top) Y.$$
+On reconnaît la matrice de projection $P = I - Z(Z^\top Z)^{-1}Z^\top$ sur l'orthogonal des colonnes de $V$ (voir @sec-al). De même, on voit que $S$ se factorise en $$X^\top (I - Z(Z^\top Z)^{-1}Z^\top)X$$
+ce qui vaut $X^\top P X$ ; et comme $P^2 = P$, on peut même écrire $S = (PX)^\top (PX)$. Comme $PX = X_Z$ et $PY = Y_Z$ (ce sont de simples notations), on a 
+$$\hat{\bt} = (X_Z^\top X_Z)^{-1}X^\top Y_Z.$$
+C'est bien l'expression de $\hat{\bt}_X$.
+:::
+
