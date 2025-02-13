@@ -80,7 +80,7 @@ Dans ces cas, on maximise directement la vraisemblance en utilisant un algorithm
 $$ \theta_{t+1} - \theta_t = \eta \nabla \ell(\theta_t)$$
 où $\eta$ est le *pas* de la montée de gradient. 
 
-## Exemple
+## Exemple d'EMV
 
 Pour illustrer le propos, regardons l'exemple classique de l'estimation de $\mu$ dans un modèle $N(\mu, 1)$, à partir de $n$ observations indépendantes. La log-vraisemblance $\ell(\mu)$ du modèle est 
 $$\sum_{i=1}^n -\frac{(x_i - \mu)^2}{2} - \frac{n}{2}\ln(2\pi).$$
@@ -89,5 +89,44 @@ $$ \sum_{i=1}^n (x_i - \mu).$$
 Le maximum de vraisemblance existe et il est unique, car le modèle est exponentiel et identifiable. Il n'y a donc qu'un seul point critique (qui vérifie $\ell'(\mu)=0$) et celui-ci est donné par 
 $$ \hat{\mu}_{\mathrm{emv}} = \frac{\sum_{i=1}^n x_i}{n} = \bar{x}_n.$$
 Sans surprise, l'EMV est donc bien la moyenne empirique. 
+
+
+
+## Tests fondés sur l'EMV
+
+L'idée principale de l'EMV (maximiser la vraisemblance) est utilisable pour effectuer des tests. Typiquement, on peut vouloir tester l'hypothèse nulle 
+$$ H_0 : \theta \in \Theta_0$$
+contre l'hypothèse alternative 
+$$ H_1 : \theta \in \Theta_1$$
+où $\Theta_0,\Theta_1$ sont deux régions distinctes de l'espace des paramètres $\Theta$. Dans ces cas, nous pouvons définir deux maximums de vraisemblance, un par hypothèse : par exemple, 
+$$ L_0 =  \sup_{\theta \in \Theta_0} p_\theta(x).$$
+
+Dans le cas où les régions $\Theta_0,\Theta_1$ sont constituées d'un seul élément, disons $\theta_0,\theta_1$, ces maximums de vraisemblance sont simplement $p_{\theta_0}(x)$ et $p_{\theta_1}(x)$. Dans tous les cas, on peut associer à chaque hypothèse un EMV, par exemple 
+$$ \hat{\theta}_0 = \arg \max_{\theta \in \Theta_0} p_\theta(x),$$
+qui s'il existe vérifie $L_0 = p_{\hat{\theta}_0}(x)$. 
+
+
+:::{#def-testRVgen}
+
+Les *tests du rapport de vraisemblance* pour les hypothèses qui ne sont pas forcément simples sont les tests dont la région de rejet est de la forme 
+$$ \left\lbrace\frac{\sup_{\theta \in \Theta_1}p_\theta(X)}{\sup_{\theta\in\Theta_0}p_\theta(X)} > z \right\rbrace. $$ 
+:::
+
+Lorsque les EMV pour chaque hypothèse existent, cette région de rejet s'écrit donc également 
+$$ \left\lbrace \frac{p_{\hat{\theta}_0}(X)}{p_{\hat{\theta}_1}(X)} > z \right\rbrace. $$
+Malheureusement, il n'y a pas d'équivalent du théorème de Neyman-Pearson (@thm-affinity, @thm-jerzy) lorsque les hypothèses ne sont pas simples. 
+
+## Limitations de l'EMV
+
+L'estimation par maximum de vraisemblance, par sa portée théorique autant que pratique, est une référence difficilement contournable. Au vu de son importance, il est de bon aloi d'en cerner les limites.
+
+1. Si la loi $P$ qui a généré les observations n'appartient pas au modèle, l'estimateur n'a aucune chance d'être convergent, même s'il constitue quand même la meilleure estimation possible *dans ce modèle*. Le choix du modèle statistique reste donc un problème fondamental. 
+
+2. L'apparente optimalité (au sens de Cramér-Rao, que l'on verra dans le chapitre suivant) de l'EMV n'est qu'asymptotique. À distance finie, il peut y avoir des estimateurs biaisés ayant un meilleur risque quadratique. Pire, dans des modèles exponentiels élémentaires comme le modèle gaussien $N(\mu, I_p)$ où l'on cherche à estimer une moyenne $\mu \in \mathbb{R}^p$ à partir d'une réalisation, il existe un estimateur dont le risque quadratique est strictement meilleur que l'EMV **quel que soit $\mu$** : c'est le [paradoxe de James-Stein](https://fr.wikipedia.org/wiki/Paradoxe_de_Stein) sur lequel nous reviendrons peut-être. 
+
+3. Tous les modèles ne sont pas exponentiels. Même si l'estimation par maximum de vraisemblance reste pertinente en général, elle peut aussi donner des résultats peu cohérents, surtout lorsqu'elle est utilisée pour faire des tests (voir par exemple @exr-testunif). 
+
+4. Enfin, même dans les modèles exponentiels, la fonction de partition $Z(\theta)$ peut être inaccessible, en particulier lorsque la dimension de $\theta$ est grande comme en deep learning. L'estimation par maximum de vraisemblance sera alors quasiment infaisable. 
+
 
 
