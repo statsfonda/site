@@ -122,6 +122,35 @@ Il s'agit donc bien d'une « redondance d'information » : le terme de droite e
 $$ \dkl(P\mid Q) =  - \int P \ln Q - \left( - \int P \ln P \right)$$
 indique donc à quel point il est optimal (ou pas) d'encoder les réalisations de la loi $P$ grâce au « code » $\log_2 Q$ :  $\dkl$ quantifie la *redondance* de $Q$ par rapport à $P$. Puisque le codage optimal est celui qui code $x$ par $\log_2 P(x)$, le codage utilisant $\log_2 Q(x)$ n'a pas structuré au mieux l'information disponible dans $P$ est pourrait être allégé. 
 
-## Retour sur l'information de Fisher
 
-Dans un modèle exponentiel, nous avons vu que l'information de Fisher est la courbure de l'entropie (@prp-courbure). Comme dans ce cadre, l'entropie est concave, la courbure en $\theta$ est un indicateur de à quel point l'entropie forme un « pic » autour de $\theta$. 
+## Information de Fisher et entropie
+
+Dans le cas général d'une loi de densité $f$ par rapport à une mesure de référence $\nu$, l'entropie est donnée par
+
+:::{#def-entropie}
+
+## Entropie
+
+L'entropie d'une loi de densité $f$ par rapport à la mesure de référence $\nu$ est donnée par 
+$$\mathrm{Ent}(f) = -\int f(x)\ln f(x)\nu(dx). $$ 
+
+:::
+
+Lorsque $\nu$ est la mesure de comptage sur un ensemble fini ou discret $\mathcal{X}$, on retrouve la formule de l'entropie discrète ci-dessus. 
+
+Dans le cas d'un modèle exponentiel, l'entropie est égale à $E_\theta[\ln p_\theta(X)]$ par définition. On peut interpréter $I(\theta)$ comme la *courbure moyenne de l'entropie*. 
+
+:::{#prp-courbure}
+
+$I(\theta) = - \nabla^2_\theta~ \mathrm{Ent}(p_\theta).$
+
+:::
+
+:::{.proof} 
+
+Il suffit de dériver deux fois sous l'intégrale et d'utiliser @eq-hess-exp. 
+
+:::
+
+Comme dans ce cadre, l'entropie est concave, la courbure en $\theta$ est un indicateur de à quel point l'entropie forme un « pic » autour de $\theta$. 
+

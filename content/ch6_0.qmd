@@ -22,7 +22,7 @@ Soit $\nu$ une mesure de référence ($\sigma$-finie) sur $\mathbb{R}^d$.
 Soit $\Theta \subset \mathbb{R}^p$ (l'espace des paramètres) et soit $T : \mathbb{R}^d \to \mathbb{R}^p$ une fonction mesurable. 
 
 On suppose que pour tout $\theta \in \Theta$, la fonction $x \mapsto e^{\langle \theta, T(x)\rangle}$ est intégrable par rapport à $\nu$ : son intégrale
-$$Z_\theta = \int e^{\langle \theta, T(x)\rangle}\nu(dx)$$
+$$Z(\theta) = \int e^{\langle \theta, T(x)\rangle}\nu(dx)$$
 est appelée *fonction de partition*. 
 
 
@@ -30,16 +30,16 @@ est appelée *fonction de partition*.
 :::{#def-modele_expo}
 
 Le modèle exponentiel associé à $T$ est la famille de densités (par rapport à $\nu$) définie par 
-$$ p_\theta(x) = \frac{e^{\langle \theta, T(x)\rangle}}{Z_\theta}.$$
+$$ p_\theta(x) = \frac{e^{\langle \theta, T(x)\rangle}}{Z(\theta)}.$$
 
 :::
 
 Lorsqu'on fixe un $x$ dans l'espace des observations, la fonction  
 $$ \theta \mapsto p_\theta(x)$$
 est appelée *vraisemblance* et son logarithme
-$$\ell_\theta(x) = \ln p_\theta(x)$$
- est appelé *log-vraisemblance*. Lorsqu'il est bien défini, le gradient (en $\theta$) de la log-vraisemblance 
- $$ \nabla \ln p_\theta(x)$$
+$$\ell_x(\theta) = \ln p_\theta(x)$$
+ est appelé *log-vraisemblance*. Lorsqu'il est bien défini, le gradient en $\theta$ de la log-vraisemblance 
+ $$ \nabla_\theta \ln p_\theta(x)$$
  est appelé *fonction de score* du modèle. Ces termes ne sont pas propres aux modèles exponentiels. On omet fréquemment de noter la dépendance en les observations, qu'on suppose fixées une bonne fois pour toutes. 
 
 ## Retour sur des exemples
@@ -86,7 +86,7 @@ On supposera dorénavant que l'espace des paramètres $\Theta$ (qui est une part
 2) La fonction de partition d'un modèle exponentiel est infiniment différentiable. 
 
 3) Le gradient de la log-partition est donné par 
-$$\nabla \ln Z(\theta) = E_\theta[T(X)]$${#eq-grad-exp}
+$$\nabla_\theta \ln Z(\theta) = E_\theta[T(X)]$${#eq-grad-exp}
 et sa matrice hessienne^[On rappelle que la Hessienne d'une fonction $f:\mathbb{R}^d \to \mathbb{R}$ est la matrice de ses dérivées secondes $$\frac{\partial^2}{\partial x_i \partial x_j}f(x_1, \dotsc, x_d).$$
 Par abus de notation, on la note souvent $\nabla^2$, mais il serait plus juste de la noter $\nabla^\top \nabla$. ] par 
 $$ \nabla^2 \ln Z(\theta) = \mathrm{Var}_\theta(T(X)).$${#eq-hess-exp}

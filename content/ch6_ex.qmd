@@ -7,8 +7,8 @@
 - Calculer l'EMV de $\mu$ et $\sigma^2$ dans un modèle iid $N(\mu, \sigma^2)$ avec $n$ observations. 
 - Montrer que dans un modèle linéaire gaussien $Y = X\bt + \varepsilon$, l'estimateur des moindres carrés ordinaires est l'EMV de $\bt$. Quel est l'EMV pour $\sigma^2$ ?
 - Dans un modèle exponentiel, construire une région (ellipsoïde) de confiance asymptotique pour le paramètre. 
-- Soit $\mathcal{X}$ un ensemble fini à $p$ éléments et soient $x_1, \dotsc, x_n$ des réalisations iid d'une même loi $P$ sur $\mathcal{X}$. On cherche $P$. Montrer que ce problème peut se formuler comme la recherche d'un paramètre (indice : il est de dimension $p$) dans un modèle exponentiel et écrire l'EMV. 
-- Dans un modèle exponentiel $p_\theta(x) = e^{-\langle \theta, T(x)\rangle}/Z(\theta)$, on a des observations iid $x_1, \dotsc, x_n$. On note $\hat{\mu}_n$ la loi empirique^[C'est-à-dire la mesure de probabilité définie par $n^{-1}\sum \delta_{x_i}$.]. des $x_i$ Montrer que l'EMV (lorsqu'il existe) est l'unique $\theta$ tel que 
+- Soit $\mathcal{X}$ un ensemble fini à $p$ éléments et soient $x_1, \dotsc, x_n$ des réalisations iid d'une même loi $P$ sur $\mathcal{X}$. On cherche $P$. Montrer que ce problème peut se formuler comme la recherche d'un paramètre (indice : il est de dimension $p-1$) dans un modèle exponentiel et écrire l'EMV. 
+- Dans un modèle exponentiel $p_\theta(x) = e^{\langle \theta, T(x)\rangle}/Z(\theta)$, on a des observations iid $x_1, \dotsc, x_n$. On note $\hat{\mu}_n$ la loi empirique^[C'est-à-dire la mesure de probabilité définie par $n^{-1}\sum \delta_{x_i}$.]. des $x_i$ Montrer que l'EMV (lorsqu'il existe) est l'unique $\theta$ tel que 
 $$ \int_{\mathcal{X}} T(x)d\hat{\mu}_n =  \int_{\mathcal{X}} T(x)p_\theta(x)dx.$$
 - Montrer que la densité gaussienne multidimensionnelle $N(0,\Sigma)$ peut aussi s'écrire 
 $$ \frac{\exp\left( - \langle \theta, xx^\top \rangle_F / 2 \right)}{\sqrt{(2\pi)^n \det(\Sigma)}}$$
@@ -21,7 +21,7 @@ où $\langle A,B\rangle_F = \mathrm{trace}(AB^\top)$ est le produit scalaire^[Ce
 
 :::{#exr-mlef}
 
-Soit $\hat{\theta}$ l'estimateur du maximum de vraisemblance d'un paramètre $\theta$ dans un modèle régulier. Montrer que $f(\hat{\theta})$ est l'estimateur du maximum de vraisemblance de $f(\theta)$, pour n'importe quelle fonction $\theta$ raisonnable. 
+Soit $\hat{\theta}$ l'estimateur du maximum de vraisemblance d'un paramètre $\theta$ dans un modèle statistique. Montrer que $f(\hat{\theta})$ est l'estimateur du maximum de vraisemblance de $f(\theta)$, pour n'importe quelle fonction $\theta$ raisonnable. 
 
 :::
 
@@ -31,6 +31,16 @@ On observe un échantillon iid $(X_1, \dotsc, X_n)$ de lois de Laplace, c'est-à
 
 1. En supposant $\lambda$ connu, proposer un estimateur de $m$ par la méthode des moments, et un estimateur par la méthode du maximum de vraisemblance.  Étudier leurs propriétés et les comparer. 
 2. Même question lorsque ni $\lambda$ ni $m$ ne sont connus. 
+
+:::
+
+:::{#exr-reparam}
+
+Soit $(p_\theta)$ un modèle statistique, avec $\theta$ dans un ouvert $U$. Soit $\phi$ un difféomorphisme de $V$ vers un ouvert $U$. On considère le modèle statistique $(p_{\phi(\mu)})$, où $\mu$ est dans $V$. On note $I_1(\theta)$ la matrice d'information de Fisher du modèle $(p_\theta)$, et $I_2(\mu)$ celle du modèle $(p_{\phi(\mu)})$. 
+
+1. Montrer que $I_2(\mu) = J_\phi(\mu) I(\phi(\mu)) J_\phi(\mu)^\top$, où $J_\phi(\mu)$ est la matrice jacobienne de $\phi$ en $\mu$.
+
+2. Retrouver les formules pour l'information de Fisher des lois de Bernoulli dans la section @sec-interp-fisher. 
 
 :::
 
