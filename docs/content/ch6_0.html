@@ -356,12 +356,12 @@ $$
 <h2 data-number="13.1" class="anchored" data-anchor-id="définitions"><span class="header-section-number">13.1</span> Définitions</h2>
 <p>Soit <span class="math inline">\(\nu\)</span> une mesure de référence (<span class="math inline">\(\sigma\)</span>-finie) sur <span class="math inline">\(\mathbb{R}^d\)</span>.</p>
 <p>Soit <span class="math inline">\(\Theta \subset \mathbb{R}^p\)</span> (l’espace des paramètres) et soit <span class="math inline">\(T :&nbsp;\mathbb{R}^d \to \mathbb{R}^p\)</span> une fonction mesurable.</p>
-<p>On suppose que pour tout <span class="math inline">\(\theta \in \Theta\)</span>, la fonction <span class="math inline">\(x \mapsto e^{\langle \theta, T(x)\rangle}\)</span> est intégrable par rapport à <span class="math inline">\(\nu\)</span> : son intégrale <span class="math display">\[Z_\theta = \int e^{\langle \theta, T(x)\rangle}\nu(dx)\]</span> est appelée <em>fonction de partition</em>.</p>
+<p>On suppose que pour tout <span class="math inline">\(\theta \in \Theta\)</span>, la fonction <span class="math inline">\(x \mapsto e^{\langle \theta, T(x)\rangle}\)</span> est intégrable par rapport à <span class="math inline">\(\nu\)</span> : son intégrale <span class="math display">\[Z(\theta) = \int e^{\langle \theta, T(x)\rangle}\nu(dx)\]</span> est appelée <em>fonction de partition</em>.</p>
 <div id="def-modele_expo" class="theorem definition">
-<p><span class="theorem-title"><strong>Définition 13.1 </strong></span>Le modèle exponentiel associé à <span class="math inline">\(T\)</span> est la famille de densités (par rapport à <span class="math inline">\(\nu\)</span>) définie par <span class="math display">\[ p_\theta(x) = \frac{e^{\langle \theta, T(x)\rangle}}{Z_\theta}.\]</span></p>
+<p><span class="theorem-title"><strong>Définition 13.1 </strong></span>Le modèle exponentiel associé à <span class="math inline">\(T\)</span> est la famille de densités (par rapport à <span class="math inline">\(\nu\)</span>) définie par <span class="math display">\[ p_\theta(x) = \frac{e^{\langle \theta, T(x)\rangle}}{Z(\theta)}.\]</span></p>
 </div>
 <p>Lorsqu’on fixe un <span class="math inline">\(x\)</span> dans l’espace des observations, la fonction<br>
-<span class="math display">\[ \theta \mapsto p_\theta(x)\]</span> est appelée <em>vraisemblance</em> et son logarithme <span class="math display">\[\ell_\theta(x) = \ln p_\theta(x)\]</span> est appelé <em>log-vraisemblance</em>. Lorsqu’il est bien défini, le gradient (en <span class="math inline">\(\theta\)</span>) de la log-vraisemblance <span class="math display">\[ \nabla \ln p_\theta(x)\]</span> est appelé <em>fonction de score</em> du modèle. Ces termes ne sont pas propres aux modèles exponentiels. On omet fréquemment de noter la dépendance en les observations, qu’on suppose fixées une bonne fois pour toutes.</p>
+<span class="math display">\[ \theta \mapsto p_\theta(x)\]</span> est appelée <em>vraisemblance</em> et son logarithme <span class="math display">\[\ell_x(\theta) = \ln p_\theta(x)\]</span> est appelé <em>log-vraisemblance</em>. Lorsqu’il est bien défini, le gradient en <span class="math inline">\(\theta\)</span> de la log-vraisemblance <span class="math display">\[ \nabla_\theta \ln p_\theta(x)\]</span> est appelé <em>fonction de score</em> du modèle. Ces termes ne sont pas propres aux modèles exponentiels. On omet fréquemment de noter la dépendance en les observations, qu’on suppose fixées une bonne fois pour toutes.</p>
 </section>
 <section id="retour-sur-des-exemples" class="level2" data-number="13.2">
 <h2 data-number="13.2" class="anchored" data-anchor-id="retour-sur-des-exemples"><span class="header-section-number">13.2</span> Retour sur des exemples</h2>
@@ -382,7 +382,7 @@ $$
 <ol type="1">
 <li><p>Pour tout <span class="math inline">\(n\)</span>, <span class="math inline">\(E_\theta[|T(X)|^n]\)</span> est fini.</p></li>
 <li><p>La fonction de partition d’un modèle exponentiel est infiniment différentiable.</p></li>
-<li><p>Le gradient de la log-partition est donné par <span id="eq-grad-exp"><span class="math display">\[\nabla \ln Z(\theta) = E_\theta[T(X)] \tag{13.1}\]</span></span> et sa matrice hessienne<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> par <span id="eq-hess-exp"><span class="math display">\[ \nabla^2 \ln Z(\theta) = \mathrm{Var}_\theta(T(X)). \tag{13.2}\]</span></span></p></li>
+<li><p>Le gradient de la log-partition est donné par <span id="eq-grad-exp"><span class="math display">\[\nabla_\theta \ln Z(\theta) = E_\theta[T(X)] \tag{13.1}\]</span></span> et sa matrice hessienne<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> par <span id="eq-hess-exp"><span class="math display">\[ \nabla^2 \ln Z(\theta) = \mathrm{Var}_\theta(T(X)). \tag{13.2}\]</span></span></p></li>
 </ol>
 </div>
 <div class="proof">

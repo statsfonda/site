@@ -353,15 +353,15 @@ $$
 <li>Calculer l’EMV de <span class="math inline">\(\mu\)</span> et <span class="math inline">\(\sigma^2\)</span> dans un modèle iid <span class="math inline">\(N(\mu, \sigma^2)\)</span> avec <span class="math inline">\(n\)</span> observations.</li>
 <li>Montrer que dans un modèle linéaire gaussien <span class="math inline">\(Y = X\bt + \varepsilon\)</span>, l’estimateur des moindres carrés ordinaires est l’EMV de <span class="math inline">\(\bt\)</span>. Quel est l’EMV pour <span class="math inline">\(\sigma^2\)</span> ?</li>
 <li>Dans un modèle exponentiel, construire une région (ellipsoïde) de confiance asymptotique pour le paramètre.</li>
-<li>Soit <span class="math inline">\(\mathcal{X}\)</span> un ensemble fini à <span class="math inline">\(p\)</span> éléments et soient <span class="math inline">\(x_1, \dotsc, x_n\)</span> des réalisations iid d’une même loi <span class="math inline">\(P\)</span> sur <span class="math inline">\(\mathcal{X}\)</span>. On cherche <span class="math inline">\(P\)</span>. Montrer que ce problème peut se formuler comme la recherche d’un paramètre (indice : il est de dimension <span class="math inline">\(p\)</span>) dans un modèle exponentiel et écrire l’EMV.</li>
-<li>Dans un modèle exponentiel <span class="math inline">\(p_\theta(x) = e^{-\langle \theta, T(x)\rangle}/Z(\theta)\)</span>, on a des observations iid <span class="math inline">\(x_1, \dotsc, x_n\)</span>. On note <span class="math inline">\(\hat{\mu}_n\)</span> la loi empirique<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. des <span class="math inline">\(x_i\)</span> Montrer que l’EMV (lorsqu’il existe) est l’unique <span class="math inline">\(\theta\)</span> tel que <span class="math display">\[ \int_{\mathcal{X}} T(x)d\hat{\mu}_n =  \int_{\mathcal{X}} T(x)p_\theta(x)dx.\]</span></li>
+<li>Soit <span class="math inline">\(\mathcal{X}\)</span> un ensemble fini à <span class="math inline">\(p\)</span> éléments et soient <span class="math inline">\(x_1, \dotsc, x_n\)</span> des réalisations iid d’une même loi <span class="math inline">\(P\)</span> sur <span class="math inline">\(\mathcal{X}\)</span>. On cherche <span class="math inline">\(P\)</span>. Montrer que ce problème peut se formuler comme la recherche d’un paramètre (indice : il est de dimension <span class="math inline">\(p-1\)</span>) dans un modèle exponentiel et écrire l’EMV.</li>
+<li>Dans un modèle exponentiel <span class="math inline">\(p_\theta(x) = e^{\langle \theta, T(x)\rangle}/Z(\theta)\)</span>, on a des observations iid <span class="math inline">\(x_1, \dotsc, x_n\)</span>. On note <span class="math inline">\(\hat{\mu}_n\)</span> la loi empirique<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. des <span class="math inline">\(x_i\)</span> Montrer que l’EMV (lorsqu’il existe) est l’unique <span class="math inline">\(\theta\)</span> tel que <span class="math display">\[ \int_{\mathcal{X}} T(x)d\hat{\mu}_n =  \int_{\mathcal{X}} T(x)p_\theta(x)dx.\]</span></li>
 <li>Montrer que la densité gaussienne multidimensionnelle <span class="math inline">\(N(0,\Sigma)\)</span> peut aussi s’écrire <span class="math display">\[ \frac{\exp\left( - \langle \theta, xx^\top \rangle_F / 2 \right)}{\sqrt{(2\pi)^n \det(\Sigma)}}\]</span> où <span class="math inline">\(\langle A,B\rangle_F = \mathrm{trace}(AB^\top)\)</span> est le produit scalaire<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> sur l’espace des matrices, et où <span class="math inline">\(\theta = \Sigma^{-1}\)</span>.</li>
 </ul>
 </section>
 <section id="exercices" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="exercices">Exercices</h2>
 <div id="exr-mlef" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 1 </strong></span>Soit <span class="math inline">\(\hat{\theta}\)</span> l’estimateur du maximum de vraisemblance d’un paramètre <span class="math inline">\(\theta\)</span> dans un modèle régulier. Montrer que <span class="math inline">\(f(\hat{\theta})\)</span> est l’estimateur du maximum de vraisemblance de <span class="math inline">\(f(\theta)\)</span>, pour n’importe quelle fonction <span class="math inline">\(\theta\)</span> raisonnable.</p>
+<p><span class="theorem-title"><strong>Exercice 1 </strong></span>Soit <span class="math inline">\(\hat{\theta}\)</span> l’estimateur du maximum de vraisemblance d’un paramètre <span class="math inline">\(\theta\)</span> dans un modèle statistique. Montrer que <span class="math inline">\(f(\hat{\theta})\)</span> est l’estimateur du maximum de vraisemblance de <span class="math inline">\(f(\theta)\)</span>, pour n’importe quelle fonction <span class="math inline">\(\theta\)</span> raisonnable.</p>
 </div>
 <div id="exr-laplace" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercice 2 </strong></span>On observe un échantillon iid <span class="math inline">\((X_1, \dotsc, X_n)\)</span> de lois de Laplace, c’est-à-dire de densité <span class="math inline">\(x\mapsto \lambda e^{-\lambda|x-m|} / 2\)</span>, où <span class="math inline">\(\lambda&gt;0\)</span> et <span class="math inline">\(m\in \mathbb{R}\)</span>.</p>
@@ -370,8 +370,15 @@ $$
 <li>Même question lorsque ni <span class="math inline">\(\lambda\)</span> ni <span class="math inline">\(m\)</span> ne sont connus.</li>
 </ol>
 </div>
+<div id="exr-reparam" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 3 </strong></span>Soit <span class="math inline">\((p_\theta)\)</span> un modèle statistique, avec <span class="math inline">\(\theta\)</span> dans un ouvert <span class="math inline">\(U\)</span>. Soit <span class="math inline">\(\phi\)</span> un difféomorphisme de <span class="math inline">\(V\)</span> vers un ouvert <span class="math inline">\(U\)</span>. On considère le modèle statistique <span class="math inline">\((p_{\phi(\mu)})\)</span>, où <span class="math inline">\(\mu\)</span> est dans <span class="math inline">\(V\)</span>. On note <span class="math inline">\(I_1(\theta)\)</span> la matrice d’information de Fisher du modèle <span class="math inline">\((p_\theta)\)</span>, et <span class="math inline">\(I_2(\mu)\)</span> celle du modèle <span class="math inline">\((p_{\phi(\mu)})\)</span>.</p>
+<ol type="1">
+<li><p>Montrer que <span class="math inline">\(I_2(\mu) = J_\phi(\mu) I(\phi(\mu)) J_\phi(\mu)^\top\)</span>, où <span class="math inline">\(J_\phi(\mu)\)</span> est la matrice jacobienne de <span class="math inline">\(\phi\)</span> en <span class="math inline">\(\mu\)</span>.</p></li>
+<li><p>Retrouver les formules pour l’information de Fisher des lois de Bernoulli dans la section <a href="ch6_2.html#sec-interp-fisher"><span>Section&nbsp;15.3</span></a>.</p></li>
+</ol>
+</div>
 <div id="exr-exemv" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 3 </strong></span>Calculer l’estimateur du maximum de vraisemblance et étudier ses propriétés dans les cas suivants :&nbsp;</p>
+<p><span class="theorem-title"><strong>Exercice 4 </strong></span>Calculer l’estimateur du maximum de vraisemblance et étudier ses propriétés dans les cas suivants :&nbsp;</p>
 <ol type="1">
 <li>On observe <span class="math inline">\(X_1, \dotsc, X_n\)</span> de loi de Poisson de paramètre <span class="math inline">\(\lambda&gt;0\)</span>.</li>
 <li>On observe <span class="math inline">\(X \sim \mathrm{Bin}(n,p)\)</span> où <span class="math inline">\(n\)</span> est connu et <span class="math inline">\(p\in ]0,1[\)</span>.</li>
@@ -380,7 +387,7 @@ $$
 </ol>
 </div>
 <div id="exr-gammaemv" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 4 </strong></span>On se donne un échantillon <span class="math inline">\((X_1,\dots,X_n)\)</span> de loi <span class="math inline">\(\Gamma(\alpha, \beta)\)</span><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
+<p><span class="theorem-title"><strong>Exercice 5 </strong></span>On se donne un échantillon <span class="math inline">\((X_1,\dots,X_n)\)</span> de loi <span class="math inline">\(\Gamma(\alpha, \beta)\)</span><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
 <ol type="1">
 <li>On suppose le paramètre <span class="math inline">\(\beta\)</span> connu. Proposer un estimateur de <span class="math inline">\(\alpha\)</span> par la méthode des moments.</li>
 <li>On suppose à présent que les deux paramètres <span class="math inline">\(\alpha, \beta\)</span> sont inconnus. Proposer un estimateur de <span class="math inline">\((\alpha,\beta)\)</span> par la méthode des moments.</li>
@@ -388,7 +395,7 @@ $$
 </ol>
 </div>
 <div id="exr-unifemv" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 5 </strong></span>Soit <span class="math inline">\((X_1,\dots,X_n)\)</span> un <span class="math inline">\(n\)</span>-échantillon de la loi uniforme sur <span class="math inline">\([-\theta,\theta]\)</span>, avec <span class="math inline">\(\theta&gt;0\)</span>.</p>
+<p><span class="theorem-title"><strong>Exercice 6 </strong></span>Soit <span class="math inline">\((X_1,\dots,X_n)\)</span> un <span class="math inline">\(n\)</span>-échantillon de la loi uniforme sur <span class="math inline">\([-\theta,\theta]\)</span>, avec <span class="math inline">\(\theta&gt;0\)</span>.</p>
 <ol type="1">
 <li>Décrire le modèle statistique associé.</li>
 <li>Proposer un estimateur <span class="math inline">\(\hat \theta_n\)</span> de <span class="math inline">\(\theta\)</span> obtenu par méthode des moments. Est-il consistant? Proposer un intervalle de confiance asymptotique de niveau de confiance <span class="math inline">\(\alpha\)</span>.
@@ -398,21 +405,21 @@ Soit <span class="math inline">\(T_n\)</span> l’estimateur du maximum de vrais
 </ol>
 </div>
 <div id="exr-weibullemv" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 6 </strong></span>Soit <span class="math inline">\(c&gt;0\)</span> un paramètre fixé connu. On considère la loi de Weibull de paramètre <span class="math inline">\(c\)</span>, notée <span class="math inline">\(\mathscr{W}(c)\)</span>, dont la densité sur <span class="math inline">\(\mathbb{R}_+\)</span> est <span class="math display">\[\lambda c x^{c-1}e^{-\lambda x^c}\]</span> On observe un <span class="math inline">\(n\)</span>-échantillon de loi <span class="math inline">\(\mathscr{W}(c)\)</span>, avec <span class="math inline">\(n\)</span> plus grand que 3.</p>
+<p><span class="theorem-title"><strong>Exercice 7 </strong></span>Soit <span class="math inline">\(c&gt;0\)</span> un paramètre fixé connu. On considère la loi de Weibull de paramètre <span class="math inline">\(c\)</span>, notée <span class="math inline">\(\mathscr{W}(c)\)</span>, dont la densité sur <span class="math inline">\(\mathbb{R}_+\)</span> est <span class="math display">\[\lambda c x^{c-1}e^{-\lambda x^c}\]</span> On observe un <span class="math inline">\(n\)</span>-échantillon de loi <span class="math inline">\(\mathscr{W}(c)\)</span>, avec <span class="math inline">\(n\)</span> plus grand que 3.</p>
 <ol type="1">
 <li>Calculer l’estimateur du maximum de vraisemblance <span class="math inline">\(\hat \lambda_n\)</span> de <span class="math inline">\(\lambda\)</span>.</li>
 <li>Calculer son risque quadratique.</li>
 </ol>
 </div>
 <div id="exr-buse" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 7 </strong></span>Dans une urne contenant 1000 tickets, 20 sont marqués <span class="math inline">\(\theta\)</span> et 980 sont marqués <span class="math inline">\(10\theta\)</span>, où <span class="math inline">\(\theta\)</span> est un réel strictement positif inconnu.</p>
+<p><span class="theorem-title"><strong>Exercice 8 </strong></span>Dans une urne contenant 1000 tickets, 20 sont marqués <span class="math inline">\(\theta\)</span> et 980 sont marqués <span class="math inline">\(10\theta\)</span>, où <span class="math inline">\(\theta\)</span> est un réel strictement positif inconnu.</p>
 <ol type="1">
 <li>On tire un unique ticket de valeur <span class="math inline">\(X\)</span>. Écrire le modèle statistique associé : est-il dominé par une mesure <span class="math inline">\(\sigma\)</span>-finie? Donner un estimateur qui s’apparenterait à un maximum de vraisemblance <span class="math inline">\(\hat{\theta}\)</span> de <span class="math inline">\(\theta\)</span> (maximiser <span class="math inline">\(P_\theta(\{X\})\)</span>), puis montrer que <span class="math inline">\(\mathbb{P}(\hat{\theta}=\theta)\geq 0,98.\)</span></li>
 <li>On renumérote les tickets marqués <span class="math inline">\(10\theta\)</span> par <span class="math inline">\(a_i \theta\)</span>, <span class="math inline">\(1 \leq i \leq 980\)</span>, où les <span class="math inline">\(a_i\)</span> sont des réels connus tous distincts dans <span class="math inline">\([10;10,1]\)</span>. Donner le nouvel estimateur du maximum de vraisemblance <span class="math inline">\(\tilde{\theta}\)</span> et montrer que <span class="math inline">\(\mathbb{P}(\tilde{\theta}&lt;10 \theta)=0,02.\)</span></li>
 </ol>
 </div>
 <div id="exr-logistique" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 8 (Régression logistique) </strong></span>On observe des couples <span class="math inline">\((\bx_i, y_i)\)</span> où les <span class="math inline">\(\bx_i\)</span> sont des variables explicatives (vecteurs ligne de dimension <span class="math inline">\(d\)</span>) et les <span class="math inline">\(y_i\)</span> sont des variables valant 0 ou 1.</p>
+<p><span class="theorem-title"><strong>Exercice 9 (Régression logistique) </strong></span>On observe des couples <span class="math inline">\((\bx_i, y_i)\)</span> où les <span class="math inline">\(\bx_i\)</span> sont des variables explicatives (vecteurs ligne de dimension <span class="math inline">\(d\)</span>) et les <span class="math inline">\(y_i\)</span> sont des variables valant 0 ou 1.</p>
 <ol type="1">
 <li>Avant toute chose, expliquer pourquoi une régression linéaire des <span class="math inline">\(\bx_i\)</span> sur les <span class="math inline">\(y_i\)</span> n’aurait pas beaucoup de sens.</li>
 <li>On suppose dorénavant que les <span class="math inline">\(y_i\)</span> sont des réalisations indépendantes de <span class="math inline">\(Y_i \sim \mathrm{Ber}(p(x_i))\)</span> et on suppose que la fonction <span class="math inline">\(p :&nbsp;\mathbb{R}^{1,d}\to]0,1[\)</span> s’écrit sous forme <em>logistique</em> (« modèle logit ») : <span class="math display">\[p(\bx) = \frac{e^{\bx \bt}}{1 + e^{\bx \bt}}. \]</span> où <span class="math inline">\(\bt \in \mathbb{R}^d\)</span>.

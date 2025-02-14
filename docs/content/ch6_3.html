@@ -311,7 +311,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#la-notion-de-code" id="toc-la-notion-de-code" class="nav-link active" data-scroll-target="#la-notion-de-code"><span class="header-section-number">16.1</span> La notion de code</a></li>
   <li><a href="#le-théorème-de-shannon" id="toc-le-théorème-de-shannon" class="nav-link" data-scroll-target="#le-théorème-de-shannon"><span class="header-section-number">16.2</span> Le théorème de Shannon</a></li>
   <li><a href="#lentropie-relative" id="toc-lentropie-relative" class="nav-link" data-scroll-target="#lentropie-relative"><span class="header-section-number">16.3</span> L’entropie relative</a></li>
-  <li><a href="#retour-sur-linformation-de-fisher" id="toc-retour-sur-linformation-de-fisher" class="nav-link" data-scroll-target="#retour-sur-linformation-de-fisher"><span class="header-section-number">16.4</span> Retour sur l’information de Fisher</a></li>
+  <li><a href="#information-de-fisher-et-entropie" id="toc-information-de-fisher-et-entropie" class="nav-link" data-scroll-target="#information-de-fisher-et-entropie"><span class="header-section-number">16.4</span> Information de Fisher et entropie</a></li>
   </ul>
 </nav>
     </div>
@@ -411,9 +411,21 @@ $$
 <p>Soit <span class="math inline">\(P\)</span> une loi de probabilité. Le codage optimal de <span class="math inline">\(P\)</span> est <span class="math inline">\(\log_2 P\)</span>. On pourrait aussi utiliser le codage d’une autre loi de probabilité, disons <span class="math inline">\(Q\)</span> :&nbsp; la quantité</p>
 <p><span class="math display">\[\sum_{k=1}^n p_k \log_2\frac{p_k}{q_k}\]</span> peut aussi se voir comme <span class="math display">\[E[\log_2 q_X] - E[\ell_X^\star].\]</span> Il s’agit donc bien d’une « redondance d’information » :&nbsp;le terme de droite est la quantité minimale d’information dont on a besoin pour coder <span class="math inline">\(X\)</span> en moyenne (via le codage entropique), et le terme de gauche est la quantité d’information dont on use pour coder <span class="math inline">\(X\)</span> en moyenne par le code <span class="math inline">\(S\)</span>. À une constante près<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, la divergence de Kullback-Leibler <span class="math display">\[ \dkl(P\mid Q) =  - \int P \ln Q - \left( - \int P \ln P \right)\]</span> indique donc à quel point il est optimal (ou pas) d’encoder les réalisations de la loi <span class="math inline">\(P\)</span> grâce au « code » <span class="math inline">\(\log_2 Q\)</span> : <span class="math inline">\(\dkl\)</span> quantifie la <em>redondance</em> de <span class="math inline">\(Q\)</span> par rapport à <span class="math inline">\(P\)</span>.&nbsp;Puisque le codage optimal est celui qui code <span class="math inline">\(x\)</span> par <span class="math inline">\(\log_2 P(x)\)</span>, le codage utilisant <span class="math inline">\(\log_2 Q(x)\)</span> n’a pas structuré au mieux l’information disponible dans <span class="math inline">\(P\)</span> est pourrait être allégé.</p>
 </section>
-<section id="retour-sur-linformation-de-fisher" class="level2" data-number="16.4">
-<h2 data-number="16.4" class="anchored" data-anchor-id="retour-sur-linformation-de-fisher"><span class="header-section-number">16.4</span> Retour sur l’information de Fisher</h2>
-<p>Dans un modèle exponentiel, nous avons vu que l’information de Fisher est la courbure de l’entropie (<a href="ch6_2.html#prp-courbure">Proposition&nbsp;<span>15.1</span></a>). Comme dans ce cadre, l’entropie est concave, la courbure en <span class="math inline">\(\theta\)</span> est un indicateur de à quel point l’entropie forme un « pic » autour de <span class="math inline">\(\theta\)</span>.</p>
+<section id="information-de-fisher-et-entropie" class="level2" data-number="16.4">
+<h2 data-number="16.4" class="anchored" data-anchor-id="information-de-fisher-et-entropie"><span class="header-section-number">16.4</span> Information de Fisher et entropie</h2>
+<p>Dans le cas général d’une loi de densité <span class="math inline">\(f\)</span> par rapport à une mesure de référence <span class="math inline">\(\nu\)</span>, l’entropie est donnée par</p>
+<div id="def-entropie" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 16.3 (Entropie) </strong></span>L’entropie d’une loi de densité <span class="math inline">\(f\)</span> par rapport à la mesure de référence <span class="math inline">\(\nu\)</span> est donnée par <span class="math display">\[\mathrm{Ent}(f) = -\int f(x)\ln f(x)\nu(dx). \]</span></p>
+</div>
+<p>Lorsque <span class="math inline">\(\nu\)</span> est la mesure de comptage sur un ensemble fini ou discret <span class="math inline">\(\mathcal{X}\)</span>, on retrouve la formule de l’entropie discrète ci-dessus.</p>
+<p>Dans le cas d’un modèle exponentiel, l’entropie est égale à <span class="math inline">\(E_\theta[\ln p_\theta(X)]\)</span> par définition. On peut interpréter <span class="math inline">\(I(\theta)\)</span> comme la <em>courbure moyenne de l’entropie</em>.</p>
+<div id="prp-courbure" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 16.1 </strong></span><span class="math inline">\(I(\theta) = - \nabla^2_\theta~ \mathrm{Ent}(p_\theta).\)</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Preuve</em>. </span>Il suffit de dériver deux fois sous l’intégrale et d’utiliser <a href="ch6_0.html#eq-hess-exp">Équation&nbsp;<span>13.2</span></a>.</p>
+</div>
+<p>Comme dans ce cadre, l’entropie est concave, la courbure en <span class="math inline">\(\theta\)</span> est un indicateur de à quel point l’entropie forme un « pic » autour de <span class="math inline">\(\theta\)</span>.</p>
 
 
 </section>
