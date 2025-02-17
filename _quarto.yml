@@ -38,6 +38,7 @@ book:
      - content/ch7_0.qmd
      - content/ch7_1.qmd
      - content/ch7_ex.qmd
+     - content/ch8_0.qmd
      - content/references.qmd
      - content/ref.qmd
      - content/app1.qmd

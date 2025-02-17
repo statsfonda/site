@@ -95,6 +95,9 @@ Maintenant, nous allons paramétriser le modèle de Bernoulli avec les logits :�
 $$p_z(x) = \frac{e^{zx}}{1+e^z}.$$
 Comme $x$ vaut 0 ou 1, on voit que la probabilité d'obtenir 1 est égale à $\theta = \theta(z) = e^z/(1+e^z)$. Il s'agit donc d'une autre paramétrisation de $p$, mais celle-ci a l'avantage d'exprimer les lois de Bernoulli sous forme exponentielle, avec $T(x) = x$. L'information de Fisher dans cette autre paramétrisation du modèle de Bernoulli est donnée par la formule $\mathrm{Var}_z(X) = \frac{e^z}{(1+e^z)^2}$, soit
 $$\tilde{I}(z) = \theta(z)(1-\theta(z)).$${#eq-info-ber2}
+
+![](/images/fisher_bernoulli.png){width=90%}
+
 Les formules @eq-info-ber1 et @eq-info-ber2 (qui sont bien celles que j'ai obtenues en cours ce matin) sont toutes les deux correctes, mais elles ne coïncident pas. Pourquoi ?
 
 

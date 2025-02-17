@@ -1,0 +1,55 @@
+# Fisher VS Bayes
+
+Les test d'intelligence comme le QI ont été conçus pour être standardisés : la répartition du QI d'un test sur une large population ressemble à une gaussienne centrée en 100, et d'écart-type 15. Cela signifie que si l'on prend un individu au hasard, la probabilité que son QI soit entre 85 et 115 est de 68%.
+
+Dans une population de $n=1000$ individus, on note $x_i$ le QI de la personne $i$. Pour mesurer les $x_i$, on décide de faire passer un test à chaque personne : le résultat de ce test, $y_i$, est une estimation de $x_i$ : n se doute bien qu'un seul test ne suffit pas à déterminer exactement $x_i$. Cependant, il est raisonnable de penser que $y_i$ est centrée en $x_i$, et d'écart-type pas trop grand, disons $5$. 
+
+## Le problème du point de vue de Fisher
+
+En statistique *fréquentiste*, les $y_i$ sont des réalisations de variables iid $N(x_i, 5)$ et on cherche à estimer $x_i$. Toutes les méthodes vues en cours indiquent que dans ce cas, l'estimateur de référence de $x_i$ est $y_i$. 
+
+Imaginons que les tests $y_i$ aient une répartition comme suit :  
+
+![](/images/IQ.png){width=70%}
+
+La personne "la plus intelligente" a obtenu $y_i = 147$. On peut estimer son QI à 150, mais il y a quand même un doute : dans la population, le QI $x_i$ est sensé être à peu distribué selon $N(100, 15^2)$. Un QI de 147 représente à peu près une déviation de 3.3 écarts-types : un événement de cet ordre a une probabilité d'environ 0.1\%. La probabilité pour que parmi 100 personnes, au moins une ait un QI plus grand que 145 est donc $1 - 0.001^{100} \approx 0.3 \approx 10\%$. C'est peu, sans être improbable.
+
+Mais il y a une autre possibilité : peut-être que la personne $i$ a un QI plus proche de 140, mais que ce jour-là, elle a eu de la chance. En fait, la probabilité pour qu'une personne ait un $x_i$ qui dévie de plus de 2 écarts-types (donc, $x_i>130$) est de 5\%, et la probabilité pour que le jour du test, cette personne dévie de 2 écarts-types (donc $y_i-x-i>20$), est encore de 5\%. Cela fait une probabilité d'environ 0.25\%.
+
+:::{#lem-iq}
+
+Il est plus probable que la personne "la plus intelligente" de la salle soit 1) assez intelligente avec un $x_i$ de 130, et 2) qu'elle ait eu de la chance le jour du test - en tout cas, c'est 2 à 3 fois plus probable que le fait qu'elle ait un QI $x_i$ supérieur à 150. 
+
+:::
+
+
+
+
+La théorie statistique "à la Fisher" comme nous l'avons vue dans ce cours ne permet pas d'intégrer une connaissance *a priori* sur le paramètre $\mu$ à estimer. Dans notre cas, la connaissance a priori qu'on a sur les $\mu_i$ est qu'ils sont eux-mêmes aléatoires, distribués selon $N(100, 15^2)$ : il est donc presque impossible qu'un des $\mu_i$ soit plus grand que, disons, 200. 
+
+La statistique bayésienne permet d'intégrer cette connaissance a priori et de *corriger* l'estimation naïve de Fisher. 
+
+## Estimation bayésienne
+
+### Formule de Tweedie
+
+:::{#thm-tweedie}
+
+## Formule de Tweedie
+
+Soit $X$ une variable aléatoire de densité $\varrho$ et soit $\varepsilon \sim N(0, \sigma^2)$. On pose $Y = X+\varepsilon$, qui est une version bruitée de $X$. Si $f$ est la densité de $Y$, alors
+$$\mathbb{E}[X | Y] = Y + \sigma^2 \nabla_y \ln f(Y).$$
+
+:::
+
+:::{.proof}
+
+La loi jointe du couple $(X,Y)$ est $\varrho(x)g_\sigma(y-x),$ où $g_\sigma$ est la densité de $N(0, \sigma^2)$. La loi de $Y$ est la convolution $\varrho * g_\sigma = \int g(x)g_\sigma(y-x)dx$. Enfin, la densité conditionnelle de $X$ sachant $Y$ est donnée par la formule de Bayes, 
+$$ \frac{\varrho(x)g_\sigma(y-x)}{\int g(x)g_\sigma(y-x)dx}.$$
+L'espérance conditionnelle $\mathbb{E}[X|Y=y]$ vaut donc 
+$$\int \frac{x\varrho(x)g_\sigma(y-x)}{\int g(x)g_\sigma(y-x)dx}.$$
+Dans l'intégrale du haut, on peut artificiellement écrire $x= x-y+y$ afin d'obtenir 
+$$\int \frac{(x-y)\varrho(x)g_\sigma(y-x)dx}{\int g(x)g_\sigma(y-x)dx} + y\int \frac{\varrho(x)g_\sigma(y-x)dx}{\int g(x)g_\sigma(y-x)dx}.$$
+Le second terme est égal à $y$, et en dérivant sous l'intégrale, on voit que le premier est égal à $\partial_y \ln (\varrho * g_\sigma)(y)$.
+
+:::

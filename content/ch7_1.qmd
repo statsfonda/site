@@ -10,15 +10,32 @@ En réalité, si l'on suppose seulement que $F$ est continue, il se trouve que $
 
 ## Kolmogorov-Smirnov
 
-$\sqrt{n}|F_n - F|_\infty$ converge en loi vers $|B|_\infty$, où $(B_t)_{t\in [0,1]}$ est un mouvement Brownien standard. La loi de cette variable aléatoire positive est appelée *loi de Kolmogorov-Smirnov*, et sa fonction de répartition $\mathbb{P}(|B|_\infty \leqslant x)$ est donnée par
+1) $\sqrt{n}|F_n - F|_\infty$ converge en loi vers $|B|_\infty$, où $(B_t)_{t\in [0,1]}$ est un pont Brownien standard[^1]. La loi de cette variable aléatoire positive est appelée *loi de Kolmogorov-Smirnov*, et sa fonction de répartition $\mathbb{P}(|B|_\infty \leqslant x)$ est donnée par
 $$1 - 2\sum_{k=0}^\infty (-1)^k e^{-2x^2 (k+1)^2}.$$
 
-:::
-
-Ce théorème permet de construire des tests aymptotiques de niveau exactement $1-\alpha$. 
-
-:::{#thm-consistance-ks}
-
+2) 
 Si $X_1, \dotsc, X_n$ suivent une loi de fonction de répartition $G \neq F$, alors $\sqrt{n}|F_n - F|_\infty \to \infty$ presque sûrement. 
+:::
+
+:::{.proof}
+
+La démonstration du premier point nécessite des outils plus avancés en théorie des probabilités (théorème de Donsker). 
+
+Pour le second point, si $G\neq F$, alors il existe un $x$ tel que $G(x) \neq F(x)$, donc $|F(x) - G(x)|=c>0$. Or, par la loi des grands nombres, $F_n(x)$ converge vers $G(x)$ presque sûrement. Comme $|F_n - F|_\infty$ est plus grand que $|F_n(x) - G(x)|$ qui converge vers $c>0$, on voit que dès que $n$ est assez grand,  $\sqrt{n}|F_n - F|_\infty$ est plus grand que $\sqrt{n}c/2$ et donc tend vers $\infty$.
 
 :::
+
+
+
+![](/images/kolmogorov_smirnov_distribution.png){width=70%}
+
+Ce théorème permet de construire des tests aymptotiques de niveau exactement $1-\alpha$ en utilisant les quantiles de la loi de Kolmogorov-Smirnov, qui ont été tabulés. Je note $q_\beta$ le quantile usuel, $\mathbb{P}(\textrm{KS}< q_\beta) = \beta$. L'essentiel de la masse de cette loi est supportée sur l'intervalle $[0.5, 2]$. 
+
+| $\beta$ | 0.1% | 1% | 95% | 98% | 99% | 99.99% | 
+| ---- | - | - | - | - | - | - |
+| $q_\beta$ | 0.44 | 0.57 | 1.36 | 1.52 | 1.63 | 2.22 |
+
+
+
+
+[^1]: Si $W$ est un mouvement brownien, $B_t = W_t - tW_1$ est un pont brownien. C'est une fonction aléatoire qui vaut 0 aux points $t=0$ et $t=1$. 
