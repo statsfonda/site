@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Statistiques Fondamentales - Exercices</title>
+<title>Statistiques Fondamentales - 20&nbsp; Fisher VS Bayes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../content/ch5_0.html" rel="next">
-<link href="../content/ch4_2.html" rel="prev">
+<link href="../content/references.html" rel="next">
+<link href="../content/ch7_ex.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -77,7 +77,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/ch4_ex.html">Exercices</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/ch8_0.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Fisher VS Bayes</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -174,7 +174,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/ch4_ex.html" class="sidebar-item-text sidebar-link active">
+  <a href="../content/ch4_ex.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercices</span></a>
   </div>
 </li>
@@ -270,7 +270,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/ch8_0.html" class="sidebar-item-text sidebar-link">
+  <a href="../content/ch8_0.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Fisher VS Bayes</span></span></a>
   </div>
 </li>
@@ -314,10 +314,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table des matières</h2>
    
   <ul>
-  <li><a href="#questions" id="toc-questions" class="nav-link active" data-scroll-target="#questions">Questions</a></li>
-  <li><a href="#tests-élémentaires" id="toc-tests-élémentaires" class="nav-link" data-scroll-target="#tests-élémentaires">Tests élémentaires</a></li>
-  <li><a href="#exercices" id="toc-exercices" class="nav-link" data-scroll-target="#exercices">Exercices</a></li>
-  <li><a href="#travail-pratique1" id="toc-travail-pratique1" class="nav-link" data-scroll-target="#travail-pratique1">Travail pratique[^1]</a></li>
+  <li><a href="#le-problème-du-point-de-vue-de-fisher" id="toc-le-problème-du-point-de-vue-de-fisher" class="nav-link active" data-scroll-target="#le-problème-du-point-de-vue-de-fisher"><span class="header-section-number">20.1</span> Le problème du point de vue de Fisher</a></li>
+  <li><a href="#estimation-bayésienne" id="toc-estimation-bayésienne" class="nav-link" data-scroll-target="#estimation-bayésienne"><span class="header-section-number">20.2</span> Estimation bayésienne</a>
+  <ul class="collapse">
+  <li><a href="#formule-de-tweedie" id="toc-formule-de-tweedie" class="nav-link" data-scroll-target="#formule-de-tweedie"><span class="header-section-number">20.2.1</span> Formule de Tweedie</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -338,7 +339,7 @@ $$
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Exercices</h1>
+<h1 class="title"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Fisher VS Bayes</span></h1>
 </div>
 
 
@@ -353,177 +354,34 @@ $$
 
 </header>
 
-<section id="questions" class="level2">
-<h2 class="anchored" data-anchor-id="questions">Questions</h2>
-<ul>
-<li>Quelles sont les erreurs du test consistant à toujours accepter l’hypothèse nulle ?</li>
-<li>Quelles sont les erreurs du test consistant à toujours refuser l’hypothèse nulle ?</li>
-<li>Montrer que la distance en variation totale entre deux mesures de densités <span class="math inline">\(p,q\)</span> peut aussi s’écrire <span class="math inline">\(\int(p/q-1)_+ \mathrm{d}p\)</span>.</li>
-<li>Montrer que si <span class="math inline">\(\mathrm{d}_{\mathrm{KL}}(P_n \mid Q) \to 0\)</span>, alors <span class="math inline">\(P_n\)</span> converge en loi vers <span class="math inline">\(Q\)</span>.</li>
-<li>Calculer la distance en variation totale entre deux lois de Bernoulli de paramètres respectifs <span class="math inline">\(p\)</span> et <span class="math inline">\(q\)</span>.</li>
-<li>Calculer la distance en variation totale entre une loi <span class="math inline">\(\mathrm{Bin}(n,p)\)</span> et une loi <span class="math inline">\(N(\mu,\sigma^2)\)</span>.</li>
-<li>Soient <span class="math inline">\(P,Q\)</span> deux mesures distinctes. Montrer que <span class="math inline">\(\dtv(P^{\otimes n}, Q^{\otimes n})\)</span> tend vers 1.</li>
-<li>Soient <span class="math inline">\(P,Q\)</span> deux mesures. Montrer que <span class="math inline">\(\dkl(P^{\otimes n} \mid Q^{\otimes n}) = n \dkl(P \mid Q)\)</span>.</li>
-</ul>
+<p>Les test d’intelligence comme le QI ont été conçus pour être standardisés : la répartition du QI d’un test sur une large population ressemble à une gaussienne centrée en 100, et d’écart-type 15. Cela signifie que si l’on prend un individu au hasard, la probabilité que son QI soit entre 85 et 115 est de 68%.</p>
+<p>Dans une population de <span class="math inline">\(n=1000\)</span> individus, on note <span class="math inline">\(x_i\)</span> le QI de la personne <span class="math inline">\(i\)</span>. Pour mesurer les <span class="math inline">\(x_i\)</span>, on décide de faire passer un test à chaque personne : le résultat de ce test, <span class="math inline">\(y_i\)</span>, est une estimation de <span class="math inline">\(x_i\)</span> : n se doute bien qu’un seul test ne suffit pas à déterminer exactement <span class="math inline">\(x_i\)</span>. Cependant, il est raisonnable de penser que <span class="math inline">\(y_i\)</span> est centrée en <span class="math inline">\(x_i\)</span>, et d’écart-type pas trop grand, disons <span class="math inline">\(5\)</span>.</p>
+<section id="le-problème-du-point-de-vue-de-fisher" class="level2" data-number="20.1">
+<h2 data-number="20.1" class="anchored" data-anchor-id="le-problème-du-point-de-vue-de-fisher"><span class="header-section-number">20.1</span> Le problème du point de vue de Fisher</h2>
+<p>En statistique <em>fréquentiste</em>, les <span class="math inline">\(y_i\)</span> sont des réalisations de variables iid <span class="math inline">\(N(x_i, 5)\)</span> et on cherche à estimer <span class="math inline">\(x_i\)</span>. Toutes les méthodes vues en cours indiquent que dans ce cas, l’estimateur de référence de <span class="math inline">\(x_i\)</span> est <span class="math inline">\(y_i\)</span>.</p>
+<p>Imaginons que les tests <span class="math inline">\(y_i\)</span> aient une répartition comme suit :</p>
+<p><img src="../images/IQ.png" class="img-fluid" style="width:70.0%"></p>
+<p>La personne “la plus intelligente” a obtenu <span class="math inline">\(y_i = 147\)</span>. On peut estimer son QI à 150, mais il y a quand même un doute : dans la population, le QI <span class="math inline">\(x_i\)</span> est sensé être à peu distribué selon <span class="math inline">\(N(100, 15^2)\)</span>. Un QI de 147 représente à peu près une déviation de 3.3 écarts-types : un événement de cet ordre a une probabilité d’environ 0.1%. La probabilité pour que parmi 100 personnes, au moins une ait un QI plus grand que 145 est donc <span class="math inline">\(1 - 0.001^{100} \approx 0.3 \approx 10\%\)</span>. C’est peu, sans être improbable.</p>
+<p>Mais il y a une autre possibilité : peut-être que la personne <span class="math inline">\(i\)</span> a un QI plus proche de 140, mais que ce jour-là, elle a eu de la chance. En fait, la probabilité pour qu’une personne ait un <span class="math inline">\(x_i\)</span> qui dévie de plus de 2 écarts-types (donc, <span class="math inline">\(x_i&gt;130\)</span>) est de 5%, et la probabilité pour que le jour du test, cette personne dévie de 2 écarts-types (donc <span class="math inline">\(y_i-x-i&gt;20\)</span>), est encore de 5%. Cela fait une probabilité d’environ 0.25%.</p>
+<div id="lem-iq" class="theorem lemma">
+<p><span class="theorem-title"><strong>Lemme 20.1 </strong></span>Il est plus probable que la personne “la plus intelligente” de la salle soit 1) assez intelligente avec un <span class="math inline">\(x_i\)</span> de 130, et 2) qu’elle ait eu de la chance le jour du test - en tout cas, c’est 2 à 3 fois plus probable que le fait qu’elle ait un QI <span class="math inline">\(x_i\)</span> supérieur à 150.</p>
+</div>
+<p>La théorie statistique “à la Fisher” comme nous l’avons vue dans ce cours ne permet pas d’intégrer une connaissance <em>a priori</em> sur le paramètre <span class="math inline">\(\mu\)</span> à estimer. Dans notre cas, la connaissance a priori qu’on a sur les <span class="math inline">\(\mu_i\)</span> est qu’ils sont eux-mêmes aléatoires, distribués selon <span class="math inline">\(N(100, 15^2)\)</span> : il est donc presque impossible qu’un des <span class="math inline">\(\mu_i\)</span> soit plus grand que, disons, 200.</p>
+<p>La statistique bayésienne permet d’intégrer cette connaissance a priori et de <em>corriger</em> l’estimation naïve de Fisher.</p>
 </section>
-<section id="tests-élémentaires" class="level2">
-<h2 class="anchored" data-anchor-id="tests-élémentaires">Tests élémentaires</h2>
-<p>Pour tous les cas suivants, il faut savoir réaliser rapidement un test puissant, voire même optimal au sens qu’il vous plaira.</p>
-<ul>
-<li>Tester <span class="math inline">\(\mu = \mu_0\)</span> contre <span class="math inline">\(\mu = \mu_1\)</span> dans un échantillon <span class="math inline">\(N(\mu, \sigma^2)\)</span> lorsque <span class="math inline">\(\sigma\)</span> est connu.</li>
-<li>Même question lorsque <span class="math inline">\(\sigma\)</span> est inconnu (attention :&nbsp;dans ce cas les hypothèses ne sont pas simples mais composites. Il faut utiliser le rapport des maximums de vraisemblance, que l’on verra plus tard).</li>
-<li>Soient <span class="math inline">\(X_1, \dotsc, X_n\)</span> un échantillon iid <span class="math inline">\(N(\mu_1,\sigma_1^2)\)</span> et <span class="math inline">\(Y_1, \dotsc, Y_m\)</span> (<span class="math inline">\(m\)</span> et <span class="math inline">\(n\)</span> ne sont pas forcément égaux) un échantillon iid de loi <span class="math inline">\(N(\mu_2,\sigma_2^2)\)</span>. Tester <span class="math inline">\(\sigma_1 = \sigma_2\)</span> lorsque <span class="math inline">\(\mu_1\)</span> et <span class="math inline">\(\mu_2\)</span> sont connues.</li>
-<li>Même question lorsque <span class="math inline">\(\mu_1\)</span> et <span class="math inline">\(\mu_2\)</span> ne sont pas connues (même remarque que précédemment).<br>
-</li>
-<li>Donner la forme d’un test sur la valeur de <span class="math inline">\(p\)</span> pour une réalisation d’une loi <span class="math inline">\(\mathrm{Bin}(n,p)\)</span> et calculer son niveau asymptotique quand <span class="math inline">\(n\to\infty\)</span>.</li>
-<li>Donner la forme d’un test sur la valeur de <span class="math inline">\(\lambda\)</span> dans un échantillon de <span class="math inline">\(n\)</span> variables aléatoires de Poisson de paramètre <span class="math inline">\(\lambda\)</span>.</li>
-</ul>
-</section>
-<section id="exercices" class="level2">
-<h2 class="anchored" data-anchor-id="exercices">Exercices</h2>
-<div id="exr-testchideux" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 1 </strong></span>Soient <span class="math inline">\(X_1, \dotsc, X_n\)</span> des variables indépendantes de loi <span class="math inline">\(\chi_2(p)\)</span>. On cherche à tester l’hypothèse nulle <span class="math inline">\(p=1\)</span> contre l’hypothèse alternative <span class="math inline">\(p=2\)</span>.</p>
-<ol type="1">
-<li>Écrire la forme de la région de rejet des tests de rapport de vraisemblance.</li>
-<li>Essayer de calculer le niveau de ce test ; si ce n’est pas possible, essayer de le borner.</li>
-</ol>
+<section id="estimation-bayésienne" class="level2" data-number="20.2">
+<h2 data-number="20.2" class="anchored" data-anchor-id="estimation-bayésienne"><span class="header-section-number">20.2</span> Estimation bayésienne</h2>
+<section id="formule-de-tweedie" class="level3" data-number="20.2.1">
+<h3 data-number="20.2.1" class="anchored" data-anchor-id="formule-de-tweedie"><span class="header-section-number">20.2.1</span> Formule de Tweedie</h3>
+<div id="thm-tweedie" class="theorem">
+<p><span class="theorem-title"><strong>Théorème 20.1 (Formule de Tweedie) </strong></span>Soit <span class="math inline">\(X\)</span> une variable aléatoire de densité <span class="math inline">\(\varrho\)</span> et soit <span class="math inline">\(\varepsilon \sim N(0, \sigma^2)\)</span>. On pose <span class="math inline">\(Y = X+\varepsilon\)</span>, qui est une version bruitée de <span class="math inline">\(X\)</span>. Si <span class="math inline">\(f\)</span> est la densité de <span class="math inline">\(Y\)</span>, alors <span class="math display">\[\mathbb{E}[X | Y] = Y + \sigma^2 \nabla_y \ln f(Y).\]</span></p>
 </div>
-<div id="exr-testvar" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 2 </strong></span>Soient <span class="math inline">\(X_1, \dotsc, X_n\)</span> des variables indépendantes de loi <span class="math inline">\(N(0,\sigma^2)\)</span>. Proposer un test de niveau <span class="math inline">\(\alpha\)</span> de l’hypothèse <span class="math inline">\(\sigma^2=1\)</span> contre l’hypothèse <span class="math inline">\(\sigma^2 = 1+\varepsilon\)</span>, et estimer sa puissance. Comment varie-t-elle en fonction de <span class="math inline">\(n\)</span> et de <span class="math inline">\(\varepsilon\)</span> ?</p>
+<div class="proof">
+<p><span class="proof-title"><em>Preuve</em>. </span>La loi jointe du couple <span class="math inline">\((X,Y)\)</span> est <span class="math inline">\(\varrho(x)g_\sigma(y-x),\)</span> où <span class="math inline">\(g_\sigma\)</span> est la densité de <span class="math inline">\(N(0, \sigma^2)\)</span>. La loi de <span class="math inline">\(Y\)</span> est la convolution <span class="math inline">\(\varrho * g_\sigma = \int g(x)g_\sigma(y-x)dx\)</span>. Enfin, la densité conditionnelle de <span class="math inline">\(X\)</span> sachant <span class="math inline">\(Y\)</span> est donnée par la formule de Bayes, <span class="math display">\[ \frac{\varrho(x)g_\sigma(y-x)}{\int g(x)g_\sigma(y-x)dx}.\]</span> L’espérance conditionnelle <span class="math inline">\(\mathbb{E}[X|Y=y]\)</span> vaut donc <span class="math display">\[\int \frac{x\varrho(x)g_\sigma(y-x)}{\int g(x)g_\sigma(y-x)dx}.\]</span> Dans l’intégrale du haut, on peut artificiellement écrire <span class="math inline">\(x= x-y+y\)</span> afin d’obtenir <span class="math display">\[\int \frac{(x-y)\varrho(x)g_\sigma(y-x)dx}{\int g(x)g_\sigma(y-x)dx} + y\int \frac{\varrho(x)g_\sigma(y-x)dx}{\int g(x)g_\sigma(y-x)dx}.\]</span> Le second terme est égal à <span class="math inline">\(y\)</span>, et en dérivant sous l’intégrale, on voit que le premier est égal à <span class="math inline">\(\partial_y \ln (\varrho * g_\sigma)(y)\)</span>.</p>
 </div>
-<div id="exr-testrandom" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 3 </strong></span>Soient <span class="math inline">\(X_1, \dotsc, X_n\)</span> des variables indépendantes de même loi <span class="math inline">\(P\)</span>. On cherche à tester l’hypothèse nulle <span class="math inline">\(P = N(0,1)\)</span> contre l’hypothèse alternative <span class="math inline">\(P = \mathscr{T}(n)\)</span>.</p>
-<ol type="1">
-<li>Donner le test optimal au sens de l’affinité.</li>
-<li>Donner un autre test, de niveau <span class="math inline">\(1-\alpha\)</span>, et calculer sa puissance.</li>
-<li>Comparer ces deux tests, en particulier dans le régime où <span class="math inline">\(n\)</span> est grand.</li>
-</ol>
-</div>
-<div id="exr-samplecomplexity" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 4 </strong></span>Montrer que le nombre de lancers nécessaire pour distinguer une pièce équilibrée <span class="math inline">\((p=1/2)\)</span> d’une pièce légèrement déséquilibrée (<span class="math inline">\(p_1 = 1/2 + \varepsilon\)</span>) est d’ordre <span class="math inline">\(1/\varepsilon^2\)</span>.</p>
-</div>
-<div id="exr-bintest" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 5 </strong></span>On note <span class="math inline">\(p\)</span> la probabilité qu’un enfant né vivant soit un garçon. On suppose que les enfants sont de sexe indépendants, et que cette probabilité est la même pour toutes les grossesses.</p>
-<ol type="1">
-<li>Il y a eu en France métropolitaine en 2015 <span class="math inline">\(n=760\,421\)</span> naissances. , dont <span class="math inline">\(389\,181\)</span> garçons. Tester l’hypothèse <span class="math inline">\(p=\frac12\)</span> contre l’alternative pertinente.</li>
-<li>En 1920, il y a eu <span class="math inline">\(838\,137\)</span> naissances dont <span class="math inline">\(432\,044\)</span> garçons. Tester l’hypothèse <span class="math inline">\(p_{2015}=p_{1920}\)</span>.</li>
-</ol>
-</div>
-<div id="exr-testsdivers" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 6 </strong></span>Soient <span class="math inline">\(X_1, \dotsc, X_n\)</span> i.i.d de loi <span class="math inline">\(N(\theta,1)\)</span>, où <span class="math inline">\(\theta\)</span> est un paramètre réel.</p>
-<ol type="1">
-<li>Donner un intervalle de confiance pour <span class="math inline">\(\theta\)</span> au niveau de risque <span class="math inline">\(5\%\)</span> de la forme <span class="math inline">\([\hat{\theta}_n, +\infty[\)</span>.</li>
-<li>En déduire un test de niveau <span class="math inline">\(5\%\)</span> pour les hypothèses <span class="math inline">\(H_0: \theta = 0\)</span> et <span class="math inline">\(H_1: \theta &gt;0\)</span>.</li>
-<li>Donner le modèle de l’expérience statistique. Donner l’expression du test de rapport de vraisemblance <span class="math inline">\(T\)</span> pour les hypothèses <span class="math inline">\(H_0: \theta =0\)</span> et <span class="math inline">\(H_1: \theta = \mu\)</span>, où <span class="math inline">\(\mu &gt;0\)</span>. Quel test retrouve-t-on?</li>
-<li>Construire le test de rapport de vraisemblance au niveau <span class="math inline">\(5\%\)</span> pour les hypothèses <span class="math inline">\(H_0: \theta = 0\)</span> et <span class="math inline">\(H_1: \theta &gt;0\)</span>.</li>
-</ol>
-</div>
-<div id="exr-testunif" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 7 (Test sur des lois uniformes) </strong></span>On se donne <span class="math inline">\(X_1, \dots, X_n\)</span> iid de loi <span class="math inline">\(\mathscr{U}(0,\theta)\)</span>, et on note <span class="math inline">\(M_n = \max_{j=1, \dots, n} X_i\)</span>.</p>
-<ol type="1">
-<li>Écrire la fonction de répartition de <span class="math inline">\(M_n\)</span>, puis en déduire un test <span class="math inline">\(T\)</span> de niveau <span class="math inline">\(1-\alpha\)</span> pour les hypothèses <span class="math inline">\(H_0: \theta = 1\)</span> contre <span class="math inline">\(H_1: \theta &lt; 1\)</span>.</li>
-<li>Donner le test du rapport de vraisemblance pour pour les hypothèses <span class="math inline">\(H_0: \theta = 1\)</span> contre <span class="math inline">\(H_1: \theta = \theta_0\)</span>, où <span class="math inline">\(\theta_0&lt;1\)</span>. Calculer sa puissance.</li>
-<li>On cherche à tester <span class="math inline">\(H_0: \theta = 1\)</span> contre <span class="math inline">\(H_1: \theta &lt; 1\)</span>. Comme la seconde hypothèse est composite, on ne peut pas directement appliquer le test du rapport de vraisemblance ; à la place, on utilise un test du <em>maximum</em> de vraisemblance, qui est de la forme <span class="math display">\[ \frac{\sup_{\theta &lt; 1}\rho_\theta(x_1, \dotsc, x_n)}{\rho_1(x_1, \dotsc, x_n)} &gt; z\]</span> où <span class="math inline">\(\rho_\theta\)</span> est la densité d’un échantillon iid de lois <span class="math inline">\(\mathscr{U}[0,\theta]\)</span>. Calculer le supremum dans cette expression, et en déduire la région de rejet.</li>
-<li>Montrer que la puissance de <span class="math inline">\(T\)</span> vaut <span class="math inline">\(\alpha\)</span>.</li>
-<li>En utilisant la même technique, construire le test du rapport de maximum de vraisemblance pour pour les hypothèses <span class="math inline">\(H_0: \theta = 1\)</span> contre <span class="math inline">\(H_1: \theta&gt;1\)</span>, noté <span class="math inline">\(T'\)</span>, au niveau <span class="math inline">\(1-\alpha\)</span>. Calculer sa puissance.</li>
-<li>Donner un test de niveau <span class="math inline">\(1-\alpha\)</span> pour <span class="math inline">\(H_0: \theta = 1\)</span> contre <span class="math inline">\(H_1: \theta&gt;1\)</span>, plus puissant que <span class="math inline">\(T'\)</span> pour n’importe quel <span class="math inline">\(\theta &gt;1\)</span>.</li>
-</ol>
-</div>
-<div id="exr-binomtest" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 8 </strong></span>Une réalisation d’une variable aléatoire <span class="math inline">\(X \sim \mathrm{Bin}(20,p)\)</span> donne <span class="math inline">\(X = 8\)</span>.</p>
-<ol type="1">
-<li>Proposer un test du rapport de vraisemblance de l’hypothèse nulle <span class="math inline">\(p=p_0=1/2\)</span> contre l’hypothèse alternative <span class="math inline">\(p=p_1=1/3\)</span>. Donner l’expression de la <span class="math inline">\(p\)</span>-valeur du test.</li>
-<li>On tire des variables aléatoires iid de Bernoulli jusqu’à obtenir 8 succès. Écrire la loi de probabilité du nombre de lancers <span class="math inline">\(N\)</span>.</li>
-<li>Il se trouve que le nombre de lancers nécessaires pour cela était <span class="math inline">\(N=20\)</span>. Proposer un test du rapport de vraisemblance de l’hypothèse nulle <span class="math inline">\(p=p_0=1/2\)</span> contre l’hypothèse alternative <span class="math inline">\(p=p_1=1/3\)</span>. Donner l’expression de la <span class="math inline">\(p\)</span>-valeur du test.</li>
-<li>Pourquoi les deux <span class="math inline">\(p\)</span>-valeurs sont-elles différentes, alors que les deux tests sont identiques ?</li>
-</ol>
-</div>
-<div id="exr-testdé" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 9 (Test d’adéquation du <span class="math inline">\(\chi_2\)</span>) </strong></span>On lance <span class="math inline">\(60\)</span> fois un dé et on obtient les résultats suivants :</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th><strong>Face <span class="math inline">\(k\)</span></strong></th>
-<th style="text-align: center;">1</th>
-<th style="text-align: center;">2</th>
-<th style="text-align: center;">3</th>
-<th style="text-align: center;">4</th>
-<th style="text-align: center;">5</th>
-<th style="text-align: center;">6</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Effectif <span class="math inline">\(N_k\)</span></strong></td>
-<td style="text-align: center;">10</td>
-<td style="text-align: center;">13</td>
-<td style="text-align: center;">8</td>
-<td style="text-align: center;">12</td>
-<td style="text-align: center;">9</td>
-<td style="text-align: center;">8</td>
-</tr>
-</tbody>
-</table>
-<p>Le dé est-il bien équilibré ? À titre indicatif, le quantile d’une loi <span class="math inline">\(\chi^2(5)\)</span> d’ordre <span class="math inline">\(95\%\)</span> est <span class="math inline">\(11.07\)</span>.</p>
-</div>
-<div id="exr-testind" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 10 (Test d’indépendance du <span class="math inline">\(\chi_2\)</span>) </strong></span>On cherche à savoir si les variables « être riche » et « être heureux » sont indépendantes. On interroge un grand échantillon de personnes à ce sujet, et l’on récolte les données suivantes :</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th></th>
-<th>riche</th>
-<th>pauvre</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>heureux</strong></td>
-<td>344</td>
-<td>700</td>
-<td></td>
-</tr>
-<tr class="even">
-<td><strong>triste</strong></td>
-<td>257</td>
-<td>705</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>L’argent fait-il le bonheur ?</p>
-</div>
-<div id="exr-testsmultiples" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 11 (Tests multiples (examen 24)) </strong></span>Soient <span class="math inline">\(x_1, \dotsc, x_n\)</span> des variables aléatoires indépendantes gaussiennes dans <span class="math inline">\(\mathbb{R}^d\)</span>, de lois respectives <span class="math inline">\(N(\mu_i, \sigma_i^2 I_d)\)</span>, où <span class="math inline">\(\mu_i \in \mathbb{R}^d\)</span> et <span class="math inline">\(\sigma_i^2 &gt; 0\)</span> sont inconnus. On note <span class="math inline">\(H_{0,i}\)</span> l’hypothèse « <span class="math inline">\(\mu_i = 0\)</span> ».</p>
-<ol type="1">
-<li>Construire un test de <span class="math inline">\(H_{0,i}\)</span> de niveau de confiance <span class="math inline">\(1-\alpha\)</span>. On le notera <span class="math inline">\(T_{\alpha}^{(i)}\)</span>.</li>
-<li>On effectue chacun des tests <span class="math inline">\(T^{(i)}_\alpha\)</span>, indépendamment les uns des autres. Si tous les <span class="math inline">\(\mu_i\)</span> sont simultanément nuls, quelle est la probabilité qu’aucune des hypothèses <span class="math inline">\(H_{0,i}\)</span> ne soit rejetée ? Quelle est la limite de cette probabilité lorsque <span class="math inline">\(n \to \infty\)</span> ?</li>
-<li>Dorénavant, on notera <span class="math inline">\(H_0\)</span> l’hypothèse selon laquelle tous les <span class="math inline">\(\mu_i\)</span> sont nuls. Quel niveau de confiance <span class="math inline">\(1-\delta\)</span> faudrait-il choisir pour que, sous <span class="math inline">\(H_0\)</span>, la probabilité de l’événement « aucun des tests <span class="math inline">\(T^{(i)}_{\delta}\)</span> ne rejette <span class="math inline">\(H_{0,i}\)</span> » soit égale à <span class="math inline">\(1-\alpha\)</span> ?</li>
-<li>On s’intéresse maintenant à la propriété suivante : « sous <span class="math inline">\(H_0\)</span>, la probabilité de l’événement “plus de <span class="math inline">\(k\%\)</span> des tests <span class="math inline">\(T^{(i)}_\delta\)</span> ont rejetés <span class="math inline">\(H_{0,i}\)</span>” est inférieure à <span class="math inline">\(\alpha\)</span> ».
-<ol type="1">
-<li>Sous <span class="math inline">\(H_0\)</span>, quelle est la loi du nombre d’hypothèses <span class="math inline">\(H_{0,i}\)</span> rejetées par <span class="math inline">\(T^{(i)}_{\delta}\)</span> ?</li>
-<li>Trouver un <span class="math inline">\(\delta\)</span> (dépendant de <span class="math inline">\(k,\alpha,n\)</span>) tel que la famille de tests <span class="math inline">\(T_\delta^{(i)}\)</span> vérifie la propriété ci-dessus. (indice : Wassily).</li>
-</ol></li>
-</ol>
-</div>
-</section>
-<section id="travail-pratique1" class="level1">
-<h1>Travail pratique[^1]</h1>
-<p>Faites un test du chi-deux (indépendance ou adéquation) de votre choix. Vous devez vous-même trouver une question qui vous intéresse. Cela peut être n’importe quoi :</p>
-<ul>
-<li>vérifier la loi de Benford dans je ne sais quel document ou site ou journal ;</li>
-<li>se demander si le département de région d’une personne et ses opinions politiques sont indépendantes ;</li>
-<li>tester une corrélation simple entre la météo à NY et la positivé du rendement du S&amp;P500 (« il pleut à Wall Street » vs « les marchés sont dans le vert ») ;&nbsp;</li>
-<li>se demander si les naissances en France sont uniformément réparties sur les 365 jours de l’année ;</li>
-<li>tester si ChatGPT ou je ne sais quel LLM&nbsp;est capable de générer des échantillons de lois précises (loi uniforme, loi de Poisson, etc). Je serai curieux d’avoir le résultat.</li>
-<li>Etc.</li>
-</ul>
-<p>Trouvez donc une question intéressante, trouvez des données pertinentes (c’est peut-être la partie la moins simple), formulez la question sous la forme d’un test statistique, et réalisez le test avec votre langage de programmation favori (qui n’est pas R, soyez de bon goût). Écrivez quelques lignes pour me dire où vous avez eu les données et comment vous vous adaptez au formalisme du cours. Une page max (snippet de code compris) devrait suffire.</p>
-<p>Pas besoin d’aller chercher très loin, un jeu de données simple suffit ! Amusez-vous bien.</p>
-<p>Vous devez m’envoyer ça avant le 9 février 23h59, avec pour objet du mail votre nom suivi de “chi-deux”.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -762,13 +620,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../content/ch4_2.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Tests du <span class="math inline">\(\chi_2\)</span></span></span>
+      <a href="../content/ch7_ex.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Exercices</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../content/ch5_0.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Moindres carrés</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../content/references.html" class="pagination-link">
+        <span class="nav-page-text">Et après ?</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

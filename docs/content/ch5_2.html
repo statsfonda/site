@@ -270,6 +270,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../content/ch8_0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Fisher VS Bayes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../content/references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Et après ?</span></a>
   </div>
@@ -283,19 +289,19 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/app1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Algèbre linéaire</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Algèbre linéaire</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/app3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Formules d’inversion</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Formules d’inversion</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/app2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">50&nbsp;nuances de TCL</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">50&nbsp;nuances de TCL</span></span></a>
   </div>
 </li>
     </ul>
@@ -374,7 +380,7 @@ $$
 <p><span class="theorem-title"><strong>Théorème 12.3 </strong></span><span class="math display">\[\frac{R^2}{1-R^2}\frac{n-d}{d-1} \sim \mathscr{F}_{d-1, n-d}. \]</span></p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Preuve</em>. </span>Il existe une formule qui permet d’inverser des matrices par blocs :&nbsp;la formule de Schur (<a href="app3.html#thm-schur">Théorème&nbsp;<span>21.1</span></a>). Commençons par décomposer <span class="math inline">\(X\)</span> sous la forme<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="math inline">\([\mathbf{1}, X_0]\)</span>, avec <span class="math inline">\(X_0\)</span> de taille <span class="math inline">\(n \times (d-1)\)</span> et <span class="math inline">\(\mathbf{1}\)</span> le vecteur constant égal à 1. La matrice <span class="math inline">\(X^\top X\)</span> vaut <span class="math display">\[\begin{bmatrix} n &amp; u \\ v &amp; X_0^\top X_0 \end{bmatrix}\]</span> où <span class="math inline">\(u\)</span> est le vecteur ligne <span class="math inline">\(\mathbf{1}^\top X_0\)</span> et <span class="math inline">\(v\)</span> est le vecteur colonne <span class="math inline">\(X_0^\top \mathbf{1}\)</span>. La formule de Schur dit que l’inverse de cette matrice est <span class="math display">\[\begin{bmatrix}* &amp; * \\ * &amp; (X_0^\top X_0 - vu/n)^{-1}\end{bmatrix} \]</span> La matrice <span class="math inline">\(uv/n\)</span> s’écrit <span class="math inline">\(X_0^\top E X_0\)</span>, où <span class="math inline">\(E = \mathbf{1}\mathbf{1}^\top / n\)</span> est la projection orthogonale sur le sous-espace vectoriel engendré par <span class="math inline">\(\mathbf{1}\)</span>. Comme <span class="math inline">\((I-E)^2=I-E\)</span>, on peut écrire <span class="math inline">\((X_0^\top X_0 - vu/n)^{-1}\)</span> sous la forme <span class="math inline">\(X_1^\top X_1\)</span>, où <span class="math inline">\(X_1 = (I-E)X_0\)</span>. La statistique de Wald s’écrit alors <span id="eq-statfisher2"><span class="math display">\[\frac{\langle \hat{\bt}_1, X_1^\top X_1 \hat{\bt}_1\rangle}{(d-1)\hat{\sigma}^2_n}  \tag{12.2}\]</span></span> où <span class="math inline">\(\hat{\bt}_1 = C\hat{\bt}\)</span> est composé des entrées de <span class="math inline">\(\hat{\bt}\)</span> sauf la première. On reconnaît, en haut, la norme <span class="math inline">\(|X_1 \hat{\bt}_1|^2\)</span>.</p>
+<p><span class="proof-title"><em>Preuve</em>. </span>Il existe une formule qui permet d’inverser des matrices par blocs :&nbsp;la formule de Schur (<a href="app3.html#thm-schur">Théorème&nbsp;<span>22.1</span></a>). Commençons par décomposer <span class="math inline">\(X\)</span> sous la forme<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="math inline">\([\mathbf{1}, X_0]\)</span>, avec <span class="math inline">\(X_0\)</span> de taille <span class="math inline">\(n \times (d-1)\)</span> et <span class="math inline">\(\mathbf{1}\)</span> le vecteur constant égal à 1. La matrice <span class="math inline">\(X^\top X\)</span> vaut <span class="math display">\[\begin{bmatrix} n &amp; u \\ v &amp; X_0^\top X_0 \end{bmatrix}\]</span> où <span class="math inline">\(u\)</span> est le vecteur ligne <span class="math inline">\(\mathbf{1}^\top X_0\)</span> et <span class="math inline">\(v\)</span> est le vecteur colonne <span class="math inline">\(X_0^\top \mathbf{1}\)</span>. La formule de Schur dit que l’inverse de cette matrice est <span class="math display">\[\begin{bmatrix}* &amp; * \\ * &amp; (X_0^\top X_0 - vu/n)^{-1}\end{bmatrix} \]</span> La matrice <span class="math inline">\(uv/n\)</span> s’écrit <span class="math inline">\(X_0^\top E X_0\)</span>, où <span class="math inline">\(E = \mathbf{1}\mathbf{1}^\top / n\)</span> est la projection orthogonale sur le sous-espace vectoriel engendré par <span class="math inline">\(\mathbf{1}\)</span>. Comme <span class="math inline">\((I-E)^2=I-E\)</span>, on peut écrire <span class="math inline">\((X_0^\top X_0 - vu/n)^{-1}\)</span> sous la forme <span class="math inline">\(X_1^\top X_1\)</span>, où <span class="math inline">\(X_1 = (I-E)X_0\)</span>. La statistique de Wald s’écrit alors <span id="eq-statfisher2"><span class="math display">\[\frac{\langle \hat{\bt}_1, X_1^\top X_1 \hat{\bt}_1\rangle}{(d-1)\hat{\sigma}^2_n}  \tag{12.2}\]</span></span> où <span class="math inline">\(\hat{\bt}_1 = C\hat{\bt}\)</span> est composé des entrées de <span class="math inline">\(\hat{\bt}\)</span> sauf la première. On reconnaît, en haut, la norme <span class="math inline">\(|X_1 \hat{\bt}_1|^2\)</span>.</p>
 <p>Il suffit de montrer que l’expression dans <a href="#eq-statfisher2">Équation&nbsp;<span>12.2</span></a> est égale à <span class="math inline">\((n-d)R^2/(d-1)(1-R^2)\)</span>. On rappelle que <span class="math inline">\(R^2 = 1 - |\hat{Y} - Y|^2 / |\bar{y}\mathbf{1} - Y|^2\)</span>. L’expression <span class="math inline">\(R^2/(1-R^2)\)</span> devrait donc valoir <span class="math display">\[\frac{|\bar{y}\mathbf{1} - Y|^2 - |\hat{Y} - Y|^2}{|\hat{Y} - Y|^2}.\]</span> Au vu de <a href="#eq-statfisher2">Équation&nbsp;<span>12.2</span></a> et du fait que <span class="math inline">\(\hat{\sigma}^2_n = |\hat{Y} - Y|^2 / (n-d)\)</span>, il suffit de montrer que <span class="math inline">\(|X_1 \hat{\bt}_1|^2\)</span> et <span class="math inline">\(|\bar{y}\mathbf{1} - Y|^2 - |\hat{Y} - Y|^2\)</span> sont égales.</p>
 <p>Le vecteur <span class="math inline">\(\bar{y}\mathbf{1}\)</span> est la projection orthogonale de <span class="math inline">\(Y\)</span> sur <span class="math inline">\(\mathbf{1}\)</span>. Ainsi, on a <span class="math display">\[ Y = \hat{\varepsilon} + \bar{y}\mathbf{1} + (\hat{Y} - \bar{y}\mathbf{1})\]</span> et ces trois vecteurs sont orthogonaux. Le théorème de Pythagore dit que <span class="math inline">\(|\bar{y}\mathbf{1} - Y|^2 - |\hat{Y} - Y|^2\)</span> est égal à <span class="math inline">\(|\hat{Y} - \bar{y}\mathbf{1}|^2\)</span>. On reconnaît la projection orthogonale de <span class="math inline">\(Y - \bar{y}\mathbf{1} = (I-E)Y\)</span> sur l’espace vectoriel engendré par les colonnes de la matrice <span class="math inline">\(X_1 = (I-E)X_0\)</span>. Si l’on note <span class="math inline">\(\tilde{\bt}_1\)</span> l’estimateur des MCO de la régression de <span class="math inline">\((I-E)Y\)</span> vers <span class="math inline">\((I-E)X_0\)</span>, il suffit donc de montrer que <span class="math inline">\(\tilde{\bt}_1 = \hat{\bt}_1\)</span> pour terminer la démonstration. C’est exactement le théorème de Frish-Waugh <a href="ch5_0.html#thm-fw">Théorème&nbsp;<span>9.2</span></a>.</p>
 </div>

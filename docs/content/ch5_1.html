@@ -270,6 +270,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../content/ch8_0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Fisher VS Bayes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../content/references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Et après ?</span></a>
   </div>
@@ -283,19 +289,19 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/app1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Algèbre linéaire</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Algèbre linéaire</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/app3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Formules d’inversion</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Formules d’inversion</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/app2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">50&nbsp;nuances de TCL</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">50&nbsp;nuances de TCL</span></span></a>
   </div>
 </li>
     </ul>
@@ -369,7 +375,7 @@ $$
 <div id="thm-condgaussien" class="theorem">
 <p><span class="theorem-title"><strong>Théorème 11.2 </strong></span>La loi de <span class="math inline">\(X\)</span> conditionnellement à <span class="math inline">\(Y\)</span> est une loi gaussienne de moyenne <span class="math display">\[\mu_1 + \Sigma_{1,2}\Sigma_{2,2}^{-1}(Y-\mu_2) \]</span> et de covariance <span id="eq-schur"><span class="math display">\[ \Sigma_{1,1} - \Sigma_{2,1}\Sigma_{2,2}^{-1}\Sigma_{1,2}. \tag{11.3}\]</span></span></p>
 </div>
-<p>La formule <a href="#eq-schur">Équation&nbsp;<span>11.3</span></a> est appelée <em>complément de Schur</em>. Son inverse est égal au bloc inférieur-droit de l’inverse de <span class="math inline">\(\Sigma\)</span> comme expliqué dans <a href="app3.html"><span>Chapitre&nbsp;21</span></a>.</p>
+<p>La formule <a href="#eq-schur">Équation&nbsp;<span>11.3</span></a> est appelée <em>complément de Schur</em>. Son inverse est égal au bloc inférieur-droit de l’inverse de <span class="math inline">\(\Sigma\)</span> comme expliqué dans <a href="app3.html"><span>Chapitre&nbsp;22</span></a>.</p>
 <div class="proof">
 <p><span class="proof-title"><em>Preuve</em>. </span>Je préfère laisser mon lecteur confiant méditer lui-même sur le fait que la loi conditionnelle d’une partie <span class="math inline">\(X\)</span> d’un vecteur gaussien contre l’autre partie <span class="math inline">\(Y\)</span> du même vecteur est elle-même une loi gaussienne, dont il suffit par conséquent de calculer l’espérance et la variance pour l’identifier. On peut le faire par une technique puissante :&nbsp;on cherche à « enlever Y de X ». Plus précisément, on va essayer d’écrire <span class="math display">\[X = Z + AY\]</span> où <span class="math inline">\(Z\)</span> est indépendante de <span class="math inline">\(Y\)</span> et <span class="math inline">\(A\)</span> est une matrice à trouver. Comme <span class="math inline">\(\mathrm{Cov}(X,Y) = \Sigma_{1,2}\)</span> et qu’on cherche <span class="math inline">\(Z,A\)</span> tels que <span class="math inline">\(\mathrm{Cov}(Z,Y)=0\)</span>, on voit vite que <span class="math inline">\(A\)</span> doit vérifier <span class="math inline">\(\Sigma_{1,2} = A \Sigma_{2,2}\)</span>, et donc que <span class="math display">\[ Z = X - \Sigma_{1,2}\Sigma_{2,2}^{-1}Y.\]</span> Comme <span class="math inline">\(Z\)</span> et <span class="math inline">\(Y\)</span> sont décorrélées et conjointement gaussiennes, elles sont indépendantes, et <span class="math inline">\(\mathbb{E}[Z|Y]=\mathbb{E}[Z] = \mu_1 - A\mu_2\)</span>. Ainsi, <span class="math inline">\(\mathbb{E}[X|Y] = \mathbb{E}[Z] - AY\)</span> et on en déduit tout de suite <a href="#eq-condgaussesp">Équation&nbsp;<span>11.2</span></a>. Pour la variance conditionnelle, <span class="math inline">\(\mathrm{Var}(X|Y) = \mathrm{Var}(Z) + A\mathrm{Var}(Y)A^\top\)</span> et <a href="#eq-schur">Équation&nbsp;<span>11.3</span></a> en découle facilement.</p>
 </div>

@@ -270,6 +270,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../content/ch8_0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Fisher VS Bayes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../content/references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Et après ?</span></a>
   </div>
@@ -283,19 +289,19 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/app1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Algèbre linéaire</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Algèbre linéaire</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/app3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Formules d’inversion</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Formules d’inversion</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/app2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">50&nbsp;nuances de TCL</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">50&nbsp;nuances de TCL</span></span></a>
   </div>
 </li>
     </ul>
@@ -380,7 +386,9 @@ $$
 <h2 data-number="15.3" class="anchored" data-anchor-id="sec-interp-fisher"><span class="header-section-number">15.3</span> Interprétation</h2>
 <p>L’information de Fisher d’un modèle dépend crucialement de <em>comment</em> on paramétrise le modèle, et c’est ce qui a donné lieu à la terrible confusion qui m’a paralysé en cours jeudi matin.</p>
 <p>Prenons l’exemple de la loi de Bernoulli, et considérons d’abord sa paramétrisation usuelle, <span class="math display">\[ p_\theta(x) = \theta^x(1-\theta)^{1-x}\]</span> avec <span class="math inline">\(x \in \{0,1\}\)</span>, et <span class="math inline">\(\theta\)</span> est dans <span class="math inline">\(]0,1[\)</span>. La fonction de score est donnée par <span class="math inline">\((x\ln \theta + (1-x)\ln(1-\theta))'\)</span>, soit <span class="math inline">\(\frac{x}{\theta} - \frac{1-x}{1-\theta}\)</span>, ou encore <span class="math display">\[ \frac{x}{\theta(1-\theta)} + \frac{1}{1-\theta}, \]</span> et donc l’information de Fisher de ce modèle est égale à la variance de <span class="math inline">\(X/\theta(1-\theta) + 1/(1-\theta)\)</span>, qui vaut <span class="math inline">\(1/\theta(1-\theta)\)</span> :&nbsp; <span id="eq-info-ber1"><span class="math display">\[I(\theta) = \frac{1}{\theta(1-\theta)}. \tag{15.2}\]</span></span></p>
-<p>Maintenant, nous allons paramétriser le modèle de Bernoulli avec les logits :&nbsp;plutôt que de considérer <span class="math inline">\(p\)</span>, nous allons paramétriser <span class="math inline">\(z = \ln(\theta/(1-\theta))\)</span>. La densité de Bernoulli s’écrit alors <span class="math display">\[p_z(x) = \frac{e^{zx}}{1+e^z}.\]</span> Comme <span class="math inline">\(x\)</span> vaut 0 ou 1, on voit que la probabilité d’obtenir 1 est égale à <span class="math inline">\(\theta = \theta(z) = e^z/(1+e^z)\)</span>. Il s’agit donc d’une autre paramétrisation de <span class="math inline">\(p\)</span>, mais celle-ci a l’avantage d’exprimer les lois de Bernoulli sous forme exponentielle, avec <span class="math inline">\(T(x) = x\)</span>. L’information de Fisher dans cette autre paramétrisation du modèle de Bernoulli est donnée par la formule <span class="math inline">\(\mathrm{Var}_z(X) = \frac{e^z}{(1+e^z)^2}\)</span>, soit <span id="eq-info-ber2"><span class="math display">\[\tilde{I}(z) = \theta(z)(1-\theta(z)). \tag{15.3}\]</span></span> Les formules <a href="#eq-info-ber1">Équation&nbsp;<span>15.2</span></a> et <a href="#eq-info-ber2">Équation&nbsp;<span>15.3</span></a> (qui sont bien celles que j’ai obtenues en cours ce matin) sont toutes les deux correctes, mais elles ne coïncident pas. Pourquoi ?</p>
+<p>Maintenant, nous allons paramétriser le modèle de Bernoulli avec les logits :&nbsp;plutôt que de considérer <span class="math inline">\(p\)</span>, nous allons paramétriser <span class="math inline">\(z = \ln(\theta/(1-\theta))\)</span>. La densité de Bernoulli s’écrit alors <span class="math display">\[p_z(x) = \frac{e^{zx}}{1+e^z}.\]</span> Comme <span class="math inline">\(x\)</span> vaut 0 ou 1, on voit que la probabilité d’obtenir 1 est égale à <span class="math inline">\(\theta = \theta(z) = e^z/(1+e^z)\)</span>. Il s’agit donc d’une autre paramétrisation de <span class="math inline">\(p\)</span>, mais celle-ci a l’avantage d’exprimer les lois de Bernoulli sous forme exponentielle, avec <span class="math inline">\(T(x) = x\)</span>. L’information de Fisher dans cette autre paramétrisation du modèle de Bernoulli est donnée par la formule <span class="math inline">\(\mathrm{Var}_z(X) = \frac{e^z}{(1+e^z)^2}\)</span>, soit <span id="eq-info-ber2"><span class="math display">\[\tilde{I}(z) = \theta(z)(1-\theta(z)). \tag{15.3}\]</span></span></p>
+<p><img src="../images/fisher_bernoulli.png" class="img-fluid" style="width:90.0%"></p>
+<p>Les formules <a href="#eq-info-ber1">Équation&nbsp;<span>15.2</span></a> et <a href="#eq-info-ber2">Équation&nbsp;<span>15.3</span></a> (qui sont bien celles que j’ai obtenues en cours ce matin) sont toutes les deux correctes, mais elles ne coïncident pas. Pourquoi ?</p>
 <p>La réponse est que <span class="math inline">\(I(\theta)\)</span> et <span class="math inline">\(\tilde{I}(z)\)</span> quantifient la quantité d’information <strong>sur le paramètre estimé</strong> qui et contenue dans les observations, et que le paramètre n’est pas le même dans les deux cas.</p>
 <ul>
 <li>pour le modèle <a href="#eq-info-ber1">Équation&nbsp;<span>15.2</span></a>, le paramètre est <span class="math inline">\(\theta\)</span>. Dans ce cas, l’information contenue dans les observations est maximale lorsque <span class="math inline">\(\theta\)</span> est proche de 0 ou 1.<br>
@@ -399,7 +407,7 @@ $$
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>Rappelons que (cf <a href="app1.html#sec-defpos"><span>Section&nbsp;20.4</span></a>) lorsque <span class="math inline">\(A,B\)</span> sont des matrices symétriques, <span class="math inline">\(A \preceq B\)</span> équivaut à ce que <span class="math inline">\(\langle y, Ay\rangle \leqslant \langle y, By\rangle\)</span> pour tout <span class="math inline">\(y\)</span>. <a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Rappelons que (cf <a href="app1.html#sec-defpos"><span>Section&nbsp;21.4</span></a>) lorsque <span class="math inline">\(A,B\)</span> sont des matrices symétriques, <span class="math inline">\(A \preceq B\)</span> équivaut à ce que <span class="math inline">\(\langle y, Ay\rangle \leqslant \langle y, By\rangle\)</span> pour tout <span class="math inline">\(y\)</span>. <a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>à titre d’exemple, toute valeur de <span class="math inline">\(z\)</span> plus grande que 10 donne un <span class="math inline">\(\theta(z)\)</span> plus grand que <span class="math inline">\(99.99\%\)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
