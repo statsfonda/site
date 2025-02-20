@@ -1,4 +1,4 @@
 # Exercices {.unnumbered}
 
 
-Rien pour l'instant. 
+- Le Lemme @lem-gc est-il encore vrai lorsque $F$ n'est pas continue ?

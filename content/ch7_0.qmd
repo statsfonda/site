@@ -53,7 +53,7 @@ En particulier, la loi de $|F_n - F|_\infty$ ne dépend pas de $F$ : on dit que 
 
 ### Démonstration du théorème de Glivenko-Cantelli {.unnumbered}
 
-Notons $q_j$ le $j$-ème quantile d'ordre $N$ de $F$ (on choisira l'entier $N$ plus tard). Soit $x$ entre $q_j$ et $q_{j+1}$. Par croissance, $F_n(x)$ est entre $F_n(q_j)$ et  $F_n(q_{j+1})$, et $F(x)$ est entre $j/N$ et $(j+1)/N$. Ainsi, $F_n(x) - F(x)$ est plus grand que 
+On se place dans le cas où $F$ est continue. Notons $q_j$ le $j$-ème quantile d'ordre $N$ de $F$ (on choisira l'entier $N$ plus tard) : il est bien défini, et il vérifie $F(q_j) = j/N$. Soit $x$ entre $q_j$ et $q_{j+1}$. Par croissance, $F_n(x)$ est entre $F_n(q_j)$ et  $F_n(q_{j+1})$, et $F(x)$ est entre $j/N$ et $(j+1)/N$. Ainsi, $F_n(x) - F(x)$ est plus grand que 
 $$ F_n(q_j) - \frac{j}{N} - \frac{1}{N}$$
 et plus petit que 
 $$ F_n(q_{j+1})- \frac{j}{n} = F_n(q_{j+1})- \frac{j+1}{N}  + \frac{1}{N}.$$

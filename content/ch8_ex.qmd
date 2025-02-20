@@ -1,0 +1,23 @@
+# Exercices {.unnumbered}
+
+:::{#exr-b1}
+
+Soit $\mu$ une variable aléatoire et $X = \mu + N(0,\sigma^2)$. Montrer la formule de Tweedie pour la variance : 
+$$\mathrm{Var}(\mu \mid X) = \sigma^2(1 + \sigma^2 \ell''(X))$$
+où $\ell = \ln f$ et $f$ est la densité de $X$. 
+
+:::
+
+:::{#exr-b2}
+
+## Formule de Robbins
+
+Soit $\lambda$ une variable aléatoire avec une densité, et $X \sim \mathrm{Poi}(\lambda)$. Montrer que 
+$$ \mathbb{E}[\lambda | X] = \frac{(X+1)f(X+1)}{f(X)}$$
+où $f$ est la densité de $X$. 
+
+De façon plus générale, notons $\varrho$ la densité de $\lambda$ et on note $p_\lambda(x) = e^{\lambda T(x)}/Z(\lambda)$ un modèle exponentiel par rapport à une mesure $\nu$. On suppose que $X \sim p_\lambda$. Montrer que 
+$$\mathbb{E}[\lambda | X] = \Lambda'(X)$$
+où $\Lambda = \ln f(z)$ et $f$ est la densité de $X$. 
+
+:::

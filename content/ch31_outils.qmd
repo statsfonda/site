@@ -54,7 +54,9 @@ et donc, est plus grand que @eq-gaussiantaill.
 ### Quantiles généraux
 
  Dans le cas général où la fonction de répartition $F(x) = \mathbb{P}(X \leqslant x)$ n'est pas continue (par exemple pour les lois discrètes), on peut toujours définir les quantiles de n'importe quel ordre $\beta \in [0,1]$ en prenant la plus petite valeur $q$ telle que $\mathbb{P}(X \leqslant q) \geqslant \beta$. Autrement dit, 
-$$q(\beta) = \inf \{t : F(t) \geqslant \beta \}.$$
+$$q(\beta) = \inf \{t : F(t) \geqslant \beta \}.$${#eq-quantile}
+Notons que $F$ est continue à droite : comme il y a une suite $q_n \to q(\beta)$ telle que $q_n>q(\beta)$ et $F(q_n)\geqslant \beta$, on voit que $F(q(\beta)) = \lim F(q_n) \geqslant \beta$. Mais il n'y a pas toujours égalité !
+
 
 ## Calculs de lois
 

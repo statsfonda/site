@@ -45,7 +45,7 @@ La théorie statistique « à la Fisher » ne permet pas d'intégrer une connais
 
 Dans notre cas, la connaissance a priori qu'on a sur les $\mu_i$ est qu'ils sont eux-mêmes aléatoires, distribués selon $N(100, 15^2)$ : il est donc presque impossible qu'un des $\mu_i$ soit plus grand que, disons, 200. La statistique bayésienne permet d'intégrer cette connaissance a priori et de *corriger* l'estimation naïve de Fisher. 
 
-## Estimation bayésienne
+## Le point de vue de Bayes
 
 Comme les $\mu_i$ sont eux-mêmes aléatoires, la « meilleure approximation[^1] » de $\mu$ sachant $\mu + N(0,\sigma^2)$ est tout simplement une espérance conditionnelle. Or, dans le cas d'une perturbation gaussienne, on sait calculer cette espérance conditionnelle.
 
@@ -75,8 +75,10 @@ Le second terme est égal à $y$, et en dérivant sous l'intégrale, on voit que
 ### Application
 
 Soit $\mu$ une variable aléatoire réelle avec densité $\varrho$ et $x = \mu + N(0,\sigma^2)$ ; l'estimateur « bayésien » de $\mu$ sachant $x$ est donné par 
-$$\hat{\mu} = \underbrace{x}_{\hat{\mu}_{\mathrm{EMV}}} - \underbrace{\sigma^2 \nabla_x \ln f(x)}_{\text{correction de Bayes}},$$
+$$\hat{\mu} = \underbrace{x}_{\hat{\mu}_{\mathrm{EMV}}} - \underbrace{\sigma^2 \nabla_x \ln f(x)}_{\text{correction de Bayes}},$${#eq-tweedieest}
 où $f = \varrho * g_\sigma$ est la densité de $x$.  
+
+Noter que cette formule suppose crucialement que $\sigma$ est connu. Lorsqu'il ne l'est pas, il faut l'estimer : cela donne naissance à l'estimateur de James-Stein, qui sera présenté dans la prochaine section. 
 
 :::{#exm-iq}
 
@@ -92,6 +94,9 @@ ce qui dans le cas qui nous intéresse ($x_i = 148$) donne une estimation de $\m
 
 ### Le biais de sélection
 
+Dans la formule de l'estimateur @eq-tweedieest, lorsque la réalisation $x$ est très éloignée de la moyenne, la correction de Bayes est très forte. L'estimateur a intégré la remarque qu'on avait fait dans la section précédente : plus $x$ est éloigné de la moyenne, plus il est probable que la vraie valeur de $\mu$ soit plus proche de la moyenne. Ce phénomène se rencontre souvent sous le nom populaire de « paradoxe du survivant » ou « biais de sélection ». 
+
+L'estimation naturelle a toujours tendence à sous-estimer le rôle du hasard dans les phénomènes extrêmes. Typiquement, les grandes fortunes doivent leur richesse à un mélange de talent et de chance, mais les admirateurs béats ne retiennent que le talent. 
 
 
 [^1]: au sens $L^2$ --- je vous renvoie au cours de probabilités théoriques. ]

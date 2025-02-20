@@ -1,0 +1,27 @@
+# James-Stein
+
+Soient $\mu_1, \dotsc, \mu_n$ des réalisations de $N(m,1)$ et soient $x_i \sim N(\mu_i, \sigma^2)$ des réalisations iid de gaussiennes centrées en $\mu_i$. On cherche à estimer *tous* les $\mu_i$, c'est-à-dire le vecteur $\mu = (\mu_1, \dotsc, \mu_n)$. L'estimateur du maximum de vraisemblance dit que $\hat{\mu} = x$, le vecteur des $x_i$. Quel est le risque quadratique de cet estimateur ?
+
+$$\mathbb{E}[|\hat{\mu} - \mu |^2] = \sum_{i=1}^n \mathbb{E}[(x_i - \mu_i)^2] = n \sigma^2.$$
+
+## L'estimateur de James-Stein
+
+:::{#def-js}
+
+L'estimateur de James-Stein est défini par 
+
+$$\hat{\mu}_{\mathrm{JS}} = \left(1 - \frac{(n-2)\sigma^2}{|x|^2}\right)x.$${#eq-js}
+
+:::
+
+:::{#thm-js}
+
+## Théorème de James-Stein
+
+Même si les $\mu_i$ sont des nombres fixés, on a toujours
+
+$$\mathbb{E}[|\hat{\mu}_{\mathrm{JS}} - \mu |^2] = \left(1 - \mathbb{E}\frac{n-2}{|x|^2}\right)n\sigma^2 < n \sigma^2.$$
+
+:::
+
+Comme $x_i = \mu_i + \varepsilon_i$, on voit que $x_i \sim N(m, 1 + \sigma^2)$. On note $\tau^2 = 1 + \sigma^2$. 
