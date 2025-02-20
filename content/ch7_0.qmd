@@ -16,18 +16,23 @@ $\mathbb{P}$-presque sûrement, $\lim_{n\to \infty}|F_n - F|_\infty = 0$.
 
 :::
 
-Ce théorème dit que $F_n$ est un estimateur « convergent au sens de la norme uniforme » de $F$. On va utiliser ce théorème pour faire des tests : si $|F_n - F|$ n'est pas suffisamment proche de zéro, on rejettera l'hypothèse selon laquelle les $X_i$ ont $F$ pour fonction de répartition. Le critère exact est appelé *test de Kolmogorov-Smirnov* et sera vu dans la section suivante. 
+Ce théorème dit que $F_n$ est un estimateur « convergent au sens de la norme uniforme » de $F$. Il est en fait valable même si la fonction de répartition $F$ n'est pas continue, mais la démonstration est un peu plus technique. 
+
+On va utiliser ce théorème pour faire des tests : si $|F_n - F|$ n'est pas suffisamment proche de zéro, on rejettera l'hypothèse selon laquelle les $X_i$ ont $F$ pour fonction de répartition. Le critère exact est appelé *test de Kolmogorov-Smirnov* et sera vu dans la section suivante. 
 
 ### Calculabilité et loi  {.unnumbered}
 
 Soit $(X_{(1)}, \dotsc, X_{(n)})$ l'échantillon trié en ordre croissant. Par convention, on pose $X_{(0)} = -\infty$. La quantité $|F_n - F|_\infty$ est calculable grâce à la représentation suivante : 
-$$|F_n - F|_\infty = \sup_{i\in \{0, \dotsc, n-1\}}\left|\frac{i}{n} - F(X_{(i)})\right| \vee \left| \frac{i}{n} - F(X_{(i+1)})\right|. $${#eq-supf}
+$$|F_n - F|_\infty = \sup_{i\in \{0, \dotsc, n-1\}}\left|\frac{i}{n} - F(X_{(i)})\right| \vee \left| \frac{i}{n} - F(X_{(i+1)}-)\right|,  $${#eq-supf}
+où $F(x-)$ est la limite à gauche de $F$ en $x$, c'est-à-dire la limite de $F(x-t)$ lorsque $t>0$, $t\to 0$. Ainsi, lorsque $F$ est continue, $F(X_{(i)}) = F(X_{(i+1)}-)$.
 
 :::{.proof}
 
-La fonction $F$ est croissante, et la fonction $\hat{F}_n$ est constante par morceaux sur tous les intervalles $[X_{(i)}, X_{(i+1)}[$. En effet, à chaque $X_{(i)}$, elle saute de la valeur à gauche $(i-1)/n$ a la valeur à droite $i/n$. Ainsi, le maximum de $F - \hat{F}_n$ sur l'intervalle $[X_{(i)}, X_{(i+1)}[$ est forcément atteint à une des deux bornes, et vaut donc soit $|i/n - F(X_{(i)})|$, soit $|i/n - F(X_{(i+1)})|$, selon celui qui est le plus grand. Le supremum de $|F - \hat{F}_n|$ sur $\mathbb{R}$ étant aussi le supremum des supremums sur tous ces intervalles, la représentation ci-dessus est vraie. 
+La fonction $F$ est croissante, et la fonction $\hat{F}_n$ est constante par morceaux sur tous les intervalles $[X_{(i)}, X_{(i+1)}[$. En effet, à chaque $X_{(i)}$, elle saute de la valeur à gauche $(i-1)/n$ a la valeur à droite $i/n$. Ainsi, le maximum de $F - \hat{F}_n$ sur l'intervalle $[X_{(i)}, X_{(i+1)}[$ est forcément atteint à une des deux bornes, et vaut donc soit $|i/n - F(X_{(i)})|$, soit $|i/n - F(X_{(i+1)}-)|$, selon celui qui est le plus grand. Le supremum de $|F - \hat{F}_n|$ sur $\mathbb{R}$ étant aussi le supremum des supremums sur tous ces intervalles, la représentation ci-dessus est vraie. 
 
 :::
+
+
 
 
 :::{#lem-gc}
@@ -74,3 +79,5 @@ $$\mathbb{P}(|F_n - F|_\infty > t) \leqslant 2e^{-2nt^2}.$${#eq-dkw}
 :::
 
 Il faut comparer ce résultat avec @eq-predkw, dans lequel la borne est effectivement décroissante en $nt^2$, mais polynomialement. L'inégalité DKW donne une décroissance *exponentielle* en $nt^2$. 
+
+[^1]: Prudence : il faut aussi que $N$ soit plus grand que 1, car sinon les quantiles n'ont pas de sens. Mais $\lceil 2/t\rceil$ vaut 1 uniquement lorsque $t$ est plus grand que 2 : dans ce cas, $\mathbb{P}(|F_n - F|_\infty > t) = 0$, puisque $|F_n - F|_\infty \leqslant |F|_\infty + |F_n|_\infty =2$. 
