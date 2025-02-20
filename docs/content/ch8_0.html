@@ -320,10 +320,11 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#estimation-des-mu_i" id="toc-estimation-des-mu_i" class="nav-link" data-scroll-target="#estimation-des-mu_i"><span class="header-section-number">20.2.1</span> Estimation des <span class="math inline">\(\mu_i\)</span></a></li>
   <li><a href="#la-personne-la-plus-intelligente" id="toc-la-personne-la-plus-intelligente" class="nav-link" data-scroll-target="#la-personne-la-plus-intelligente"><span class="header-section-number">20.2.2</span> La personne la plus intelligente</a></li>
   </ul></li>
-  <li><a href="#estimation-bayésienne" id="toc-estimation-bayésienne" class="nav-link" data-scroll-target="#estimation-bayésienne"><span class="header-section-number">20.3</span> Estimation bayésienne</a>
+  <li><a href="#le-point-de-vue-de-bayes" id="toc-le-point-de-vue-de-bayes" class="nav-link" data-scroll-target="#le-point-de-vue-de-bayes"><span class="header-section-number">20.3</span> Le point de vue de Bayes</a>
   <ul class="collapse">
   <li><a href="#formule-de-tweedie" id="toc-formule-de-tweedie" class="nav-link" data-scroll-target="#formule-de-tweedie"><span class="header-section-number">20.3.1</span> Formule de Tweedie</a></li>
   <li><a href="#application" id="toc-application" class="nav-link" data-scroll-target="#application"><span class="header-section-number">20.3.2</span> Application</a></li>
+  <li><a href="#le-biais-de-sélection" id="toc-le-biais-de-sélection" class="nav-link" data-scroll-target="#le-biais-de-sélection"><span class="header-section-number">20.3.3</span> Le biais de sélection</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -386,8 +387,8 @@ $$
 <p>Dans notre cas, la connaissance a priori qu’on a sur les <span class="math inline">\(\mu_i\)</span> est qu’ils sont eux-mêmes aléatoires, distribués selon <span class="math inline">\(N(100, 15^2)\)</span> : il est donc presque impossible qu’un des <span class="math inline">\(\mu_i\)</span> soit plus grand que, disons, 200. La statistique bayésienne permet d’intégrer cette connaissance a priori et de <em>corriger</em> l’estimation naïve de Fisher.</p>
 </section>
 </section>
-<section id="estimation-bayésienne" class="level2" data-number="20.3">
-<h2 data-number="20.3" class="anchored" data-anchor-id="estimation-bayésienne"><span class="header-section-number">20.3</span> Estimation bayésienne</h2>
+<section id="le-point-de-vue-de-bayes" class="level2" data-number="20.3">
+<h2 data-number="20.3" class="anchored" data-anchor-id="le-point-de-vue-de-bayes"><span class="header-section-number">20.3</span> Le point de vue de Bayes</h2>
 <p>Comme les <span class="math inline">\(\mu_i\)</span> sont eux-mêmes aléatoires, la « meilleure approximation<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> » de <span class="math inline">\(\mu\)</span> sachant <span class="math inline">\(\mu + N(0,\sigma^2)\)</span> est tout simplement une espérance conditionnelle. Or, dans le cas d’une perturbation gaussienne, on sait calculer cette espérance conditionnelle.</p>
 <section id="formule-de-tweedie" class="level3" data-number="20.3.1">
 <h3 data-number="20.3.1" class="anchored" data-anchor-id="formule-de-tweedie"><span class="header-section-number">20.3.1</span> Formule de Tweedie</h3>
@@ -400,11 +401,17 @@ $$
 </section>
 <section id="application" class="level3" data-number="20.3.2">
 <h3 data-number="20.3.2" class="anchored" data-anchor-id="application"><span class="header-section-number">20.3.2</span> Application</h3>
-<p>Soit <span class="math inline">\(\mu\)</span> une variable aléatoire réelle avec densité <span class="math inline">\(\varrho\)</span> et <span class="math inline">\(x = \mu + N(0,\sigma^2)\)</span> ; l’estimateur « bayésien » de <span class="math inline">\(\mu\)</span> sachant <span class="math inline">\(x\)</span> est donné par <span class="math display">\[\hat{\mu} = \underbrace{x}_{\hat{\mu}_{\mathrm{EMV}}} - \underbrace{\sigma^2 \nabla_x \ln f(x)}_{\text{correction de Bayes}},\]</span> où <span class="math inline">\(f = \varrho * g_\sigma\)</span> est la densité de <span class="math inline">\(x\)</span>.</p>
+<p>Soit <span class="math inline">\(\mu\)</span> une variable aléatoire réelle avec densité <span class="math inline">\(\varrho\)</span> et <span class="math inline">\(x = \mu + N(0,\sigma^2)\)</span> ; l’estimateur « bayésien » de <span class="math inline">\(\mu\)</span> sachant <span class="math inline">\(x\)</span> est donné par <span id="eq-tweedieest"><span class="math display">\[\hat{\mu} = \underbrace{x}_{\hat{\mu}_{\mathrm{EMV}}} - \underbrace{\sigma^2 \nabla_x \ln f(x)}_{\text{correction de Bayes}}, \tag{20.2}\]</span></span> où <span class="math inline">\(f = \varrho * g_\sigma\)</span> est la densité de <span class="math inline">\(x\)</span>.</p>
+<p>Noter que cette formule suppose crucialement que <span class="math inline">\(\sigma\)</span> est connu. Lorsqu’il ne l’est pas, il faut l’estimer :&nbsp;cela donne naissance à l’estimateur de James-Stein, qui sera présenté dans la prochaine section.</p>
 <div id="exm-iq" class="theorem example">
 <p><span class="theorem-title"><strong>Exemple 20.1 </strong></span>Dans le cas qui nous intéresse, les <span class="math inline">\(x_i\)</span> sont précisément de la forme <span class="math inline">\(\mu_i + \varepsilon_i\)</span>, et leur loi est donc <span class="math inline">\(N(100, \tau^2)\)</span> avec <span class="math inline">\(\tau^2 = 15^2+5^2\)</span>. On connaît directement leur densité et la log-dérivée de celle-ci, <span class="math display">\[\nabla_y \ln f(y) = -\frac{y-100}{\tau^2}.\]</span> donne alors, avec <span class="math inline">\(\sigma = 5\)</span>, <span class="math display">\[\hat{\mu_i} = x_i - \left(\frac{\sigma}{\tau}\right)^2 (x_i-100) \approx x_i - 0.69 (x_i-100),\]</span> ce qui dans le cas qui nous intéresse (<span class="math inline">\(x_i = 148\)</span>) donne une estimation de <span class="math inline">\(\mu_i = 143\)</span> pour une vraie valeur d’environ <span class="math inline">\(\mu_i=142\)</span>.</p>
 <p><img src="../images/IQ2.png" class="img-fluid" style="width:70.0%"></p>
 </div>
+</section>
+<section id="le-biais-de-sélection" class="level3" data-number="20.3.3">
+<h3 data-number="20.3.3" class="anchored" data-anchor-id="le-biais-de-sélection"><span class="header-section-number">20.3.3</span> Le biais de sélection</h3>
+<p>Dans la formule de l’estimateur <a href="#eq-tweedieest">Équation&nbsp;<span>20.2</span></a>, lorsque la réalisation <span class="math inline">\(x\)</span> est très éloignée de la moyenne, la correction de Bayes est très forte. L’estimateur a intégré la remarque qu’on avait fait dans la section précédente : plus <span class="math inline">\(x\)</span> est éloigné de la moyenne, plus il est probable que la vraie valeur de <span class="math inline">\(\mu\)</span> soit plus proche de la moyenne. Ce phénomène se rencontre souvent sous le nom populaire de « paradoxe du survivant » ou « biais de sélection ».</p>
+<p>L’estimation naturelle a toujours tendence à sous-estimer le rôle du hasard dans les phénomènes extrêmes. Typiquement, les grandes fortunes doivent leur richesse à un mélange de talent et de chance, mais les admirateurs béats ne retiennent que le talent.</p>
 
 
 </section>
