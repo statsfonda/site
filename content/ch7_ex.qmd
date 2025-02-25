@@ -1,4 +1,20 @@
 # Exercices {.unnumbered}
 
+## Questions
 
 - Le Lemme @lem-gc est-il encore vrai lorsque $F$ n'est pas continue ?
+- Construire un intervalle de confiance asymptotique pour $F(x)$ lorsque $x$ est fixé.
+
+## Exercices
+
+:::{#exr-ordo}
+
+Soient $U_1, \dotsc, U_n$ des variables iid de loi $\mathscr{U}[0,1]$. On note $U_{(1)}, \dotsc, U_{(n)}$ les variables ordonnées. 
+
+1. Montrer que la densité de $U_{(i)}$ est $$\varrho_k(x) = \mathbf{1}_{x\in [0,1]}k\binom{n}{k}x^{k-1}(1-x)^{n-k}.$$
+Autrement dit, $U_{(i)}$ est une loi Bêta de paramètres $(k, n-k+1)$.
+
+2. On suppose, pour être concret, que $n=20$. Je choisis secrètement un $k$ entre 1 et $n$, et je vous dévoile solennellement que $U_{(k)}$ vaut environ 0.12. Estimez $k$. 
+
+3. Calculer les 4 premiers moments de $U_{(i)}$ (attention, c'est calculatoire). En déduire que $\mathbb{E}[|U_{(i)}- i/n|] = O(1/n)$. 
+:::
