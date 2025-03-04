@@ -59,7 +59,7 @@ Ce n'est pas le cas et cette hypothèse est très fréquemment réfutée : le pr
 
 Le théorème @thm-cvloimult dit que $\sqrt{n}(\frac{N}{n}- \mathbf{p}) \approx N(0, \Sigma)$. Notons $\sqrt{\bp_0} = (\sqrt{p_1}, \dotsc, \sqrt{p_k})$ et $D = \mathrm{diag}(\sqrt{\bp}_0)$. Sous $H_0$,  $D^{-1} \sqrt{n}(\frac{N}{n}- \mathbf{p}_0)$ converge en loi vers  $D^{-1}N(0,\Sigma) = N(0,D^{-1}\Sigma (D^{-1})^\top)$. Que vaut cette matrice de covariance ? 
 
-D'abord, comme $D$ est diagonale, $D^{-1}$ l'est aussi et $(D^{-1})^\top$ vaut $D^{-1}$. De plus, $D^2$ est égal à $\mathrm{diag}(\bp_0)$. Enfin, en faisant la multiplication on voit vite que $D^{-1}\bp_0 = \sqrt{\bp}_0$. Ainsi, on voit que $D^{-1}\Sigma D^{-1}$ vaut également $D^{-1}D^2 D^{-1} - D^{-1}\bp_0 \bp_0 D^{-1}$ c'est-à-dire $$I_k - \sqrt{\bp}_0 \bp_0^{\top}.$$
+D'abord, comme $D$ est diagonale, $D^{-1}$ l'est aussi et $(D^{-1})^\top$ vaut $D^{-1}$. De plus, $D^2$ est égal à $\mathrm{diag}(\bp_0)$. Enfin, en faisant la multiplication on voit vite que $D^{-1}\bp_0 = \sqrt{\bp}_0$. Ainsi, on voit que $D^{-1}\Sigma D^{-1}$ vaut également $D^{-1}D^2 D^{-1} - D^{-1}\bp_0 \bp_0 D^{-1}$ c'est-à-dire $$I_k - \sqrt{\bp_0} \sqrt{\bp_0}^{\top}.$$
 L'appendice @sec-al rappelle pourquoi cette matrice est une matrice de projection orthogonale. 
 
 
