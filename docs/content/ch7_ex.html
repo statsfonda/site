@@ -310,7 +310,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table des matières</h2>
+   
+  <ul>
+  <li><a href="#questions" id="toc-questions" class="nav-link active" data-scroll-target="#questions">Questions</a></li>
+  <li><a href="#exercices" id="toc-exercices" class="nav-link" data-scroll-target="#exercices">Exercices</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -344,11 +351,26 @@ $$
 
 </header>
 
+<section id="questions" class="level2">
+<h2 class="anchored" data-anchor-id="questions">Questions</h2>
 <ul>
 <li>Le Lemme <a href="ch7_0.html#lem-gc">Lemme&nbsp;<span>18.1</span></a> est-il encore vrai lorsque <span class="math inline">\(F\)</span> n’est pas continue ?</li>
+<li>Construire un intervalle de confiance asymptotique pour <span class="math inline">\(F(x)\)</span> lorsque <span class="math inline">\(x\)</span> est fixé.</li>
 </ul>
+</section>
+<section id="exercices" class="level2">
+<h2 class="anchored" data-anchor-id="exercices">Exercices</h2>
+<div id="exr-ordo" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 1 </strong></span>Soient <span class="math inline">\(U_1, \dotsc, U_n\)</span> des variables iid de loi <span class="math inline">\(\mathscr{U}[0,1]\)</span>. On note <span class="math inline">\(U_{(1)}, \dotsc, U_{(n)}\)</span> les variables ordonnées.</p>
+<ol type="1">
+<li><p>Montrer que la densité de <span class="math inline">\(U_{(i)}\)</span> est <span class="math display">\[\varrho_k(x) = \mathbf{1}_{x\in [0,1]}k\binom{n}{k}x^{k-1}(1-x)^{n-k}.\]</span> Autrement dit, <span class="math inline">\(U_{(i)}\)</span> est une loi Bêta de paramètres <span class="math inline">\((k, n-k+1)\)</span>.</p></li>
+<li><p>On suppose, pour être concret, que <span class="math inline">\(n=20\)</span>. Je choisis secrètement un <span class="math inline">\(k\)</span> entre 1 et <span class="math inline">\(n\)</span>, et je vous dévoile solennellement que <span class="math inline">\(U_{(k)}\)</span> vaut environ 0.12. Estimez <span class="math inline">\(k\)</span>.</p></li>
+<li><p>Calculer les 4 premiers moments de <span class="math inline">\(U_{(i)}\)</span> (attention, c’est calculatoire). En déduire que <span class="math inline">\(\mathbb{E}[|U_{(i)}- i/n|] = O(1/n)\)</span>.</p></li>
+</ol>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

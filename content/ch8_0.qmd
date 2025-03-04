@@ -5,7 +5,7 @@
 
 La statistique vue dans ce cours repose sur la notion de modèle statistique (une famille de lois) dans laquelle on cherche « la meilleure loi » qui explique les observations, le plus souvent à l'aide du maximum de vraisemblance. Cette approche s'appelle *fréquentiste* et elle est associée à [Ron Fisher](https://en.wikipedia.org/wiki/Ronald_Fisher). Elle présente une limitation cruciale : parfois, on a des informations *a priori* sur le paramètre à estimer, par exemple quand ce paramètre est lui-même aléatoire. 
 
-Je vais expliquer cette limitation sur un exemple, et montrer comment un point de vue un peu différent (le point de vue bayésien) permet de le résoudre. 
+Je vais expliquer cette limitation sur un exemple, et montrer comment un point de vue un peu différent (le point de vue bayésien) permet de le résoudre partiellement. 
 
 ## Introduction
 
@@ -85,12 +85,15 @@ Noter que cette formule suppose crucialement que $\sigma$ est connu. Lorsqu'il n
 Dans le cas qui nous intéresse, les $x_i$ sont précisément de la forme $\mu_i + \varepsilon_i$, et leur loi est donc $N(100, \tau^2)$ avec $\tau^2 = 15^2+5^2$. On connaît directement leur densité et la log-dérivée de celle-ci, 
 $$\nabla_y \ln f(y) = -\frac{y-100}{\tau^2}.$$
  donne alors, avec $\sigma = 5$,
-$$\hat{\mu_i} = x_i - \left(\frac{\sigma}{\tau}\right)^2 (x_i-100) \approx x_i - 0.69 (x_i-100),$$
+$$\hat{\mu_i} = x_i - \left(\frac{\sigma}{\tau}\right)^2 (x_i-100) \approx x_i - 0.69 (x_i-100),$${#eq-prejs}
 ce qui dans le cas qui nous intéresse ($x_i = 148$) donne une estimation de $\mu_i = 143$ pour une vraie valeur d'environ $\mu_i=142$. 
 
 ![](/images/IQ2.png){width=70%}
 
 :::
+
+On peut interpréter la formule @eq-prejs comme un estimateur de régression vers la moyenne : si $x$ est plus grand que la moyenne 100, l'estimation est tirée vers le bas ; si $x$ est plus petit, elle est tirée vers le haut. C'est un cas particulier d'une technique générale qui donne des estimateurs plus robustes que l'estimateur du maximum de vraisemblance *dans tous les cas*, comme l'estimateur de James-Stein. Ces estimateurs (tout comme @eq-prejs) sont « biaisés » au sens où, si l'on considère les $\mu_i$ comme fixés, ils ne sont pas centrés en $\mu_i$. Cependant, ils ont un risque quadratique plus faible que l'estimateur du maximum de vraisemblance. Pour ces raisons, ils ne rentrent pas vraiment dans le cadre fréquentiste « classique » de Fisher. 
+
 
 ### Le biais de sélection
 
