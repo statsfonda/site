@@ -93,9 +93,11 @@ Je ne garantis pas que les notations et les concepts utilisés dans ces annales 
 
 - [Examen 2024](/pdfs/exam_24.pdf) avec sa correction. 
 
-- [Second examen 2024](/pdfs/rattrapage_24.pdf), avec sa correction. 
+- [Second examen 2024](/pdfs/rattrapage_24.pdf) avec sa correction. 
 
-- [Partiel 2025](/pdfs/partiel_25.pdf) avec aussi sa correction intégrée. 
+- [Partiel 2025](/pdfs/partiel_25.pdf) avec sa correction. 
+
+- [Examen 2025](/pdfs/exam_25.pdf) avec sa correction intégrée. 
 
 
 [^1]: une dénomination très vieillote, je vous le concède. 
