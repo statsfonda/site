@@ -4,7 +4,7 @@
     "href": "index.html#organisation",
     "title": "Statistiques Fondamentales",
     "section": "Organisation",
-    "text": "Organisation\n\nLe dernier cours du semestre a eu lieu vendredi 21 février.\nL’examen final a eu lieu lundi 3 mars de 13h30 à 16h30. Il y aura un examen de rattrapage plus tard.\nCalcul de la note finale. Trois quantités entrent en jeu : la note de contrôle continu \\(c \\in [0,10]\\), la note du partiel \\(p\\in [0,20]\\), et la note que vous obtiendrez à l’examen, \\(e \\in [0,20]\\). La note finale \\(f \\in [0,20]\\) est donnée par la formule \\[ f = 20^{\\theta} \\left(\\frac{\\max\\{p,e\\} + e}{2}\\right)^{1 - \\theta} \\] où \\(\\theta = 0.3 \\times c/10\\). C’est une moyenne géométrique qui ne pénalise personne, et qui ne peut que tirer votre note vers le haut si vous avez une note de contrôle continu \\(c\\) strictement positive."
+    "text": "Organisation\n\nLe dernier cours du semestre a eu lieu vendredi 21 février.\nL’examen final a eu lieu lundi 3 mars de 13h30 à 16h30. Il y aura un examen de rattrapage plus tard.\nCalcul de la note finale. Trois quantités entrent en jeu : la note de contrôle continu \\(c \\in [0,10]\\), la note du partiel \\(p\\in [0,20]\\), et la note que vous obtiendrez à l’examen, \\(e \\in [0,20]\\). La note finale \\(f \\in [0,20]\\) est donnée par la formule \\[ f = 20^{\\theta} \\left(\\frac{\\max\\{p,e\\} + e}{2}\\right)^{1 - \\theta} \\] où \\(\\theta = 0.2 \\times c/10\\). C’est une moyenne géométrique qui ne pénalise personne, et qui ne peut que tirer votre note vers le haut si vous avez une note de contrôle continu \\(c\\) strictement positive."
   },
   {
     "objectID": "index.html#utiliser-ce-site",
@@ -641,7 +641,7 @@
     "href": "content/problemes.html#sujets-passés-dexamens",
     "title": "Problèmes et sujets",
     "section": "Sujets passés d’examens",
-    "text": "Sujets passés d’examens\nJe ne garantis pas que les notations et les concepts utilisés dans ces annales soient en phase avec le cours de cette année !\n\nPartiel 2020 et sa correction\nExamen 2020 ; ne pas regarder le deuxième exercice.\nPartiel 2023 et sa correction\nPartiel 2024 avec sa correction intégrée, assez proche de ce que j’attend de vous pour le partiel 2025.\nExamen 2024 avec sa correction.\nSecond examen 2024 avec sa correction.\nPartiel 2025 avec sa correction.\nExamen 2025 avec sa correction intégrée."
+    "text": "Sujets passés d’examens\nJe ne garantis pas que les notations et les concepts utilisés dans ces annales soient en phase avec le cours de cette année !\n\nPartiel 2020 et sa correction\nPartiel 2023 et sa correction\nPartiel 2024 avec sa correction intégrée, assez proche de ce que j’attend de vous pour le partiel 2025.\nExamen 2024 avec sa correction.\nSecond examen 2024 avec sa correction.\nPartiel 2025 avec sa correction.\nExamen 2025 avec sa correction intégrée."
   },
   {
     "objectID": "content/problemes.html#footnotes",
