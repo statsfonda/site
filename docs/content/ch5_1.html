@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.7.30">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Statistiques Fondamentales - 11&nbsp; Outils gaussiens</title>
+<title>11&nbsp; Outils gaussiens – Statistiques Fondamentales</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,22 +32,29 @@ ul.task-list li input[type="checkbox"] {
 <meta name="quarto:offset" content="../">
 <link href="../content/ch5_2.html" rel="next">
 <link href="../content/ch5_01.html" rel="prev">
-<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-de070a7b0ab54f8780927367ac907214.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-83a5b8d58647c924f663c9ce3a35b344.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "Pas de résultats",
     "search-matching-documents-text": "documents trouvés",
@@ -56,31 +63,59 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "correspondance de plus dans ce document",
     "search-more-matches-text": "correspondances de plus dans ce document",
     "search-clear-button-title": "Effacer",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Annuler",
     "search-submit-button-title": "Envoyer",
     "search-label": "Recherche"
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../utils/styles.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/ch5_1.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Outils gaussiens</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/ch5_1.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Outils gaussiens</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Recherche" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -89,13 +124,13 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Statistiques Fondamentales</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/statsfonda/site" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <a href="../Statistiques-Fondamentales.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="https://github.com/statsfonda/site" title="Code source" class="quarto-navigation-tool px-1" aria-label="Code source"><i class="bi bi-github"></i></a>
+    <a href="../Statistiques-Fondamentales.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
@@ -307,7 +342,7 @@ ul.task-list li input[type="checkbox"] {
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -351,40 +386,42 @@ $$
   </div>
   
 
+
 </header>
+
 
 <section id="vecteurs-gaussiens" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="vecteurs-gaussiens"><span class="header-section-number">11.1</span> Vecteurs gaussiens</h2>
 <p>Un vecteur aléatoire <span class="math inline">\(X\)</span> à valeurs dans <span class="math inline">\(\mathbb{R}^n\)</span> est un vecteur gaussien de loi <span class="math inline">\(N(\mu,\Sigma)\)</span> si sa densité est donnée par <span class="math display">\[ \frac{\exp\left\lbrace - \frac{1}{2}\left\langle x-\mu, \Sigma^{-1}(x-\mu)\right\rangle \right\rbrace}{\sqrt{(2\pi)^n \det(\Sigma)}}.\]</span> Ici, le vecteur <span class="math inline">\(\mu \in \mathbb{R}^n\)</span> est appelé <em>moyenne</em> de <span class="math inline">\(X\)</span> parce que <span class="math display">\[\mathbb{E}[X] = \mu. \]</span> La matrice <span class="math inline">\(\Sigma\)</span>, qui est toujours supposée symétrique et à valeurs propres strictement positives (on dit <em>définie positive</em>), est appelée <em>matrice de covariance</em>, parce que <span class="math display">\[\mathbb{E}[(X-\mu)(X-\mu)^\top] = \Sigma. \]</span></p>
 <p>De même que la transformée de Fourier d’une variable gaussienne réelle <span class="math inline">\(N(m, \sigma^2)\)</span> est égale à <span class="math inline">\(e^{imt - \frac{t^2\sigma^2}{2}}\)</span>, la transformée de Fourier <span class="math inline">\(\mathbb{E}[e^{i\langle t, X\rangle}]\)</span> d’un vecteur gaussien <span class="math inline">\(N(\mu,\Sigma)\)</span> est égale à <span id="eq-tf-gaussienne"><span class="math display">\[\exp\left\lbrace i\langle t, \mu\rangle - \frac{\langle(t-\mu), \Sigma (t-\mu) \rangle}{2} \right\rbrace.  \tag{11.1}\]</span></span> Le théorème suivant synthétise toutes les propriétés de stabilité des lois gaussiennes.</p>
 <div id="thm-vecgauss" class="theorem">
-<p><span class="theorem-title"><strong>Théorème 11.1 </strong></span>&nbsp;</p>
+<p><span class="theorem-title"><strong>Théorème 11.1</strong></span> &nbsp;</p>
 <ol type="1">
 <li><p>Toute fonction linéaire d’un vecteur gaussien est encore un vecteur gaussien. Si <span class="math inline">\(M\)</span> est une matrice et <span class="math inline">\(X \sim N(\mu,\Sigma)\)</span>, <span class="math display">\[MX \sim N(M\mu, M\Sigma M^\top). \]</span></p></li>
 <li><p>Si le couple <span class="math inline">\((X,Y)\)</span> forme un vecteur gaussien, alors <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> sont indépendants si et seulement si leur covariance <span class="math inline">\(\mathbb{E}[(X-\mathbb{E}[X])(Y-\mathbb{E}[Y])^\top]\)</span> est la matrice nulle.</p></li>
 </ol>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Preuve</em>. </span>La transformée de Fourier de <span class="math inline">\(MX\)</span> est <span class="math inline">\(\mathbb{E}[\exp(i\langle t, MX\rangle)]\)</span>, ce qui vaut également <span class="math inline">\(\mathbb{E}[\exp(i\langle M^\top t, X\rangle)]\)</span>. En appliquant la formule <a href="#eq-tf-gaussienne">Équation&nbsp;<span>11.1</span></a>, puis en remettant le <span class="math inline">\(M^\top\)</span> à droite des produits scalaires et en réarrangeant les termes, on obtient <span class="math display">\[\exp\left\lbrace i\langle t, M\mu\rangle - \frac{\langle(t-\mu), M\Sigma M^\top (t-\mu) \rangle}{2} \right\rbrace. \]</span> C’est bien la transformée de Fourier de <span class="math inline">\(N(M\mu, M\Sigma M^\top)\)</span>.</p>
-<p>Pour le second point, il suffit de vérifier que la transformée de Fourier <span class="math inline">\(\mathbb{E}[e^{i\langle t, X+Y\rangle}]\)</span> est égale à <span class="math inline">\(\mathbb{E}[e^{i\langle t, X\rangle}]\mathbb{E}[e^{i\langle t, Y\rangle}]\)</span>. C’est un simple calcul découlant de <a href="#eq-tf-gaussienne">Équation&nbsp;<span>11.1</span></a>.</p>
+<p><span class="proof-title"><em>Preuve</em>. </span>La transformée de Fourier de <span class="math inline">\(MX\)</span> est <span class="math inline">\(\mathbb{E}[\exp(i\langle t, MX\rangle)]\)</span>, ce qui vaut également <span class="math inline">\(\mathbb{E}[\exp(i\langle M^\top t, X\rangle)]\)</span>. En appliquant la formule <a href="#eq-tf-gaussienne" class="quarto-xref">Équation&nbsp;<span>11.1</span></a>, puis en remettant le <span class="math inline">\(M^\top\)</span> à droite des produits scalaires et en réarrangeant les termes, on obtient <span class="math display">\[\exp\left\lbrace i\langle t, M\mu\rangle - \frac{\langle(t-\mu), M\Sigma M^\top (t-\mu) \rangle}{2} \right\rbrace. \]</span> C’est bien la transformée de Fourier de <span class="math inline">\(N(M\mu, M\Sigma M^\top)\)</span>.</p>
+<p>Pour le second point, il suffit de vérifier que la transformée de Fourier <span class="math inline">\(\mathbb{E}[e^{i\langle t, X+Y\rangle}]\)</span> est égale à <span class="math inline">\(\mathbb{E}[e^{i\langle t, X\rangle}]\mathbb{E}[e^{i\langle t, Y\rangle}]\)</span>. C’est un simple calcul découlant de <a href="#eq-tf-gaussienne" class="quarto-xref">Équation&nbsp;<span>11.1</span></a>.</p>
 </div>
 </section>
 <section id="conditionnement-gaussien" class="level2" data-number="11.2">
 <h2 data-number="11.2" class="anchored" data-anchor-id="conditionnement-gaussien"><span class="header-section-number">11.2</span> Conditionnement gaussien</h2>
 <p>Soit <span class="math inline">\((X,Y)\)</span> un vecteur gaussien de dimension <span class="math inline">\(n+m\)</span>, avec <span class="math inline">\(X \in \mathbb{R}^n\)</span> et <span class="math inline">\(Y \in \mathbb{R}^m\)</span>. On peut écrire sa moyenne <span class="math inline">\(\mu\)</span> en deux blocs <span id="eq-condgaussesp"><span class="math display">\[ \mu = \begin{bmatrix}\mu_1 \\ \mu_2 \end{bmatrix} \tag{11.2}\]</span></span> et sa covariance <span class="math inline">\(\Sigma\)</span> en quatre blocs <span class="math display">\[ \Sigma = \begin{bmatrix}\Sigma_{1,1} &amp; \Sigma_{1,2} \\&nbsp;\Sigma_{2,1} &amp; \Sigma_{2,2} \end{bmatrix}\]</span> où , par symétrie, <span class="math inline">\(\Sigma_{2,1} = \Sigma_{1,2}^\top\)</span>.</p>
 <div id="thm-condgaussien" class="theorem">
-<p><span class="theorem-title"><strong>Théorème 11.2 </strong></span>La loi de <span class="math inline">\(X\)</span> conditionnellement à <span class="math inline">\(Y\)</span> est une loi gaussienne de moyenne <span class="math display">\[\mu_1 + \Sigma_{1,2}\Sigma_{2,2}^{-1}(Y-\mu_2) \]</span> et de covariance <span id="eq-schur"><span class="math display">\[ \Sigma_{1,1} - \Sigma_{2,1}\Sigma_{2,2}^{-1}\Sigma_{1,2}. \tag{11.3}\]</span></span></p>
+<p><span class="theorem-title"><strong>Théorème 11.2</strong></span> La loi de <span class="math inline">\(X\)</span> conditionnellement à <span class="math inline">\(Y\)</span> est une loi gaussienne de moyenne <span class="math display">\[\mu_1 + \Sigma_{1,2}\Sigma_{2,2}^{-1}(Y-\mu_2) \]</span> et de covariance <span id="eq-schur"><span class="math display">\[ \Sigma_{1,1} - \Sigma_{2,1}\Sigma_{2,2}^{-1}\Sigma_{1,2}. \tag{11.3}\]</span></span></p>
 </div>
-<p>La formule <a href="#eq-schur">Équation&nbsp;<span>11.3</span></a> est appelée <em>complément de Schur</em>. Son inverse est égal au bloc inférieur-droit de l’inverse de <span class="math inline">\(\Sigma\)</span> comme expliqué dans <a href="app3.html"><span>Chapitre&nbsp;22</span></a>.</p>
+<p>La formule <a href="#eq-schur" class="quarto-xref">Équation&nbsp;<span>11.3</span></a> est appelée <em>complément de Schur</em>. Son inverse est égal au bloc inférieur-droit de l’inverse de <span class="math inline">\(\Sigma\)</span> comme expliqué dans <a href="app3.html" class="quarto-xref"><span>Chapitre 22</span></a>.</p>
 <div class="proof">
-<p><span class="proof-title"><em>Preuve</em>. </span>Je préfère laisser mon lecteur confiant méditer lui-même sur le fait que la loi conditionnelle d’une partie <span class="math inline">\(X\)</span> d’un vecteur gaussien contre l’autre partie <span class="math inline">\(Y\)</span> du même vecteur est elle-même une loi gaussienne, dont il suffit par conséquent de calculer l’espérance et la variance pour l’identifier. On peut le faire par une technique puissante :&nbsp;on cherche à « enlever Y de X ». Plus précisément, on va essayer d’écrire <span class="math display">\[X = Z + AY\]</span> où <span class="math inline">\(Z\)</span> est indépendante de <span class="math inline">\(Y\)</span> et <span class="math inline">\(A\)</span> est une matrice à trouver. Comme <span class="math inline">\(\mathrm{Cov}(X,Y) = \Sigma_{1,2}\)</span> et qu’on cherche <span class="math inline">\(Z,A\)</span> tels que <span class="math inline">\(\mathrm{Cov}(Z,Y)=0\)</span>, on voit vite que <span class="math inline">\(A\)</span> doit vérifier <span class="math inline">\(\Sigma_{1,2} = A \Sigma_{2,2}\)</span>, et donc que <span class="math display">\[ Z = X - \Sigma_{1,2}\Sigma_{2,2}^{-1}Y.\]</span> Comme <span class="math inline">\(Z\)</span> et <span class="math inline">\(Y\)</span> sont décorrélées et conjointement gaussiennes, elles sont indépendantes, et <span class="math inline">\(\mathbb{E}[Z|Y]=\mathbb{E}[Z] = \mu_1 - A\mu_2\)</span>. Ainsi, <span class="math inline">\(\mathbb{E}[X|Y] = \mathbb{E}[Z] - AY\)</span> et on en déduit tout de suite <a href="#eq-condgaussesp">Équation&nbsp;<span>11.2</span></a>. Pour la variance conditionnelle, <span class="math inline">\(\mathrm{Var}(X|Y) = \mathrm{Var}(Z) + A\mathrm{Var}(Y)A^\top\)</span> et <a href="#eq-schur">Équation&nbsp;<span>11.3</span></a> en découle facilement.</p>
+<p><span class="proof-title"><em>Preuve</em>. </span>Je préfère laisser mon lecteur confiant méditer lui-même sur le fait que la loi conditionnelle d’une partie <span class="math inline">\(X\)</span> d’un vecteur gaussien contre l’autre partie <span class="math inline">\(Y\)</span> du même vecteur est elle-même une loi gaussienne, dont il suffit par conséquent de calculer l’espérance et la variance pour l’identifier. On peut le faire par une technique puissante :&nbsp;on cherche à « enlever Y de X ». Plus précisément, on va essayer d’écrire <span class="math display">\[X = Z + AY\]</span> où <span class="math inline">\(Z\)</span> est indépendante de <span class="math inline">\(Y\)</span> et <span class="math inline">\(A\)</span> est une matrice à trouver. Comme <span class="math inline">\(\mathrm{Cov}(X,Y) = \Sigma_{1,2}\)</span> et qu’on cherche <span class="math inline">\(Z,A\)</span> tels que <span class="math inline">\(\mathrm{Cov}(Z,Y)=0\)</span>, on voit vite que <span class="math inline">\(A\)</span> doit vérifier <span class="math inline">\(\Sigma_{1,2} = A \Sigma_{2,2}\)</span>, et donc que <span class="math display">\[ Z = X - \Sigma_{1,2}\Sigma_{2,2}^{-1}Y.\]</span> Comme <span class="math inline">\(Z\)</span> et <span class="math inline">\(Y\)</span> sont décorrélées et conjointement gaussiennes, elles sont indépendantes, et <span class="math inline">\(\mathbb{E}[Z|Y]=\mathbb{E}[Z] = \mu_1 - A\mu_2\)</span>. Ainsi, <span class="math inline">\(\mathbb{E}[X|Y] = \mathbb{E}[Z] - AY\)</span> et on en déduit tout de suite <a href="#eq-condgaussesp" class="quarto-xref">Équation&nbsp;<span>11.2</span></a>. Pour la variance conditionnelle, <span class="math inline">\(\mathrm{Var}(X|Y) = \mathrm{Var}(Z) + A\mathrm{Var}(Y)A^\top\)</span> et <a href="#eq-schur" class="quarto-xref">Équation&nbsp;<span>11.3</span></a> en découle facilement.</p>
 </div>
 </section>
 <section id="théorème-de-cochran" class="level2" data-number="11.3">
 <h2 data-number="11.3" class="anchored" data-anchor-id="théorème-de-cochran"><span class="header-section-number">11.3</span> Théorème de Cochran</h2>
 <p>Le fait que dans un modèle gaussien, la quantité <span class="math inline">\((\bar{X}_n - \mu) / \hat{\sigma}_n\)</span> suive une loi de Student, ou que dans le modèle linéaire gaussien, les résidus sont indépendants de l’estimateur des moindres carrés, sont tous les deux des applications du théorème de Cochran.</p>
 <div id="thm-cochran" class="theorem">
-<p><span class="theorem-title"><strong>Théorème 11.3 (Théorème de Cochran) </strong></span>Soit <span class="math inline">\(X \sim N(0,I_n)\)</span> et soient <span class="math inline">\(E_1, \dotsc, E_k\)</span> des sous-espaces orthogonaux de <span class="math inline">\(\mathbb{R}^n\)</span> tels que <span class="math inline">\(\mathbb{R}^n = \oplus_{j=1}^k E_j\)</span>. On note <span class="math inline">\(\pi_j(X)\)</span> la projection orthogonale de <span class="math inline">\(X\)</span> sur <span class="math inline">\(E_j\)</span>. Alors, la famille <span class="math inline">\((\pi_j(X))_{j = 1, \dotsc, k}\)</span> est une famille de vecteurs gaussiens indépendants. De plus, <span class="math display">\[ |\pi_j(X)|^2 \sim \chi_2(\dim E_j).\]</span></p>
+<p><span class="theorem-title"><strong>Théorème 11.3 (Théorème de Cochran)</strong></span> Soit <span class="math inline">\(X \sim N(0,I_n)\)</span> et soient <span class="math inline">\(E_1, \dotsc, E_k\)</span> des sous-espaces orthogonaux de <span class="math inline">\(\mathbb{R}^n\)</span> tels que <span class="math inline">\(\mathbb{R}^n = \oplus_{j=1}^k E_j\)</span>. On note <span class="math inline">\(\pi_j(X)\)</span> la projection orthogonale de <span class="math inline">\(X\)</span> sur <span class="math inline">\(E_j\)</span>. Alors, la famille <span class="math inline">\((\pi_j(X))_{j = 1, \dotsc, k}\)</span> est une famille de vecteurs gaussiens indépendants. De plus, <span class="math display">\[ |\pi_j(X)|^2 \sim \chi_2(\dim E_j).\]</span></p>
 </div>
 <div class="proof">
 <p><span class="proof-title"><em>Preuve</em>. </span>Pour chaque <span class="math inline">\(E_i\)</span>, notons <span class="math inline">\(d_i\)</span> sa dimension et choisissons-lui une base orthonormale <span class="math inline">\(e^i_1, \dotsc, e^i_{d_i}\)</span>. La projection orthogonale de <span class="math inline">\(X\)</span> sur <span class="math inline">\(E_i\)</span> est <span class="math inline">\(\pi_i(X)= \sum_{t=1}^{d_i} \langle X, e^i_t\rangle e^i_t\)</span>. Notons <span class="math inline">\(X^i_t=\langle X, e^i_t\rangle\)</span>. Le vecteur <span class="math inline">\((X^i_t)\)</span> (avec <span class="math inline">\(i=1, \dotsc, k\)</span> et <span class="math inline">\(t = 1, \dotsc, d_i\)</span>), qui contient bien <span class="math inline">\(d_1+\dotsb+d_k=n\)</span> éléments, est une fonction linéaire du vecteur gaussien centré <span class="math inline">\(X\)</span>, donc est lui-même un vecteur gaussien centré. Calculons sa covariance : de façon générale, si <span class="math inline">\(e,f\)</span> sont deux vecteurs fixés, <span class="math inline">\(\mathbb{E}[\langle X, e\rangle \langle X, f\rangle]\)</span> se développe en <span class="math display">\[\sum_{i,j}e_if_j \mathrm{Cov}(X_i, X_j)\]</span> et comme les <span class="math inline">\(X_i\)</span> sont iid, cela vaut <span class="math inline">\(\langle e, f\rangle\)</span>. Il est alors immédiat que la matrice de covariance du vecteur gaussien <span class="math inline">\((X^i_t)\)</span> n’est autre que la matrice <span class="math inline">\((\langle e^i_t, e^j_s \rangle)\)</span>, c’est-à-dire l’identité puisque les <span class="math inline">\((e^i_t)\)</span> forment une base orthonormale de <span class="math inline">\(\mathbb{R}^n\)</span>. Il en résulte les deux points de l’énoncé.</p>
@@ -396,262 +433,429 @@ $$
 </section>
 <section id="sec-fisher" class="level2" data-number="11.4">
 <h2 data-number="11.4" class="anchored" data-anchor-id="sec-fisher"><span class="header-section-number">11.4</span> Loi de Fisher</h2>
-<p>Si <span class="math inline">\(N\)</span> est un vecteur et <span class="math inline">\(X,Y\)</span> sont les projections de <span class="math inline">\(N\)</span> sur deux sous-espaces vectoriels orthogonaux, le théorème de Cochran dit que <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> sont des lois du <span class="math inline">\(\chi_2\)</span> indépendantes de paramètres <span class="math inline">\(p=\dim E, q = \dim F\)</span>. La loi de leur rapport <span class="math inline">\(X/Y\)</span> apparaît souvent dans des problèmes de statistiques.</p>
+<p>Si <span class="math inline">\(N\)</span> est un vecteur et <span class="math inline">\(X,Y\)</span> sont les projections de <span class="math inline">\(N\)</span> sur deux sous-espaces vectoriels orthogonaux, le théorème de Cochran dit que <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> sont des lois du <span class="math inline">\(\chi_2\)</span> indépendantes de paramètres <span class="math inline">\(p=\dim  E, q = \dim F\)</span>. La loi de leur rapport <span class="math inline">\(X/Y\)</span> apparaît souvent dans des problèmes de statistiques.</p>
 <div id="thm-fisher" class="theorem">
-<p><span class="theorem-title"><strong>Théorème 11.4 </strong></span>Soient <span class="math inline">\(X,Y\)</span> deux variables aléatoires indépendantes, de lois respectives <span class="math inline">\(\chi_2(p)\)</span> et <span class="math inline">\(\chi_2(q)\)</span>. La loi du rapport <span class="math inline">\((X/p)/(Y/q)\)</span> s’appelle loi de Fisher de paramètres <span class="math inline">\(p,q\)</span>, et on la note <span class="math inline">\(\mathscr{F}_{p,q}\)</span>. Sa densité <span class="math inline">\(f_{p,q}(x)\)</span> sur <span class="math inline">\([0,\infty[\)</span> est donnée par <span id="eq-fisherdensity"><span class="math display">\[ \frac{1}{Z_{p,q}}\frac{\left(\frac{px}{px + q}\right)^{\frac{p}{2}} \left(1 - \frac{px}{px + q}\right)^{\frac{q}{2}}}{x} \tag{11.4}\]</span></span> où la constante <span class="math inline">\(Z_{p,q}\)</span> est <span class="math inline">\(B(p/2, q/2)\)</span>, c’est-à-dire <span class="math display">\[ \int_0^1 u^{\frac{p}{2}-1}(1-u)^{\frac{q}{2}-1}du.\]</span></p>
+<p><span class="theorem-title"><strong>Théorème 11.4</strong></span> Soient <span class="math inline">\(X,Y\)</span> deux variables aléatoires indépendantes, de lois respectives <span class="math inline">\(\chi_2(p)\)</span> et <span class="math inline">\(\chi_2(q)\)</span>. La loi du rapport <span class="math inline">\((X/p)/(Y/q)\)</span> s’appelle loi de Fisher de paramètres <span class="math inline">\(p,q\)</span>, et on la note <span class="math inline">\(\mathscr{F}_{p,q}\)</span>. Sa densité <span class="math inline">\(f_{p,q}(x)\)</span> sur <span class="math inline">\([0,\infty[\)</span> est donnée par <span id="eq-fisherdensity"><span class="math display">\[ \frac{1}{Z_{p,q}}\frac{\left(\frac{px}{px + q}\right)^{\frac{p}{2}} \left(1 - \frac{px}{px + q}\right)^{\frac{q}{2}}}{x} \tag{11.4}\]</span></span> où la constante <span class="math inline">\(Z_{p,q}\)</span> est <span class="math inline">\(B(p/2, q/2)\)</span>, c’est-à-dire <span class="math display">\[ \int_0^1 u^{\frac{p}{2}-1}(1-u)^{\frac{q}{2}-1}du.\]</span></p>
 </div>
-<p>Le calcul est facile, puisque les lois du <span class="math inline">\(\chi_2\)</span> ont une densité connue donnée par <a href="ch31_outils.html#eq-chideuxdensity">Équation&nbsp;<span>5.5</span></a>. Soit <span class="math inline">\(\varphi\)</span> une fonction test et soit <span class="math inline">\(F = (X/p)/(Y/q)\)</span>. Alors, <span class="math inline">\(\mathbb{E}[\varphi(F)]\)</span> vaut <span class="math display">\[\frac{1}{C_p C_q}\int_0^\infty \int_0^\infty \varphi\left(\frac{uq}{vp}\right)e^{-\frac{u}{2}-\frac{v}{2}}u^{\frac{p}{2}-1}v^{\frac{q}{2}-1}dudv \]</span> avec <span class="math inline">\(C_n = 2^{n/2}\Gamma(n/2)\)</span>. Dans l’intégrale en <span class="math inline">\(v\)</span>, on pose <span class="math inline">\(x = uq/vp\)</span>, de sorte que l’intégrale ci-dessus devient <span class="math display">\[\frac{(p/q)^{\frac{p}{2}}}{C_p C_q}\int_0^\infty \varphi(x) x^{\frac{p}{2}-1}\int_0^\infty e^{-\frac{vpx}{2q}-\frac{v}{2}}v^{\frac{p}{2}-1}v^{\frac{q}{2}}dv dx. \]</span> On reconnaît dans l’intégrale en <span class="math inline">\(v\)</span> une fonction Gamma, égale à <span class="math display">\[\frac{\Gamma(p/2 + q/2)}{\left(\frac{px+q}{2q}\right)^{\frac{p+q}{2}}}.\]</span> L’espérance <span class="math inline">\(\mathbb{E}[\varphi(F)]\)</span> vaut donc <span class="math display">\[\frac{(p/q)^{p/2}\Gamma\left(\frac{p+q}{2}\right)}{C_p C_q (2q)^{\frac{p+q}{2}}}\int_0^\infty \varphi(x)\frac{x^{\frac{p}{2}-1}}{(px + q)^{\frac{p+q}{2}}}dx. \]</span> En simplifiant, on trouve exactement la densité donnée par <a href="#eq-fisherdensity">Équation&nbsp;<span>11.4</span></a>.</p>
+<p>Le calcul est facile, puisque les lois du <span class="math inline">\(\chi_2\)</span> ont une densité connue donnée par <a href="ch31_outils.html#eq-chideuxdensity" class="quarto-xref">Équation&nbsp;<span>5.5</span></a>. Soit <span class="math inline">\(\varphi\)</span> une fonction test et soit <span class="math inline">\(F = (X/p)/(Y/q)\)</span>. Alors, <span class="math inline">\(\mathbb{E}[\varphi(F)]\)</span> vaut <span class="math display">\[\frac{1}{C_p C_q}\int_0^\infty \int_0^\infty \varphi\left(\frac{uq}{vp}\right)e^{-\frac{u}{2}-\frac{v}{2}}u^{\frac{p}{2}-1}v^{\frac{q}{2}-1}dudv \]</span> avec <span class="math inline">\(C_n = 2^{n/2}\Gamma(n/2)\)</span>. Dans l’intégrale en <span class="math inline">\(v\)</span>, on pose <span class="math inline">\(x = uq/vp\)</span>, de sorte que l’intégrale ci-dessus devient <span class="math display">\[\frac{(p/q)^{\frac{p}{2}}}{C_p C_q}\int_0^\infty \varphi(x) x^{\frac{p}{2}-1}\int_0^\infty e^{-\frac{vpx}{2q}-\frac{v}{2}}v^{\frac{p}{2}-1}v^{\frac{q}{2}}dv dx. \]</span> On reconnaît dans l’intégrale en <span class="math inline">\(v\)</span> une fonction Gamma, égale à <span class="math display">\[\frac{\Gamma(p/2 + q/2)}{\left(\frac{px+q}{2q}\right)^{\frac{p+q}{2}}}.\]</span> L’espérance <span class="math inline">\(\mathbb{E}[\varphi(F)]\)</span> vaut donc <span class="math display">\[\frac{(p/q)^{p/2}\Gamma\left(\frac{p+q}{2}\right)}{C_p C_q (2q)^{\frac{p+q}{2}}}\int_0^\infty \varphi(x)\frac{x^{\frac{p}{2}-1}}{(px + q)^{\frac{p+q}{2}}}dx. \]</span> En simplifiant, on trouve exactement la densité donnée par <a href="#eq-fisherdensity" class="quarto-xref">Équation&nbsp;<span>11.4</span></a>.</p>
 
 
 </section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copié");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copié");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-  function tippyHover(el, contentFn) {
-    const config = {
-      allowHTML: true,
-      content: contentFn,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start'
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      return note.innerHTML;
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
       }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
+      return false;
     }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copié");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copié");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
       });
     }
-  }
-});
-</script>
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../content/ch5_01.html" class="pagination-link">
+      <a href="../content/ch5_01.html" class="pagination-link" aria-label="Modèles linéaires">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Modèles linéaires</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../content/ch5_2.html" class="pagination-link">
+      <a href="../content/ch5_2.html" class="pagination-link" aria-label="Tests linéaires">
         <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Tests linéaires</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+
 
 
 
