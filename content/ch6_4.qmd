@@ -31,7 +31,7 @@ Le principe d'entropie de Boltzmann-Gibbs s'applique aussi aux lois empiriques e
 $$ \frac{1}{n}\sum_{i=1}^n T(x_i) = \bar{T}_n.$$
 Il est alors naturel de chercher $P$ parmi toutes les lois qui vérifient la contrainte $E_{X\sim P}[T(X)] = \bar{T}_n$, et *rien de plus*. Le principe de Boltzmann-Gibbs dit que les lois qui maximisent l'entropie sous cette contrainte sont exactement les lois exponentielles associées à $T$, et pour peu que le modèle soit identifiable (cf @thm-iden-expo), il n'y a qu'un seul paramètre qui garantit que $E_\theta[T(X)] = \bar{T}_n$. Ce paramètre est évidemment $\emv$. 
 
-:::{#exm-test} 
+:::{exm-example-gaussien-entropie}
 
 ## Loi gaussienne
 

@@ -127,7 +127,7 @@ indique donc à quel point il est optimal (ou pas) d'encoder les réalisations d
 
 Dans le cas général d'une loi de densité $f$ par rapport à une mesure de référence $\nu$, l'entropie est donnée par
 
-:::{#def-entropie}
+:::{#def-entropie-generale}
 
 ## Entropie
 
