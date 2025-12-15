@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Statistiques Fondamentales",
     "section": "",
-    "text": "Organisation\nBienvenue sur la page du cours de Statistiques Fondamentales (STF8) du master Mathématiques Fondamentales et Appliquées de l’Université Paris-Cité. Les notes de cours sont accessibles à tous. De nombreux auteurs s’y sont succédés ; je suis le dernier en date, mais les versions précédentes ont été travaillées par Clément Levrard, Stéphane Boucheron, Stéphane Gaïffas, Pierre Youssef.\nLe cours est terminé.",
+    "text": "Organisation\nLa statistique est l’outil qui, en sciences, permet d’étudier le hasard : le décrire, l’analyser, distinguer différents types de hasard, séparer ce qui est dû au hasard et ce qui ne l’est pas.\nLa statistique se parle en langage mathématique, et ce cours ne fera pas exception à cette règle ; mais elle ne s’y réduit pas. Qu’on le veuille ou non, sa puissance a fait d’elle un outil omniprésent dans tous les domaines de la vie où des phénomènes sont mesurés et quantifiés, qu’il s’agisse de science, d’industrie, de commerce ou de politique. Depuis quelques dizaines d’années, les idées venues de la statistique ont même donné à des problèmes purement mathématiques (et parfois anciens) un nouvel éclairage ; certaines des questions les plus ardues de mathématiques pures sont de nature statistique.\nDans ce cours, mon objectif est vous apprendre à penser en statistique, quel que soit le domaine auquel vous vous destinez. On apprendra donc :",
     "crumbs": [
       "Organisation"
     ]
@@ -14,7 +14,7 @@
     "href": "index.html#organisation",
     "title": "Statistiques Fondamentales",
     "section": "",
-    "text": "Calcul de la note finale. Trois quantités entrent en jeu : la note de contrôle continu \\(c \\in [0,10]\\), la note du partiel \\(p\\in [0,20]\\), et la note que vous obtiendrez à l’examen, \\(e \\in [0,20]\\). La note finale \\(f \\in [0,20]\\) est donnée par la formule \\[ f = 20^{\\theta} \\left(\\frac{\\max\\{p,e\\} + e}{2}\\right)^{1 - \\theta} \\] où \\(\\theta = 0.3 \\times c/10\\). C’est une moyenne géométrique qui ne pénalise personne, et qui ne peut que tirer votre note vers le haut si vous avez une note de contrôle continu \\(c\\) strictement positive.",
+    "text": "Le cours a lieu tout le second semestre, du 8 janvier au 3 avril, avec une semaine de vacances du 2 au 7 mars.\nLes CM ont lieu le jeudi de 9h à 11h en salle 2016.\nLes TD sont assurés par Hugo Capot et ont lieu le jeudi de 11h15 à 13h15 en salle 2016 et le vendredi de 13h45 à 15h45 en salle 2004.",
     "crumbs": [
       "Organisation"
     ]
