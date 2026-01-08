@@ -1,0 +1,83 @@
+# Répartitons et inégalités
+
+## Quantiles  {#sec-quantiles}
+
+
+### Quantiles des lois continues
+
+Si $X$ est une variable aléatoire continue sur $\mathbb{R}$, un quantile d'ordre $\beta \in ]0,1[$, noté $q_\beta$, est un nombre tel que $\mathbb{P}(X \leqslant q_\beta) = \beta$. 
+ Lorsque $X$ est continue, un tel nombre existe forcément, car la fonction de répartition $F(x) = \mathbb{P}(X\leqslant x)$ est une bijection continue. 
+Les quantiles symétriques $z_\beta$ sont, eux, définis par $\mathbb{P}(|X|\leqslant z_\beta) = \beta$. 
+
+Si la loi de $X$ est de surcroît symétrique, les quantiles symétriques s'expriment facilement en fonction des quantiles classiques. En effet, $\mathbb{P}(|X|\leqslant z)$ est égal à $\mathbb{P}(X \leqslant z) - \mathbb{P}(X \leqslant -z)$. Or, si la loi de $X$ est symétrique, alors $\mathbb{P}(X \leqslant -z) = 1 - \mathbb{P}(X \leqslant z)$, et donc 
+$$ \mathbb{P}(|X|\leqslant z) = 2\mathbb{P}(X \leqslant z) - 1.$$
+Il suffit alors de choisir pour $z$ le quantile $q_{\frac{1+\beta}{2}}$ pour obtenir $\mathbb{P}(|X|\leqslant z) = \beta$. Lorsque $\beta$ est de la forme $1-\alpha$ avec $\alpha$ petit (comme les niveaux des intervalles de confiance), on trouve alors $z_{1-\alpha} = q_{1 - \alpha/2}$. 
+
+Les quantiles s'obtiennent en inversant la fonction de répartition : lorsque celle-ci est une bijection sur $]0,1[$, alors $$q_\beta = F^{-1}(\beta).$$ En règle générale, il n'y a pas de forme fermée. Par exemple, pour une loi gaussienne standard, 
+$$F(x) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^x e^{-u^2/2}du$$
+qui elle-même n'a pas d'écriture plus simple. Fort heureusement, les outils de calcul numérique permettent d'effectuer ces calculs avec une grande précision. La table suivante donne les quantiles symétriques de la gaussienne.  
+
+| $\beta$ | 90% | 95% | 98% | 99% | 99.9% | 99.99999% |
+| ---- | - | - | - | - | - | - |
+| $z_\beta$ | 1.64 | 1.96 | 2.32 | 2.57 | 3.2 | 5.32 |
+
+Voir aussi la [règle 1-2-3](https://en.wikipedia.org/wiki/68%E2%80%9395%E2%80%9399.7_rule). Il existe de nombreuses tables de quantiles pour les lois usuelles. 
+
+
+:::{#thm-gaussiantail}
+
+## Queues de distribution de la gaussienne
+
+Si $x$ est plus grand que 1, $\mathbb{P}(X > x)$ est compris entre
+$$  \left(1 - \frac{1}{x^2}\right) \frac{1}{x}\frac{e^{-x^2/2}}{\sqrt{2\pi}} $${#eq-gaussiantailu}
+et
+$$ \frac{1}{x}\frac{e^{-x^2/2}}{\sqrt{2\pi}}. $${#eq-gaussiantaill}
+
+En particulier, si $x$ est grand, $$\mathbb{P}(X \geqslant x) \sim e^{-x^2/2}/x\sqrt{2\pi}$$ avec une erreur d'ordre $O(e^{-x^2/2}/x^3)$. 
+:::
+
+À titre d'exemple, pour $x=2.32$ cette approximation donne 98.83%, ce qui est remarquablement proche de 98%. Pour $x = 2.57$ on trouve 99.42%.
+
+:::{.proof}
+Le nombre $\mathbb{P}(X>x)$ est exactement égal à $(2\pi)^{-1/2}\int_x^\infty e^{-t^2/2}dt$. En multipliant et en divisant l'exponentielle dans l'intégrale par $t$ et en faisant une intégration par parties, on peut écrire ceci sous la forme 
+$$ \frac{e^{-x^2/2}}{x\sqrt{2\pi}} - \int_x^\infty \frac{e^{-t^2/2}}{t^2\sqrt{2\pi}}dt.$$
+Comme l'intégrale $I$ à droite est positive, tout ce terme est bien plus petit que @eq-gaussiantailu. Par ailleurs, en refaisant la même astuce, on peut écrire $I$ sous la forme
+$$ \frac{e^{-x^2/2}}{x^3\sqrt{2\pi}} - 2\int_x^\infty \frac{e^{-t^2/2}}{t^3\sqrt{2\pi}}dt.$$
+Si $J$ est la nouvelle intégrale à droite, elle est positive ; on a donc montré que $\mathbb{P}(X>x)$ est aussi égal à 
+$$  \left(1 - \frac{1}{x^2}\right) \frac{1}{x}\frac{e^{-x^2/2}}{\sqrt{2\pi}} + J$$
+et donc, est plus grand que @eq-gaussiantaill. 
+:::
+
+
+### Quantiles généraux
+
+ Dans le cas général où la fonction de répartition $F(x) = \mathbb{P}(X \leqslant x)$ n'est pas continue (par exemple pour les lois discrètes), on peut toujours définir les quantiles de n'importe quel ordre $\beta \in [0,1]$ en prenant la plus petite valeur $q$ telle que $\mathbb{P}(X \leqslant q) \geqslant \beta$. Autrement dit, 
+$$q(\beta) = \inf \{t : F(t) \geqslant \beta \}.$${#eq-quantile}
+Notons que $F$ est continue à droite : comme il y a une suite $q_n \to q(\beta)$ telle que $q_n>q(\beta)$ et $F(q_n)\geqslant \beta$, on voit que $F(q(\beta)) = \lim F(q_n) \geqslant \beta$. Mais il n'y a pas toujours égalité !
+
+
+
+## Extrêmes et queues de distribution
+
+La fonction de survie d’une variable aléatoire $X$ est la fonction $S(x) = \mathbb{P}(X > x)$. Son asymptotique lorsque $x$ est grand est d’une importance capitale : elle permet d’estimer des probabilités d’événements très rares, comme par exemple « le rendement de cet actif va dépasser les x\% en un an », avec $x$ gigantesque. 
+
+## Courbe de Lorenz et indice de Gini
+
+La courbe de Lorenz de la loi d’une variable aléatoire $X$ est la courbe qui indique quelle fraction de la masse totale est allouée à chaque fraction de la population : typiquement, quand on dit que 50\% d’une population possède 30\% de la richesse, on dit que la courbe de Lorenz passe par le point $(0.5, 0.3)$. Pour n’importe quel $x \in \mathbb{R}$, la fraction de la population qui possède moins de $x$ est $F(x) = \mathbb{P}(X\leqslant x)$; mais la masse  allouée à cette fraction est égale à $\mathbb{E}[X\mathbf{1}_{\{X \leqslant x\}}]$. Comme la masse totale est tout simplement $\mathbb{E}[X]$, la fraction de la masse allouée à $]-\infty, x]$ est $m(x) = \mathbb{E}[X\mathbf{1}_{X \leqslant x}]/\mathbb{E}[X]$. La courbe de Lorenz est donc la courbe 
+$$\left(F(x), \frac{\mathbb{E}[X\mathbf{1}_{X \leqslant x}]}{\mathbb{E}[X]}\right)_{x \in \mathbb{R}}.$$
+Elle passe forcément par les points $(0,0)$ et $(1,1)$, et elle est croissante. En fait, lorsque $F^{-1}$ existe, on peut aussi écrire que la courbe de Lorenz est 
+$$\left(t, \frac{\mathbb{E}[X\mathbf{1}_{X \leqslant F^{-1}(t)}]}{\mathbb{E}[X]}\right)_{t \in [0,1]}.$$
+En faisant le changement de variables $s = F(u)$, on a 
+\begin{align*}\mathbb{E}[X\mathbf{1}_{X \leqslant F^{-1}(t)}] &= \int_{-\infty}^{F^{-1}(t)} u f(u)du \\ &= \int_0^t F^{-1}(s) ds \\
+&= \int_0^t q(s)ds
+\end{align*}
+où $q$ est la fonction quantile. La courbe de Lorenz est donc la courbe intégrale des quantiles (normalisés), c’est-à-dire la représentation graphique de la fonction 
+$$ t\mapsto \mathscr{L}(t) =\frac{\int_0^t q(s)ds}{\int_0^1 q(s)ds}.$$
+La dérivée de cette fonction est égale à $q(t)/\mathbb{E}[X]$. Or, la fonction quantile est une fonction positive et croissante : la courbe de Lorenz est donc convexe, et comme toutes les fonctions convexes, elle est en dessous de ses cordes. En particulier, elle est en dessous de la droite qui relie les points $(0,0)$ et $(1,1)$, c’est-à-dire la diagonale. 
+
+:::{#def-gini}
+L’indice de Gini est le double de l’aire entre la courbe de Lorenz et la diagonale : 
+$$G = 2\int_0^1 (t - \mathscr{L}(t)) dt.$$
+:::
+
+On prend le double pour avoir une quantité entre 0 et 1 (et pas entre 0 et 1/2). 

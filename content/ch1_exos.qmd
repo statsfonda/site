@@ -1,0 +1,55 @@
+# Exercices
+
+## Questions
+
+- Calculer la moyenne, la variance, l'écart-type, la skewness et la kurtosis des lois uniformes et des lois Gamma. 
+- Montrer que la courbe de Lorenz d’une variable aléatoire réelle $X$ est la même que celle de $cX$ pour tout $c > 0$. 
+- Trouver des exemples de variables aléatoires dont la médiane est différente de la moyenne. 
+- La courbe de Lorenz peut-elle être confondue avec la droite $(t,t)$ ? 
+- Calculer la courbe de Lorenz des lois uniformes, exponentielles, et de Pareto. 
+- Le principe de Pareto dit que, dans de nombreux contextes, 20\% des efforts produisent 80\% des résultats ; dit dans l’autre sens, 80\% des efforts ne produisent que 20\% des résultats. Quel est l’unique $\alpha$ pour lequel la loi de Pareto d’indice $\alpha$ correspond à ce principe ? 
+- Montrer que l’indice de Gini d’une variable aléatoire continue peut s’écrire 
+$$G = \frac{1}{2\mathbb{E}[X]}\int_0^1 \int_0^1 |q(t) - q(s)| dt ds.$$
+- Montrer que l’indice de Gini peut aussi s’écrire 
+$$ G =  \frac{2\mathrm{Cov}(X, F(X))}{\mathbb{E}[X]}.$$
+
+
+## Cumulants 
+
+1. Montrer que les cumulants d’une variable aléatoire ne dépendent pas des translations ($\kappa_X(k) = \kappa_{X+a}(k)$) et sont homogènes ($\kappa_n(cX) = c^n \kappa_n(X)$). 
+2. Montrer que si $X_1, \dotsc, X_n$ sont des variables aléatoires indépendantes, alors $\kappa_n(X_1 + \dotsc + X_n) = \kappa_n(X_1) + \dotsc + \kappa_n(X_n)$. Ainsi, contrairement aux moments, les cumulants sont… cumulatifs. D’où leur nom. 
+3. Montrer que $\kappa_k = \mu_4 - 3\mu_2^2$, où $\mu_k = \mathbb{E}[(X - \mu_X)^k]$ sont les moments normalisés. 
+4. Calculer les cumulants des lois gaussiennes. 
+
+## Inégalité de Greiner
+
+Soient $X,Y$ deux variables aléatoires conjointement gaussiennes, de corrélation $\rho$. Montrer que
+
+$$\rho = \sin\left(\frac{\pi}{2} \mathbb{E}[\tau]\right).$$
+
+Attention, c’est peut-être difficile. 
+
+## Lois log-normales
+
+On dit qu’une variable aléatoire positive est log-normale si elle s’écrit $X = e^Y$ où $Y$ est une variable  aléatoire gaussienne. 
+
+1. Calculer la moyenne, la variance, l’écart-type, la skewness et la kurtosis des lois log-normales. 
+2. Calculer la courbe de Lorenz et l’indice de Gini des lois log-normales. 
+
+## Inégalité de Hotelling-Solomons
+
+Si $m$ est la médiane, $\mu$ la moyenne, et $\sigma$ l’écart-type, montrer que 
+$$|\mu - m| \leq \sigma.$$
+
+
+
+## Relation entre moments et cumulants
+
+1. Démontrer la [formule de Faa di Bruno](https://en.wikipedia.org/wiki/Fa%C3%A0_di_Bruno%27s_formula) : si $f$ et $g$ sont deux fonctions, alors $(f\circ g)^{(n)}(x)$ est égal à 
+$$\sum_{m_1 + 2m2 + \dotsb + n m_n = n} c(m_1, \dotsc, m_n)f^{(m_1 + \dotsc + m_n)}(g(x)) \prod_{j=1}^n g^{(j)}(x)^{m_j},$$ 
+où 
+$$c(m_1, \dotsc, m_n) = \frac{n!}{m_1! 1!^{m1} m_2!2!^{m_2}\dots m_n! n!^{m_n}} $$
+2. En déduire que 
+$$\mathbb{E}[X^n] = \sum_{k=1}^n B_{n,k}(\kappa_1, \dotsc, \kappa_{n-k+1})$$
+où les $B_{n,k}$ sont les polynômes incomplets de Bell, 
+$$n!\sum_{\substack{j_1 + \dotsb + j_{n-k+1} = n \\ j_1, \dotsc, j_{n-k+1} \geq 0 \\ j_1 + 2j_2 + \dotsb + (n-k+1)j_{n-k+1} = n}} \prod_{i=1}^{n-k+1}\frac{x_i^{j_i}}{(i!)^{j_i} j_i!}.$$

@@ -1,0 +1,88 @@
+# Paramètres et moments
+
+En pratique, quels types de paramètres voudrait-on estimer à partir d’un échantillon ? En finance, on cherche souvent à estimer la moyenne et la volatilité (l’écart-type) des actifs financiers ; en sciences sociales, on peut vouloir estimer des indicateurs de disparités, comme l’indice de Gini ; on peut vouloir estimer des quantités plus complexes qui sont utiles à telle ou telle science. Dans les trois prochains chapitres, nous allons faire une revue sommaire de *statistique descriptive* : il s’agit de décrire certaines propriétés intuitives des lois de probabilités ou des échantillons observés, à l’aide d’un seul indicateur numérique. 
+
+Tous ces *descripteurs* peuvent se formuler directement au niveau des mesures de probabilité : par exemple, on sait bien que la moyenne d’une mesure réelle $\mathbb{P}$ est définie par 
+$$\int_{\mathbb{R}} x d\mathbb{P}(x)$${#eq-moyenne}
+pourvu que cette intégrale converge. Lorsqu’on parle de moyenne[^1] d’une variable aléatoire, on sous-entend qu’on parle de la moyenne de sa loi. 
+
+En fait, cette formulation s’applique aussi à des échantillons $(x_1, \dotsc, x_n)$ grâce à leur *mesure empirique*, 
+$$\hat{\mu}_n = \frac{1}{n}\sum_{i=1}^n \delta_{x_i}.$$
+La moyenne empirique de l’échantillon est égale, comme on s’y attend, à 
+$$\int_{\mathbb{R}} x d\hat{\mu}_n(x) = \frac{1}{n}\sum_{i=1}^n x_i.$$
+
+
+
+## Moyenne,  écart-type, moments
+
+La moyenne d’une variable aléatoire $X$ de loi $\mathbb{P}$ est définie par la formule @eq-moyenne, et on la note souvent $\mu_X$. Pour que la moyenne existe, il suffit que $X$ soit intégrable. Une variable dont la moyenne est nulle est appelée *centrée*. 
+
+Lorsque $X^2$ est intégrable, la variance de $X$ est la moyenne de $(X - \mathbb{E}[X])^2$, soit 
+$$\mathrm{Var}(X) = \mathbb{E}[(X-\mathbb{E}[X])^2]. $$
+Le problème de la variance est qu’elle n’a pas la même unité que $X$ : si $X$ est en euros, la variance est en euros carrés. La bonne façon de mesurer la dispersion est de prendre la racine carrée de la variance, ce qui donne l’écart-type, souvent noté $\sigma_X = \sqrt{\mathrm{Var}(X)}$. Une variable dont l’écart-type est 1 est appelée *réduite*. 
+
+En finance, l’écart-type d’un actif est souvent appelé *volatilité*. Le gestionnaires de portefeuille sont souvent obsédés par une mesure essentielle de performance d’une quantité $R$, le *ratio de Sharpe*, qui est le ratio de la moyenne du rendement sur l’écart-type du rendement : 
+$$\zeta = \frac{\mu_R}{\sigma_R}.$$
+
+
+## Skewness
+
+La moyenne mesure le comportement moyen d’un phénomène aléatoire, et l’écart-type mesure l’écart moyen à ce comportement moyen. Deux moments supplémentaires sont très souvent utilisés. 
+
+Supposons qu’une variable aléatoire soit centrée et réduite ; en moyenne, son écart à sa valeur moyenne vaut 1. Mais cette moyenne cache évidemment des disparités : peut-être que $X$ est très souvent proche de 0.5, mais plus rarement proche de -10, et que ces fluctuations se compensent. Il est essentiel de mesurer si les écarts ont plutôt lieu à droite ou à gauche de la moyenne, et cette quantité est appelée *skewness*, ou coefficient d’asymétrie
+
+$$\gamma_X = \mathbb{E}\left[\left(\frac{X-\mu_X}{\sigma_X}\right)^3\right].$$
+
+Une asymétrie positivie signifie que la variable est plus souvent grande que petite, et une asymétrie négative signifie que la variable est plus souvent petite que grande. Le graal de tout financier est un actif avec une forte asymétrie positive : parmi tous les actifs avec le même rendement $\mu$ et la même volatilité $\sigma$, celui avec la forte asymétrie positive aura tendance, lorsqu’il s’écarte de $\mu$, à s’en écarter plutôt en étant grand. Les actifs avec des asymétries négatives sont plus dangereux : lorsqu’ils dévient de leur comportement moyen, c’est catastrophique. 
+
+Bien sûr, une variable aléatoire symétrique (ou symétrique autour de sa moyenne) a une asymétrie nulle. 
+
+## Kurtosis et moments supérieurs
+
+La *kurtosis* mesure à quel point une variable aléatoire peut prendre des valeurs *vraiment très éloignées* de sa moyenne. Plutôt que de mesurer l’écart avec un carré (comme la variance), on le mesure avec une puissance 4, donnant beaucoup plus d’importance aux très grands écarts. La kurtosis est définie par  
+$$\kappa_X = \mathbb{E}\left[\left(\frac{X-\mu_X}{\sigma_X}\right)^4\right].$$
+On aurait pu utiliser des moments encore d’ordre supérieur, avec des puissances 6 ou 8, mais en pratique ça n’est jamais utilisé. 
+
+Si $X \sim \mathscr{N}(0,1)$, alors la kurtosis est égale à $\mathbb{E}[X^4]$. Il est indispensable d’avoir en tête les moments de la gaussienne. 
+
+:::{#thm-moments-gaussienne}
+Les moments d’ordre impair de $\mathscr{N}(0,1)$ sont tous nuls. Les moments d’ordre pair sont donnés par 
+$$\mathbb{E}[X^{2k}] = (2k-1)!! = \frac{(2k)!}{2^k k!}.$$
+:::
+
+:::{.proof}
+
+Le changement de variable $y = x^2/2$ donne
+\begin{align*}\mathbb{E}[X^{2k}] &= 2\int_0^\infty x^{2k} \frac{e^{-x^2/2}}{\sqrt{2\pi}} dx \\
+&= 2\int_0^\infty 2^k y^k \frac{e^{-y}}{\sqrt{2\pi}} \frac{dy}{\sqrt{2y}} \\
+&= \frac{2^k}{\sqrt{\pi}}\Gamma(k+1/2).
+\end{align*}
+Or, la formule $\Gamma(z+1) = z\Gamma(z)$ donne
+\begin{align*}\Gamma(k+1/2) &= \prod_{j=1}^k \left(j + \frac{1}{2}\right) = \frac{(2k-1)!!}{2^k}\\
+&= \frac{1 \times 3 \times 5 \times \dotsc \times (2k-1)}{2^k} \times \Gamma(1/2)
+\end{align*}
+et comme $\Gamma(1/2) = \sqrt{\pi}$, on obtient le résultat.
+
+:::
+
+On a donc $\mathbb{E}[X^4] = 1\times 3 = 3$. Il est fréquent de parler de loi *leptokurtique* lorsque sa kurtosis est supérieure à celle d’une gaussienne, donc 3, et de *platykurtique* pour l’inverse. Les lois platykurtiques sont donc plus étalées : il y a plus de masse dans les zones extrêmes. 
+
+
+
+## Les Cumulants
+
+Si $X$ est une variable aléatoire, sa transformée de Fourier est définie par $\mathbb{E}[e^{i tX}]$. Dans les cas où l’on peut justifier l’interversion de la série et de l’espérance, on a donc 
+$$\varphi(t) = \mathbb{E}[e^{tX}] = \sum_{k=0}^\infty \frac{i^kt^k}{k!} \mathbb{E}[X^k].$$
+La transformée de Fourier est donc la fonction génératrice des moments. Son logarithme complexe, lui, est **la fonction génératrice des cumulants** : son développement en série de Taylor s’écrit
+$$\psi(t) = \log\mathbb{E}[e^{itX}] = \sum_{k=1}^\infty \frac{i^k t^k}{k} \kappa_k(X).$$
+Les coefficients $\kappa_k(X)$ sont appelés *cumulants*. Ils s’obtiennent en évaluant les dérivées successives de $\psi$ en $t=0$. Par exemple, 
+$$\psi’(0) = \frac{\varphi’(0)}{\varphi(0)} = \mathbb{E}[X] = \mu_X, $$
+et 
+\begin{align*}\psi’’(0) &= \frac{\varphi’’(0)}{\varphi(0)} - \frac{\varphi’(0)^2}{\varphi(0)^2} \\
+&= \mathrm{Var}(X) = \sigma_X^2. 
+\end{align*}
+
+Il existe des relations entre les cumulants et les moments : ces relations utilisent la formule de Faa di Bruno. 
+
+
+[^1]: ou n’importe quoi d’autre, variance, écart-type, etc.

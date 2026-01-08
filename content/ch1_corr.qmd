@@ -1,0 +1,44 @@
+# Corrélation et association
+
+## Qu’est-ce qu’une corrélation ?
+
+$$\mathrm{Var}(X) = \mathbb{E}[X X^\top] - \mathbb{E}[X] \mathbb{E}[X]^\top.$$
+
+$$\mathrm{Cov}(X, Y) = \mathbb{E}[(X-\mathbb{E}[X])(Y-\mathbb{E}[Y])] = \mathbb{E}[XY] - \mathbb{E}[X] \mathbb{E}[Y].$$
+
+$$\mathrm{Corr}(X, Y) = \frac{\mathrm{Cov}(X, Y)}{\sigma_X \sigma_Y}.$$
+
+## Le coefficient de Kendall
+
+Le coefficient de Kendall mesure à quel point deux séries d’observations $(X_i)$ et $(Y_i)$ ont tendance à varier dans le même sens. Il est défini par 
+
+:::{#def-kendall}
+$$\tau = \frac{2}{n(n-1)} \sum_{i<j} \mathrm{signe}(X_i - X_j) \mathrm{signe}(Y_i - Y_j).$$
+:::
+
+
+Une paire $(i,j)$ d’indices est appelée *concordante* si $X_i,X_j$ et $Y_i,Y_j$ sont dans le même ordre, autrement dit si $X_i < X_j$ et $Y_i < Y_j$ ou si $X_i > X_j$ et $Y_i > Y_j$. Le coefficient de Kendall compte alors le nombre de paires concordantes et le nombre de paires discordantes : en fait, on a 
+$$\tau = \frac{\text{nombre de paires concordantes} - \text{nombre de paires discordantes}}{\binom{n}{2}}.$$
+Cette expression montre que $\tau$ est compris entre $-1$ et $1$, et que $\tau = 1$ si et seulement si les deux séries d’observations sont dans le même ordre, et $\tau = -1$ si et seulement si les deux séries d’observations sont dans l’ordre inverse. 
+
+:::{#thm-kendall}
+Si les deux séries d’observations sont indépendantes, alors $\mathbb{E}[\tau] = 0$ et $\mathrm{Var}(\tau) = \frac{2(2n+5)}{9n(n-1)}$.
+:::
+
+:::{.proof}
+À écrire. 
+:::
+
+
+## Le coefficient de Spearman
+
+Le coefficient de Spearman est la corrélation entre les rangs des observations : si les observations sont $(X_i, Y_i)$ pour $i=1,\ldots,n$, on note $R_i$ le rang de $X_i$ et $S_i$ le rang de $Y_i$. Le coefficient de Spearman est donné par 
+$$\rho_S = \mathrm{Corr}(R, S).$$
+Lorsqu’il n’y a pas de cas d’égalité dans les $X_i$ ou les $Y_i$, on peut écrire 
+$$\rho_S = 1 - \frac{6 \sum_{i=1}^n (R_i - S_i)^2}{n(n^2 - 1)}.$$
+
+:::{.proof}
+
+À écrire. 
+
+:::
