@@ -374,11 +374,9 @@ window.Quarto = {
    
   <ul>
   <li><a href="#questions" id="toc-questions" class="nav-link active" data-scroll-target="#questions"><span class="header-section-number">5.1</span> Questions</a></li>
-  <li><a href="#cumulants" id="toc-cumulants" class="nav-link" data-scroll-target="#cumulants"><span class="header-section-number">5.2</span> Cumulants</a></li>
-  <li><a href="#inégalité-de-greiner" id="toc-inégalité-de-greiner" class="nav-link" data-scroll-target="#inégalité-de-greiner"><span class="header-section-number">5.3</span> Inégalité de Greiner</a></li>
-  <li><a href="#lois-log-normales" id="toc-lois-log-normales" class="nav-link" data-scroll-target="#lois-log-normales"><span class="header-section-number">5.4</span> Lois log-normales</a></li>
-  <li><a href="#inégalité-de-hotelling-solomons" id="toc-inégalité-de-hotelling-solomons" class="nav-link" data-scroll-target="#inégalité-de-hotelling-solomons"><span class="header-section-number">5.5</span> Inégalité de Hotelling-Solomons</a></li>
-  <li><a href="#relation-entre-moments-et-cumulants" id="toc-relation-entre-moments-et-cumulants" class="nav-link" data-scroll-target="#relation-entre-moments-et-cumulants"><span class="header-section-number">5.6</span> Relation entre moments et cumulants</a></li>
+  <li><a href="#lois-log-normales" id="toc-lois-log-normales" class="nav-link" data-scroll-target="#lois-log-normales"><span class="header-section-number">5.2</span> Lois log-normales</a></li>
+  <li><a href="#inégalité-de-hotelling-solomons" id="toc-inégalité-de-hotelling-solomons" class="nav-link" data-scroll-target="#inégalité-de-hotelling-solomons"><span class="header-section-number">5.3</span> Inégalité de Hotelling-Solomons</a></li>
+  <li><a href="#inégalité-de-greiner" id="toc-inégalité-de-greiner" class="nav-link" data-scroll-target="#inégalité-de-greiner"><span class="header-section-number">5.4</span> Inégalité de Greiner</a></li>
   </ul>
 </nav>
     </div>
@@ -419,7 +417,8 @@ $$
 <section id="questions" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="questions"><span class="header-section-number">5.1</span> Questions</h2>
 <ul>
-<li>Calculer la moyenne, la variance, l’écart-type, la skewness et la kurtosis des lois uniformes et des lois Gamma.</li>
+<li>Calculer la moyenne, la variance, l’écart-type, l’asymétrie et la kurtosis des lois uniformes.</li>
+<li>Calculer l’asymétrie des lois Gamma.</li>
 <li>Montrer que la courbe de Lorenz d’une variable aléatoire réelle <span class="math inline">\(X\)</span> est la même que celle de <span class="math inline">\(cX\)</span> pour tout <span class="math inline">\(c &gt; 0\)</span>.</li>
 <li>Trouver des exemples de variables aléatoires dont la médiane est différente de la moyenne.</li>
 <li>La courbe de Lorenz peut-elle être confondue avec la droite <span class="math inline">\((t,t)\)</span> ?</li>
@@ -427,40 +426,37 @@ $$
 <li>Le principe de Pareto dit que, dans de nombreux contextes, 20% des efforts produisent 80% des résultats ; dit dans l’autre sens, 80% des efforts ne produisent que 20% des résultats. Quel est l’unique <span class="math inline">\(\alpha\)</span> pour lequel la loi de Pareto d’indice <span class="math inline">\(\alpha\)</span> correspond à ce principe ?</li>
 <li>Montrer que l’indice de Gini d’une variable aléatoire continue peut s’écrire <span class="math display">\[G = \frac{1}{2\mathbb{E}[X]}\int_0^1 \int_0^1 |q(t) - q(s)| dt ds.\]</span></li>
 <li>Montrer que l’indice de Gini peut aussi s’écrire <span class="math display">\[ G =  \frac{2\mathrm{Cov}(X, F(X))}{\mathbb{E}[X]}.\]</span></li>
+<li>Vérifier que les coefficients de Pearson, de Spearman et de Kendall ne dépendent pas d’une même modification affine des deux variables. Par exemple, si on pose <span class="math inline">\(Z = aX + b\)</span> et <span class="math inline">\(W = cY + d\)</span>, alors <span class="math inline">\(\rho(Z, W) = \rho(X, Y)\)</span>.</li>
+<li>Trouver un exemple où les coefficients de Spearman et de Kendall ne sont pas égaux.</li>
 </ul>
 </section>
-<section id="cumulants" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="cumulants"><span class="header-section-number">5.2</span> Cumulants</h2>
-<ol type="1">
-<li>Montrer que les cumulants d’une variable aléatoire ne dépendent pas des translations (<span class="math inline">\(\kappa_X(k) = \kappa_{X+a}(k)\)</span>) et sont homogènes (<span class="math inline">\(\kappa_n(cX) = c^n \kappa_n(X)\)</span>).</li>
-<li>Montrer que si <span class="math inline">\(X_1, \dotsc, X_n\)</span> sont des variables aléatoires indépendantes, alors <span class="math inline">\(\kappa_n(X_1 + \dotsc + X_n) = \kappa_n(X_1) + \dotsc + \kappa_n(X_n)\)</span>. Ainsi, contrairement aux moments, les cumulants sont… cumulatifs. D’où leur nom.</li>
-<li>Montrer que <span class="math inline">\(\kappa_k = \mu_4 - 3\mu_2^2\)</span>, où <span class="math inline">\(\mu_k = \mathbb{E}[(X - \mu_X)^k]\)</span> sont les moments normalisés.</li>
-<li>Calculer les cumulants des lois gaussiennes.</li>
-</ol>
-</section>
-<section id="inégalité-de-greiner" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="inégalité-de-greiner"><span class="header-section-number">5.3</span> Inégalité de Greiner</h2>
-<p>Soient <span class="math inline">\(X,Y\)</span> deux variables aléatoires conjointement gaussiennes, de corrélation <span class="math inline">\(\rho\)</span>. Montrer que</p>
-<p><span class="math display">\[\rho = \sin\left(\frac{\pi}{2} \mathbb{E}[\tau]\right).\]</span></p>
-<p>Attention, c’est peut-être difficile.</p>
-</section>
-<section id="lois-log-normales" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="lois-log-normales"><span class="header-section-number">5.4</span> Lois log-normales</h2>
+<section id="lois-log-normales" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="lois-log-normales"><span class="header-section-number">5.2</span> Lois log-normales</h2>
 <p>On dit qu’une variable aléatoire positive est log-normale si elle s’écrit <span class="math inline">\(X = e^Y\)</span> où <span class="math inline">\(Y\)</span> est une variable aléatoire gaussienne.</p>
 <ol type="1">
-<li>Calculer la moyenne, la variance, l’écart-type, la skewness et la kurtosis des lois log-normales.</li>
+<li>Calculer <span class="math inline">\(\mathbb{E}[X^t]\)</span> pour tout <span class="math inline">\(t&gt;0\)</span>.</li>
+<li>En déduire la moyenne, la variance, l’écart-type, la skewness et la kurtosis des lois log-normales.</li>
 <li>Calculer la courbe de Lorenz et l’indice de Gini des lois log-normales.</li>
 </ol>
 </section>
-<section id="inégalité-de-hotelling-solomons" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="inégalité-de-hotelling-solomons"><span class="header-section-number">5.5</span> Inégalité de Hotelling-Solomons</h2>
+<section id="inégalité-de-hotelling-solomons" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="inégalité-de-hotelling-solomons"><span class="header-section-number">5.3</span> Inégalité de Hotelling-Solomons</h2>
 <p>Si <span class="math inline">\(m\)</span> est la médiane, <span class="math inline">\(\mu\)</span> la moyenne, et <span class="math inline">\(\sigma\)</span> l’écart-type, montrer que <span class="math display">\[|\mu - m| \leq \sigma.\]</span></p>
 </section>
-<section id="relation-entre-moments-et-cumulants" class="level2" data-number="5.6">
-<h2 data-number="5.6" class="anchored" data-anchor-id="relation-entre-moments-et-cumulants"><span class="header-section-number">5.6</span> Relation entre moments et cumulants</h2>
+<section id="inégalité-de-greiner" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="inégalité-de-greiner"><span class="header-section-number">5.4</span> Inégalité de Greiner</h2>
+<p>Soient <span class="math inline">\(X,Y\)</span> deux variables aléatoires centrées conjointement gaussiennes, de corrélation <span class="math inline">\(\rho\)</span> et d’écarts-types 1. L’objectif est de montrer que</p>
+<p><span class="math display">\[\rho = \sin\left(\frac{\pi}{2} \mathbb{E}[\tau]\right).\]</span></p>
 <ol type="1">
-<li>Démontrer la <a href="https://en.wikipedia.org/wiki/Fa%C3%A0_di_Bruno%27s_formula">formule de Faa di Bruno</a> : si <span class="math inline">\(f\)</span> et <span class="math inline">\(g\)</span> sont deux fonctions, alors <span class="math inline">\((f\circ g)^{(n)}(x)\)</span> est égal à <span class="math display">\[\sum_{m_1 + 2m2 + \dotsb + n m_n = n} c(m_1, \dotsc, m_n)f^{(m_1 + \dotsc + m_n)}(g(x)) \prod_{j=1}^n g^{(j)}(x)^{m_j},\]</span> où <span class="math display">\[c(m_1, \dotsc, m_n) = \frac{n!}{m_1! 1!^{m1} m_2!2!^{m_2}\dots m_n! n!^{m_n}} \]</span></li>
-<li>En déduire que <span class="math display">\[\mathbb{E}[X^n] = \sum_{k=1}^n B_{n,k}(\kappa_1, \dotsc, \kappa_{n-k+1})\]</span> où les <span class="math inline">\(B_{n,k}\)</span> sont les polynômes incomplets de Bell, <span class="math display">\[n!\sum_{\substack{j_1 + \dotsb + j_{n-k+1} = n \\ j_1, \dotsc, j_{n-k+1} \geq 0 \\ j_1 + 2j_2 + \dotsb + (n-k+1)j_{n-k+1} = n}} \prod_{i=1}^{n-k+1}\frac{x_i^{j_i}}{(i!)^{j_i} j_i!}.\]</span></li>
+<li>Montrer que <span class="math inline">\(\mathbb{E}[\tau] = 2 \mathbb{P}((X-X')(Y-Y')&gt;0)-1\)</span> où <span class="math inline">\((X',Y')\)</span> est une copie indépendante de <span class="math inline">\((X,Y)\)</span>. On notera dorénavant <span class="math inline">\(p = \mathbb{P}((X-X')(Y-Y')&gt;0)\)</span>.</li>
+<li>Calculer cette probabilité lorsque <span class="math inline">\(\rho = 0\)</span>.</li>
+<li>On pose <span class="math inline">\(A = X-X'\)</span> et <span class="math inline">\(B = Y-Y'\)</span>. Quelle est la loi de <span class="math inline">\((A,B)\)</span> ? On note <span class="math inline">\(s\)</span> leur corrélation.</li>
+<li>Montrer que <span class="math inline">\(\mathbb{P}(B&gt;0 \mid A = a) = \Phi(ra)\)</span> où <span class="math inline">\(r = s/ \sqrt{1-s^2}\)</span> et <span class="math inline">\(\Phi\)</span> est la fonction de répartition de <span class="math inline">\(\mathscr{N}(0,1)\)</span>.</li>
+<li>En déduire que <span class="math display">\[p = \int_{\mathbb{R}}\frac{e^{-x^2/2}}{\sqrt{2\pi}} \Phi(rx) dx.\]</span> On note cette fonction <span class="math inline">\(I(r)\)</span>.</li>
+<li>Montrer que <span class="math inline">\(I'(r) = \frac{1}{2\pi(1+r^2)}\)</span>.</li>
+<li>En déduire que <span class="math inline">\(I(r) = 1/4+\arcsin(r)/2\pi\)</span>.</li>
+<li>Vérifier que <span class="math inline">\(\arcsin(r) = \arcsin(\rho)\)</span>.</li>
+<li>Conclure.</li>
 </ol>
 
 

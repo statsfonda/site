@@ -373,7 +373,7 @@ window.Quarto = {
     <h2 id="toc-title">Table des matières</h2>
    
   <ul>
-  <li><a href="#quest-ce-quune-corrélation" id="toc-quest-ce-quune-corrélation" class="nav-link active" data-scroll-target="#quest-ce-quune-corrélation"><span class="header-section-number">3.1</span> Qu’est-ce qu’une corrélation ?</a></li>
+  <li><a href="#le-coefficient-de-pearson" id="toc-le-coefficient-de-pearson" class="nav-link active" data-scroll-target="#le-coefficient-de-pearson"><span class="header-section-number">3.1</span> Le coefficient de Pearson</a></li>
   <li><a href="#le-coefficient-de-kendall" id="toc-le-coefficient-de-kendall" class="nav-link" data-scroll-target="#le-coefficient-de-kendall"><span class="header-section-number">3.2</span> Le coefficient de Kendall</a></li>
   <li><a href="#le-coefficient-de-spearman" id="toc-le-coefficient-de-spearman" class="nav-link" data-scroll-target="#le-coefficient-de-spearman"><span class="header-section-number">3.3</span> Le coefficient de Spearman</a></li>
   </ul>
@@ -413,19 +413,32 @@ $$
 </header>
 
 
-<section id="quest-ce-quune-corrélation" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="quest-ce-quune-corrélation"><span class="header-section-number">3.1</span> Qu’est-ce qu’une corrélation ?</h2>
-<p><span class="math display">\[\mathrm{Var}(X) = \mathbb{E}[X X^\top] - \mathbb{E}[X] \mathbb{E}[X]^\top.\]</span></p>
-<p><span class="math display">\[\mathrm{Cov}(X, Y) = \mathbb{E}[(X-\mathbb{E}[X])(Y-\mathbb{E}[Y])] = \mathbb{E}[XY] - \mathbb{E}[X] \mathbb{E}[Y].\]</span></p>
-<p><span class="math display">\[\mathrm{Corr}(X, Y) = \frac{\mathrm{Cov}(X, Y)}{\sigma_X \sigma_Y}.\]</span></p>
+<p>Une question essentielle et difficile en statistique est de mesurer à quel point deux phénomènes aléatoires sont reliées. Étant données deux échantillons, disons <span class="math inline">\((X_i)\)</span> et <span class="math inline">\((Y_i)\)</span>, ou deux variables aléatoires <span class="math inline">\((X,Y)\)</span>, on aimerait avoir un indicateur quantitatif de la relation entre les deux, les deux extrêmes étant les suivants :</p>
+<ul>
+<li>les <span class="math inline">\(X_i\)</span> peuvent s’exprimer comme une fonction des <span class="math inline">\(Y_i\)</span>. Dans ce cas, les deux variables ont une dépendance maximale : la connaissance de l’une est entièrement suffisante pour connaître l’autre. Cette dépendance pourrait être linéaire, par exemple <span class="math inline">\(X_i = aY_i + b\)</span>, ou non linéaire, par exemple <span class="math inline">\(X_i = X_i^2 - e^{X_i}\)</span>.</li>
+<li>ou bien, les <span class="math inline">\(X_i\)</span> et les <span class="math inline">\(Y_i\)</span> pourraient être statistiquement indépendants au sens de la théorie des probabilités, signifiant que la connaissance de l’une n’apporte aucune information sur l’autre.</li>
+</ul>
+<p>Il n’existe, à ce jour, aucun indicateur quantitatif universel de ce genre ayant de bonnes propriétés (de convergence, de variance, etc). L’indicateur qui s’en rapproche le plus est le <a href="https://arxiv.org/abs/1909.10140">coefficient de Chatterjee (2019)</a>, mais il dépasse le cadre de ce cours : nous nous contenterons de trois coefficients qui sont déjà très puissants et qu’il est <em>essentiel</em> de maîtriser tant ils sont utiles dans la pratique : les coefficients de Pearson, de Spearman et de Kendall.</p>
+<section id="le-coefficient-de-pearson" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="le-coefficient-de-pearson"><span class="header-section-number">3.1</span> Le coefficient de Pearson</h2>
+<p>La covariance entre deux variables aléatoires est définie par <span class="math display">\[\mathrm{Cov}(X, Y) = \mathbb{E}[(X-\mathbb{E}[X])(Y-\mathbb{E}[Y])].\]</span></p>
+<p>Dans le cas d’une mesure empirique de deux échantillons, disons <span class="math inline">\((x_i)\)</span> et <span class="math inline">\((y_i)\)</span>, la covariance est <span class="math display">\[\frac{1}{n}\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{x}).\]</span></p>
+<div id="def-coef-pearson" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 3.1</strong></span> Le coefficient de corrélation linéaire de Pearson<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, appelé <em>corrélation</em>, est la covariance normalisée :</p>
+<p><span id="eq-corr"><span class="math display">\[\rho(X, Y) = \frac{\mathrm{Cov}(X, Y)}{\sigma_X \sigma_Y}. \tag{3.1}\]</span></span></p>
+</div>
+<p>L’inégalité de Cauchy-Schwarz entraîne directement que la corrélation est comprise entre <span class="math inline">\(-1\)</span> et <span class="math inline">\(1\)</span>, et qu’elle vaut 1 ou -1 si et seulement si les deux variables sont liées par une relation affine, c’est-à-dire si <span class="math inline">\(Y = aX + b\)</span> pour deux constantes <span class="math inline">\(a\)</span> et <span class="math inline">\(b\)</span>.</p>
+<p>Il faut bien comprendre que ce coefficient mesure exclusivement la dépendance <em>linéaire</em> entre les deux variables. Une corrélation nulle n’implique pas l’indépendance des deux variables, mais seulement l’absence de dépendance linéaire. Il est facile de créer des couples d’échantillons de corrélation nulle, mais qui sont clairement dépendants : c’est par exemple le cas des nuages de points suivants, qui viennent de <a href="https://dl.acm.org/doi/epdf/10.1145/3025453.3025912">cet article</a>:</p>
+<p><img src="../images/dino.png" class="img-fluid" style="width:40.0%"></p>
+<p><img src="../images/corrzero.png" class="img-fluid" style="width:60.0%"></p>
 </section>
 <section id="le-coefficient-de-kendall" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="le-coefficient-de-kendall"><span class="header-section-number">3.2</span> Le coefficient de Kendall</h2>
-<p>Le coefficient de Kendall mesure à quel point deux séries d’observations <span class="math inline">\((X_i)\)</span> et <span class="math inline">\((Y_i)\)</span> ont tendance à varier dans le même sens. Il est défini par</p>
+<p>Le coefficient de Kendall mesure à quel point deux séries d’observations <span class="math inline">\((X_i)\)</span> et <span class="math inline">\((Y_i)\)</span> ont tendance à varier dans le même sens : ce qui est mesurée, ce n’est donc plus l’association linéaire comme le coefficient de Pearson, mais plutôt l’association monotone. Il est défini par</p>
 <div id="def-kendall" class="theorem definition">
-<p><span class="theorem-title"><strong>Définition 3.1</strong></span> <span class="math display">\[\tau = \frac{2}{n(n-1)} \sum_{i&lt;j} \mathrm{signe}(X_i - X_j) \mathrm{signe}(Y_i - Y_j).\]</span></p>
+<p><span class="theorem-title"><strong>Définition 3.2</strong></span> <span class="math display">\[\tau = \frac{2}{n(n-1)} \sum_{i&lt;j} \mathrm{signe}(X_i - X_j) \mathrm{signe}(Y_i - Y_j).\]</span></p>
 </div>
-<p>Une paire <span class="math inline">\((i,j)\)</span> d’indices est appelée <em>concordante</em> si <span class="math inline">\(X_i,X_j\)</span> et <span class="math inline">\(Y_i,Y_j\)</span> sont dans le même ordre, autrement dit si <span class="math inline">\(X_i &lt; X_j\)</span> et <span class="math inline">\(Y_i &lt; Y_j\)</span> ou si <span class="math inline">\(X_i &gt; X_j\)</span> et <span class="math inline">\(Y_i &gt; Y_j\)</span>. Le coefficient de Kendall compte alors le nombre de paires concordantes et le nombre de paires discordantes : en fait, on a <span class="math display">\[\tau = \frac{\text{nombre de paires concordantes} - \text{nombre de paires discordantes}}{\binom{n}{2}}.\]</span> Cette expression montre que <span class="math inline">\(\tau\)</span> est compris entre <span class="math inline">\(-1\)</span> et <span class="math inline">\(1\)</span>, et que <span class="math inline">\(\tau = 1\)</span> si et seulement si les deux séries d’observations sont dans le même ordre, et <span class="math inline">\(\tau = -1\)</span> si et seulement si les deux séries d’observations sont dans l’ordre inverse.</p>
+<p>Une paire <span class="math inline">\((i,j)\)</span> d’indices est appelée <em>concordante</em> si <span class="math inline">\(X_i,X_j\)</span> et <span class="math inline">\(Y_i,Y_j\)</span> sont dans le même ordre, autrement dit si <span class="math inline">\(X_i &lt; X_j\)</span> et <span class="math inline">\(Y_i &lt; Y_j\)</span> ou si <span class="math inline">\(X_i &gt; X_j\)</span> et <span class="math inline">\(Y_i &gt; Y_j\)</span>. Le coefficient de Kendall compte alors le nombre de paires concordantes et le nombre de paires discordantes : en fait, <span class="math inline">\(\tau\)</span>, est égal à <span class="math display">\[\frac{\text{paires concordantes} - \text{paires discordantes}}{\binom{n}{2}}.\]</span> Cette expression montre que <span class="math inline">\(\tau\)</span> est compris entre <span class="math inline">\(-1\)</span> et <span class="math inline">\(1\)</span>, et que <span class="math inline">\(\tau = 1\)</span> si et seulement si les deux séries d’observations sont dans le même ordre, et <span class="math inline">\(\tau = -1\)</span> si et seulement si les deux séries d’observations sont dans l’ordre inverse.</p>
 <div id="thm-kendall" class="theorem">
 <p><span class="theorem-title"><strong>Théorème 3.1</strong></span> Si les deux séries d’observations sont indépendantes, alors <span class="math inline">\(\mathbb{E}[\tau] = 0\)</span> et <span class="math inline">\(\mathrm{Var}(\tau) = \frac{2(2n+5)}{9n(n-1)}\)</span>.</p>
 </div>
@@ -435,12 +448,19 @@ $$
 </section>
 <section id="le-coefficient-de-spearman" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="le-coefficient-de-spearman"><span class="header-section-number">3.3</span> Le coefficient de Spearman</h2>
-<p>Le coefficient de Spearman est la corrélation entre les rangs des observations : si les observations sont <span class="math inline">\((X_i, Y_i)\)</span> pour <span class="math inline">\(i=1,\ldots,n\)</span>, on note <span class="math inline">\(R_i\)</span> le rang de <span class="math inline">\(X_i\)</span> et <span class="math inline">\(S_i\)</span> le rang de <span class="math inline">\(Y_i\)</span>. Le coefficient de Spearman est donné par <span class="math display">\[\rho_S = \mathrm{Corr}(R, S).\]</span> Lorsqu’il n’y a pas de cas d’égalité dans les <span class="math inline">\(X_i\)</span> ou les <span class="math inline">\(Y_i\)</span>, on peut écrire <span class="math display">\[\rho_S = 1 - \frac{6 \sum_{i=1}^n (R_i - S_i)^2}{n(n^2 - 1)}.\]</span></p>
+<p>Le coefficient de Spearman est une variante du <span class="math inline">\(\tau\)</span> de Kendall. Il est défini comme la corrélation entre les rangs des observations : si les observations sont <span class="math inline">\((X_i, Y_i)\)</span> pour <span class="math inline">\(i=1,\ldots,n\)</span>, on note <span class="math inline">\(R_i\)</span> le rang de <span class="math inline">\(X_i\)</span> et <span class="math inline">\(S_i\)</span> le rang de <span class="math inline">\(Y_i\)</span>. Le coefficient de Spearman est donné par <span class="math display">\[\rho_S = \mathrm{Corr}(R, S).\]</span> Lorsqu’il n’y a pas de cas d’égalité dans les <span class="math inline">\(X_i\)</span> ou les <span class="math inline">\(Y_i\)</span>, on peut écrire <span class="math display">\[\rho_S = 1 - \frac{6 \sum_{i=1}^n (R_i - S_i)^2}{n(n^2 - 1)}.\]</span></p>
 <div class="proof">
 <p><span class="proof-title"><em>Preuve</em>. </span>À écrire.</p>
 </div>
+<p>Le coefficient de Spearman s’interprète un peu comme le coefficient de Kendall. Il mesure à quel point l’ordre global des deux séries est le même : par exemple, s’il vaut 1, alors les deux séries sont dans le même ordre, et donc le coefficient de Kendall vaudrait également 1. C’est le cas lorsque, par exemple, <span class="math inline">\(Y\)</span> est une fonction croissante de <span class="math inline">\(X\)</span>. Mais il y a des cas où ces deux coefficients sont différents.</p>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Le coefficient de Pearson est en fait dû au scientifique Français Auguste Bravais, en 1844, dans son <a href="https://books.google.fr/books?id=y3s_AAAAcAAJ&amp;printsec=frontcover&amp;source=gbs_ViewAPI&amp;redir_esc=y#v=onepage&amp;q&amp;f=false">Analyse mathématique sur les probabilités des erreurs de situation d’un point</a>, un curieux livre que je vous conseille d’aller feuilleter : derrière un langage un peu différent, on trouve déjà formulées toutes les questions et la plupart des réponses de la statistique moderne. C’est aussi vrai des écrits de Laplace.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
