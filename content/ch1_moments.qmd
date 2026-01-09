@@ -15,14 +15,21 @@ $$\int_{\mathbb{R}} x d\hat{\mu}_n(x) = \frac{1}{n}\sum_{i=1}^n x_i.$$
 
 ## Moyenne,  écart-type, moments
 
-La moyenne d’une variable aléatoire $X$ de loi $\mathbb{P}$ est définie par la formule @eq-moyenne, et on la note souvent $\mu_X$. Pour que la moyenne existe, il suffit que $X$ soit intégrable. Une variable dont la moyenne est nulle est appelée *centrée*. 
+**Valeur moyenne**. La moyenne d’une variable aléatoire $X$ de loi $\mathbb{P}$ est définie par la formule @eq-moyenne, et on la note souvent $\mu_X$. Pour que la moyenne existe, il suffit que $X$ soit intégrable. Une variable dont la moyenne est nulle est appelée *centrée*. 
+
+
+**Dispersion. ** La moyenne d'une probabilité contient finalement très peu d'information sur la loi : elle ne dit rien sur la dispersion des valeurs de la variable aléatoire. Une information indispensable à tout travail de modélisation est la dispersion des valeurs de la variable aléatoire autour de sa moyenne, mesurée par la variance ou l'écart-type.
 
 Lorsque $X^2$ est intégrable, la variance de $X$ est la moyenne de $(X - \mathbb{E}[X])^2$, soit 
 $$\mathrm{Var}(X) = \mathbb{E}[(X-\mathbb{E}[X])^2]. $$
 Le problème de la variance est qu’elle n’a pas la même unité que $X$ : si $X$ est en euros, la variance est en euros carrés. La bonne façon de mesurer la dispersion est de prendre la racine carrée de la variance, ce qui donne l’écart-type, souvent noté $\sigma_X = \sqrt{\mathrm{Var}(X)}$. Une variable dont l’écart-type est 1 est appelée *réduite*. 
 
-En finance, l’écart-type d’un actif est souvent appelé *volatilité*. Le gestionnaires de portefeuille sont souvent obsédés par une mesure essentielle de performance d’une quantité $R$, le *ratio de Sharpe*, qui est le ratio de la moyenne du rendement sur l’écart-type du rendement : 
+Il existe de très nombreuses autres mesures de dispersion ; signalons simplement qu'au lieu de mesurer les distances à la moyenne avec un carré, on aurait pu simplement utiliser une valeur absolue, ce qui aurait donné la *déviation moyenne*,  
+$$\mathrm{Dev}(X) = \mathbb{E}[|X-\mu_X|].$$
+
+**Moyenne relative. ** En finance, l’écart-type d’un actif est souvent appelé *volatilité*. Le gestionnaires de portefeuille sont souvent obsédés par une mesure essentielle de performance d’une quantité $R$, le *ratio de Sharpe*, qui est le ratio de la moyenne du rendement sur l’écart-type du rendement : 
 $$\zeta = \frac{\mu_R}{\sigma_R}.$$
+La volatilité représente un *risque moyen* et la moyenne un *gain moyen* : le ratio de Sharpe mesure donc le *gain par unité de risque*. 
 
 
 ## Skewness
@@ -47,7 +54,7 @@ Si $X \sim \mathscr{N}(0,1)$, alors la kurtosis est égale à $\mathbb{E}[X^4]$.
 
 :::{#thm-moments-gaussienne}
 Les moments d’ordre impair de $\mathscr{N}(0,1)$ sont tous nuls. Les moments d’ordre pair sont donnés par 
-$$\mathbb{E}[X^{2k}] = (2k-1)!! = \frac{(2k)!}{2^k k!}.$$
+$$\mathbb{E}[X^{2k}] = \frac{(2k)!}{2^k k!}.$$
 :::
 
 :::{.proof}
@@ -71,18 +78,40 @@ On a donc $\mathbb{E}[X^4] = 1\times 3 = 3$. Il est fréquent de parler de loi *
 
 ## Les Cumulants
 
-Si $X$ est une variable aléatoire, sa transformée de Fourier est définie par $\mathbb{E}[e^{i tX}]$. Dans les cas où l’on peut justifier l’interversion de la série et de l’espérance, on a donc 
-$$\varphi(t) = \mathbb{E}[e^{tX}] = \sum_{k=0}^\infty \frac{i^kt^k}{k!} \mathbb{E}[X^k].$$
-La transformée de Fourier est donc la fonction génératrice des moments. Son logarithme complexe, lui, est **la fonction génératrice des cumulants** : son développement en série de Taylor s’écrit
-$$\psi(t) = \log\mathbb{E}[e^{itX}] = \sum_{k=1}^\infty \frac{i^k t^k}{k} \kappa_k(X).$$
-Les coefficients $\kappa_k(X)$ sont appelés *cumulants*. Ils s’obtiennent en évaluant les dérivées successives de $\psi$ en $t=0$. Par exemple, 
-$$\psi’(0) = \frac{\varphi’(0)}{\varphi(0)} = \mathbb{E}[X] = \mu_X, $$
-et 
-\begin{align*}\psi’’(0) &= \frac{\varphi’’(0)}{\varphi(0)} - \frac{\varphi’(0)^2}{\varphi(0)^2} \\
-&= \mathrm{Var}(X) = \sigma_X^2. 
+Si $X$ est une variable aléatoire, sa transformée de Fourier $\varphi(t)$ est définie par $\mathbb{E}[e^{i tX}]$. Dans les cas où l’on peut justifier l’interversion de la série et de l’espérance, on a donc 
+\begin{align*}\varphi(t) &= \mathbb{E}[e^{itX}] \\
+&= \sum_{k=0}^\infty \frac{i^kt^k}{k!} \mathbb{E}[X^k] \\
 \end{align*}
+La transformée de Fourier est donc la fonction génératrice des moments. Son logarithme complexe, lui, est **la fonction génératrice des cumulants** : son développement en série de Taylor s’écrit
+\begin{align*}\psi(t) &= \log\mathbb{E}[e^{itX}] \\
+&= \sum_{k=1}^\infty \frac{i^k t^k}{k} \kappa_k(X).
+\end{align*}
+Les coefficients $\kappa_k(X)$ sont appelés *cumulants*. Ils s’obtiennent en évaluant les dérivées successives de $\psi$ en $t=0$. 
 
-Il existe des relations entre les cumulants et les moments : ces relations utilisent la formule de Faa di Bruno. 
+:::{#exm-cumulants}
+Par exemple, 
+\begin{align*}\kappa_1(X) &= \psi’(0) \\&= \frac{\varphi’(0)}{\varphi(0)}\\ &= \mathbb{E}[X] 
+\end{align*}
+et 
+\begin{align*}\kappa_2(X) &=\psi’’(0) \\&= \frac{\varphi’’(0)}{\varphi(0)} - \frac{\varphi’(0)^2}{\varphi(0)^2} \\
+&= \mathrm{Var}(X).
+\end{align*}
+:::
+
+En développant les dérivées à tous les ordres (par exemple via la [formule de Faà di Bruno](https://fr.wikipedia.org/wiki/Formule_de_Fa%C3%A0_di_Bruno)), on peut obtenir des relations entre les cumulants et les moments, mais elles sont assez compliquées et nous ne les développerons pas ici. 
+
+
+:::{#exm-cumulants-gauss}
+
+
+La transformée de Fourier de la gaussienne $\mathscr{N}(\mu, \sigma^2)$ est égale à $\exp(i\mu t - \sigma^2 t^2/2)$. La fonction génératrice des cumulants de la gaussienne est donc
+$i\mu t - \sigma^2 t^2/2$. Par identification, tous les cumulants de la gaussienne sont nuls, sauf le premier et le second, qui sont $\mu$ et $\sigma^2$.
+
+:::
+
+
+
+
 
 
 [^1]: ou n’importe quoi d’autre, variance, écart-type, etc.

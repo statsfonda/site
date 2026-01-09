@@ -2,7 +2,8 @@
 
 ## Questions
 
-- Calculer la moyenne, la variance, l'écart-type, la skewness et la kurtosis des lois uniformes et des lois Gamma. 
+- Calculer la moyenne, la variance, l'écart-type, l'asymétrie et la kurtosis des lois uniformes. 
+- Calculer l'asymétrie des lois Gamma. 
 - Montrer que la courbe de Lorenz d’une variable aléatoire réelle $X$ est la même que celle de $cX$ pour tout $c > 0$. 
 - Trouver des exemples de variables aléatoires dont la médiane est différente de la moyenne. 
 - La courbe de Lorenz peut-elle être confondue avec la droite $(t,t)$ ? 
@@ -12,28 +13,17 @@
 $$G = \frac{1}{2\mathbb{E}[X]}\int_0^1 \int_0^1 |q(t) - q(s)| dt ds.$$
 - Montrer que l’indice de Gini peut aussi s’écrire 
 $$ G =  \frac{2\mathrm{Cov}(X, F(X))}{\mathbb{E}[X]}.$$
+- Vérifier que les coefficients de Pearson, de Spearman et de Kendall ne dépendent pas d'une même modification affine des deux variables. Par exemple, si on pose $Z = aX + b$ et $W = cY + d$, alors $\rho(Z, W) = \rho(X, Y)$.
+- Trouver un exemple où les coefficients de Spearman et de Kendall ne sont pas égaux. 
 
 
-## Cumulants 
-
-1. Montrer que les cumulants d’une variable aléatoire ne dépendent pas des translations ($\kappa_X(k) = \kappa_{X+a}(k)$) et sont homogènes ($\kappa_n(cX) = c^n \kappa_n(X)$). 
-2. Montrer que si $X_1, \dotsc, X_n$ sont des variables aléatoires indépendantes, alors $\kappa_n(X_1 + \dotsc + X_n) = \kappa_n(X_1) + \dotsc + \kappa_n(X_n)$. Ainsi, contrairement aux moments, les cumulants sont… cumulatifs. D’où leur nom. 
-3. Montrer que $\kappa_k = \mu_4 - 3\mu_2^2$, où $\mu_k = \mathbb{E}[(X - \mu_X)^k]$ sont les moments normalisés. 
-4. Calculer les cumulants des lois gaussiennes. 
-
-## Inégalité de Greiner
-
-Soient $X,Y$ deux variables aléatoires conjointement gaussiennes, de corrélation $\rho$. Montrer que
-
-$$\rho = \sin\left(\frac{\pi}{2} \mathbb{E}[\tau]\right).$$
-
-Attention, c’est peut-être difficile. 
 
 ## Lois log-normales
 
 On dit qu’une variable aléatoire positive est log-normale si elle s’écrit $X = e^Y$ où $Y$ est une variable  aléatoire gaussienne. 
 
-1. Calculer la moyenne, la variance, l’écart-type, la skewness et la kurtosis des lois log-normales. 
+1. Calculer $\mathbb{E}[X^t]$ pour tout $t>0$. 
+2. En déduire la moyenne, la variance, l’écart-type, la skewness et la kurtosis des lois log-normales. 
 2. Calculer la courbe de Lorenz et l’indice de Gini des lois log-normales. 
 
 ## Inégalité de Hotelling-Solomons
@@ -43,13 +33,21 @@ $$|\mu - m| \leq \sigma.$$
 
 
 
-## Relation entre moments et cumulants
+## Inégalité de Greiner
 
-1. Démontrer la [formule de Faa di Bruno](https://en.wikipedia.org/wiki/Fa%C3%A0_di_Bruno%27s_formula) : si $f$ et $g$ sont deux fonctions, alors $(f\circ g)^{(n)}(x)$ est égal à 
-$$\sum_{m_1 + 2m2 + \dotsb + n m_n = n} c(m_1, \dotsc, m_n)f^{(m_1 + \dotsc + m_n)}(g(x)) \prod_{j=1}^n g^{(j)}(x)^{m_j},$$ 
-où 
-$$c(m_1, \dotsc, m_n) = \frac{n!}{m_1! 1!^{m1} m_2!2!^{m_2}\dots m_n! n!^{m_n}} $$
-2. En déduire que 
-$$\mathbb{E}[X^n] = \sum_{k=1}^n B_{n,k}(\kappa_1, \dotsc, \kappa_{n-k+1})$$
-où les $B_{n,k}$ sont les polynômes incomplets de Bell, 
-$$n!\sum_{\substack{j_1 + \dotsb + j_{n-k+1} = n \\ j_1, \dotsc, j_{n-k+1} \geq 0 \\ j_1 + 2j_2 + \dotsb + (n-k+1)j_{n-k+1} = n}} \prod_{i=1}^{n-k+1}\frac{x_i^{j_i}}{(i!)^{j_i} j_i!}.$$
+Soient $X,Y$ deux variables aléatoires centrées conjointement gaussiennes, de corrélation $\rho$ et d'écarts-types 1. L'objectif est de montrer que
+
+$$\rho = \sin\left(\frac{\pi}{2} \mathbb{E}[\tau]\right).$$
+
+1. Montrer que $\mathbb{E}[\tau] = 2 \mathbb{P}((X-X')(Y-Y')>0)-1$ où $(X',Y')$ est une copie indépendante de $(X,Y)$. On notera dorénavant $p = \mathbb{P}((X-X')(Y-Y')>0)$.
+2. Calculer cette probabilité lorsque $\rho = 0$. 
+3. On pose $A = X-X'$ et $B = Y-Y'$. Quelle est la loi de $(A,B)$ ? On note $s$ leur corrélation. 
+4. Montrer que $\mathbb{P}(B>0 \mid A = a) = \Phi(ra)$ où $r = s/ \sqrt{1-s^2}$ et $\Phi$ est la fonction de répartition de $\mathscr{N}(0,1)$. 
+5. En déduire que 
+$$p = \int_{\mathbb{R}}\frac{e^{-x^2/2}}{\sqrt{2\pi}} \Phi(rx) dx.$$
+On note cette fonction $I(r)$. 
+6. Montrer que $I'(r) = \frac{1}{2\pi(1+r^2)}$. 
+7. En déduire que $I(r) = 1/4+\arcsin(r)/2\pi$. 
+8. Vérifier que $\arcsin(r) = \arcsin(\rho)$. 
+9. Conclure. 
+

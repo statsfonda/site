@@ -1,24 +1,46 @@
 # Corrélation et association
 
-## Qu’est-ce qu’une corrélation ?
+Une question essentielle et difficile en statistique est de mesurer à quel point deux phénomènes aléatoires sont reliées. Étant données deux échantillons, disons $(X_i)$ et $(Y_i)$, ou deux variables aléatoires $(X,Y)$, on aimerait avoir un indicateur quantitatif de la relation entre les deux, les deux extrêmes étant les suivants : 
 
-$$\mathrm{Var}(X) = \mathbb{E}[X X^\top] - \mathbb{E}[X] \mathbb{E}[X]^\top.$$
+- les $X_i$ peuvent s'exprimer comme une fonction des $Y_i$. Dans ce cas, les deux variables ont une dépendance maximale : la connaissance de l'une est entièrement suffisante pour connaître l'autre. Cette dépendance pourrait être linéaire, par exemple $X_i = aY_i + b$, ou non linéaire, par exemple $X_i = X_i^2 - e^{X_i}$. 
+- ou bien, les $X_i$ et les $Y_i$ pourraient être statistiquement indépendants au sens de la théorie des probabilités, signifiant que la connaissance de l'une n'apporte aucune information sur l'autre. 
 
-$$\mathrm{Cov}(X, Y) = \mathbb{E}[(X-\mathbb{E}[X])(Y-\mathbb{E}[Y])] = \mathbb{E}[XY] - \mathbb{E}[X] \mathbb{E}[Y].$$
+Il n'existe, à ce jour, aucun indicateur quantitatif universel de ce genre ayant de bonnes propriétés (de convergence, de variance, etc). L'indicateur qui s'en rapproche le plus est le [coefficient de Chatterjee (2019)](https://arxiv.org/abs/1909.10140), mais il dépasse le cadre de ce cours : nous nous contenterons de trois coefficients qui sont déjà très puissants et qu'il est *essentiel* de maîtriser tant ils sont utiles dans la pratique : les coefficients de Pearson, de Spearman et de Kendall.
 
-$$\mathrm{Corr}(X, Y) = \frac{\mathrm{Cov}(X, Y)}{\sigma_X \sigma_Y}.$$
+## Le coefficient de Pearson
+
+La covariance entre deux variables aléatoires est définie par 
+$$\mathrm{Cov}(X, Y) = \mathbb{E}[(X-\mathbb{E}[X])(Y-\mathbb{E}[Y])].$$
+
+Dans le cas d'une mesure empirique de deux échantillons, disons $(x_i)$ et $(y_i)$, la covariance est 
+$$\frac{1}{n}\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{x}).$$
+
+:::{#def-coef-pearson}
+Le coefficient de corrélation linéaire de Pearson[^bravais], appelé  *corrélation*, est la covariance normalisée : 
+
+$$\rho(X, Y) = \frac{\mathrm{Cov}(X, Y)}{\sigma_X \sigma_Y}.$${#eq-corr}
+
+:::
+
+L'inégalité de Cauchy-Schwarz entraîne directement que la corrélation est comprise entre $-1$ et $1$, et qu'elle vaut 1 ou -1 si et seulement si les deux variables sont liées par une relation affine, c'est-à-dire si $Y = aX + b$ pour deux constantes $a$ et $b$. 
+
+Il faut bien comprendre que ce coefficient mesure exclusivement la dépendance *linéaire* entre les deux variables. Une corrélation nulle n'implique pas l'indépendance des deux variables, mais seulement l'absence de dépendance linéaire. Il est facile de créer des couples d'échantillons de corrélation nulle, mais qui sont clairement dépendants : c'est par exemple le cas des nuages de points suivants, qui viennent de [cet article](https://dl.acm.org/doi/epdf/10.1145/3025453.3025912): 
+
+![](/images/dino.png){width=40%}
+
+![](/images/corrzero.png){width=60%}
 
 ## Le coefficient de Kendall
 
-Le coefficient de Kendall mesure à quel point deux séries d’observations $(X_i)$ et $(Y_i)$ ont tendance à varier dans le même sens. Il est défini par 
+Le coefficient de Kendall mesure à quel point deux séries d’observations $(X_i)$ et $(Y_i)$ ont tendance à varier dans le même sens : ce qui est mesurée, ce n'est donc plus l'association linéaire comme le coefficient de Pearson, mais plutôt l'association monotone. Il est défini par 
 
 :::{#def-kendall}
 $$\tau = \frac{2}{n(n-1)} \sum_{i<j} \mathrm{signe}(X_i - X_j) \mathrm{signe}(Y_i - Y_j).$$
 :::
 
 
-Une paire $(i,j)$ d’indices est appelée *concordante* si $X_i,X_j$ et $Y_i,Y_j$ sont dans le même ordre, autrement dit si $X_i < X_j$ et $Y_i < Y_j$ ou si $X_i > X_j$ et $Y_i > Y_j$. Le coefficient de Kendall compte alors le nombre de paires concordantes et le nombre de paires discordantes : en fait, on a 
-$$\tau = \frac{\text{nombre de paires concordantes} - \text{nombre de paires discordantes}}{\binom{n}{2}}.$$
+Une paire $(i,j)$ d’indices est appelée *concordante* si $X_i,X_j$ et $Y_i,Y_j$ sont dans le même ordre, autrement dit si $X_i < X_j$ et $Y_i < Y_j$ ou si $X_i > X_j$ et $Y_i > Y_j$. Le coefficient de Kendall compte alors le nombre de paires concordantes et le nombre de paires discordantes : en fait, $\tau$, est égal à
+$$\frac{\text{paires concordantes} - \text{paires discordantes}}{\binom{n}{2}}.$$
 Cette expression montre que $\tau$ est compris entre $-1$ et $1$, et que $\tau = 1$ si et seulement si les deux séries d’observations sont dans le même ordre, et $\tau = -1$ si et seulement si les deux séries d’observations sont dans l’ordre inverse. 
 
 :::{#thm-kendall}
@@ -32,7 +54,7 @@ Si les deux séries d’observations sont indépendantes, alors $\mathbb{E}[\tau
 
 ## Le coefficient de Spearman
 
-Le coefficient de Spearman est la corrélation entre les rangs des observations : si les observations sont $(X_i, Y_i)$ pour $i=1,\ldots,n$, on note $R_i$ le rang de $X_i$ et $S_i$ le rang de $Y_i$. Le coefficient de Spearman est donné par 
+Le coefficient de Spearman est une variante du $\tau$ de Kendall.  Il est défini comme la corrélation entre les rangs des observations : si les observations sont $(X_i, Y_i)$ pour $i=1,\ldots,n$, on note $R_i$ le rang de $X_i$ et $S_i$ le rang de $Y_i$. Le coefficient de Spearman est donné par 
 $$\rho_S = \mathrm{Corr}(R, S).$$
 Lorsqu’il n’y a pas de cas d’égalité dans les $X_i$ ou les $Y_i$, on peut écrire 
 $$\rho_S = 1 - \frac{6 \sum_{i=1}^n (R_i - S_i)^2}{n(n^2 - 1)}.$$
@@ -42,3 +64,8 @@ $$\rho_S = 1 - \frac{6 \sum_{i=1}^n (R_i - S_i)^2}{n(n^2 - 1)}.$$
 À écrire. 
 
 :::
+
+Le coefficient de Spearman s'interprète un peu comme le coefficient de Kendall. Il mesure à quel point l'ordre global des deux séries est le même : par exemple, s'il vaut 1, alors les deux séries sont dans le même ordre, et donc le coefficient de Kendall vaudrait également 1. C'est le cas lorsque, par exemple, $Y$ est une fonction croissante de $X$. Mais il y a des cas où ces deux coefficients sont différents. 
+
+
+[^bravais]: Le coefficient de Pearson est en fait dû au scientifique Français Auguste Bravais, en 1844, dans son [Analyse mathématique sur les probabilités des erreurs de situation d'un point](https://books.google.fr/books?id=y3s_AAAAcAAJ&printsec=frontcover&source=gbs_ViewAPI&redir_esc=y#v=onepage&q&f=false), un curieux livre que je vous conseille d'aller feuilleter : derrière un langage un peu différent, on trouve déjà formulées toutes les questions et la plupart des réponses de la statistique moderne. C'est aussi vrai des écrits de Laplace. 
