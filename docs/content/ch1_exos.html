@@ -421,12 +421,13 @@ $$
 <li>Calculer l’asymétrie des lois Gamma.</li>
 <li>Montrer que la courbe de Lorenz d’une variable aléatoire réelle <span class="math inline">\(X\)</span> est la même que celle de <span class="math inline">\(cX\)</span> pour tout <span class="math inline">\(c &gt; 0\)</span>.</li>
 <li>Trouver des exemples de variables aléatoires dont la médiane est différente de la moyenne.</li>
+<li>Montrer que <span class="math inline">\(\arg\min_{c\in \mathbb{R}} \mathbb{E}[|X-c|]\)</span> est une médiane de <span class="math inline">\(X\)</span>.</li>
 <li>La courbe de Lorenz peut-elle être confondue avec la droite <span class="math inline">\((t,t)\)</span> ?</li>
 <li>Calculer la courbe de Lorenz des lois uniformes, exponentielles, et de Pareto.</li>
 <li>Le principe de Pareto dit que, dans de nombreux contextes, 20% des efforts produisent 80% des résultats ; dit dans l’autre sens, 80% des efforts ne produisent que 20% des résultats. Quel est l’unique <span class="math inline">\(\alpha\)</span> pour lequel la loi de Pareto d’indice <span class="math inline">\(\alpha\)</span> correspond à ce principe ?</li>
 <li>Montrer que l’indice de Gini d’une variable aléatoire continue peut s’écrire <span class="math display">\[G = \frac{1}{2\mathbb{E}[X]}\int_0^1 \int_0^1 |q(t) - q(s)| dt ds.\]</span></li>
 <li>Montrer que l’indice de Gini peut aussi s’écrire <span class="math display">\[ G =  \frac{2\mathrm{Cov}(X, F(X))}{\mathbb{E}[X]}.\]</span></li>
-<li>Vérifier que les coefficients de Pearson, de Spearman et de Kendall ne dépendent pas d’une même modification affine des deux variables. Par exemple, si on pose <span class="math inline">\(Z = aX + b\)</span> et <span class="math inline">\(W = cY + d\)</span>, alors <span class="math inline">\(\rho(Z, W) = \rho(X, Y)\)</span>.</li>
+<li>Vérifier que les coefficients de Pearson, de Spearman et de Kendall ne dépendent pas d’une même modification affine des deux variables. Par exemple, si on pose <span class="math inline">\(Z = aX + b\)</span> et <span class="math inline">\(W = aY + b\)</span>, alors <span class="math inline">\(\rho(Z, W) = \rho(X, Y)\)</span>.</li>
 <li>Trouver un exemple où les coefficients de Spearman et de Kendall ne sont pas égaux.</li>
 </ul>
 </section>
@@ -445,19 +446,20 @@ $$
 </section>
 <section id="inégalité-de-greiner" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="inégalité-de-greiner"><span class="header-section-number">5.4</span> Inégalité de Greiner</h2>
-<p>Soient <span class="math inline">\(X,Y\)</span> deux variables aléatoires centrées conjointement gaussiennes, de corrélation <span class="math inline">\(\rho\)</span> et d’écarts-types 1. L’objectif est de montrer que</p>
+<p>Soient <span class="math inline">\(X,Y\)</span> deux variables aléatoires centrées conjointement gaussiennes, de corrélation <span class="math inline">\(\rho\)</span> et d’écarts-types 1. L’objectif est de montrer que l’identité suivante, qui porte sur le coefficient <span class="math inline">\(\tau\)</span> de Kendall :</p>
 <p><span class="math display">\[\rho = \sin\left(\frac{\pi}{2} \mathbb{E}[\tau]\right).\]</span></p>
 <ol type="1">
 <li>Montrer que <span class="math inline">\(\mathbb{E}[\tau] = 2 \mathbb{P}((X-X')(Y-Y')&gt;0)-1\)</span> où <span class="math inline">\((X',Y')\)</span> est une copie indépendante de <span class="math inline">\((X,Y)\)</span>. On notera dorénavant <span class="math inline">\(p = \mathbb{P}((X-X')(Y-Y')&gt;0)\)</span>.</li>
 <li>Calculer cette probabilité lorsque <span class="math inline">\(\rho = 0\)</span>.</li>
-<li>On pose <span class="math inline">\(A = X-X'\)</span> et <span class="math inline">\(B = Y-Y'\)</span>. Quelle est la loi de <span class="math inline">\((A,B)\)</span> ? On note <span class="math inline">\(s\)</span> leur corrélation.</li>
-<li>Montrer que <span class="math inline">\(\mathbb{P}(B&gt;0 \mid A = a) = \Phi(ra)\)</span> où <span class="math inline">\(r = s/ \sqrt{1-s^2}\)</span> et <span class="math inline">\(\Phi\)</span> est la fonction de répartition de <span class="math inline">\(\mathscr{N}(0,1)\)</span>.</li>
-<li>En déduire que <span class="math display">\[p = \int_{\mathbb{R}}\frac{e^{-x^2/2}}{\sqrt{2\pi}} \Phi(rx) dx.\]</span> On note cette fonction <span class="math inline">\(I(r)\)</span>.</li>
-<li>Montrer que <span class="math inline">\(I'(r) = \frac{1}{2\pi(1+r^2)}\)</span>.</li>
-<li>En déduire que <span class="math inline">\(I(r) = 1/4+\arcsin(r)/2\pi\)</span>.</li>
-<li>Vérifier que <span class="math inline">\(\arcsin(r) = \arcsin(\rho)\)</span>.</li>
-<li>Conclure.</li>
+<li>On pose <span class="math inline">\(A = X-X'\)</span> et <span class="math inline">\(B = Y-Y'\)</span>. Quelle est la loi de <span class="math inline">\((A,B)\)</span> ?</li>
+<li><ol type="a">
+<li>Montrer que <span class="math inline">\(\mathbb{P}(B&gt;0 \mid A = a) = \Phi(ra/\sqrt{2})\)</span> où <span class="math inline">\(r = \rho/ \sqrt{1-\rho^2}\)</span> et <span class="math inline">\(\Phi\)</span> est la fonction de répartition de <span class="math inline">\(\mathscr{N}(0,1)\)</span>.</li>
+<li>En déduire que <span class="math display">\[p = 2\int_{0}^{\infty}\frac{e^{-x^2/4}}{\sqrt{4\pi}} \Phi\left(\frac{rx}{\sqrt{2}}\right) dx.\]</span> On note cette fonction <span class="math inline">\(I(r)\)</span>.</li>
+<li>Montrer que <span class="math inline">\(I'(r) = \frac{1}{\pi(1+r^2)}\)</span> et en déduire que <span class="math inline">\(I(r) = 1/2+\arctan(r)/\pi\)</span>.</li>
+<li>Vérifier que <span class="math inline">\(\arctan(r) = \arcsin(\rho)\)</span> et conclure.</li>
+</ol></li>
 </ol>
+<p>La formule de Greiner donne donc le lien entre le coefficient de corrélation de Pearson et le coefficient de Kendall. Remarquons que dans la démonstration, on a implicitement calculé <span class="math inline">\(\mathbb{P}(A \text{ et } B \text{ ont le même signe})\)</span> pour n’importe quel couple de variables aléatoires gaussiennes, ce qui n’est pas si évident.</p>
 
 
 </section>
