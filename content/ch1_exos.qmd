@@ -6,6 +6,7 @@
 - Calculer l'asymétrie des lois Gamma. 
 - Montrer que la courbe de Lorenz d’une variable aléatoire réelle $X$ est la même que celle de $cX$ pour tout $c > 0$. 
 - Trouver des exemples de variables aléatoires dont la médiane est différente de la moyenne. 
+- Montrer que $\arg\min_{c\in \mathbb{R}} \mathbb{E}[|X-c|]$ est une médiane de $X$. 
 - La courbe de Lorenz peut-elle être confondue avec la droite $(t,t)$ ? 
 - Calculer la courbe de Lorenz des lois uniformes, exponentielles, et de Pareto. 
 - Le principe de Pareto dit que, dans de nombreux contextes, 20\% des efforts produisent 80\% des résultats ; dit dans l’autre sens, 80\% des efforts ne produisent que 20\% des résultats. Quel est l’unique $\alpha$ pour lequel la loi de Pareto d’indice $\alpha$ correspond à ce principe ? 
@@ -13,7 +14,7 @@
 $$G = \frac{1}{2\mathbb{E}[X]}\int_0^1 \int_0^1 |q(t) - q(s)| dt ds.$$
 - Montrer que l’indice de Gini peut aussi s’écrire 
 $$ G =  \frac{2\mathrm{Cov}(X, F(X))}{\mathbb{E}[X]}.$$
-- Vérifier que les coefficients de Pearson, de Spearman et de Kendall ne dépendent pas d'une même modification affine des deux variables. Par exemple, si on pose $Z = aX + b$ et $W = cY + d$, alors $\rho(Z, W) = \rho(X, Y)$.
+- Vérifier que les coefficients de Pearson, de Spearman et de Kendall ne dépendent pas d'une même modification affine des deux variables. Par exemple, si on pose $Z = aX + b$ et $W = aY + b$, alors $\rho(Z, W) = \rho(X, Y)$.
 - Trouver un exemple où les coefficients de Spearman et de Kendall ne sont pas égaux. 
 
 
@@ -35,19 +36,18 @@ $$|\mu - m| \leq \sigma.$$
 
 ## Inégalité de Greiner
 
-Soient $X,Y$ deux variables aléatoires centrées conjointement gaussiennes, de corrélation $\rho$ et d'écarts-types 1. L'objectif est de montrer que
+Soient $X,Y$ deux variables aléatoires centrées conjointement gaussiennes, de corrélation $\rho$ et d'écarts-types 1. L'objectif est de montrer que l'identité suivante, qui porte sur le coefficient $\tau$ de Kendall :
 
 $$\rho = \sin\left(\frac{\pi}{2} \mathbb{E}[\tau]\right).$$
 
 1. Montrer que $\mathbb{E}[\tau] = 2 \mathbb{P}((X-X')(Y-Y')>0)-1$ où $(X',Y')$ est une copie indépendante de $(X,Y)$. On notera dorénavant $p = \mathbb{P}((X-X')(Y-Y')>0)$.
 2. Calculer cette probabilité lorsque $\rho = 0$. 
-3. On pose $A = X-X'$ et $B = Y-Y'$. Quelle est la loi de $(A,B)$ ? On note $s$ leur corrélation. 
-4. Montrer que $\mathbb{P}(B>0 \mid A = a) = \Phi(ra)$ où $r = s/ \sqrt{1-s^2}$ et $\Phi$ est la fonction de répartition de $\mathscr{N}(0,1)$. 
-5. En déduire que 
-$$p = \int_{\mathbb{R}}\frac{e^{-x^2/2}}{\sqrt{2\pi}} \Phi(rx) dx.$$
+3. On pose $A = X-X'$ et $B = Y-Y'$. Quelle est la loi de $(A,B)$ ? 
+4. a. Montrer que $\mathbb{P}(B>0 \mid A = a) = \Phi(ra/\sqrt{2})$ où $r = \rho/ \sqrt{1-\rho^2}$ et $\Phi$ est la fonction de répartition de $\mathscr{N}(0,1)$. 
+    b. En déduire que 
+$$p = 2\int_{0}^{\infty}\frac{e^{-x^2/4}}{\sqrt{4\pi}} \Phi\left(\frac{rx}{\sqrt{2}}\right) dx.$$
 On note cette fonction $I(r)$. 
-6. Montrer que $I'(r) = \frac{1}{2\pi(1+r^2)}$. 
-7. En déduire que $I(r) = 1/4+\arcsin(r)/2\pi$. 
-8. Vérifier que $\arcsin(r) = \arcsin(\rho)$. 
-9. Conclure. 
+    c. Montrer que $I'(r) = \frac{1}{\pi(1+r^2)}$ et en déduire que $I(r) = 1/2+\arctan(r)/\pi$. 
+    d. Vérifier que $\arctan(r) = \arcsin(\rho)$ et conclure.
 
+La formule de Greiner donne donc le lien entre le coefficient de corrélation de Pearson et le coefficient de Kendall. Remarquons que dans la démonstration, on a implicitement calculé $\mathbb{P}(A \text{ et } B \text{ ont le même signe})$ pour n'importe quel couple de variables aléatoires gaussiennes, ce qui n'est pas si évident. 
