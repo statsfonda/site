@@ -32,6 +32,13 @@ On dit qu’une variable aléatoire positive est log-normale si elle s’écrit 
 Si $m$ est la médiane, $\mu$ la moyenne, et $\sigma$ l’écart-type, montrer que 
 $$|\mu - m| \leq \sigma.$$
 
+## Coefficient de Spearman
+
+Soient $X_1, \dotsc, X_n$ et $Y_1, \dotsc, Y_n$ deux échantillons de taille $n$ et $R_i$ et $S_i$ les rangs de $X_i$ et $Y_i$ dans leur échantillon respectif. On suppose que toutes les données sont distinctes. 
+
+1. Calculer la moyenne empirique et la variance empirique[^va] des rangs $R_i$ et $S_i$. 
+2. Montrer que le coefficient de Spearman est égal à 
+$$1 - \frac{6 \sum_{i=1}^n (R_i - S_i)^2}{n(n^2 - 1)}.$$
 
 
 ## Inégalité de Greiner
@@ -51,3 +58,6 @@ On note cette fonction $I(r)$.
     d. Vérifier que $\arctan(r) = \arcsin(\rho)$ et conclure.
 
 La formule de Greiner donne donc le lien entre le coefficient de corrélation de Pearson et le coefficient de Kendall. Remarquons que dans la démonstration, on a implicitement calculé $\mathbb{P}(A \text{ et } B \text{ ont le même signe})$ pour n'importe quel couple de variables aléatoires gaussiennes, ce qui n'est pas si évident. 
+
+
+[^va]: Ici, on utilise la variance "non corrigée", à savoir $n^{-1}\sum_{i=1}^n (R_i - \bar{R})^2$. 

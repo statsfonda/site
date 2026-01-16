@@ -6,16 +6,17 @@
 ### Quantiles des lois continues
 
 Si $X$ est une variable aléatoire continue sur $\mathbb{R}$, un quantile d'ordre $\beta \in ]0,1[$, noté $q_\beta$, est un nombre tel que $\mathbb{P}(X \leqslant q_\beta) = \beta$. 
- Lorsque $X$ est continue, un tel nombre existe forcément, car la fonction de répartition $F(x) = \mathbb{P}(X\leqslant x)$ est une bijection continue. 
-Les quantiles symétriques $z_\beta$ sont, eux, définis par $\mathbb{P}(|X|\leqslant z_\beta) = \beta$. 
+ Lorsque la fonction de répartition $F(x) = \mathbb{P}(X\leqslant x)$ est une bijection continue, le quantile $q_\beta$ est unique et est donné par $q_\beta = F^{-1}(\beta)$. En règle générale, il n'y a pas de forme fermée. Par exemple, pour la gaussienne standard,
+$$F(x) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^x e^{-u^2/2}du$$
+qui elle-même n'a pas d'écriture plus simple et ne peut donc pas être inversée simplement. Fort heureusement, les outils de calcul numérique permettent d'effectuer ces calculs avec une grande précision. 
 
-Si la loi de $X$ est de surcroît symétrique, les quantiles symétriques s'expriment facilement en fonction des quantiles classiques. En effet, $\mathbb{P}(|X|\leqslant z)$ est égal à $\mathbb{P}(X \leqslant z) - \mathbb{P}(X \leqslant -z)$. Or, si la loi de $X$ est symétrique, alors $\mathbb{P}(X \leqslant -z) = 1 - \mathbb{P}(X \leqslant z)$, et donc 
+
+
+Les quantiles symétriques $z_\beta$ sont, eux, définis par $\mathbb{P}(|X|\leqslant z_\beta) = \beta$. Si la loi de $X$ est de surcroît symétrique, les quantiles symétriques s'expriment facilement en fonction des quantiles classiques. En effet, $\mathbb{P}(|X|\leqslant z)$ est égal à $\mathbb{P}(X \leqslant z) - \mathbb{P}(X \leqslant -z)$. Or, si la loi de $X$ est symétrique, alors $\mathbb{P}(X \leqslant -z) = 1 - \mathbb{P}(X \leqslant z)$, et donc 
 $$ \mathbb{P}(|X|\leqslant z) = 2\mathbb{P}(X \leqslant z) - 1.$$
 Il suffit alors de choisir pour $z$ le quantile $q_{\frac{1+\beta}{2}}$ pour obtenir $\mathbb{P}(|X|\leqslant z) = \beta$. Lorsque $\beta$ est de la forme $1-\alpha$ avec $\alpha$ petit (comme les niveaux des intervalles de confiance), on trouve alors $z_{1-\alpha} = q_{1 - \alpha/2}$. 
 
-Les quantiles s'obtiennent en inversant la fonction de répartition : lorsque celle-ci est une bijection sur $]0,1[$, alors $$q_\beta = F^{-1}(\beta).$$ En règle générale, il n'y a pas de forme fermée. Par exemple, pour une loi gaussienne standard, 
-$$F(x) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^x e^{-u^2/2}du$$
-qui elle-même n'a pas d'écriture plus simple. Fort heureusement, les outils de calcul numérique permettent d'effectuer ces calculs avec une grande précision. La table suivante donne les quantiles symétriques de la gaussienne.  
+La table suivante donne les quantiles symétriques de la gaussienne.  
 
 | $\beta$ | 90% | 95% | 98% | 99% | 99.9% | 99.99999% |
 | ---- | - | - | - | - | - | - |
@@ -34,12 +35,12 @@ Notons que $F$ est continue à droite : comme il y a une suite $q_n \to q(\beta
 
 ### Médianes et fractiles
 
-Une médiane est un quantile d'ordre 1/2. Les quartiles sont les quantiles d'ordre 1/4 et 3/4. Ces quantités permettent également de voir la dispersion d'un jeu de données : typiquement, si les deux quartiles sont très proches, la dispersion est faible. 
+Une médiane est un quantile d'ordre 1/2. Les quartiles sont les quantiles d'ordre 1/4 et 3/4. Les déciles sont les quantiles d'ordre 1/10, 2/10, ..., 9/10. Ces quantités permettent également de voir la dispersion d'un jeu de données : typiquement, si les deux quartiles sont très proches, la dispersion est faible. 
 
 
 ## Extrêmes et queues de distribution
 
-La fonction de survie d’une variable aléatoire $X$ est la fonction $S(x) = \mathbb{P}(X > x)$. Son asymptotique lorsque $x$ est grand est d’une importance capitale : elle permet d’estimer des probabilités d’événements très rares, comme par exemple « le rendement de cet actif va dépasser les x\% en un an », avec $x$ gigantesque. 
+La fonction de survie d’une variable aléatoire $X$ est la fonction $S(x) = \mathbb{P}(X > x)$. Son asymptotique lorsque $x$ est grand est d’une importance capitale : elle permet d’estimer des probabilités d’événements très rares, comme par exemple « le rendement de cet actif va dépasser les $x$\% en un an », avec $x$ gigantesque. 
 
 Intuitivement, plus la fonction de Survie tend vite vers 0, plus rares sont les événements extrêmes. Une référence à toujours garder en tête est la décroissante de la fonction de survie de la loi gaussienne. 
 
@@ -73,11 +74,15 @@ Cette décroissance est extrêmement rapide, puisqu'elle est plus qu'exponentiel
 
 :::{#def-queue-lourde}
 
-On dit qu'une variable aléatoire $X$ est *à queue lourde* s'il existe une constante $c>0$ telle que $\mathbb{P}(X>x) \sim c e^{-x^\alpha}$ pour $x$ grand, avec $\alpha>0$. 
+On dit qu'une variable aléatoire $X$ est *à queue lourde* s'il existe une constante $c>0$ telle que $\mathbb{P}(X>x) \sim c x^{-\alpha}$ pour $x$ grand, avec $\alpha>0$. 
 
 :::
 
-Dans la "vraie" définition, on autorise $c$ à ne pas être constante, mais à dépendre de $x$ très très lentement. Je ne rentrerai pas dans les détails. 
+Dans la "vraie" définition, on autorise $c$ à ne pas être constante, mais à dépendre de $x$ très très lentement, c'est-à-dire à être une fonction à variation lente [au sens de Karamata](https://fr.wikipedia.org/wiki/Fonction_%C3%A0_variation_lente). Je ne rentrerai pas dans les détails. 
+
+L'indice $\alpha$ donne une idée de la fréquence des événements extrêmes : plus $\alpha$ est grand, plus la décroissance de $S$ est rapide et donc les événements extrêmes sont rares. Plus $\alpha$ est petit, plus les événements extrêmes sont fréquents. Une loi à queue lourde avec $\alpha \leqslant 1$ n'a même pas d'espérance !
+
+L'estimation du paramètre $\alpha$ à partir d'un échantillon est un sujet important en statistiques, sur lequel on reviendra plus tard. 
 
 ## Courbe de Lorenz et indice de Gini
 
