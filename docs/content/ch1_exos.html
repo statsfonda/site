@@ -376,7 +376,8 @@ window.Quarto = {
   <li><a href="#questions" id="toc-questions" class="nav-link active" data-scroll-target="#questions"><span class="header-section-number">5.1</span> Questions</a></li>
   <li><a href="#lois-log-normales" id="toc-lois-log-normales" class="nav-link" data-scroll-target="#lois-log-normales"><span class="header-section-number">5.2</span> Lois log-normales</a></li>
   <li><a href="#inégalité-de-hotelling-solomons" id="toc-inégalité-de-hotelling-solomons" class="nav-link" data-scroll-target="#inégalité-de-hotelling-solomons"><span class="header-section-number">5.3</span> Inégalité de Hotelling-Solomons</a></li>
-  <li><a href="#inégalité-de-greiner" id="toc-inégalité-de-greiner" class="nav-link" data-scroll-target="#inégalité-de-greiner"><span class="header-section-number">5.4</span> Inégalité de Greiner</a></li>
+  <li><a href="#coefficient-de-spearman" id="toc-coefficient-de-spearman" class="nav-link" data-scroll-target="#coefficient-de-spearman"><span class="header-section-number">5.4</span> Coefficient de Spearman</a></li>
+  <li><a href="#inégalité-de-greiner" id="toc-inégalité-de-greiner" class="nav-link" data-scroll-target="#inégalité-de-greiner"><span class="header-section-number">5.5</span> Inégalité de Greiner</a></li>
   </ul>
 </nav>
     </div>
@@ -444,8 +445,16 @@ $$
 <h2 data-number="5.3" class="anchored" data-anchor-id="inégalité-de-hotelling-solomons"><span class="header-section-number">5.3</span> Inégalité de Hotelling-Solomons</h2>
 <p>Si <span class="math inline">\(m\)</span> est la médiane, <span class="math inline">\(\mu\)</span> la moyenne, et <span class="math inline">\(\sigma\)</span> l’écart-type, montrer que <span class="math display">\[|\mu - m| \leq \sigma.\]</span></p>
 </section>
-<section id="inégalité-de-greiner" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="inégalité-de-greiner"><span class="header-section-number">5.4</span> Inégalité de Greiner</h2>
+<section id="coefficient-de-spearman" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="coefficient-de-spearman"><span class="header-section-number">5.4</span> Coefficient de Spearman</h2>
+<p>Soient <span class="math inline">\(X_1, \dotsc, X_n\)</span> et <span class="math inline">\(Y_1, \dotsc, Y_n\)</span> deux échantillons de taille <span class="math inline">\(n\)</span> et <span class="math inline">\(R_i\)</span> et <span class="math inline">\(S_i\)</span> les rangs de <span class="math inline">\(X_i\)</span> et <span class="math inline">\(Y_i\)</span> dans leur échantillon respectif. On suppose que toutes les données sont distinctes.</p>
+<ol type="1">
+<li>Calculer la moyenne empirique et la variance empirique<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> des rangs <span class="math inline">\(R_i\)</span> et <span class="math inline">\(S_i\)</span>.</li>
+<li>Montrer que le coefficient de Spearman est égal à <span class="math display">\[1 - \frac{6 \sum_{i=1}^n (R_i - S_i)^2}{n(n^2 - 1)}.\]</span></li>
+</ol>
+</section>
+<section id="inégalité-de-greiner" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="inégalité-de-greiner"><span class="header-section-number">5.5</span> Inégalité de Greiner</h2>
 <p>Soient <span class="math inline">\(X,Y\)</span> deux variables aléatoires centrées conjointement gaussiennes, de corrélation <span class="math inline">\(\rho\)</span> et d’écarts-types 1. L’objectif est de montrer que l’identité suivante, qui porte sur le coefficient <span class="math inline">\(\tau\)</span> de Kendall :</p>
 <p><span class="math display">\[\rho = \sin\left(\frac{\pi}{2} \mathbb{E}[\tau]\right).\]</span></p>
 <ol type="1">
@@ -462,6 +471,12 @@ $$
 <p>La formule de Greiner donne donc le lien entre le coefficient de corrélation de Pearson et le coefficient de Kendall. Remarquons que dans la démonstration, on a implicitement calculé <span class="math inline">\(\mathbb{P}(A \text{ et } B \text{ ont le même signe})\)</span> pour n’importe quel couple de variables aléatoires gaussiennes, ce qui n’est pas si évident.</p>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Ici, on utilise la variance “non corrigée”, à savoir <span class="math inline">\(n^{-1}\sum_{i=1}^n (R_i - \bar{R})^2\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
