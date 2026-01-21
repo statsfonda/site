@@ -16,7 +16,7 @@ $$G = \frac{1}{2\mathbb{E}[X]}\int_0^1 \int_0^1 |q(t) - q(s)| dt ds.$$
 $$ G =  \frac{2\mathrm{Cov}(X, F(X))}{\mathbb{E}[X]}.$$
 - Vérifier que les coefficients de Pearson, de Spearman et de Kendall ne dépendent pas d'une même modification affine des deux variables. Par exemple, si on pose $Z = aX + b$ et $W = aY + b$, alors $\rho(Z, W) = \rho(X, Y)$.
 - Trouver un exemple où les coefficients de Spearman et de Kendall ne sont pas égaux. 
-
+- Soit $(X_1, \dotsc, X_n)$ un échantillon de variables aléatoires. On note $X_{(1)}\leqslant \dotsc \leqslant X_{(n)}$ les variables ordonnées. Montrer que chaque $X_{(i)}$ est une statistique. 
 
 
 ## Lois log-normales

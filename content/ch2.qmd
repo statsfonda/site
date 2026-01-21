@@ -78,7 +78,9 @@ On voit parfois le mot *consistant* utilisé au lieu de *convergent*. Je pense q
 
 ## Normalité asymptotique
 
-Lorsqu'un estimateur est convergent, on peut se demander à quoi ressemblent ses fluctuations autour de sa valeur limite. Le théorème central limite indique que le comportement asymptotique gaussiens est relativement fréquent, parce que beaucoup d'estimateurs sont des sommes de variables indépendantes. 
+Lorsqu'un estimateur est convergent, on peut se demander à quoi ressemblent ses fluctuations autour de sa valeur limite. Le théorème central limite indique que le comportement asymptotique gaussien est relativement fréquent, parce que beaucoup d'estimateurs sont des sommes de variables indépendantes. 
+
+À toutes fins utiles, on rappelle que la convergence en loi est définie comme la convergence des fonctions caractéristiques. De façon équivalente, $X_n$ converge en loi vers $X$ si et seulement si pour toute fonction continue bornée $\varphi$, $\mathbb{E}[\varphi(X_n)] \to \mathbb{E}[\varphi(X)]$. 
 
 ::: {#def-normasymp}
 
@@ -90,7 +92,7 @@ où $\Sigma$ est une matrice de covariance qui dépend peut-être de $\theta$. P
 
 :::
 
-La normalité asymptotique sera utilisée pour construire des intervalles de confiance et des tests. Aussi, prouver que des estimateurs sont asymptotiquement normaux est une tache importante, qui est grandement simplifiée par les outils suivants. 
+La normalité asymptotique sera utilisée pour construire des intervalles de confiance et des tests. Aussi, prouver que des estimateurs sont asymptotiquement normaux est une tâche importante, qui est grandement simplifiée par les outils suivants. 
 
 
 ## Trois outils sur la normalité asymptotique
@@ -134,13 +136,13 @@ On termine par la « delta-méthode » : si une suite d'estimateurs est asympto
 
 ::: {.content-visible when-format="pdf"} 
 
-![Une petite gaussienne autour de 1.5 est transformée par une fonction $f \in \mathscr{C}^1$ en une petite gaussienne autour de $f(1.5)$, de variance normalisée par $f'(1.5)$. ](/images/histogram.png){width=60%}
+![Une petite gaussienne autour de 1.5 est transformée par une fonction $f \in \mathscr{C}^1$ en une petite gaussienne autour de $f(1.8)$, de variance normalisée par $f'(1.5)$. ](/images/histogram.png){width=60%}
 
 :::
 
 ::: {.content-visible when-format="html"} 
 
-![Une petite gaussienne autour de 1.5 est transformée par une fonction $f \in \mathscr{C}^1$ en une petite gaussienne autour de $f(1.5)$, de variance normalisée par $f'(1.5)$. ](/images/histogram.webp)
+![Une petite gaussienne autour de 1.5 est transformée par une fonction $f \in \mathscr{C}^1$ en une petite gaussienne autour de $f(1.8)$, de variance normalisée par $f'(1.5)$. ](/images/histogram.webp)
 
 :::
 
@@ -148,7 +150,7 @@ On termine par la « delta-méthode » : si une suite d'estimateurs est asympto
 
 ## Delta-méthode
 
-Soit $(X_n)$ une suite de variables aléatoires réelles telle que $\sqrt{n}(X_n - \alpha)$ converge en loi vers $N(0,\sigma^2)$. Pour toute fonction $g : \mathbb{R} \to \mathbb{R}$ dérivable en $\alpha$ (de dérivée non nulle en $\alpha$), alors la variable aléatoire
+Soit $(X_n)$ une suite de variables aléatoires réelles telle que $\sqrt{n}(X_n - \alpha)$ converge en loi vers $N(0,\sigma^2)$. Pour toute fonction $g : \mathbb{R} \to \mathbb{R}$ dérivable en $\alpha$ (de dérivée non nulle en $\alpha$), la variable aléatoire
 $$ \sqrt{n}(g(X_n) - g(\alpha))$$
 converge en loi vers 
 $$N(0, g'(\alpha)^2 \sigma^2).$$
