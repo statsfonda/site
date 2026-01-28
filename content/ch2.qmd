@@ -120,8 +120,13 @@ Soit $(X_n)$ une suite de variables aléatoire qui converge en loi vers $X$ et $
 $$\mathbb{E}[\varphi(X_n, Y_n)] \to \mathbb{E}[\varphi(X,c)].$$
 :::
 
+
+
+**Remarque importante.** Lorqu’une suite de variables aléatoires $Z_n$ converge en loi vers $Z$ et que $f$ est n’importe quelle fonction *continue* (et pas forcément bornée), alors $f(Z_n)$ converge encore en loi vers $f(Z)$. Par exemple, si $(X_n, Y_n)$ converge en loi vers $(X,c)$ comme dans la conclusion du Lemme de Slutsky, alors $X_n + Y_n$ converge en loi vers $X + c$, même si la fonction $(x,y) \mapsto x+y$ n’est pas bornée.  
+
+
 :::{.proof}
-Fixons une fonction test $\varphi$ continue à support compact, donc bornée par un certain $M$. Il faut montrer que $\mathbb{E}[\varphi(X_n, Y_n) - \varphi(X,c)]$ tend vers zéro. L'intégrande est égal à la somme de $A = \varphi(X_n, Y_n) - \varphi(X_n, c)$ et de $B=\varphi(X_n, c) - \varphi(X, c)$. 
+Fixons une fonction test $\varphi$ continue à support compact, donc bornée par un certain $M$. Pour montrer la convergence en loi, il faut montrer que $\mathbb{E}[\varphi(X_n, Y_n) - \varphi(X,c)]$ tend vers zéro. L'intégrande est égal à la somme de $A = \varphi(X_n, Y_n) - \varphi(X_n, c)$ et de $B=\varphi(X_n, c) - \varphi(X, c)$. 
 
 Comme $X_n$ tend en loi vers $X$ et que $t\to \varphi(t,c)$ est continue bornée, l'espérance de $B$ tend vers zéro. Il faut donc montrer que l'espérance de $A$ tend vers zéro. On fixe un $\varepsilon>0$.   
 
@@ -136,13 +141,13 @@ On termine par la « delta-méthode » : si une suite d'estimateurs est asympto
 
 ::: {.content-visible when-format="pdf"} 
 
-![Une petite gaussienne autour de 1.5 est transformée par une fonction $f \in \mathscr{C}^1$ en une petite gaussienne autour de $f(1.8)$, de variance normalisée par $f'(1.5)$. ](/images/histogram.png){width=60%}
+![Une petite gaussienne autour de 1.5 est transformée par une fonction $f \in \mathscr{C}^1$ en une petite gaussienne autour de $f(1.5)\approx 1.8$, de variance normalisée par $f'(1.5)$. ](/images/histogram.png){width=60%}
 
 :::
 
 ::: {.content-visible when-format="html"} 
 
-![Une petite gaussienne autour de 1.5 est transformée par une fonction $f \in \mathscr{C}^1$ en une petite gaussienne autour de $f(1.8)$, de variance normalisée par $f'(1.5)$. ](/images/histogram.webp)
+![Une petite gaussienne autour de 1.5 est transformée par une fonction $f \in \mathscr{C}^1$ en une petite gaussienne autour de $f(1.5)\approx 1.8$, de variance normalisée par $f'(1.5)$. ](/images/histogram.webp)
 
 :::
 

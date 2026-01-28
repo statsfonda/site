@@ -14,7 +14,8 @@
 10. L'intervalle de confiance de niveau $1-\alpha$ pour la moyenne d'un modèle $N(\mu, 1)$ avec $n$ observations est $I_n = [\bar{X}_n \pm z_\alpha /\sqrt{n}]$. Supposons qu'on obtienne une nouvelle observation indépendante des autres, disons $Z$. La probabilité $\mathbb{P}(Z \in I_n)$ est-elle plus grande ou plus petite que $1-\alpha$ ?
 11. Comparer la longueur des intervalles de confiance obtenus par les différentes méthodes de la section @sec-icber. 
 12. Le quantile d'ordre 97,5% d'une variable $X\sim \mathrm{Bin}(12,1/2)$ est 9. Trouver $c$ tel que $\mathbb{P}(|X-6|>c)=95\%$. 
-
+13. Si $X$ est une variable aléatoire centrée qui a tous ses moments finis, montrer que 
+$$\mathbb{P}(|X|>t) \leqslant \inf_{q \in \mathbb{N}}t^{-q}\mathbb{E}[|X|^q].$$
 
 ## Exercices 
 
@@ -88,3 +89,12 @@ Soit $(E_i)$ une suite de variables aléatoires iid de loi exponentielle de para
 3. Proposer un intervalle de confiance asymptotique de $c$ de niveau de risque $\alpha$.
 
 :::
+
+
+:::{#exr-gaussian-concentration}
+
+## Concentration gaussienne
+
+1. Calculer $\mathbb{E}[e^{t X}]$ lorsque $X$ est une variable gaussienne. 
+2. En déduire que si les $X_i$ sont des gaussiennes iid $N(\mu,\sigma^2)$, alors 
+$$\mathbb{P}(|\bar{X}_n-\mu|>t)\leqslant 2 e^{-t^2 / 4n\sigma^2}.$$
