@@ -204,7 +204,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/ch31_outils.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Outils pour les Intervalles de Confiance</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Intervalles non-gaussiens</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -347,20 +347,26 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../content/app0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Densités usuelles</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../content/app1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Algèbre linéaire</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Algèbre linéaire</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/app3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Formules d’inversion</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Formules d’inversion</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/app2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">50&nbsp;nuances de TCL</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">50&nbsp;nuances de TCL</span></span></a>
   </div>
 </li>
     </ul>
@@ -466,7 +472,7 @@ $$
 </section>
 <section id="trois-outils-sur-la-normalité-asymptotique" class="level2" data-number="6.4">
 <h2 data-number="6.4" class="anchored" data-anchor-id="trois-outils-sur-la-normalité-asymptotique"><span class="header-section-number">6.4</span> Trois outils sur la normalité asymptotique</h2>
-<p>Vous devez maîtriser sur le bout des doigts le Théorème Central-Limite. Le <a href="app2.html" class="quarto-xref"><span>Chapitre 27</span></a> de l’appendice revient sur différentes formes qu’il peut prendre.</p>
+<p>Vous devez maîtriser sur le bout des doigts le Théorème Central-Limite. Le <a href="app2.html" class="quarto-xref"><span>Chapitre 28</span></a> de l’appendice revient sur différentes formes qu’il peut prendre.</p>
 <div id="thm-tcl" class="theorem">
 <p><span class="theorem-title"><strong>Théorème 6.2 (Théorème Central-Limite)</strong></span> Soit <span class="math inline">\((X_i)\)</span> une suite de variables aléatoires réelles, indépendantes et identiquement distribuées. On suppose que ces variables ont une variance <span class="math inline">\(\sigma^2\)</span> finie. Alors, la variable aléatoire <span class="math display">\[ \sqrt{n}\left(\frac{1}{n}\sum_{i=1}^n X_i - \mathbb{E}[X]\right)\]</span> converge en loi vers une loi <span class="math inline">\(N(0,\sigma^2)\)</span>.</p>
 </div>
@@ -474,8 +480,9 @@ $$
 <div id="thm-slutsky" class="theorem">
 <p><span class="theorem-title"><strong>Théorème 6.3 (Lemme de Slutsky)</strong></span> Soit <span class="math inline">\((X_n)\)</span> une suite de variables aléatoire qui converge en loi vers <span class="math inline">\(X\)</span> et <span class="math inline">\((Y_n)\)</span> une suite de variables aléatoires qui converge en probabilité (ou en loi) vers une constante <span class="math inline">\(c\)</span>. Alors, le <em>couple</em> <span class="math inline">\((X_n, Y_n)\)</span> converge en loi vers <span class="math inline">\((X,c)\)</span> ; autrement dit, pour toute fonction continue bornée <span class="math inline">\(\varphi\)</span>, <span class="math display">\[\mathbb{E}[\varphi(X_n, Y_n)] \to \mathbb{E}[\varphi(X,c)].\]</span></p>
 </div>
+<p><strong>Remarque importante.</strong> Lorqu’une suite de variables aléatoires <span class="math inline">\(Z_n\)</span> converge en loi vers <span class="math inline">\(Z\)</span> et que <span class="math inline">\(f\)</span> est n’importe quelle fonction <em>continue</em> (et pas forcément bornée), alors <span class="math inline">\(f(Z_n)\)</span> converge encore en loi vers <span class="math inline">\(f(Z)\)</span>. Par exemple, si <span class="math inline">\((X_n, Y_n)\)</span> converge en loi vers <span class="math inline">\((X,c)\)</span> comme dans la conclusion du Lemme de Slutsky, alors <span class="math inline">\(X_n + Y_n\)</span> converge en loi vers <span class="math inline">\(X + c\)</span>, même si la fonction <span class="math inline">\((x,y) \mapsto x+y\)</span> n’est pas bornée.</p>
 <div class="proof">
-<p><span class="proof-title"><em>Preuve</em>. </span>Fixons une fonction test <span class="math inline">\(\varphi\)</span> continue à support compact, donc bornée par un certain <span class="math inline">\(M\)</span>. Il faut montrer que <span class="math inline">\(\mathbb{E}[\varphi(X_n, Y_n) - \varphi(X,c)]\)</span> tend vers zéro. L’intégrande est égal à la somme de <span class="math inline">\(A = \varphi(X_n, Y_n) - \varphi(X_n, c)\)</span> et de <span class="math inline">\(B=\varphi(X_n, c) - \varphi(X, c)\)</span>.</p>
+<p><span class="proof-title"><em>Preuve</em>. </span>Fixons une fonction test <span class="math inline">\(\varphi\)</span> continue à support compact, donc bornée par un certain <span class="math inline">\(M\)</span>. Pour montrer la convergence en loi, il faut montrer que <span class="math inline">\(\mathbb{E}[\varphi(X_n, Y_n) - \varphi(X,c)]\)</span> tend vers zéro. L’intégrande est égal à la somme de <span class="math inline">\(A = \varphi(X_n, Y_n) - \varphi(X_n, c)\)</span> et de <span class="math inline">\(B=\varphi(X_n, c) - \varphi(X, c)\)</span>.</p>
 <p>Comme <span class="math inline">\(X_n\)</span> tend en loi vers <span class="math inline">\(X\)</span> et que <span class="math inline">\(t\to \varphi(t,c)\)</span> est continue bornée, l’espérance de <span class="math inline">\(B\)</span> tend vers zéro. Il faut donc montrer que l’espérance de <span class="math inline">\(A\)</span> tend vers zéro. On fixe un <span class="math inline">\(\varepsilon&gt;0\)</span>.</p>
 <ul>
 <li>Par le <a href="https://fr.wikipedia.org/wiki/Th%C3%A9or%C3%A8me_de_Heine">théorème de Heine</a>, <span class="math inline">\(\varphi\)</span> est uniformément continue :&nbsp;il existe <span class="math inline">\(\delta&gt;0\)</span> tel que <span class="math inline">\(|(x,y) - (x', y')|&lt;\delta\)</span> entraîne que <span class="math inline">\(|\varphi(x,y) - \varphi(x', y')|&lt; \varepsilon/2\)</span>.</li>
@@ -489,7 +496,7 @@ $$
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../images/histogram.webp" class="img-fluid figure-img"></p>
-<figcaption>Une petite gaussienne autour de 1.5 est transformée par une fonction <span class="math inline">\(f \in \mathscr{C}^1\)</span> en une petite gaussienne autour de <span class="math inline">\(f(1.8)\)</span>, de variance normalisée par <span class="math inline">\(f'(1.5)\)</span>.</figcaption>
+<figcaption>Une petite gaussienne autour de 1.5 est transformée par une fonction <span class="math inline">\(f \in \mathscr{C}^1\)</span> en une petite gaussienne autour de <span class="math inline">\(f(1.5)\approx 1.8\)</span>, de variance normalisée par <span class="math inline">\(f'(1.5)\)</span>.</figcaption>
 </figure>
 </div>
 <div id="thm-deltamethod" class="theorem">

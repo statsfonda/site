@@ -204,7 +204,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/ch31_outils.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Outils pour les Intervalles de Confiance</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Intervalles non-gaussiens</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -347,20 +347,26 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../content/app0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Densités usuelles</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../content/app1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Algèbre linéaire</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Algèbre linéaire</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/app3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Formules d’inversion</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Formules d’inversion</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/app2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">50&nbsp;nuances de TCL</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">50&nbsp;nuances de TCL</span></span></a>
   </div>
 </li>
     </ul>
@@ -439,7 +445,7 @@ $$
 <h3 data-number="24.2.2" class="anchored" data-anchor-id="la-personne-la-plus-intelligente"><span class="header-section-number">24.2.2</span> La personne la plus intelligente</h3>
 <p>Imaginons que les tests <span class="math inline">\(x_i\)</span> aient une répartition comme suit :</p>
 <p><img src="../images/IQ.png" class="img-fluid" style="width:70.0%"></p>
-<p>La personne “la plus intelligente” a obtenu <span class="math inline">\(x_i = 150\)</span>. On peut estimer son QI à 150, mais il y a quand même un doute : dans la population, le QI <span class="math inline">\(\mu_i\)</span> est sensé être à peu distribué selon <span class="math inline">\(N(100, 15^2)\)</span>. Un QI de 150 représente à peu près une déviation de 3.3 écarts-types par rapport à la moyenne 100 : un événement de cet ordre a une probabilité d’environ 0.1% (cela s’estime par exemple via <a href="ch31_outils.html#thm-gaussiantail" class="quarto-xref">Théorème&nbsp;<span>9.1</span></a>). La probabilité pour que parmi 100 personnes, au moins une ait un QI plus grand que 150 est donc <span class="math inline">\(1 - 0.001^{100} \approx 10\%\)</span>. Ce n’est pas impossible, mais c’est peu.</p>
+<p>La personne “la plus intelligente” a obtenu <span class="math inline">\(x_i = 150\)</span>. On peut estimer son QI à 150, mais il y a quand même un doute : dans la population, le QI <span class="math inline">\(\mu_i\)</span> est sensé être à peu distribué selon <span class="math inline">\(N(100, 15^2)\)</span>. Un QI de 150 représente à peu près une déviation de 3.3 écarts-types par rapport à la moyenne 100 : un événement de cet ordre a une probabilité d’environ 0.1% (cela s’estime par exemple via <a href="ch1_dist.html#thm-gaussiantail" class="quarto-xref">Théorème&nbsp;<span>4.1</span></a>). La probabilité pour que parmi 100 personnes, au moins une ait un QI plus grand que 150 est donc <span class="math inline">\(1 - 0.001^{100} \approx 10\%\)</span>. Ce n’est pas impossible, mais c’est peu.</p>
 <p>Or, il y a une autre possibilité : peut-être que la personne <span class="math inline">\(i\)</span> a un QI plus proche de 140, mais que ce jour-là, elle a eu de la chance. En fait, la probabilité pour qu’une personne ait un <span class="math inline">\(\mu_i\)</span> qui dévie de plus de 2 écarts-types (donc, <span class="math inline">\(\mu_i&gt;130\)</span>) est de 5%, et la probabilité pour que le jour du test, cette personne dévie de 2 écarts-types (donc <span class="math inline">\(x_i-\mu_i&gt;10\)</span>), est encore de 5%. Cela fait une probabilité d’environ 0.25%.</p>
 <div id="lem-iq" class="theorem lemma">
 <p><span class="theorem-title"><strong>Lemme 24.1</strong></span> Il est plus probable que la personne “la plus intelligente” de la salle soit 1) assez intelligente avec un <span class="math inline">\(\mu_i\)</span> de 130, et 2) qu’elle ait eu de la chance le jour du test - en tout cas, c’est 2 à 3 fois plus probable que le fait qu’elle ait un QI <span class="math inline">\(\mu_i\)</span> supérieur à 150.</p>

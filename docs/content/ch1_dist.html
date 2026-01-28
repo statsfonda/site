@@ -204,7 +204,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/ch31_outils.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Outils pour les Intervalles de Confiance</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Intervalles non-gaussiens</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -347,20 +347,26 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../content/app0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Densités usuelles</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../content/app1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Algèbre linéaire</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Algèbre linéaire</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/app3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Formules d’inversion</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Formules d’inversion</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/app2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">50&nbsp;nuances de TCL</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">50&nbsp;nuances de TCL</span></span></a>
   </div>
 </li>
     </ul>
@@ -470,7 +476,7 @@ $$
 </div>
 <p>À titre d’exemple, pour <span class="math inline">\(x=2.32\)</span> cette approximation donne 98.83%, ce qui est remarquablement proche de 98%. Pour <span class="math inline">\(x = 2.57\)</span> on trouve 99.42%.</p>
 <div class="proof">
-<p><span class="proof-title"><em>Preuve</em>. </span>Le nombre <span class="math inline">\(\mathbb{P}(X&gt;x)\)</span> est exactement égal à <span class="math inline">\((2\pi)^{-1/2}\int_x^\infty e^{-t^2/2}dt\)</span>. En multipliant et en divisant l’exponentielle dans l’intégrale par <span class="math inline">\(t\)</span> et en faisant une intégration par parties, on peut écrire ceci sous la forme <span class="math display">\[ \frac{e^{-x^2/2}}{x\sqrt{2\pi}} - \int_x^\infty \frac{e^{-t^2/2}}{t^2\sqrt{2\pi}}dt.\]</span> Comme l’intégrale <span class="math inline">\(I\)</span> à droite est positive, tout ce terme est bien plus petit que <a href="ch31_outils.html#eq-gaussiantailu" class="quarto-xref">Équation&nbsp;<span>9.1</span></a>. Par ailleurs, en refaisant la même astuce, on peut écrire <span class="math inline">\(I\)</span> sous la forme <span class="math display">\[ \frac{e^{-x^2/2}}{x^3\sqrt{2\pi}} - 2\int_x^\infty \frac{e^{-t^2/2}}{t^3\sqrt{2\pi}}dt.\]</span> Si <span class="math inline">\(J\)</span> est la nouvelle intégrale à droite, elle est positive ; on a donc montré que <span class="math inline">\(\mathbb{P}(X&gt;x)\)</span> est aussi égal à <span class="math display">\[  \left(1 - \frac{1}{x^2}\right) \frac{1}{x}\frac{e^{-x^2/2}}{\sqrt{2\pi}} + J\]</span> et donc, est plus grand que <a href="ch31_outils.html#eq-gaussiantaill" class="quarto-xref">Équation&nbsp;<span>9.2</span></a>.</p>
+<p><span class="proof-title"><em>Preuve</em>. </span>Le nombre <span class="math inline">\(\mathbb{P}(X&gt;x)\)</span> est exactement égal à <span class="math inline">\((2\pi)^{-1/2}\int_x^\infty e^{-t^2/2}dt\)</span>. En multipliant et en divisant l’exponentielle dans l’intégrale par <span class="math inline">\(t\)</span> et en faisant une intégration par parties, on peut écrire ceci sous la forme <span class="math display">\[ \frac{e^{-x^2/2}}{x\sqrt{2\pi}} - \int_x^\infty \frac{e^{-t^2/2}}{t^2\sqrt{2\pi}}dt.\]</span> Comme l’intégrale <span class="math inline">\(I\)</span> à droite est positive, tout ce terme est bien plus petit que <a href="#eq-gaussiantailu" class="quarto-xref">Équation&nbsp;<span>4.2</span></a>. Par ailleurs, en refaisant la même astuce, on peut écrire <span class="math inline">\(I\)</span> sous la forme <span class="math display">\[ \frac{e^{-x^2/2}}{x^3\sqrt{2\pi}} - 2\int_x^\infty \frac{e^{-t^2/2}}{t^3\sqrt{2\pi}}dt.\]</span> Si <span class="math inline">\(J\)</span> est la nouvelle intégrale à droite, elle est positive ; on a donc montré que <span class="math inline">\(\mathbb{P}(X&gt;x)\)</span> est aussi égal à <span class="math display">\[  \left(1 - \frac{1}{x^2}\right) \frac{1}{x}\frac{e^{-x^2/2}}{\sqrt{2\pi}} + J\]</span> et donc, est plus grand que <a href="#eq-gaussiantaill" class="quarto-xref">Équation&nbsp;<span>4.3</span></a>.</p>
 </div>
 <p>Cette décroissance est extrêmement rapide, puisqu’elle est plus qu’exponentielle. Il existe une très grande classe de variables aléatoires pour lesquelles cette décroissance est beaucoup plus lente : les lois à queue lourde.</p>
 <div id="def-queue-lourde" class="theorem definition">

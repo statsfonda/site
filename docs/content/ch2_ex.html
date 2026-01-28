@@ -204,7 +204,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/ch31_outils.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Outils pour les Intervalles de Confiance</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Intervalles non-gaussiens</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -347,20 +347,26 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../content/app0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Densités usuelles</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../content/app1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Algèbre linéaire</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Algèbre linéaire</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/app3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Formules d’inversion</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Formules d’inversion</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/app2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">50&nbsp;nuances de TCL</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">50&nbsp;nuances de TCL</span></span></a>
   </div>
 </li>
     </ul>
@@ -428,18 +434,8 @@ $$
 </section>
 <section id="exercices" class="level2">
 <h2 class="anchored" data-anchor-id="exercices">Exercices</h2>
-<div id="exr-tanks" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 1 (Estimation de masse)</strong></span> Au cours de la seconde guerre mondiale, l’armée alliée notait les numéros de série <span class="math inline">\(X_1, \dots, X_n\)</span> de tous les tanks nazis capturés ou détruits, afin d’obtenir un estimateur du nombre total <span class="math inline">\(N\)</span> de tanks produits.</p>
-<ol type="1">
-<li>Proposer un modèle pour le tirage de <span class="math inline">\(X_1, \dots, X_n\)</span>.</li>
-<li>Calculer l’espérance de <span class="math inline">\(\bar X_n\)</span>. En déduire un estimateur non biaisé de <span class="math inline">\(N\)</span>. Indication: la loi de <span class="math inline">\(n\)</span> tirages sans remise est échangeable.</li>
-<li>Étudier la loi de <span class="math inline">\(X_{(n)}\)</span> et en déduire un estimateur non biaisé de <span class="math inline">\(N\)</span>.</li>
-<li>Proposer deux intervalles de confiance de niveau <span class="math inline">\(1-\alpha\)</span> de la forme <span class="math inline">\([aS, bS]\)</span> avec <span class="math inline">\(a, b\in\mathbb{R}\)</span> et <span class="math inline">\(S\)</span> une statistique. On pourra utiliser le fait que l’inégalité de Hoeffding s’applique également aux tirages sans remise.</li>
-</ol>
-<p>La méthode statistique a fourni comme estimation une production moyenne de 246 tanks/mois entre juin 1940 et septembre 1942. Des méthodes d’espionnage traditionnelles donnaient une estimation de 1400 tanks/mois. Les chiffres officiels du ministère nazi des Armements ont montré après la guerre que la production moyenne était de 245 tanks/mois. Si vous êtes intéressés, vous pouvez lire l’article de Ruggles et Broodie, <a href="https://www.cia.gov/readingroom/docs/CIA-RDP79R01001A001300010013-3.pdf">Economic intelligence in World War II</a> (sur le site de la CIA) qui explique comment les outils statistiques furent utilisés pour estimer la production nazie de tanks, de roquettes, de pneus, etc.</p>
-</div>
 <div id="exr-uniff1" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 2 (Lois uniformes (1))</strong></span> On considère <span class="math inline">\((X_1, \dots, X_n)\)</span> un échantillon de loi uniforme sur <span class="math inline">\(]\theta, \theta+1[\)</span>.</p>
+<p><span class="theorem-title"><strong>Exercice 1 (Lois uniformes (1))</strong></span> On considère <span class="math inline">\((X_1, \dots, X_n)\)</span> un échantillon de loi uniforme sur <span class="math inline">\(]\theta, \theta+1[\)</span>.</p>
 <ol type="1">
 <li>Donner la densité de la loi de la variable <span class="math inline">\(R_n=X_{(n)} -X_{(1)}\)</span>, où <span class="math inline">\(X_{(1)}=\min(X_1, \dots, X_n)\)</span> et <span class="math inline">\(X_{(n)}=\max(X_1, \dots, X_n)\)</span>.</li>
 <li>Étudier les différents modes de convergence de <span class="math inline">\(R_n\)</span> quand <span class="math inline">\(n\to\infty\)</span>.</li>
@@ -447,35 +443,35 @@ $$
 </ol>
 </div>
 <div id="exr-unif2" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 3 (Lois uniformes (2))</strong></span> Soit <span class="math inline">\(X_1,\dots,X_n\)</span> un échantillon de loi <span class="math inline">\(\mathscr{U}([0,\theta])\)</span>, avec <span class="math inline">\(\theta &gt;0\)</span>. On veut estimer <span class="math inline">\(\theta\)</span>.</p>
+<p><span class="theorem-title"><strong>Exercice 2 (Lois uniformes (2))</strong></span> Soit <span class="math inline">\(X_1,\dots,X_n\)</span> un échantillon de loi <span class="math inline">\(\mathscr{U}([0,\theta])\)</span>, avec <span class="math inline">\(\theta &gt;0\)</span>. On veut estimer <span class="math inline">\(\theta\)</span>.</p>
 <ol type="1">
 <li>Déterminer un estimateur de <span class="math inline">\(\theta\)</span> à partir de <span class="math inline">\(\bar{X}_n\)</span>.</li>
 <li>On considère l’estimateur <span class="math inline">\(X_{(n)}= {\max}_{1\leq i \leq n}X_i\)</span>. Déterminer les propriétés asymptotiques de ces estimateurs et les comparer.</li>
 </ol>
 </div>
 <div id="exr-gamma" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 4 (Lois Gamma)</strong></span> La loi Gamma <span class="math inline">\(\Gamma(\alpha, \beta)\)</span> de paramètres <span class="math inline">\(\alpha, \beta&gt;0\)</span> a pour densité <span class="math display">\[ x\mapsto \frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha-1}\exp(-\beta x), \quad x&gt;0.\]</span> On se donne un échantillon <span class="math inline">\((X_1,\dots,X_n)\)</span> de loi <span class="math inline">\(\Gamma(\alpha, \beta)\)</span> et on chercche à estimer les paramètres.</p>
+<p><span class="theorem-title"><strong>Exercice 3 (Lois Gamma)</strong></span> La loi Gamma <span class="math inline">\(\Gamma(\alpha, \beta)\)</span> de paramètres <span class="math inline">\(\alpha, \beta&gt;0\)</span> a pour densité <span class="math display">\[ x\mapsto \frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha-1}\exp(-\beta x), \quad x&gt;0.\]</span> On se donne un échantillon <span class="math inline">\((X_1,\dots,X_n)\)</span> de loi <span class="math inline">\(\Gamma(\alpha, \beta)\)</span> et on chercche à estimer les paramètres.</p>
 <ol type="1">
 <li>On suppose le paramètre <span class="math inline">\(\beta\)</span> connu. Proposer un estimateur de <span class="math inline">\(\alpha\)</span> par la méthode des moments.</li>
 <li>On suppose à présent que les deux paramètres <span class="math inline">\(\alpha, \beta\)</span> sont inconnus. Proposer un estimateur de <span class="math inline">\((\alpha,\beta)\)</span> par la méthode des moments.</li>
 </ol>
 </div>
 <div id="exr-gumbel" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 5 (Lois de Gumbel)</strong></span> La loi de Gumbel (centrale) de paramètre <span class="math inline">\(\beta\)</span> a pour fonction de répartition <span class="math inline">\(F(x)= e^{-e^{-x/\beta}}\)</span>. On observe un échantillon de lois de Gumbel et l’on cherche à estimer <span class="math inline">\(\beta\)</span>.</p>
+<p><span class="theorem-title"><strong>Exercice 4 (Lois de Gumbel)</strong></span> La loi de Gumbel (centrale) de paramètre <span class="math inline">\(\beta\)</span> a pour fonction de répartition <span class="math inline">\(F(x)= e^{-e^{-x/\beta}}\)</span>. On observe un échantillon de lois de Gumbel et l’on cherche à estimer <span class="math inline">\(\beta\)</span>.</p>
 <ol type="1">
-<li>Calculer la densité des lois de Gumbel, ainsi que leur moyenne et variance [indice :&nbsp;<span class="math inline">\(0.57721…\)</span>]</li>
+<li>Calculer la densité des lois de Gumbel, ainsi que leur moyenne [indice :&nbsp;<span class="math inline">\(0.57721…\)</span>]</li>
 <li>En déduire un estimateur convergent dont on calculera le risque quadratique et les propriétés asymptotiques.</li>
 </ol>
 </div>
 <div id="exr-yule" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 6 (Lois de Yule-Simon)</strong></span> Une variable aléatoire <span class="math inline">\(X\)</span> suit la loi de Yule-Simon de paramètre <span class="math inline">\(\rho&gt;0\)</span> lorsque <span class="math inline">\(\mathbb{P}(X = n) = \rho B(n, 1+\rho)\)</span>, où <span class="math inline">\(n\geqslant 1\)</span> et <span class="math inline">\(B\)</span> est la <a href="https://en.wikipedia.org/wiki/Beta_function">fonction beta</a>.</p>
+<p><span class="theorem-title"><strong>Exercice 5 (Lois de Yule-Simon)</strong></span> Une variable aléatoire <span class="math inline">\(X\)</span> suit la loi de Yule-Simon de paramètre <span class="math inline">\(\rho&gt;0\)</span> lorsque <span class="math inline">\(\mathbb{P}(X = n) = \rho B(n, 1+\rho)\)</span>, où <span class="math inline">\(n\geqslant 1\)</span> et <span class="math inline">\(B\)</span> est la <a href="https://en.wikipedia.org/wiki/Beta_function">fonction beta</a>.</p>
 <ol type="1">
 <li>Montrer que si <span class="math inline">\(\rho&gt;1\)</span>, alors <span class="math inline">\(\mathbb{E}[X] = \rho/(\rho-1)\)</span>.</li>
 <li>Trouver un estimateur de <span class="math inline">\(\rho\)</span> et donner ses propriétés.</li>
 </ol>
 </div>
 <div id="exr-massemanquante" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 7 (Estimation des espèces manquantes de Fisher-Corbet (examen 24))</strong></span> Un naturaliste capture des papillons dans une forêt lointaine. Il effectue deux collectes de même durée. Soit <span class="math inline">\(S\)</span> le nombre total d’espèces distinctes dans cette forêt ; on note <span class="math inline">\(X^1_k\)</span> (respectivement <span class="math inline">\(X^2_k\)</span>) le nombre de spécimens de l’espèce <span class="math inline">\(k\)</span> qui ont été capturées pendant la première collecte (respectivement, la seconde). On fait l’hypothèse selon laquelle les <span class="math inline">\(X^i_k\)</span> sont des variables aléatoires indépendantes avec <span class="math inline">\(X^i_k \sim \mathrm{Poisson}(\theta_k)\)</span> où <span class="math inline">\(\theta_k\)</span> est un paramètre positif qui représente la rareté de l’espèce <span class="math inline">\(k\)</span>.</p>
+<p><span class="theorem-title"><strong>Exercice 6 (Estimation des espèces manquantes de Fisher-Corbet (examen 24))</strong></span> Un naturaliste capture des papillons dans une forêt lointaine. Il effectue deux collectes de même durée. Soit <span class="math inline">\(S\)</span> le nombre total d’espèces distinctes dans cette forêt ; on note <span class="math inline">\(X^1_k\)</span> (respectivement <span class="math inline">\(X^2_k\)</span>) le nombre de spécimens de l’espèce <span class="math inline">\(k\)</span> qui ont été capturées pendant la première collecte (respectivement, la seconde). On fait l’hypothèse selon laquelle les <span class="math inline">\(X^i_k\)</span> sont des variables aléatoires indépendantes avec <span class="math inline">\(X^i_k \sim \mathrm{Poisson}(\theta_k)\)</span> où <span class="math inline">\(\theta_k\)</span> est un paramètre positif qui représente la rareté de l’espèce <span class="math inline">\(k\)</span>.</p>
 <ol type="1">
 <li>On pose <span class="math inline">\(N_r\)</span> le nombre d’espèces dont exactement <span class="math inline">\(r\)</span> spécimens ont été capturés . Par exemple, <span class="math inline">\(N_3\)</span> est le nombre d’espèces dont on a capturé 3 spécimens et <span class="math inline">\(N_0\)</span> est le nombre d’espèces qu’on n’a pas capturées.
 <ol type="a">
@@ -486,6 +482,16 @@ $$
 <li>En déduire que <span class="math display">\[\hat{N} := N_1 - N_2 + N_3 -N_4 + N_5 - \dotsb \]</span> est un estimateur sans biais de <span class="math inline">\(N\)</span> .</li>
 <li>Expliquer pourquoi ce résultat est étonnant. Quelles pourraient être les limitations de cet estimateur ?</li>
 </ol>
+</div>
+<div id="exr-tanks" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 7 (Estimation de masse)</strong></span> Au cours de la seconde guerre mondiale, l’armée alliée notait les numéros de série <span class="math inline">\(X_1, \dots, X_n\)</span> de tous les tanks nazis capturés ou détruits, afin d’obtenir un estimateur du nombre total <span class="math inline">\(N\)</span> de tanks produits.</p>
+<ol type="1">
+<li>Proposer un modèle pour le tirage de <span class="math inline">\(X_1, \dots, X_n\)</span>.</li>
+<li>Calculer l’espérance de <span class="math inline">\(\bar X_n\)</span>. En déduire un estimateur non biaisé de <span class="math inline">\(N\)</span>. Indication: la loi de <span class="math inline">\(n\)</span> tirages sans remise est échangeable.</li>
+<li>Étudier la loi de <span class="math inline">\(X_{(n)}\)</span> et en déduire un estimateur non biaisé de <span class="math inline">\(N\)</span>.</li>
+<li>Proposer deux intervalles de confiance de niveau <span class="math inline">\(1-\alpha\)</span> de la forme <span class="math inline">\([aS, bS]\)</span> avec <span class="math inline">\(a, b\in\mathbb{R}\)</span> et <span class="math inline">\(S\)</span> une statistique. On pourra utiliser le fait que l’inégalité de Hoeffding s’applique également aux tirages sans remise.</li>
+</ol>
+<p>La méthode statistique a fourni comme estimation une production moyenne de 246 tanks/mois entre juin 1940 et septembre 1942. Des méthodes d’espionnage traditionnelles donnaient une estimation de 1400 tanks/mois. Les chiffres officiels du ministère nazi des Armements ont montré après la guerre que la production moyenne était de 245 tanks/mois. Si vous êtes intéressés, vous pouvez lire l’article de Ruggles et Broodie, <a href="https://www.cia.gov/readingroom/docs/CIA-RDP79R01001A001300010013-3.pdf">Economic intelligence in World War II</a> (sur le site de la CIA) qui explique comment les outils statistiques furent utilisés pour estimer la production nazie de tanks, de roquettes, de pneus, etc.</p>
 </div>
 
 
