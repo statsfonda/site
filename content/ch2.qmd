@@ -170,7 +170,7 @@ L'approximation au premier ordre de $g$ au point $\alpha$ dit que $\sqrt{n}(g(X_
 
 Soit donc $s >0$. On veut montrer que $\mathbb{P}(|r_n| > s)$ tend vers zéro. On se donne un $\varepsilon >0$, et on introduit l'événement $E_n(b) = \{|\sqrt{n}(X_n - \alpha)| < b\}$, où $b$ est une constante arbitraire.  
 
-Par définition de la dérivabilité de $g$ en $\alpha$, il y a une fonction $r$ telle que $g(x) - g(\alpha) - (x-\alpha)g'(\alpha)$ est égal à $r(x)$ et telle que $r(x)/x \to 0$ quand $x\to 0$. Au vu des définitions ci-dessus, on peut même écrire que $r_n = \sqrt{n}r(X_n - \alpha)$. Il y a un $\delta$ tel que si $|x| < \delta$ alors $|r(x)|/ |x|< s/b$. 
+Par définition de la dérivabilité de $g$ en $\alpha$, il y a une fonction $r$ telle que $g(x) - g(\alpha) - (x-\alpha)g'(\alpha)$ est égal à $r(x-\alpha)$ et telle que $r(x)/x \to 0$ quand $x\to 0$. Au vu des définitions ci-dessus, on peut même écrire que $r_n = \sqrt{n}r(X_n - \alpha)$. Il y a un $\delta$ tel que si $|x| < \delta$ alors $|r(x)|/ |x|< s/b$. 
 
 
 Sur $E_n$, dès que $n$ est plus grand que $(b/\delta)^2$, alors $|X_n - \alpha|<\delta$ et donc $|r_n| < (s/b)\sqrt{n}|X_n - \alpha|$, ce qui est plus petit que $s$. On vient de montrer que sur l'événement $E_n$, dès que $n$ est grand il devient impossible d'avoir $|r_n|>s$. Par conséquent, 
