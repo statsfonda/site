@@ -49,7 +49,7 @@ Soit $X_1,\dots,X_n$ un échantillon de loi $\mathscr{U}([0,\theta])$, avec $\th
 
 La loi Gamma $\Gamma(\alpha, \beta)$ de paramètres $\alpha, \beta>0$ a pour densité
 $$ x\mapsto \frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha-1}\exp(-\beta x), \quad x>0.$$
-On se donne un échantillon $(X_1,\dots,X_n)$ de loi $\Gamma(\alpha, \beta)$ et on chercche à estimer les paramètres. 
+On se donne un échantillon $(X_1,\dots,X_n)$ de loi $\Gamma(\alpha, \beta)$ et on cherche à estimer les paramètres. 
 
 1. On suppose le paramètre $\beta$ connu. Proposer un estimateur de $\alpha$ par la méthode des moments.
 2. On suppose à présent que les deux paramètres $\alpha, \beta$ sont inconnus. Proposer un estimateur de $(\alpha,\beta)$ par la méthode des moments.
