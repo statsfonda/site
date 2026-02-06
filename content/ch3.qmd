@@ -101,9 +101,9 @@ $$\left[\frac{(n-1)\hat{\sigma}_n^2}{k^+_{n-1,\alpha}} ~~;~~ \frac{(n-1)\hat{\si
 
 Les lois de Student sont décrites dans la section @sec-densite de l’appendice. En résumé, la loi de Student d’indice $n$, notée $\mathscr{T}(n)$, est la loi de $N(0,1) / \sqrt{\chi_2(n)/n}$ où le numérateur et le dénominateur sont indépendants, et sa densité est donnée par 
 
-$$t_n(x) = Z_n\left(\frac{1}{1 + \frac{x^2}{n}}\right)^{\frac{n+1}{2}}.$$
+$$t_n(x) = \frac{1}{Z_n}\left(\frac{1}{1 + \frac{x^2}{n}}\right)^{\frac{n+1}{2}}.$$
 où la constante de normalisation est
-$$Z_n = \frac{1}{\sqrt{n\pi}}\frac{\Gamma\left(\frac{n+1}{2}\right)}{\Gamma\left(\frac{n}{2}\right)}.$$
+$$Z_n = \sqrt{n\pi}\frac{\Gamma\left(\frac{n}{2}\right)}{\Gamma\left(\frac{n+1}{2}\right)}.$$
 
 ### Loi de la statistique de Student {#sec-student2}
 
