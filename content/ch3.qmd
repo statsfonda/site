@@ -103,7 +103,7 @@ Les lois de Student sont décrites dans la section @sec-densite de l’appendice
 
 $$t_n(x) = \frac{1}{Z_n}\left(\frac{1}{1 + \frac{x^2}{n}}\right)^{\frac{n+1}{2}}.$$
 où la constante de normalisation est
-$$Z_n = \frac{1}{\sqrt{n\pi}}\frac{\Gamma\left(\frac{n+1}{2}\right)}{\Gamma\left(\frac{n}{2}\right)}.$$
+$$Z_n = \sqrt{n\pi}\frac{\Gamma\left(\frac{n}{2}\right)}{\Gamma\left(\frac{n+1}{2}\right)}.$$
 
 ### Loi de la statistique de Student {#sec-student2}
 

@@ -50,7 +50,7 @@ La démonstration se fonde sur le lemme suivant.
 
 Soit $X$ une variable aléatoire à valeurs dans $[a,b]$. Pour tout $t$, 
 
-$$\mathbb{E}[e^{t(X-\mathbb{E}[X]}] \leqslant e^{\frac{t^2(b-a)^2}{8}}.$${#eq-lemme_hoeffding}
+$$\mathbb{E}[e^{t(X-\mathbb{E}[X])}] \leqslant e^{\frac{t^2(b-a)^2}{8}}.$${#eq-lemme_hoeffding}
 
 :::
 
