@@ -8,7 +8,7 @@
 4. Même question pour la variance dans un modèle gaussien centré. 
 5. Dans l'estimation de la moyenne $\mu$ d'un modèle gaussien où la variance $\sigma^2$ est connue, montrer que l'intervalle de confiance obtenu (@eq-icgmu1) est le plus grand possible de niveau $1-\alpha$. 
 6. Démontrer le théorème @thm-gaussiantail sur l'asymptotique des queues de distribution de la loi gaussienne. 
-7. Montrer la borne suivante sur les quantiles de loi gaussienne standard: $q_\beta < \sqrt{\ln\frac{1}{\beta\sqrt{2\pi}}}$ (pour tout $1/2<\beta<1$).  
+7. Montrer la borne suivante sur les quantiles de loi gaussienne standard: $q_\beta < \sqrt{\ln\frac{1}{\beta\sqrt{2\pi}}}$ pour tout $\beta$ suffisamment proche de 1. 
 8. Comparer les queues de distribution des lois $N(0,1), \chi_2(n)$ et $\mathscr{T}(n)$. 
 9. Expliquer à votre grand-mère la différence entre un intervalle de fluctuation et un intervalle de confiance. 
 10. L'intervalle de confiance de niveau $1-\alpha$ pour la moyenne d'un modèle $N(\mu, 1)$ avec $n$ observations est $I_n = [\bar{X}_n \pm z_\alpha /\sqrt{n}]$. Supposons qu'on obtienne une nouvelle observation indépendante des autres, disons $Z$. La probabilité $\mathbb{P}(Z \in I_n)$ est-elle plus grande ou plus petite que $1-\alpha$ ?
