@@ -97,4 +97,4 @@ Soit $(E_i)$ une suite de variables aléatoires iid de loi exponentielle de para
 
 1. Calculer $\mathbb{E}[e^{t X}]$ lorsque $X$ est une variable gaussienne. 
 2. En déduire que si les $X_i$ sont des gaussiennes iid $N(\mu,\sigma^2)$, alors 
-$$\mathbb{P}(|\bar{X}_n-\mu|>t)\leqslant 2 e^{-t^2 / 4n\sigma^2}.$$
+$$\mathbb{P}(|\bar{X}_n-\mu|>t)\leqslant 2 e^{-n t^2 / 2\sigma^2}.$$
