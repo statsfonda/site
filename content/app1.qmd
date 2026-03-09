@@ -31,7 +31,7 @@ $$ M = \sum_{i=1}^n \lambda_i u_i u_i^\top.$$
 
 Soit $v$ un vecteur non nul de $\mathbb{R}^n$. L'espace vectoriel engendré par $v$ est l'ensemble $\mathscr{V}=\{tv : t \in \mathbb{R}\}$, et son orthogonal est l'hyperplan $\mathscr{V}^\perp = \{x : \langle x, v \rangle = 0\}$. Les résultats élémentaires d'algèbre linéaire disent que tout vecteur $x$ se décompose *de façon unique* sous la forme 
 $$ x = y + z$$
-avec $y$ dans $\mathscr{V}$ et $z$ dans $\mathscr{V}^\top$. En particulier, il existe un $t$ tel que $y = tv$. 
+avec $y$ dans $\mathscr{V}$ et $z$ dans $\mathscr{V}^\perp$. En particulier, il existe un $t$ tel que $y = tv$. 
 
 Considérons maintenant la matrice 
 $$P = \frac{1}{|v|^2}vv^\top \in \mathscr{M}_{n,n}. $$
