@@ -49,7 +49,7 @@ pour une valeur de $\mathbf{p}_0$ fixée au préalable. À partir de maintenant
 
 :::{#exm-testadeq}
 
-On peut se demander si, dans la langue courante, les 21 lettres de l'alphabet ont à peu près la même probabilité d'apparaître comme première lettre d'un mot. Cela revient à tester si $\bp_0=(1/26, \dotsc, 1/26)$, hypothèse qui est évidemment fausse, il suffit de regarder l'épaisseur des 26 sections du dictionnaire pour s'en rendre compte. 
+On peut se demander si, dans la langue courante, les 26 lettres de l'alphabet ont à peu près la même probabilité d'apparaître comme première lettre d'un mot. Cela revient à tester si $\bp_0=(1/26, \dotsc, 1/26)$, hypothèse qui est évidemment fausse, il suffit de regarder l'épaisseur des 26 sections du dictionnaire pour s'en rendre compte. 
 
 Qu'en est-il des 9 chiffres ? On peut vouloir tester si, dans n'importe quel document (journal, site internet, article scientifique), ces 9 chiffres apparaissent à peu près uniformément en tant que premier chiffre d'un nombre. Cela reviendrait à tester $\bp_0 = (1/9, \dotsc, 1/9)$. 
 
