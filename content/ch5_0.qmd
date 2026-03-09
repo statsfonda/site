@@ -34,7 +34,7 @@ Dans le cadre général le nombre $d$ de variables explicatives est plus grand q
 un élément de $\mathbb{R}^d$ ; les variables explicatives seront alors $\bx_1,\dotsc, \bx_n$. Avec mes notations, ces vecteurs sont **des vecteurs lignes**^[Ils sont de dimension $(1,d)$ si on les voit comme des matrices]. 
 
 On cherchera donc des nombres $\theta_i$ tels que $y_i$ est aussi proche que possible de $$\theta_1 \bx_{i,1} + \dotsb + \theta_d \bx_{i,d} = \bx_i \bt,  $$
-oùe paramètre $\bt$, sera toujours vu **comme le vecteur colonne**^[Donc, de dimension $(d,1)$ cette fois. ] des $\theta_i$. 
+où le paramètre $\bt$, sera toujours vu **comme le vecteur colonne**^[Donc, de dimension $(d,1)$ cette fois. ] des $\theta_i$. 
 
 
 **Remarque : où est passée la constante ?** *Dans l'équation ci-dessus, on a l'impression que le terme constant, qui correspondait à $\alpha$ dans l'exemple en dimension 1, a disparu. Ce n'est pas le cas : intégrer la constante au modèle revient à considérer que la variable constante égale à 1 fait partie des variables explicatives. En pratique, cela revient à poser, par exemple, $\bx_{i,1} = 1$ pour tout $i$. Ainsi, la constante correspondra toujours à $\theta_1$.* 
