@@ -81,14 +81,9 @@ Pour la table ci-dessus, on trouve $p = 0.001346$.
 ## Sujets passés d'examens
 
 
-Je ne garantis pas que les notations et les concepts utilisés dans ces annales soient en phase avec le cours de cette année !
-
-- [Partiel 2020](/pdfs/CC1.pdf) et [sa correction](/pdfs/Corrige_CC1.pdf)
 
 
-- [Partiel 2023](/pdfs/Partiel2023.pdf) et [sa correction](/pdfs/Partiel2023Corrige.pdf)
-
-- [Partiel 2024](/pdfs/partiel_24.pdf) avec sa correction intégrée, assez proche de ce que j'attend de vous pour le partiel 2025. 
+- [Partiel 2024](/pdfs/partiel_24.pdf) avec sa correction intégrée. 
 
 - [Examen 2024](/pdfs/exam_24.pdf) avec sa correction. 
 
