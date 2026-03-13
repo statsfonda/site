@@ -472,15 +472,11 @@ $$
 <ol type="1">
 <li>On suppose dans un premier temps que les erreurs <span class="math inline">\(\varepsilon^1, \varepsilon^2\)</span> ont la même loi, avec une variance <span class="math inline">\(\sigma^2\)</span> connue. Proposer un test simple de l’hypothèse nulle.</li>
 <li>Même question lorsque <span class="math inline">\(\sigma\)</span> n’est pas connue.</li>
-<li>Même question lorsque <span class="math inline">\(\varepsilon^1,\varepsilon^2\)</span> n’ont pas la même variance.</li>
+<li>Même question lorsque <span class="math inline">\(\varepsilon^1,\varepsilon^2\)</span> n’ont pas la même variance mais que <span class="math inline">\(\sigma_1,\sigma_2\)</span> sont connus.</li>
 </ol>
 </div>
 <div id="exr-covnonscal" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 7</strong></span> On se place dans un modèle linéaire <em>gaussien</em> de la forme <span class="math inline">\(Y = X\bt + \varepsilon\)</span>, mais on suppose que les entrées de <span class="math inline">\(\varepsilon_i\)</span> ne sont plus iid, mais possèdent une covariance <span class="math inline">\(\Sigma\)</span> non scalaire.</p>
-<ol type="1">
-<li>On suppose que l’on connaît <span class="math inline">\(\Sigma\)</span>. Montrer que <span class="math display">\[\hat{\bt}_{\mathrm{MCG}}= (X^\top \Sigma^{-1} X)^{-1}X^\top \Sigma^{-1}Y\]</span> est un estimateur sans biais de <span class="math inline">\(\bt\)</span>, appelé <em>estimateur des moindres carrés généralisés</em>, dont on calculera la loi.</li>
-<li>On suppose qu’on dispose d’un estimateur <span class="math inline">\(\hat{\Sigma}\)</span> de <span class="math inline">\(\Sigma\)</span>. Montrer que <span class="math display">\[(X^\top \hat{\Sigma}^{-1} X)^{-1}X^\top \hat{\Sigma}^{-1}Y\]</span> est un estimateur asymptotiquement normal et sans biais de <span class="math inline">\(\bt\)</span>.</li>
-</ol>
+<p><span class="theorem-title"><strong>Exercice 7</strong></span> On se place dans un modèle linéaire <em>gaussien</em> de la forme <span class="math inline">\(Y = X\bt + \varepsilon\)</span>, mais on suppose que les entrées de <span class="math inline">\(\varepsilon_i\)</span> ne sont plus iid, mais possèdent une covariance <span class="math inline">\(\Sigma\)</span> non scalaire. On suppose que l’on connaît <span class="math inline">\(\Sigma\)</span>. Montrer que <span class="math display">\[\hat{\bt}_{\mathrm{MCG}}= (X^\top \Sigma^{-1} X)^{-1}X^\top \Sigma^{-1}Y\]</span> est un estimateur sans biais de <span class="math inline">\(\bt\)</span>, appelé <em>estimateur des moindres carrés généralisés</em>, dont on calculera la loi.</p>
 </div>
 <div id="exr-prediction" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercice 8</strong></span> On considère le modèle de régression linéaire <span class="math inline">\(y_i=b_0+b_1x_i+\varepsilon_i\)</span> où <span class="math inline">\(i = 1, \dotsc, n\)</span> et les <span class="math inline">\(\varepsilon_i\)</span> sont des variables aléatoires indépendantes <span class="math inline">\({\mathcal N}(0,\sigma^2)\)</span> et <span class="math inline">\(b_0,b_1\)</span> et <span class="math inline">\(\sigma^2\)</span> sont inconnus.</p>
