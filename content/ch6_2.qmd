@@ -81,7 +81,7 @@ qui montre bien que $I(\theta)^{-1} \preceq \mathrm{Cov}_\theta(T)$.
 
 ## Interprétation {#sec-interp-fisher}
 
-L'information de Fisher d'un modèle dépend crucialement de *comment* on paramétrise le modèle, et c'est ce qui a donné lieu à la terrible confusion qui m'a paralysé en cours jeudi matin. 
+L'information de Fisher d'un modèle dépend crucialement de *comment* on paramétrise le modèle. 
 
 
 Prenons l'exemple de la loi de Bernoulli, et considérons d'abord sa paramétrisation usuelle, 

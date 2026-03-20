@@ -22,7 +22,7 @@ $$\int_{\mathbb{R}} x d\hat{\mu}_n(x) = \frac{1}{n}\sum_{i=1}^n x_i.$$
 
 Lorsque $X^2$ est intégrable, la variance de $X$ est la moyenne de $(X - \mathbb{E}[X])^2$, soit 
 $$\mathrm{Var}(X) = \mathbb{E}[(X-\mathbb{E}[X])^2]. $$
-Le problème de la variance est qu’elle n’a pas la même unité que $X$ : si $X$ est en euros, la variance est en euros carrés. La bonne façon de mesurer la dispersion est de prendre la racine carrée de la variance, ce qui donne l’écart-type, souvent noté $\sigma_X = \sqrt{\mathrm{Var}(X)}$. Une variable dont l’écart-type est 1 est appelée *réduite*. 
+Le problème de la variance est qu’elle n’a pas la même unité que $X$ : si $X$ est en euros, la variance est en euros carrés. La bonne façon de mesurer la dispersion est de prendre la racine carrée de la variance, ce qui donne *l’écart-type*, souvent noté $\sigma_X = \sqrt{\mathrm{Var}(X)}$. Une variable dont l’écart-type est 1 est appelée *réduite*. En finance, on utilise souvent le mot *volatilité* pour désigner l’écart-type d’un actif. 
 
 Il existe de très nombreuses autres mesures de dispersion ; signalons simplement qu'au lieu de mesurer les distances à la moyenne avec un carré, on aurait pu simplement utiliser une valeur absolue, ce qui aurait donné la *déviation moyenne*,  
 $$\mathrm{Dev}(X) = \mathbb{E}[|X-\mu_X|].$$
