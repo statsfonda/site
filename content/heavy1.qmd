@@ -7,8 +7,8 @@ pour $x$ grand, avec $\alpha>0$ et $c>0$.
 
 
 La loi de Pareto est une loi à queue lourde qui est souvent utilisée pour modéliser des phénomènes d’extrêmes. Elle est définie par la fonction de densité
-$$f(x) = \frac{\alpha x_{\min}^{\alpha}}{x^{\alpha+1}}$$
-pour $x \geqslant x_{\min}$, où $x_{\min}$ est un paramètre de position.
+$$f(x) = \frac{\alpha x_{\mathrm{min}}^{\alpha}}{x^{\alpha+1}}$$
+pour $x \geqslant x_{\mathrm{min}}$, où $x_{\mathrm{min}}$ est un paramètre de position.
 
 ## Déviations et queues lourdes
 
@@ -22,10 +22,10 @@ $$f(x) = \frac{3\mathbf{1}_{|x|>1}}{|x|^4}.$$
 Cette loi est centrée. Sa variance est donnée par 
 $$\sigma_\alpha^2 = 2\int_1^\infty x^2 \frac{3}{|x|^4} dx = 2\int_1^\infty \frac{3}{x^2} dx = 6.$$
 La loi de Pareto d’indice $\alpha=4$ a donc un écart-type de $\sqrt{6}\approx 2.45$. Maintenant, la probabilité de déviation de $k$ écarts-types est donnée par 
-\begin{align}p_k &= \mathbb{P}(|X| > k\sigma_\alpha) \\
+$$\begin{aligned}p_k &= \mathbb{P}(|X| > k\sigma_\alpha) \\
 &= 2\int_{k\sigma}^\infty \frac{3}{x^4}dx\\
 &= \frac{2}{(k\sigma)^3}.
-\end{align}
+\end{aligned}$$
 
 | $\mathbb{P}(|Z|>k\sigma)$ | $k=1$ | $k=2$ | $k=3$ |
 |---|---:|---:|---:|
@@ -43,16 +43,16 @@ $$f(x) = \frac{2}{\pi}\frac{1}{(1+x^2)^2}.$$
 Cette loi est centrée, donc sa variance est donnée par 
 $$\sigma^2 = \frac{2}{\pi}\int_0^\infty \frac{x^2}{(1+x^2)^2} dx$$
 et un calcul d’intégrale donne $\pi/2 \approx 1.57$. Calculons la probabilité de déviation de $k$ écarts-types, $p_k$. On a 
-\begin{align}p_k &= \mathbb{P}(|X| > k\sigma) \\
+$$\begin{aligned}p_k &= \mathbb{P}(|X| > k\sigma) \\
 &= \frac{4}{\pi}\int_{k\sigma}^\infty \frac{1}{(1+x^2)^2} dx.
-\end{align}
+\end{aligned}$$
 La primitive de $\frac{1}{(1+x^2)^2}$ qui s’annule en 0 est égale à 
 $$F(x) = \frac{x}{2(1+x^2)} + \frac{1}{2}\arctan(x).$$
 Sa limite en l’infini est $\pi/4$. Par conséquent, 
-\begin{align}p_k &= \frac{4}{\pi}(F(\infty) - F(k\sigma))\\
+$$\begin{aligned}p_k &= \frac{4}{\pi}(F(\infty) - F(k\sigma))\\
 &= \frac{4}{\pi}\left(\frac{\pi}{4} - \frac{k\sigma}{2(1+(k\sigma)^2)} - \frac{1}{2}\arctan(k\sigma)\right)\\
 &= 1 - \frac{2}{\pi}\left(\frac{k\sigma}{1+(k\sigma)^2} + \arctan(k\sigma)\right).
-\end{align}
+\end{aligned}$$
 
 | $\mathbb{P}(|Z|>k\sigma)$ | $k=1$ | $k=2$ | $k=3$ | $k=4$ |
 |---|---:|---:|---:|---:|
