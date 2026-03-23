@@ -294,13 +294,19 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/ch6_3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Entropie et information</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Hasard et information</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/ch6_4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Principe d’entropie maximale</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Entropies maximales</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/ch6_ex2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercices</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -329,8 +335,26 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../content/bayes1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Statistique Bayésienne</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/bayes2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Lois a priori</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/bayes3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Régression linéaire bayésienne</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../content/ch8_0.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Fisher VS Bayes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Fisher VS Bayes</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -348,25 +372,25 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/app0.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Densités usuelles</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Densités usuelles</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/app1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Algèbre linéaire</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Algèbre linéaire</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/app3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Formules d’inversion</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Formules d’inversion</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/app2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">50&nbsp;nuances de TCL</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">50&nbsp;nuances de TCL</span></span></a>
   </div>
 </li>
     </ul>
@@ -404,6 +428,7 @@ $$
 \newcommand{\dtv}{\mathrm{d}_{\mathrm{TV}}}
 \newcommand{\emv}{\hat{\theta}_{\mathrm{emv}}}
 \newcommand{\ent}{\mathrm{Ent}}
+\newcommand{\tr}{\mathrm{tr}}
 $$
 </p></div>
 
@@ -447,7 +472,7 @@ $$
 <p>Dans cette équation, on a trouvé une variable aléatoire dont la loi ne dépend plus de <span class="math inline">\(\mu\)</span>. Il est donc possible de déterminer un intervalle dans lequel elle fluctue à l’aide des quantiles de la loi normale, qui sont étudiés dans <a href="ch1_dist.html#sec-quantiles" class="quarto-xref"><span>Section 4.1</span></a>. Si l’on se donne une marge d’erreur <span class="math inline">\(\alpha = 1\%\)</span>, alors <span class="math display">\[ \mathbb{P}( (\sqrt{n}/\sigma)|\bar{X}_n - \mu| &gt; z_{0.99}) = 1\%\]</span> où <span class="math inline">\(z_{0.99} \approx 2.57\)</span>. Or, l’inégalité <span id="eq-piv1"><span class="math display">\[ \frac{\sqrt{n}}{\sigma}|\bar{X}_n - \mu| &gt; z_{0.99} \tag{8.2}\]</span></span> équivaut à<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span id="eq-piv2"><span class="math display">\[ \mu \in \left[ \bar{X}_n \pm \frac{z_{0.99}\sigma}{\sqrt{n}} \right]. \tag{8.3}\]</span></span> Le passage de <a href="#eq-piv1" class="quarto-xref">Équation&nbsp;<span>8.2</span></a> à <a href="#eq-piv2" class="quarto-xref">Équation&nbsp;<span>8.3</span></a> est souvent appelé <em>pivot</em> et sert à passer d’un intervalle de fluctuation à un intervalle de confiance.</p>
 <p>Nous avons donc les deux bornes de notre intervalle de confiance : <span class="math display">\[ A = \bar{X}_n - \frac{z_{0.99}\sigma}{\sqrt{n}}\]</span> <span class="math display">\[ B = \bar{X}_n + \frac{z_{0.99}\sigma}{\sqrt{n}} .\]</span> Ces deux quantités sont bien des statistiques, car <span class="math inline">\(\sigma\)</span> est connu. De plus, nous venons de montrer que <span class="math inline">\(P_\mu(\mu \in [A,B]) = 99\%\)</span>. Ici, le choix de la marge d’erreur <span class="math inline">\(\alpha = 1\%\)</span> ne jouait aucun rôle particulier ; ainsi, un intervalle de confiance de niveau <span class="math inline">\(1-\alpha\)</span> pour l’estimation de <span class="math inline">\(\mu\)</span> est donné par <span id="eq-icgmu1"><span class="math display">\[\left[\bar{X}_n - \frac{z_{1-\alpha}\sigma}{\sqrt{n}}~~;~~\bar{X}_n + \frac{z_{1-\alpha}\sigma}{\sqrt{n}} \right]. \tag{8.4}\]</span></span></p>
 <p><strong>Lorsque <span class="math inline">\(\sigma\)</span> est inconnue. </strong></p>
-<p>Lorsque <span class="math inline">\(\sigma\)</span> n’est pas connue, les bornes <span class="math inline">\(A,B\)</span> ci-dessus ne sont pas des statistiques, car elles dépendent de <span class="math inline">\(\sigma\)</span>. On peut estimer <span class="math inline">\(\sigma\)</span> sans biais (cf <a href="ch2.html#thm-unb" class="quarto-xref">Théorème&nbsp;<span>6.5</span></a>) via l’estimateur <span class="math display">\[ \hat{\sigma}_n^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar{X}_n)^2.\]</span> Que se passe-t-il si, dans <a href="#eq-pivg" class="quarto-xref">Équation&nbsp;<span>8.1</span></a>, on remplace <span class="math inline">\(\sigma\)</span> par son estimation <span class="math inline">\(\hat{\sigma}_n^2\)</span> ? On obtient la statistique dite <em>de Student</em>, <span id="eq-pivst"><span class="math display">\[T_n = \frac{\sqrt{n}}{\sqrt{\hat{\sigma}_n^2}}(\bar{X}_n - \mu). \tag{8.5}\]</span></span> Sa loi n’est plus gaussienne : c’est une loi de Student à <span class="math inline">\(n-1\)</span> paramètres de liberté <span class="math inline">\(\mathscr{T}(n-1)\)</span>:&nbsp;le calcul de la densité est fait en détails dans <a href="app0.html#sec-student1" class="quarto-xref"><span>Section 25.3</span></a> - <a href="#sec-student2" class="quarto-xref"><span>Section 8.3.2</span></a>. Les quantiles des lois de Student ont été calculés avec précision. On notera <span class="math inline">\(t_{k,\alpha}\)</span> le quantile symétrique de niveau <span class="math inline">\(\alpha\)</span> de <span class="math inline">\(\mathscr{T}(k)\)</span>. Alors, <span class="math display">\[ P_{\mu, \sigma^2}(|T_n|&gt; t_{n-1,1-\alpha}) = \alpha .\]</span> Par le même raisonnement que tout à l’heure, l’inégalité <span class="math display">\[ \left|\frac{\sqrt{n}}{\hat{\sigma}_n}(\bar{X}_n - \mu)\right| &gt; t_{n-1,1-\alpha}\]</span> est équivalente à <span class="math display">\[ \mu \in \left[\bar{X}_n \pm \frac{t_{n-1,1-\alpha}\hat{\sigma}_n}{\sqrt{n}} \right]\]</span> et les deux côtés de cet intervalle sont des statistiques;&nbsp;en les notant <span class="math inline">\(A,B\)</span>, on a bien trouvé un intervalle de confiance de niveau <span class="math inline">\(\alpha\)</span>, c’est-à-dire tel que <span class="math inline">\(P_{\mu,\sigma^2}(\mu \in [A,B]) = \alpha\)</span>. Cet intervalle de confiance est d’une grande importance en pratique et mérite son propre théorème. Il est dû à <a href="https://en.wikipedia.org/wiki/William_Sealy_Gosset">William Gosset</a>.</p>
+<p>Lorsque <span class="math inline">\(\sigma\)</span> n’est pas connue, les bornes <span class="math inline">\(A,B\)</span> ci-dessus ne sont pas des statistiques, car elles dépendent de <span class="math inline">\(\sigma\)</span>. On peut estimer <span class="math inline">\(\sigma\)</span> sans biais (cf <a href="ch2.html#thm-unb" class="quarto-xref">Théorème&nbsp;<span>6.5</span></a>) via l’estimateur <span class="math display">\[ \hat{\sigma}_n^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar{X}_n)^2.\]</span> Que se passe-t-il si, dans <a href="#eq-pivg" class="quarto-xref">Équation&nbsp;<span>8.1</span></a>, on remplace <span class="math inline">\(\sigma\)</span> par son estimation <span class="math inline">\(\hat{\sigma}_n^2\)</span> ? On obtient la statistique dite <em>de Student</em>, <span id="eq-pivst"><span class="math display">\[T_n = \frac{\sqrt{n}}{\sqrt{\hat{\sigma}_n^2}}(\bar{X}_n - \mu). \tag{8.5}\]</span></span> Sa loi n’est plus gaussienne : c’est une loi de Student à <span class="math inline">\(n-1\)</span> paramètres de liberté <span class="math inline">\(\mathscr{T}(n-1)\)</span>:&nbsp;le calcul de la densité est fait en détails dans <a href="app0.html#sec-student1" class="quarto-xref"><span>Section 28.3</span></a> - <a href="#sec-student2" class="quarto-xref"><span>Section 8.3.2</span></a>. Les quantiles des lois de Student ont été calculés avec précision. On notera <span class="math inline">\(t_{k,\alpha}\)</span> le quantile symétrique de niveau <span class="math inline">\(\alpha\)</span> de <span class="math inline">\(\mathscr{T}(k)\)</span>. Alors, <span class="math display">\[ P_{\mu, \sigma^2}(|T_n|&gt; t_{n-1,1-\alpha}) = \alpha .\]</span> Par le même raisonnement que tout à l’heure, l’inégalité <span class="math display">\[ \left|\frac{\sqrt{n}}{\hat{\sigma}_n}(\bar{X}_n - \mu)\right| &gt; t_{n-1,1-\alpha}\]</span> est équivalente à <span class="math display">\[ \mu \in \left[\bar{X}_n \pm \frac{t_{n-1,1-\alpha}\hat{\sigma}_n}{\sqrt{n}} \right]\]</span> et les deux côtés de cet intervalle sont des statistiques;&nbsp;en les notant <span class="math inline">\(A,B\)</span>, on a bien trouvé un intervalle de confiance de niveau <span class="math inline">\(\alpha\)</span>, c’est-à-dire tel que <span class="math inline">\(P_{\mu,\sigma^2}(\mu \in [A,B]) = \alpha\)</span>. Cet intervalle de confiance est d’une grande importance en pratique et mérite son propre théorème. Il est dû à <a href="https://en.wikipedia.org/wiki/William_Sealy_Gosset">William Gosset</a>.</p>
 <div id="thm-icg" class="theorem">
 <p><span class="theorem-title"><strong>Théorème 8.1 (Intervalle de Student)</strong></span> Un intervalle de confiance de niveau <span class="math inline">\(1-\alpha\)</span> pour l’estimation de <span class="math inline">\(\mu\)</span> lorsque <span class="math inline">\(\sigma\)</span> n’est pas connue est donné par</p>
 <p><span class="math display">\[\left[\bar{X}_n \pm \frac{t_{n-1, 1-\alpha}\hat{\sigma}_n}{\sqrt{n}}\right].\]</span></p>
@@ -457,16 +482,16 @@ $$
 <h3 data-number="8.2.2" class="anchored" data-anchor-id="estimation-de-sigma"><span class="header-section-number">8.2.2</span> Estimation de <span class="math inline">\(\sigma\)</span></h3>
 <p>Supposons maintenant qu’on désire estimer la variance <span class="math inline">\(\sigma^2\)</span>.</p>
 <p><strong>Lorsque <span class="math inline">\(\mu\)</span> est connue.</strong></p>
-<p>En supposant que <span class="math inline">\(\mu\)</span> est connue, l’estimateur des moments le plus naturel pour estimer <span class="math inline">\(\sigma^2\)</span> est évidemment <span class="math display">\[ \tilde{\sigma}^2_n = \frac{1}{n}\sum_{i=1}^n (X_i - \mu)^2.\]</span> Comme les <span class="math inline">\((X_i - \mu)/\sigma\)</span> sont des variables aléatoires gaussiennes centrées réduites, l’estimateur <span class="math inline">\(\tilde{\sigma}^2_n \times (n/ \sigma^2)\)</span> est une somme de <span class="math inline">\(n\)</span> gaussiennes standard indépendantes. La loi de cette statistique est connue :&nbsp;c’est une <a href="https://fr.wikipedia.org/wiki/Loi_du_%CF%87%C2%B2">loi du chi-deux</a> à <span class="math inline">\(n\)</span> paramètres de liberté comme démontré dans <a href="app0.html#sec-chideux" class="quarto-xref"><span>Section 25.2</span></a>. Cette loi n’est pas symétrique, puisqu’elle est supportée sur <span class="math inline">\([0,\infty[\)</span>. On note souvent <span class="math inline">\(k^-_{n,\alpha}\)</span> et <span class="math inline">\(k^+_{n,\alpha}\)</span> les nombres les plus éloignés possibles<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> tels que <span class="math inline">\(\mathbb{P}(k^-_{n,\alpha}&lt; \chi^2(n)&lt;k^+_{n,\alpha}) = 1-\alpha\)</span>. Ainsi, <span class="math display">\[P_{\sigma^2}(k^-_{n,\alpha}&lt; \frac{n \tilde{\sigma}^2_n}{\sigma^2} &lt; k^+_{n,\alpha}) = 1-\alpha.\]</span> En pivotant comme dans les exemples précédents, on obtient que l’intervalle <span class="math display">\[\left[\frac{n\tilde{\sigma}_n^2}{k^{+}_{n,\alpha}} ~~;~~ \frac{n\tilde{\sigma}_n^2}{k^-_{n,\alpha}} \right] \]</span> est un intervalle de confiance de niveau <span class="math inline">\(\alpha\)</span> pour <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>En supposant que <span class="math inline">\(\mu\)</span> est connue, l’estimateur des moments le plus naturel pour estimer <span class="math inline">\(\sigma^2\)</span> est évidemment <span class="math display">\[ \tilde{\sigma}^2_n = \frac{1}{n}\sum_{i=1}^n (X_i - \mu)^2.\]</span> Comme les <span class="math inline">\((X_i - \mu)/\sigma\)</span> sont des variables aléatoires gaussiennes centrées réduites, l’estimateur <span class="math inline">\(\tilde{\sigma}^2_n \times (n/ \sigma^2)\)</span> est une somme de <span class="math inline">\(n\)</span> gaussiennes standard indépendantes. La loi de cette statistique est connue :&nbsp;c’est une <a href="https://fr.wikipedia.org/wiki/Loi_du_%CF%87%C2%B2">loi du chi-deux</a> à <span class="math inline">\(n\)</span> paramètres de liberté comme démontré dans <a href="app0.html#sec-chideux" class="quarto-xref"><span>Section 28.2</span></a>. Cette loi n’est pas symétrique, puisqu’elle est supportée sur <span class="math inline">\([0,\infty[\)</span>. On note souvent <span class="math inline">\(k^-_{n,\alpha}\)</span> et <span class="math inline">\(k^+_{n,\alpha}\)</span> les nombres les plus éloignés possibles<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> tels que <span class="math inline">\(\mathbb{P}(k^-_{n,\alpha}&lt; \chi^2(n)&lt;k^+_{n,\alpha}) = 1-\alpha\)</span>. Ainsi, <span class="math display">\[P_{\sigma^2}(k^-_{n,\alpha}&lt; \frac{n \tilde{\sigma}^2_n}{\sigma^2} &lt; k^+_{n,\alpha}) = 1-\alpha.\]</span> En pivotant comme dans les exemples précédents, on obtient que l’intervalle <span class="math display">\[\left[\frac{n\tilde{\sigma}_n^2}{k^{+}_{n,\alpha}} ~~;~~ \frac{n\tilde{\sigma}_n^2}{k^-_{n,\alpha}} \right] \]</span> est un intervalle de confiance de niveau <span class="math inline">\(\alpha\)</span> pour <span class="math inline">\(\sigma^2\)</span>.</p>
 <p><strong>Lorsque <span class="math inline">\(\mu\)</span> est inconnue.</strong></p>
-<p>Cette fois, on utilise l’estimateur de <a href="ch2.html#thm-unb" class="quarto-xref">Théorème&nbsp;<span>6.5</span></a>, à savoir <span class="math display">\[ \hat{\sigma}_n^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar{X}_n)^2.\]</span> La loi de <span class="math inline">\((n-1)\hat{\sigma}^2_n / \sigma^2\)</span> est encore une loi du chi-deux, mais à <span class="math inline">\(n-1\)</span> paramètres de liberté (cela sera montré dans <a href="app0.html#sec-chideux" class="quarto-xref"><span>Section 25.2</span></a>). Le même raisonnement que ci-dessus donne l’intervalle de confiance de niveau <span class="math inline">\(1-\alpha\)</span> suivant :&nbsp; <span class="math display">\[\left[\frac{(n-1)\hat{\sigma}_n^2}{k^+_{n-1,\alpha}} ~~;~~ \frac{(n-1)\hat{\sigma}_n^2}{k^-_{n-1,\alpha}} \right]. \]</span></p>
+<p>Cette fois, on utilise l’estimateur de <a href="ch2.html#thm-unb" class="quarto-xref">Théorème&nbsp;<span>6.5</span></a>, à savoir <span class="math display">\[ \hat{\sigma}_n^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar{X}_n)^2.\]</span> La loi de <span class="math inline">\((n-1)\hat{\sigma}^2_n / \sigma^2\)</span> est encore une loi du chi-deux, mais à <span class="math inline">\(n-1\)</span> paramètres de liberté (cela sera montré dans <a href="app0.html#sec-chideux" class="quarto-xref"><span>Section 28.2</span></a>). Le même raisonnement que ci-dessus donne l’intervalle de confiance de niveau <span class="math inline">\(1-\alpha\)</span> suivant :&nbsp; <span class="math display">\[\left[\frac{(n-1)\hat{\sigma}_n^2}{k^+_{n-1,\alpha}} ~~;~~ \frac{(n-1)\hat{\sigma}_n^2}{k^-_{n-1,\alpha}} \right]. \]</span></p>
 </section>
 </section>
 <section id="loi-de-la-statistique-de-student" class="level2" data-number="8.3">
 <h2 data-number="8.3" class="anchored" data-anchor-id="loi-de-la-statistique-de-student"><span class="header-section-number">8.3</span> Loi de la statistique de Student</h2>
 <section id="expression" class="level3" data-number="8.3.1">
 <h3 data-number="8.3.1" class="anchored" data-anchor-id="expression"><span class="header-section-number">8.3.1</span> Expression</h3>
-<p>Les lois de Student sont décrites dans la section <a href="app0.html" class="quarto-xref"><span>Chapitre 25</span></a> de l’appendice. En résumé, la loi de Student d’indice <span class="math inline">\(n\)</span>, notée <span class="math inline">\(\mathscr{T}(n)\)</span>, est la loi de <span class="math inline">\(N(0,1) / \sqrt{\chi_2(n)/n}\)</span> où le numérateur et le dénominateur sont indépendants, et sa densité est donnée par</p>
+<p>Les lois de Student sont décrites dans la section <a href="app0.html" class="quarto-xref"><span>Chapitre 28</span></a> de l’appendice. En résumé, la loi de Student d’indice <span class="math inline">\(n\)</span>, notée <span class="math inline">\(\mathscr{T}(n)\)</span>, est la loi de <span class="math inline">\(N(0,1) / \sqrt{\chi_2(n)/n}\)</span> où le numérateur et le dénominateur sont indépendants, et sa densité est donnée par</p>
 <p><span class="math display">\[t_n(x) = \frac{1}{Z_n}\left(\frac{1}{1 + \frac{x^2}{n}}\right)^{\frac{n+1}{2}}.\]</span> où la constante de normalisation est <span class="math display">\[Z_n = \sqrt{n\pi}\frac{\Gamma\left(\frac{n}{2}\right)}{\Gamma\left(\frac{n+1}{2}\right)}.\]</span></p>
 </section>
 <section id="sec-student2" class="level3" data-number="8.3.2">
