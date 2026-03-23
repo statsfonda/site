@@ -1,0 +1,7 @@
+# Exercices {.unnumbered}
+
+## Questions {.unnumbered} 
+
+- Pour n'importe quel nombre réel $x$, trouver des lois à densité dont l'entropie est égale à $x$.
+- Calculer la divergence de KL entre deux lois d'un même modèle exponentiel. 
+- Montrer que la divergence de KL n'est pas une distance, mais que $d_\mathrm{KL}(P,Q) = 0$ si et seulement si $P = Q$.

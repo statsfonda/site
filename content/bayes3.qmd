@@ -1,0 +1,3 @@
+# Régression linéaire bayésienne
+
+calculs

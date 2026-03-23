@@ -1,0 +1,7 @@
+# Estimation de queues de distribution
+
+Comment estimer l’indice $\alpha$ d’une loi à queue lourde ?
+
+## Estimateur de Hill/censure
+
+## Estimateur de Pickands

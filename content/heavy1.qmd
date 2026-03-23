@@ -1,0 +1,66 @@
+# Lois à queues lourdes
+
+On rappelle qu’une variable aléatoire $X$ est à queue lourde si 
+$$\mathbb{P}(X > x) \sim c x^{-\alpha}$$
+pour $x$ grand, avec $\alpha>0$ et $c>0$.
+
+
+
+La loi de Pareto est une loi à queue lourde qui est souvent utilisée pour modéliser des phénomènes d’extrêmes. Elle est définie par la fonction de densité
+$$f(x) = \frac{\alpha x_{\min}^{\alpha}}{x^{\alpha+1}}$$
+pour $x \geqslant x_{\min}$, où $x_{\min}$ est un paramètre de position.
+
+## Déviations et queues lourdes
+
+### Pareto(3) vs Gaussienne
+
+On sait bien que les lois gaussiennes ne sont pas à queue lourde, puisque leur fonction de survie tend extrêmement vite vers 0. En pratique, les gaussiennes sont extrêmement concentrées : par exemple, la probabilité de déviation de 1 écart-type est d’environ 68%, tandis que la probabilité de déviation de 2 écart-types est d’environ 95%.
+
+On entend parfois dire que les lois à queue lourde sont des lois pour lesquelles les probabilités de déviation sont beaucoup plus grandes que pour les lois gaussiennes. C’est, en règle générale, faux. C’est même plutôt le contraire : pour les lois à queue lourde, la probabilité de déviation de 1 écart-type est plus petite que pour les lois gaussiennes. Mais *lorsqu’une déviation arrive*, celle-ci est incomparablement plus grande que pour les lois gaussiennes. Menons le calcul pour voir, et plaçons-nous dans le cas d’une loi d’indice $\alpha=4$. Par facilité, on considère la loi de Pareto symétrisée, dont la densité est 
+
+$$f(x) = \frac{3\mathbf{1}_{|x|>1}}{|x|^4}.$$
+Cette loi est centrée. Sa variance est donnée par 
+$$\sigma_\alpha^2 = 2\int_1^\infty x^2 \frac{3}{|x|^4} dx = 2\int_1^\infty \frac{3}{x^2} dx = 6.$$
+La loi de Pareto d’indice $\alpha=4$ a donc un écart-type de $\sqrt{6}\approx 2.45$. Maintenant, la probabilité de déviation de $k$ écarts-types est donnée par 
+\begin{align}p_k &= \mathbb{P}(|X| > k\sigma_\alpha) \\
+&= 2\int_{k\sigma}^\infty \frac{3}{x^4}dx\\
+&= \frac{2}{(k\sigma)^3}.
+\end{align}
+
+| $\mathbb{P}(|Z|>k\sigma)$ | $k=1$ | $k=2$ | $k=3$ |
+|---|---:|---:|---:|
+| $\mathscr{N}(0,1)$ | 32\% | 4.5\% | 0.27\% |
+| Pareto(3)| 13.5\% | 1.7\% | 0.5\% |
+
+
+
+
+
+### Autre exemple
+
+On regarde une variante de la loi de Cauchy au carré, notée $\mathscr{C}(1,2)$. Sa densité est
+$$f(x) = \frac{2}{\pi}\frac{1}{(1+x^2)^2}.$$
+Cette loi est centrée, donc sa variance est donnée par 
+$$\sigma^2 = \frac{2}{\pi}\int_0^\infty \frac{x^2}{(1+x^2)^2} dx$$
+et un calcul d’intégrale donne $\pi/2 \approx 1.57$. Calculons la probabilité de déviation de $k$ écarts-types, $p_k$. On a 
+\begin{align}p_k &= \mathbb{P}(|X| > k\sigma) \\
+&= \frac{4}{\pi}\int_{k\sigma}^\infty \frac{1}{(1+x^2)^2} dx.
+\end{align}
+La primitive de $\frac{1}{(1+x^2)^2}$ qui s’annule en 0 est égale à 
+$$F(x) = \frac{x}{2(1+x^2)} + \frac{1}{2}\arctan(x).$$
+Sa limite en l’infini est $\pi/4$. Par conséquent, 
+\begin{align}p_k &= \frac{4}{\pi}(F(\infty) - F(k\sigma))\\
+&= \frac{4}{\pi}\left(\frac{\pi}{4} - \frac{k\sigma}{2(1+(k\sigma)^2)} - \frac{1}{2}\arctan(k\sigma)\right)\\
+&= 1 - \frac{2}{\pi}\left(\frac{k\sigma}{1+(k\sigma)^2} + \arctan(k\sigma)\right).
+\end{align}
+
+| $\mathbb{P}(|Z|>k\sigma)$ | $k=1$ | $k=2$ | $k=3$ | $k=4$ |
+|---|---:|---:|---:|---:|
+| $\mathscr{N}(0,1)$ | 32\% | 4.5\% | 0.27\% | 0.006\% |
+| $\mathscr{C}(1,2)$ | 7\% | 1.2\% | 0.38\% | 0.16\% |
+
+## Invariance d’échelle 
+
+Les lois à queue lourde vérifient
+$$\mathbb{P}(X > \lambda t) \sim c \lambda^{-\alpha}t^{-\alpha}$$
+et donc $X/\lambda$ est également une variable aléatoire à queue lourde d’indice $\alpha$. Changer l’échelle ne change rien, hormis éventuellement la constante. 

@@ -1,4 +1,4 @@
-# Principe d'entropie maximale
+# Entropies maximales
 
 Ce chapitre fait le pont entre la physique statistique et la statistique, et montre essentiellement qu'il s'agit de deux points de vue sur la même théorie.
 
@@ -21,7 +21,7 @@ Le théorème de Boltzmann-Gibbs doit que les lois d'entropie maximale vérifian
 
 :::{#thm-boltzmann-gibbs}
 
-## Principe d'entropie maximale de Boltzmann-Gibbs
+### Principe d'entropie maximale de Boltzmann-Gibbs
 
 
 Soit $T:\mathbb{R}^d \to \mathbb{R}^p$. Les densités de probabilité $f$ sur $\mathbb{R}^n$ qui maximisent l'entropie $-\int f(x) \ln f(x)\nu(dx)$ sous la containte $E_{X\sim f}[T(X)]=c$, si elles existent, sont exactement de la forme $e^{\langle \theta, T(x)\rangle}/Z(\theta)$. 
@@ -33,15 +33,8 @@ Il est alors naturel de chercher $P$ parmi toutes les lois qui vérifient la con
 
 :::{exm-example-gaussien-entropie}
 
-## Loi gaussienne
 
-Quelle est la densité $f$ qui maximise l'entropie, sous la contrainte d'être centrée et réduite ? Ici, cette contrainte s'écrit $E[X] = 0$ et $E[X^2]=1$, donc le moment associé est $T(x) = (x, x^2)^\top$. Le théorème dit que cette loi s'écrit sous la forme $e^{-\alpha x - \beta x^2} / Z(\alpha, \beta)$, où $\alpha,\beta$ sont réels. En réalité, $\beta$ doit être positif sinon ce n'est pas une loi de probabilité. De plus, il est facile de voir que si $\alpha$ n'est pas nul, alors l'espérance n'est pas nulle. La loi d'entropie maximale est donc proportionnelle à $e^{-\beta x^2}$ : il s'agit évidemment d'une loi gaussienne, et le seul paramètre qui garantit que la variance est 1 est donné par $\beta = 1/2$. 
-
-
-:::
-
-
-## Démonstration
+### Démonstration
 
 La démonstration générale de @thm-boltzmann-gibbs nécessite des outils de calcul des variations, puisqu'il s'agit d'un problème s'optimisation en dimension infinie. Ce n'est pas difficile formellement, mais garantir l'existence d'un maximiseur peut s'avérer technique^[Après discussion avec mes collègues, il y a consensus sur la nécessité d'utiliser un critère de compacité L1 de type Dunford-Pettis. ]. En revanche, l'esprit de la preuve est très simple : on écrit le lagrangien du problème contraint. Lorsque l'espace d'états $\mathcal{X}$ est fini, c'est très simple. On supposera donc que $\mathcal{X} = \{1, \dotsc, n\}$, et on cherche une loi de probabilité sur $\mathcal{X}$, disons $p=(p_1, \dotsc, p_n)$, qui vérifie la contrainte de moments $m(p)=0$, où
 $$ m(p) = \sum_{i=1}^n p_i T(i) - c$$
@@ -64,4 +57,42 @@ $$\left(\frac{e^{-\lambda T(i)}}{Z(\lambda)}, \dotsc, \frac{e^{-\lambda T(i)}}{Z
 où $Z(\lambda) = \sum_{i=1}^n e^{-\lambda T(i)}$. **Autrement dit, s'il y a une solution au problème, il s'agit forcément d'une loi dans le modèle exponentiel associé à $T$**. Maintenant, la contrainte doit être réalisée, c'est-à-dire que l'on doit trouver un $\lambda$ qui vérifie
 $$E_\lambda [T(X)] = c.$$
 L'existence d'un tel $\lambda$ n'est pas forcément vérifiée^[Penser à la contrainte absurde $E_\lambda[X^2]=-1$. ]. Pour qu'il y ait une solution et une seule, on peut par exemple faire des hypothèses sur $T$ qui garantissent que le modèle est identifiable, de sorte que $E_\lambda [T(X)]$ est un difféormorphisme. 
+
+## Lois Gaussiennes
+
+Quelle est la densité $f$ qui maximise l'entropie, sous la contrainte d'être centrée et réduite ? Ici, cette contrainte s'écrit $E[X] = 0$ et $E[X^2]=1$, donc le moment associé est $T(x) = (x, x^2)^\top$. Le théorème dit que cette loi s'écrit sous la forme $e^{-\alpha x - \beta x^2} / Z(\alpha, \beta)$, où $\alpha,\beta$ sont réels. En réalité, $\beta$ doit être positif sinon ce n'est pas une loi de probabilité. De plus, il est facile de voir que si $\alpha$ n'est pas nul, alors l'espérance n'est pas nulle. La loi d'entropie maximale est donc proportionnelle à $e^{-\beta x^2}$ : il s'agit évidemment d'une loi gaussienne, et le seul paramètre qui garantit que la variance est 1 est donné par $\beta = 1/2$. 
+
+En fait, les lois gaussiennes occupent une place centrale dans la théorie de l'information et des statistiques *aussi* parce qu'elles sont les lois d'entropie maximale sous contrainte de moments. On va énoncer quelques théorèmes de calcul gaussiens en théorie de l'information. 
+
+:::{#thm-gaussien-entropie}
+
+L'entropie de la loi $\mathscr{N}(\mu,\Sigma)$ est égale à 
+$$\frac{1}{2} \ln((2\pi e)^d \det(\Sigma)).$$
+La divergence KL de $\mathscr{N}(\mu_1,\Sigma_1)$ vers $\mathscr{N}(\mu_2,\Sigma_2)$ est égale à 
+$$\frac{1}{2} \left(\mathrm{tr}(\Sigma_2^{-1}\Sigma_1) + (\mu_2-\mu_1)^T\Sigma_2^{-1}(\mu_2-\mu_1) - d + \ln\left(\frac{\det(\Sigma_2)}{\det(\Sigma_1)}\right)\right).$$
+::: 
+
+*Démonstration.* C'est un calcul. 
+
+
+
+On va maintenant re-démontrer le principe d'entropie maximale de Boltzmann-Gibbs pour les lois gaussiennes. En soi, le théorème @thm-boltzmann-gibbs est suffisant : il suffit de prendre le moment défini par $T(x) = (x_i x_j)_{1\leqslant i,j\leqslant d}$ pour voir que les gaussiennes sont les lois d'entropie maximale sous contrainte de covariance. Cependant, il y a une autre démonstration, légèrement plus calculatoire mais plus directe. 
+
+:::{#thm-maxent-gauss}
+
+Soit $\Sigma$ une matrice symétrique définie positive. Parmi toutes les lois centrées sur $\mathbb{R}^d$ ayant $\Sigma$ pour matrice de covariance, la loi $\mathscr{N}(0,\Sigma)$ est celle qui maximise l'entropie. 
+
+:::
+
+*Démonstration.* Soit $f$ la densité d'une variable aléatoire centrée de covariance $\Sigma$, et soit $g$ la densité de la loi $\mathscr{N}(0,\Sigma)$. Comme la divergence KL de $f$ vers $g$ est toujours positive, on sait que 
+$$-\int f \ln f  \leqslant -\int f \ln g.$${#eq-dkl_gauss}
+Par ailleurs, on sait que  
+$$\ln g(x) = -\frac{1}{2} \ln((2\pi)^d \det(\Sigma)) - \frac{1}{2}\langle x, \Sigma^{-1}x\rangle.$$
+Or, on sait que pour n'importe quelle variable aléatoire $X$, on a 
+$$\mathbb{E}[\langle X, A X\rangle] = \mathrm{tr}(A \mathrm{Var}(X)).$$
+On voit donc que 
+$$-\int f \ln g  = \frac{1}{2} \ln((2\pi)^d \det(\Sigma)) + \frac{1}{2}\mathrm{tr}(\Sigma^{-1} \Sigma).$$
+Comme $\mathrm{tr}(\Sigma^{-1} \Sigma) = d = \ln e^d$, on voit que tout ceci est égal à 
+$$\frac{1}{2} \ln((2\pi e)^d \det(\Sigma)).$$
+C'est exactement l'entropie de la loi $\mathscr{N}(0,\Sigma)$. Par ailleurs, il y a égalité dans @eq-dkl_gauss si et seulement si $f = g$. 
 

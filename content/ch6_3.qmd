@@ -1,4 +1,4 @@
-# Entropie et information
+# Hasard et information
 
 
 Soient $X_i$ des variables aléatoires définies sur un même ensemble fini $\mathcal{X} = (a_1, \dotsc, a_k)$. On note $p_k = \mathbb{P}(X = a_k)$. On observe un échantillon de $n$ réalisations des $X_i$, disons $(x_1, \dotsc, x_n)$. Avant de s'intéresser à l'information que portent ces observations sur la loi $\mathbb{P}$, qui est le problème *statistique* auquel nous nous sommes intéressé, on peut se demander quelle est la quantité d'information portée par les $x_i$ *tout court*, sans avoir à faire d'hypothèses sur la loi de $X$. Par exemple, si toutes les observations sont identiques, l'échantillon transporte peu d'information -- en tout cas, moins que si les observations sont un peu plus variées. La question posée est la suivante : si l'on voulait coder les observations de sorte que deux observations différentes soient codées de deux façons différentes, et de sorte qu'en moyenne le codage des informations soit le plus compressé possible, quel code utiliserait-on ?
@@ -21,7 +21,7 @@ Dans ces exemples, chaque codage d'un échantillon nécessitait le même nombre 
 
 Dans ce cas, la plupart des observations n'auront que des $a$. Donc si j'assigne à l'observation $a$ un code *d'un seul bit*, disons 0, et que j'assigne aux trois autres des codes plus longs comme $10, 110, 111$, alors le coût moyen de codage d'une observation sera 
 $$ 1\times 97\% + 2\times 1\% + 3 \times 1\% + 3\times 1\% = 1.05$$
-Autrement dit, en moyenne, je n'aurai pas besoin de beaucoup plus d'un bit d'observation par observation, alors que le codage élémentaire ci-dessus en nécessitait exactement deux. Avec ce code, l'échantillon $(a,a,a,b,a,d,d,a,a,a)$ devient codé par $000100111111000$, donc 15 bits. 
+Autrement dit, en moyenne, je n'aurai pas besoin de beaucoup plus d'un bit par observation, alors que le codage élémentaire ci-dessus en nécessitait exactement deux. Avec ce code, l'échantillon $(a,a,a,b,a,d,d,a,a,a)$ devient codé par $000100111111000$, donc 15 bits. 
 
 
 
@@ -39,13 +39,13 @@ $$\mathbb{E}[\ell_X] = \sum_{i=1}^k \ell_i \mathbb{P}(X = a_i).$$
 
 :::{#exm-codage}
 
-Un roman contient environ 80000 mots, donc environ 400000 signes (en comptant les espaces). Un signe peut être l'une des 26 lettres de l'alphabet (en majuscule ou minuscule), un signe de ponctuation, un chiffre, une lettre accentuée… La plupart des romans occidentaux ont besoin d'un alphabet de ~200 lettres. Le codage binaire basique lettre-par-lettre nécessiterait donc environ $\lceil \log_2 200 \rceil \approx 8$ bits d'information par lettre, soit 3200000 bits. On compte plutôt en paquet de 8 bits, appelés bytes : le codage du roman nécessiterait donc environ 400000 bytes soit 400kB. 
+Un roman contient environ 80000 mots, donc environ 400000 signes (en comptant les espaces). Un signe peut être l'une des 26 lettres de l'alphabet (en majuscule ou minuscule), un signe de ponctuation, un chiffre, une lettre accentuée… La plupart des romans occidentaux ont besoin d'un alphabet de ~200 lettres. Le codage binaire basique lettre-par-lettre nécessiterait donc environ $\lceil \log_2 200 \rceil \approx 8$ bits d'information par lettre, soit 3200000 bits. On compte plutôt en paquet de 8 bits, appelés bytes : le codage du roman nécessiterait donc environ 400000 bytes soit 400kB. On va voir plus loin qu'un encode *entropique* serait plus économique. 
 
 :::
 
-## Le théorème de Shannon
+## L'entropie des variables aléatoires
 
-Quel est la plus petite quantité moyenne d'informations nécessaire à coder une réalisation de $X$ ? La réponse est *l'entropie de la loi de $P$*. 
+Quelle est la plus petite quantité moyenne d'informations nécessaire à coder une réalisation de $X$ ? La réponse est *l'entropie de la loi de $P$*. 
 
 :::{#def-entropie}
 
@@ -60,7 +60,32 @@ Lorsque $X$ est une variable discrète prenant la valeur $a_k$ avec probabilité
 $$ -\sum_{k} p_k \log_2 p_k.$$
 
 
-En théorie de l'information, on prend plutôt le logarithme en base 2 plutôt que le logarithme népérien. L'entropie ne diffère alors que d'une constante $\ln(2)$. 
+En théorie de l'information, on prend plutôt le logarithme en base 2 plutôt que le logarithme népérien. L'entropie ne diffère alors que d'une constante $\ln(2)$. L'entropie des lois discrètes finies possède de nombreuses propriétés intéressantes. 
+
+:::{#prp-entropie-discretes}
+
+Soit $X$ une variable aléatoire sur un ensemble fini à $m$ éléments. Son entropie $\mathrm{Ent}(X)$ vérifie
+$$0 \leqslant \mathrm{Ent}(X) \leqslant \log_2(m).$$
+
+L'entropie est nulle si et seulement si $X$ est constante, et elle vaut $\log_2(m)$ si et seulement si $X$ est la loi uniforme.
+
+:::
+
+:::{.proof}
+
+La première inégalité est évidente puisque $-\log_2(p_k)$ est un nombre positif. Pour la seconde, on peut utiliser l'inégalité de Jensen : en effet, la fonction $\log_2$ est concave, donc 
+$$\mathrm{Ent}(X) = \mathbb{E}[\log_2(1/p_X)] \geqslant \log_2\left(\mathbb{E}[1/p_X]\right).$$
+Le résultat vient immédiatement du fait que $\mathbb{E}[1/p_X] = m$. Si l'un des $p_k$ est nul, il suffit de restreindre $X$ à l'ensemble des $k$ tels que $p_k > 0$, qui contient moins de $m$ éléments, pour avoir le résultat. 
+
+:::
+
+**Remarque.** Pour les lois continues, tout ceci est entièrement faux. Les entropies des variables à densité peuvent valoir n'importe quelle valeur réelle (même pas forcément positive). 
+
+Le lemme précédent donne une bonne intuition sur l'entropie : il s'agit vraiment d'une mesure de la quantité de hasard contenue dans un phénomène aléatoire. La loi uniforme est la loi la plus aléatoire possible, et son entropie est maximale. La masse de Dirac est la loi la moins aléatoire possible, et son entropie est nulle. 
+
+Plus il y a de hasard, de désordre ou de désorganisation, plus l'entropie est grande. Plus il y a de certitude, d'ordre et de structure, plus l'entropie est petite. En physique, le second principe de la thermodynamique dit que l'entropie d'un système isolé ne peut que croître ; le système se dirige toujours vers un état où il y a plus de désordre. 
+
+## Le théorème de Shannon
 
 Le théorème de codage suivant ne s'applique qu'aux variables discrètes. 
 
@@ -77,7 +102,7 @@ Il existe un codage appelé *codage entropique* vérifiant $\ell^\star(a)=\lceil
 En particulier, le codage optimal d'un échantillon iid de taille $n$ vérifie 
 $$ \lim \frac{\mathbb{E}[\ell^\star_n]}{n} = \ent(P).$$
 
-L'entropie d'une loi est donc en le nombre moyen de bits d'information nécessaire à son codage le plus économe : asymptotiquement, ce codage est le *codage entropique* qui assigne à chaque $a \in \mathcal{X}$ un code de longueur proche de $\log_2(\mathbb{P}(X=a))$. Cependant, il existe d'autres codages qui sont asymptotiquement meilleurs que le codage ci-dessus, et qui sont meilleurs même à distance finie : par exemple, le codage de Huffman. 
+L'entropie d'une loi est donc le nombre moyen de bits d'information nécessaire à son codage le plus économe : asymptotiquement, ce codage est le *codage entropique* qui assigne à chaque $a \in \mathcal{X}$ un code de longueur proche de $\log_2(\mathbb{P}(X=a))$. Cependant, il existe d'autres codages qui sont asymptotiquement aussi bons que le codage ci-dessus, et qui sont meilleurs même à distance finie : par exemple, le codage de Huffman. 
 
 
 
@@ -117,10 +142,26 @@ la quantité
 
 $$\sum_{k=1}^n p_k \log_2\frac{p_k}{q_k}$$
 peut aussi se voir comme 
-$$E[\log_2 q_X] - E[\ell_X^\star].$$
-Il s'agit donc bien d'une « redondance d'information » : le terme de droite est la quantité minimale d'information dont on a besoin pour coder $X$ en moyenne (via le codage entropique), et le terme de gauche est la quantité d'information dont on use pour coder $X$ en moyenne par le code $S$. À une constante près^[À savoir $\ln(2)$.], la divergence de Kullback-Leibler
+$$(-E[\log_2 q_X]) - E[\ell_X^\star].$$
+Il s'agit donc bien d'une « redondance d'information » : le terme de droite est la quantité minimale d'information dont on a besoin pour coder $X$ en moyenne (via le codage entropique), et le terme de gauche est la quantité d'information dont on use pour coder $X$ en moyenne par un code qui serait le codage optimal de $Q$. À une constante près^[À savoir $\ln(2)$.], la divergence de Kullback-Leibler de $P$ vers $Q$ vaut
 $$ \dkl(P\mid Q) =  - \int P \ln Q - \left( - \int P \ln P \right)$$
-indique donc à quel point il est optimal (ou pas) d'encoder les réalisations de la loi $P$ grâce au « code » $\log_2 Q$ :  $\dkl$ quantifie la *redondance* de $Q$ par rapport à $P$. Puisque le codage optimal est celui qui code $x$ par $\log_2 P(x)$, le codage utilisant $\log_2 Q(x)$ n'a pas structuré au mieux l'information disponible dans $P$ est pourrait être allégé. 
+et elle  indique à quel point il est optimal (ou pas) d'encoder les réalisations de la loi $P$ grâce au « code » $\log_2 Q$ :  $\dkl$ quantifie la *redondance* de $Q$ par rapport à $P$. Puisque le codage optimal est celui qui code $x$ par $\log_2 P(x)$, le codage utilisant $\log_2 Q(x)$ n'a pas structuré au mieux l'information disponible dans $P$ est pourrait être allégé. 
+
+
+**Point mnémotechnique.** Pour se souvenir le sens de la formule de la divergence KL, il suffit de se souvenir que le premier terme est le *source* des variables $X$. $-\mathbb{E}[\log p(X)]$ est l'entropie et $-\mathbb{E}[\log q(X)]$ est le coût non-optimal, donc la différence des deux est la redondance d'information. 
+
+:::{#exm-dkl}
+
+La fréquence des lettres en français et en anglais n'est pas la même. On estime l'entropie des 26 lettres de l'alphabet à environ 4.2 bits pour le français, et 4.7 bits pour l'anglais (et pour simplifier, on ignore la ponctuation et les accents).
+
+
+Supposons qu'un programme soit conçu pour encoder des textes en anglais (par exemple, sur une liseuse, dans laquelle la place est assez limitée). Chaque lettre $k$ est encodée par un code de longueur proche de $\log_2(p^{\mathrm{eng}}_k)$ bits. Un texte contenant 400000 lettres écrit en anglais sera donc encodé avec une taille d'environ $400000 \times 4.7 = 1880000$ bits, soit 235kB. 
+
+Maintenant, supposons qu'on utilise cet ordinateur pour encoder un texte écrit en français. La divergence de KL de l'anglais vers le français peut se calculer, et elle est égale à 0.2 bits environ : cela signifie que si le texte original est en français mais encodé par l'encodage optimal de langue anglaise, son encodage prendra plutôt $4.9 \times 400000$ bits, soit 245kB, une perte de $0.2 \times 400000$ soit 10kB. 
+
+Dans ce cas précis, il serait intéressant de détecter la langue et de faire varier l'encodage en fonction de la langue. 
+
+:::
 
 
 ## Information de Fisher et entropie

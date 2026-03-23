@@ -1,34 +1,34 @@
+La statistique est l'outil qui, en sciences, permet d'étudier le *hasard* : le décrire, l'analyser, distinguer différents types de hasard, séparer ce qui est dû au hasard et ce qui ne l'est pas. 
 
-Bienvenue sur la page du cours de Statistiques Fondamentales (STF8) du master Mathématiques Fondamentales et Appliquées de l'Université Paris-Cité. Les notes de cours sont accessibles à tous. De nombreux auteurs s'y sont succédés ; je suis le dernier en date, mais les versions précédentes ont été travaillées par Clément Levrard, Stéphane Boucheron, Stéphane Gaïffas, Pierre Youssef. 
+La statistique se parle en langage mathématique, et ce cours ne fera pas exception à cette règle ; mais elle ne s'y réduit pas. Qu'on le veuille ou non, sa puissance a fait d'elle un outil omniprésent dans tous les domaines de la vie où des phénomènes sont *mesurés* et *quantifiés*, qu'il s'agisse de science, d'industrie, de commerce ou de politique. Depuis quelques dizaines d'années, les idées venues de la statistique ont même donné à des problèmes purement mathématiques (et parfois anciens) un nouvel éclairage ; certaines des questions les plus ardues de mathématiques pures sont de nature statistique. 
+
+Dans ce cours, mon objectif est vous apprendre à penser en statistique, quel que soit le domaine auquel vous vous destinez. On apprendra donc : 
+
+- tout ce qui permet de **décrire les lois du hasard** (familles de lois classiques, moyennes, médianes, quartiles, écrasement, queues de probabilités, indices de dispersion et d'inégalité, distances entre lois, etc.)
+- les techniques élémentaires pour **retrouver des paramètres à partir d'observations** (estimation, intervalles de confiance, tests, régression)
+- certains des liens entre statistiques, théorie de l'information, physique statistique et machine learning (maximum de vraisemblance, entropie, théorème de Shannon, bornes informationnelles) ;
+- la quantification de l'incertitude du savoir extrait des observations, c'est-à-dire **le point de vue Bayésien** ; 
+- et enfin, ce qui n'est pas courant, une grande partie du cours sera consacrée aux **phénomènes extrêmes et aux lois à queue lourde** (théorème de Fisher-Tippett-Gnedenko, lois stables, estimation). 
+
 
 
 
 ## Organisation {.unnumbered}
 
-- **Horaires.** Les cours ont lieu
-  - lundi 13h45 - 16h45, SG1021
-  - jeudi 8h30 - 10h30, SG1021
-  - vendredi 10h45 - 12h45 puis 13h30 - 15h30, SG2015
+- Le cours a lieu tout le second semestre, du 8 janvier au 3 avril, avec une semaine de vacances du 2 au 7 mars. 
 
-- **Agenda.** Les cours reprennent le 13 janvier. Il y a six semaines de cours ; le programme approximatif est le suivant : 
-  - S1 : Estimation, intervalles de confiance (chapitres 1 à 5). 
-  - S2 : Tests (chapitres 6 à 8)
-  - S3 : Tests, exercices, **examen partiel le jeudi 30**.
-  - S4 : Modèles linéaires et MCO (chapitres 9 à 11).
-  - S5 : Modèles exponentiels et théorie de l'information (chapitres 13 à 17)
-  - S6 : Compléments et révisions. 
-  
-  Il y aura une interrogation par semaine.
+- Les CM ont lieu le mercredi de 13h45 à 15h15 en salle 1009 et le vendredi de 8h30 à 10h en salle 1009. 
 
-  Il y a un partiel jeudi 30 janvier. 
+- Les TD sont assurés par Hugo Capot et ont lieu le mercredi de 15h30 à 17h30 en salle 1009 et le vendredi de 10h45 à 12h45 en salle 1009. 
 
-  L'examen final a lieu **Lundi 3 mars de 14h à 17h.**
+- Le CC2 aura lieu la semaine du 23 mars. 
 
 
 
-- **Calcul de la note finale**. Trois quantités entrent en jeu : la note de contrôle continu $c \in [0,10]$, la note du partiel $p\in [0,20]$, et la note que vous obtiendrez à l'examen, $e \in [0,20]$. La note finale $f \in [0,20]$ est donnée par la formule 
-$$ f = 20^{\theta} \left(\frac{\max\{p,e\} + e}{2}\right)^{1 - \theta} $$
-où $\theta = 0.3 \times c/10$. C'est une moyenne géométrique qui ne pénalise personne, et qui ne peut que tirer votre note vers le haut si vous avez une note de contrôle continu $c$ strictement positive. 
+
+
+
+
 
 ## Utiliser ce site
 
@@ -41,6 +41,7 @@ Ces notes sont mises en lignes et totalement accessibles via [Quarto](https://qu
 \newcommand{\bmu}{\boldsymbol{\mu}}
 \newcommand{\bt}{\boldsymbol{\theta}}
 \newcommand{\dkl}{\mathrm{d}_{\mathrm{KL}}}
-\newcommand{\dtv}{\mathrm{d}_{\mathrm{TV}}}-->
+\newcommand{\dtv}{\mathrm{d}_{\mathrm{TV}}}
+\newcommand{\tr}{\mathrm{tr}}-->
 
 
