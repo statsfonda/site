@@ -353,6 +353,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../content/bayes_ex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercices</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../content/ch8_0.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Fisher VS Bayes</span></span></a>
   </div>
@@ -472,7 +478,8 @@ $$
 <p>La loi de <span class="math inline">\(\theta\)</span> sachant <span class="math inline">\(X\)</span> s’appelle la <em>loi a posteriori</em> et on la note abusivement <span class="math inline">\(p(\theta \mid X)\)</span>. La formule de Bayes dit que</p>
 <p><span class="math display">\[p(\theta \mid X) = \frac{p_\theta(X) \pi(\theta)}{p(X)}.\]</span></p>
 </div>
-<p>La loi a posteriori donne en quelque sorte la distribution de probabilité sur le paramètre <span class="math inline">\(\theta\)</span> qui est la plus compatible avec les données observées <span class="math inline">\(X\)</span>. À partir de cette interprétation, l’analogue de l’estimateur du maximum de vraisemblance est quasiment immédiate.</p>
+<p>La loi a posteriori donne en quelque sorte la distribution de probabilité sur le paramètre <span class="math inline">\(\theta\)</span> qui est la plus compatible avec les données observées <span class="math inline">\(X\)</span>. Comme la loi marginale <span class="math inline">\(p(X)\)</span> ne dépend pas du tout du paramètre, on écrit souvent l’équation ci-dessus avec une constante de proportionnalité, <span class="math display">\[p(\theta \mid x) \propto p_\theta(x) \pi(\theta), \]</span> le symbole <span class="math inline">\(\propto\)</span> signifiant « est proportionnel à ». Cette formule s’interprète de la façon classique : <span class="math display">\[\mathsf{a~posteriori} \propto \mathsf{vraisemblance} \times \mathsf{a~priori}.\]</span></p>
+<p> partir de cette interprétation, l’analogue de l’estimateur du maximum de vraisemblance est quasiment immédiate.</p>
 <div id="def-map" class="theorem definition">
 <p><span class="theorem-title"><strong>Définition 24.3</strong></span> L’estimateur du Maximum A Posteriori, s’il existe, est <span class="math display">\[\hat{\theta}_{\text{MAP}} = \arg \max_{\theta} p(\theta \mid X).\]</span></p>
 </div>

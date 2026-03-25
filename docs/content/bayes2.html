@@ -353,6 +353,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../content/bayes_ex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercices</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../content/ch8_0.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Fisher VS Bayes</span></span></a>
   </div>
@@ -403,9 +409,9 @@ window.Quarto = {
     <h2 id="toc-title">Table des matières</h2>
    
   <ul>
-  <li><a href="#choix-classiques" id="toc-choix-classiques" class="nav-link active" data-scroll-target="#choix-classiques"><span class="header-section-number">25.1</span> Choix classiques</a></li>
-  <li><a href="#le-paradoxe-de-jeffrey-lindley" id="toc-le-paradoxe-de-jeffrey-lindley" class="nav-link" data-scroll-target="#le-paradoxe-de-jeffrey-lindley"><span class="header-section-number">25.2</span> Le paradoxe de Jeffrey-Lindley</a></li>
-  <li><a href="#la-priori-de-jeffreys" id="toc-la-priori-de-jeffreys" class="nav-link" data-scroll-target="#la-priori-de-jeffreys"><span class="header-section-number">25.3</span> L’a priori de Jeffreys</a></li>
+  <li><a href="#le-principe-de-laplace" id="toc-le-principe-de-laplace" class="nav-link active" data-scroll-target="#le-principe-de-laplace"><span class="header-section-number">25.1</span> Le principe de Laplace</a></li>
+  <li><a href="#le-principe-de-jeffreys" id="toc-le-principe-de-jeffreys" class="nav-link" data-scroll-target="#le-principe-de-jeffreys"><span class="header-section-number">25.2</span> Le principe de Jeffreys</a></li>
+  <li><a href="#lois-conjuguées" id="toc-lois-conjuguées" class="nav-link" data-scroll-target="#lois-conjuguées"><span class="header-section-number">25.3</span> Lois conjuguées</a></li>
   </ul>
 </nav>
     </div>
@@ -444,17 +450,43 @@ $$
 </header>
 
 
-<section id="choix-classiques" class="level2" data-number="25.1">
-<h2 data-number="25.1" class="anchored" data-anchor-id="choix-classiques"><span class="header-section-number">25.1</span> Choix classiques</h2>
+<p>Un des reproches récurrents qui sont portés à la statistique bayésienne concerne le choix d’un a priori, auquel la théorie est particulièrement sensible<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Lors d’une analyse statistique, la première étape consiste à choisir cet a priori <span class="math inline">\(\pi(\theta)\)</span> de façon à encoder notre connaissance sur le paramètre <span class="math inline">\(\theta\)</span>.</p>
+<section id="le-principe-de-laplace" class="level2" data-number="25.1">
+<h2 data-number="25.1" class="anchored" data-anchor-id="le-principe-de-laplace"><span class="header-section-number">25.1</span> Le principe de Laplace</h2>
+<p>Lorsqu’il n’y a <em>aucune connaissance a priori</em> sur le paramètre, il n’y a pas de raison de donner à certains <span class="math inline">\(\theta\)</span> une probabilité plus grande qu’une autre. Par conséquent, il est naturel de choisir comme a priori une loi uniforme sur l’espace des paramètres. Ce choix est souvent appelé <strong>principe de Laplace</strong> ; il peut sembler raisonnable, et il l’est à certains égards ; mais à y regarder de plus près, on se rend compte qu’il porte en lui des effets indésirables.</p>
+<div id="exm-priori-de-jeffreys" class="theorem example">
+<p><span class="theorem-title"><strong>Exemple 25.1</strong></span> Considérons le cas d’un modèle de Bernoulli, avec paramètre <span class="math inline">\(\theta \in [0,1]\)</span>. Si l’on veut estimer <span class="math inline">\(\theta\)</span>, tout va bien, l’a-priori uniforme ne favorise aucun <span class="math inline">\(\theta\)</span> en particulier. Mais peut-être que l’on veut estimer autre chose qui dépend de <span class="math inline">\(\theta\)</span>, comme par exemple <span class="math inline">\(\nu=\theta^2\)</span>, la probabilité de gagner deux fois de suite. Or, dans ce cas, la loi de <span class="math inline">\(\nu\)</span> peut se calculer par la formule du changement de variable : si l’on note <span class="math inline">\(\rho\)</span> la densité de <span class="math inline">\(\nu\)</span>, alors <span class="math display">\[\rho(t) = \frac{1}{2\sqrt{s}}\mathrm{d}s.\]</span> Ceci est une loi bêta, <span class="math inline">\(B(1/2, 1)\)</span>. Ce n’est plus du tout une loi uniforme sur l’espace des paramètres de <span class="math inline">\(\nu\)</span>, qui est encore <span class="math inline">\([0,1]\)</span>.</p>
+</div>
+<p>Dans cet exemple, l’a priori uniforme ne reste pas uniforme lorsqu’on reparamétrise le modèle : en posant <span class="math inline">\(\eta=\theta^2\)</span>, cet a priori favorise les petites valeurs de <span class="math inline">\(\eta\)</span> sans que nous l’ayons réellement voulu. Un bon a priori devrait donc être aussi invariant que possible par les reparamétrisations du paramètre.</p>
+<p>Notons <span class="math inline">\(\pi\)</span> une densité sur l’espace des paramètres <span class="math inline">\(\Theta\)</span>. La formule du changement de variables dit que, si <span class="math inline">\(\varphi\)</span> est un difféomorphisme de <span class="math inline">\(\Theta\)</span>, alors la densité de la mesure image de <span class="math inline">\(\pi\)</span> par <span class="math inline">\(\varphi\)</span>, à savoir la mesure définie par <span class="math inline">\(\nu(A) = \pi(\varphi^{-1}(A))\)</span>, est donnée par <span id="eq-chg-var"><span class="math display">\[\nu(\eta) = \pi(\varphi^{-1}(\eta))|\det(D_{\varphi^{-1}}(\eta))|. \tag{25.1}\]</span></span></p>
+<p>En choisissant l’a priori uniforme et en utilisant le fait que <span class="math inline">\(D_{\varphi^{-1}}(\eta) = D_\varphi(\varphi^{-1}(\eta))^{-1}\)</span>, on voit qu’en toute généralité, l’a priori pour la reparamétrisation <span class="math inline">\(\eta=\varphi(\theta)\)</span> est donné par <span class="math display">\[\nu(\eta) = \frac{1}{|\det(D_\varphi(\varphi^{-1}(\eta)))|}.\]</span> Celui-ci n’est en général pas uniforme.</p>
 </section>
-<section id="le-paradoxe-de-jeffrey-lindley" class="level2" data-number="25.2">
-<h2 data-number="25.2" class="anchored" data-anchor-id="le-paradoxe-de-jeffrey-lindley"><span class="header-section-number">25.2</span> Le paradoxe de Jeffrey-Lindley</h2>
+<section id="le-principe-de-jeffreys" class="level2" data-number="25.2">
+<h2 data-number="25.2" class="anchored" data-anchor-id="le-principe-de-jeffreys"><span class="header-section-number">25.2</span> Le principe de Jeffreys</h2>
+<p>Le principe de Jeffreys dit que la construction d’un a priori ne doit pas dépendre de la reparamétrisation choisie. Cette notion d’invariance assez subtile n’a essentiellement qu’une seule solution.</p>
+<div id="thm-priori-de-jeffreys" class="theorem">
+<p><span class="theorem-title"><strong>Théorème 25.1</strong></span> Soit <span class="math inline">\((p_\theta)_{\theta \in \Theta}\)</span> un modèle statistique. L’<em>a priori de Jeffreys</em> est la mesure <span class="math display">\[\pi(\theta) = \sqrt{\det(I(\theta))}\]</span> où <span class="math inline">\(I(\theta)\)</span> es l’information de Fisher. Cette mesure est « invariante » par les reparamétrisations du modèle, au sens où si <span class="math inline">\(\varphi\)</span> est un difféomorphisme de <span class="math inline">\(\Theta\)</span> dans lui-même, alors l’a priori de Jeffreys dans le modèle reparamétrisé <span class="math inline">\((p_{\varphi(\theta)})_{\theta \in \Theta}\)</span> est égal à l’information de Fisher du modèle reparamétrisé, <span class="math inline">\(I_\varphi(\theta)\)</span>.</p>
+</div>
+<p><strong>Lois impropres.</strong> J’ai évité d’utiliser le mot “densité de probabilité” pour parler de l’a priori de Jeffreys, parce que la mesure <span class="math inline">\(\pi\)</span> n’est peut-être pas une mesure de probabilité, et ne peut pas non plus être normalisée pour en être une. C’est typiquement le cas lorsque <span class="math inline">\(\int \det I(\theta) d\theta = +\infty\)</span>.</p>
+<p><strong>Est-ce vraiment une invariance ?</strong> L’a priori de Jeffreys n’est pas <em>stricto sensu</em> invariant par les reparamétrisations : l’information du modèle reparamétrisé, <span class="math inline">\(I_\varphi(\theta)\)</span>, n’est en général pas égale à l’information du modèle original, <span class="math inline">\(I(\theta)\)</span>. cependant, sa <em>représentation</em> est invariante, au sens où quel que soit le modèle, cet a priori sera toujours égal à l’information de Fisher du modèle, quelle que soit la reparamétrisation. En son temps, Jeffreys parlait de « principe » : le <em>principe</em> qui gouverne la construction de l’a priori doit être indépendant de la reparamétrisation. Le principe de Laplace ( « l’a priori doit être uniforme sur l’ensemble des possibles »)ne l’est pas, comme nous l’avons vu plus haut.</p>
+<div class="proof">
+<p><span class="proof-title"><em>Preuve</em>. </span>Notons <span class="math inline">\(\nu\)</span> la mesure image de <span class="math inline">\(\pi\)</span> par <span class="math inline">\(\varphi\)</span>. La formule du changement de variables (<a href="#eq-chg-var" class="quarto-xref">Équation&nbsp;<span>25.1</span></a>) dit que <span class="math display">\[\begin{align*}
+\nu(\eta) &amp;= \pi(\varphi^{-1}(\eta))|\det(D_{\varphi^{-1}}(\eta))|.\\
+&amp;= \sqrt{\det(I(\varphi^{-1}(\eta)))} \left| \det(D_{\varphi^{-1}}(\eta))\right|.
+\end{align*}\]</span></p>
+<p>Or, la formule de reparamétrisation de l’information de Fisher (<a href="ch6_2.html#thm-reparam-fisher" class="quarto-xref">Théorème&nbsp;<span>19.2</span></a>) dit que l’information de Fisher <span class="math inline">\(I’(\theta)\)</span> du modèle reparamétrisé <span class="math inline">\((p_{\varphi^{-1}(\eta)})\)</span> est donnée <span class="math display">\[I’(\eta) = D_{\varphi^{-1}}(\eta)^\top I(\varphi^{-1}(\eta)) D_{\varphi^{-1}(\eta)}\]</span> où <span class="math inline">\(D_{\varphi^{-1}}(\eta)\)</span> est la matrice jacobienne de <span class="math inline">\(\varphi^{-1}\)</span> en <span class="math inline">\(\eta\)</span>. Par conséquent, <span class="math display">\[\det(I’(\eta)) = \det(I(\varphi^{-1}(\eta)))\det(D_{\varphi^{-1}}(\eta)^{2})\]</span> et donc <span class="math display">\[\sqrt{\det(I(\varphi^{-1}(\eta)))} = \sqrt{\det(I’(\eta))}\det(D_{\varphi^{-1}}(\eta))^{-1}.\]</span> On en déduit que <span class="math inline">\(\nu(\eta)\)</span> est égal à <span class="math inline">\(\sqrt{\det(I’(\eta))}\)</span>, qui est l’a priori de Jeffreys du modèle reparamétrisé.</p>
+</div>
 </section>
-<section id="la-priori-de-jeffreys" class="level2" data-number="25.3">
-<h2 data-number="25.3" class="anchored" data-anchor-id="la-priori-de-jeffreys"><span class="header-section-number">25.3</span> L’a priori de Jeffreys</h2>
-<p>## Lois conjuguées</p>
+<section id="lois-conjuguées" class="level2" data-number="25.3">
+<h2 data-number="25.3" class="anchored" data-anchor-id="lois-conjuguées"><span class="header-section-number">25.3</span> Lois conjuguées</h2>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>C’était d’ailleurs la grande critique adressée par Ronald Fisher à la statistique bayésienne dans les années 30.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
