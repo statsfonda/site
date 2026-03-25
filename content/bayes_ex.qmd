@@ -1,0 +1,6 @@
+# Exercices {.unnumbered}
+
+
+## Questions
+
+- Dans le cas où $\Theta$ est un ensemble fini, montrer que l’a priori uniforme est effectivement invariant par les  « reparamétrisations » (les bijections).

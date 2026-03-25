@@ -79,10 +79,11 @@ qui montre bien que $I(\theta)^{-1} \preceq \mathrm{Cov}_\theta(T)$.
 :::
 
 
-## Interprétation {#sec-interp-fisher}
+## Que mesure l’information de Fisher ? {#sec-interp-fisher}
 
 L'information de Fisher d'un modèle dépend crucialement de *comment* on paramétrise le modèle. 
 
+### Exemple des modèles de Bernoulli {.unnumbered}
 
 Prenons l'exemple de la loi de Bernoulli, et considérons d'abord sa paramétrisation usuelle, 
 $$ p_\theta(x) = \theta^x(1-\theta)^{1-x}$$ avec $x \in \{0,1\}$,
@@ -114,7 +115,38 @@ Considérons les deux modèles en parallèle, dans le régime où la probabilit�
 
 Autrement dit, la paramétrisation a radicalement changé l'information, parce que le paramètre dans chacun des deux modèles n'est pas le même et ne représente pas la même chose. 
 
+### Reparamétrisation du modèle {.unnumbered}
 
+Considérons un modèle statistique $(p_\theta)_{\theta \in \Theta}$ et un difféomorphisme $\varphi : \Theta \to \Theta'$. On reparamétrise le modèle par $\nu = \varphi(\theta)$. 
+
+:::{#thm-reparam-fisher}
+
+## Reparamétrisation et information de Fisher
+
+Notons $I(\theta)$ l’information de Fisher du modèle $(p_\theta)_{\theta \in \Theta}$ et $I_\varphi(\theta)$ celle dans le modèle reparamétrisé $(p_{\varphi(\theta)})$. Alors, 
+
+$$I_\varphi(\theta) = D_\varphi(\theta)^\top I(\varphi(\theta)) D_\varphi(\theta).$$
+
+En particulier, en dimension 1 on a $I_\varphi(\theta) = \varphi’(\theta)^2 I(\varphi(\theta))$.
+
+:::
+
+:::{.proof}
+
+Notons $q_\theta = p_{\varphi(\theta)}$. L’information de Fisher est la variance du score, 
+\begin{align*}
+I_\varphi(\theta) &= \mathrm{Var}_{X\sim q_\theta}(\nabla_\theta \ln q_\theta(X)).
+\end{align*}
+Notons $s_\theta(x) = \nabla_\theta \ln p_\theta(x)$ et $D_\varphi(\theta)$ la matrice jacobienne de $\varphi$ en $\theta$. La formule de la dérivée des fonctions composées dit que 
+$$\nabla_\theta \ln q_\theta(x) = D_\varphi(\theta)^\top s_{\varphi(\theta)}(x).$$
+Par conséquent, 
+\begin{align*}
+I_\varphi(\theta) &= \mathrm{Var}_{X\sim q_\theta}(D_\varphi(\theta)^\top s_{\varphi(\theta)}(X)\\
+&= D_\varphi(\theta)^\top \mathrm{Var}_{X\sim p_{\varphi(\theta)}}(s_{\varphi(\theta)}(X)) D_\varphi(\theta)\\
+&= D_\varphi(\theta)^\top I(\varphi(\theta)) D_\varphi(\theta).
+\end{align*}
+
+:::
 
 
 [^2]: à titre d'exemple, toute valeur de $z$ plus grande que 10 donne un $\theta(z)$ plus grand que $99.99\%$. 

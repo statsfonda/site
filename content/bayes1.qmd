@@ -34,7 +34,12 @@ $$p(\theta \mid X) = \frac{p_\theta(X) \pi(\theta)}{p(X)}.$$
 
 ::::
 
-La loi a posteriori donne en quelque sorte la distribution de probabilité sur le paramètre $\theta$ qui est la plus compatible avec les données observées $X$. À partir de cette interprétation, l’analogue de l’estimateur du maximum de vraisemblance est quasiment immédiate. 
+La loi a posteriori donne en quelque sorte la distribution de probabilité sur le paramètre $\theta$ qui est la plus compatible avec les données observées $X$. Comme la loi marginale $p(X)$ ne dépend pas du tout du paramètre, on écrit souvent l’équation ci-dessus avec une constante de proportionnalité, 
+$$p(\theta \mid x) \propto p_\theta(x) \pi(\theta), $$
+le symbole $\propto$ signifiant « est proportionnel à ». Cette formule s’interprète de la façon classique : 
+$$\mathsf{a~posteriori} \propto \mathsf{vraisemblance} \times \mathsf{a~priori}.$$
+
+ partir de cette interprétation, l’analogue de l’estimateur du maximum de vraisemblance est quasiment immédiate. 
 
 :::{#def-map}
 

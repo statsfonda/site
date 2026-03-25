@@ -1,9 +1,65 @@
 # Lois a priori
 
-## Choix classiques 
+Un des reproches récurrents qui sont portés à la statistique bayésienne concerne le choix d’un a priori, auquel la théorie est particulièrement sensible[^fisher]. Lors d’une analyse statistique, la première étape consiste à choisir cet a priori $\pi(\theta)$ de façon à encoder notre connaissance sur le paramètre $\theta$. 
 
-## Le paradoxe de Jeffrey-Lindley
+## Le principe de Laplace
 
-## L’a priori de Jeffreys 
+Lorsqu’il n’y a *aucune connaissance a priori* sur le paramètre, il n’y a pas de raison de donner à certains $\theta$ une probabilité plus grande qu’une autre. Par conséquent, il est naturel de choisir comme a priori une loi uniforme sur l’espace des paramètres. Ce choix est souvent appelé **principe de Laplace** ; il peut sembler raisonnable, et il l’est à certains égards ; mais à y regarder de plus près, on se rend compte qu’il porte en lui des effets indésirables. 
 
-## Lois conjuguées
+:::{#exm-priori-de-jeffreys}
+
+Considérons le cas d’un modèle de Bernoulli, avec paramètre $\theta \in [0,1]$. Si l’on veut estimer $\theta$, tout va bien, l’a-priori uniforme ne favorise aucun $\theta$ en particulier. Mais peut-être que l’on veut estimer autre chose qui dépend de $\theta$, comme par exemple $\nu=\theta^2$, la probabilité de gagner deux fois de suite. Or, dans ce cas, la loi de $\nu$ peut se calculer par la formule du changement de variable : si l’on note $\rho$ la densité de $\nu$, alors 
+$$\rho(t) = \frac{1}{2\sqrt{s}}\mathrm{d}s.$$
+Ceci est une loi bêta, $B(1/2, 1)$. Ce n’est plus du tout une loi uniforme sur l’espace des paramètres de $\nu$, qui est encore $[0,1]$. 
+ 
+:::
+
+Dans cet exemple, l’a priori uniforme ne reste pas uniforme lorsqu’on reparamétrise le modèle : en posant $\eta=\theta^2$, cet a priori favorise les petites valeurs de $\eta$ sans que nous l’ayons réellement voulu. Un bon a priori devrait donc être aussi invariant que possible par les reparamétrisations du paramètre. 
+
+Notons $\pi$ une densité sur l’espace des paramètres $\Theta$. La formule du changement de variables dit que, si $\varphi$ est un difféomorphisme de $\Theta$, alors la densité de la mesure image de $\pi$ par $\varphi$, à savoir la mesure définie par $\nu(A) = \pi(\varphi^{-1}(A))$, est donnée par
+$$\nu(\eta) = \pi(\varphi^{-1}(\eta))|\det(D_{\varphi^{-1}}(\eta))|.$${#eq-chg-var}
+
+En choisissant l’a priori uniforme et en utilisant le fait que $D_{\varphi^{-1}}(\eta) = D_\varphi(\varphi^{-1}(\eta))^{-1}$, on voit qu’en toute généralité, l’a priori pour la reparamétrisation $\eta=\varphi(\theta)$ est donné par 
+$$\nu(\eta) = \frac{1}{|\det(D_\varphi(\varphi^{-1}(\eta)))|}.$$
+Celui-ci n’est en général pas uniforme. 
+
+## Le principe de Jeffreys
+
+Le principe de Jeffreys dit que la construction d’un a priori ne doit pas dépendre de la reparamétrisation choisie. Cette notion d’invariance assez subtile n’a essentiellement qu’une seule solution. 
+
+:::{#thm-priori-de-jeffreys}
+
+Soit $(p_\theta)_{\theta \in \Theta}$ un modèle statistique. L’*a priori de Jeffreys* est la mesure 
+$$\pi(\theta) = \sqrt{\det(I(\theta))}$$
+où $I(\theta)$ es l’information de Fisher. Cette mesure est « invariante » par les reparamétrisations du modèle, au sens où si $\varphi$ est un difféomorphisme de $\Theta$ dans lui-même, alors l’a priori de Jeffreys dans le modèle reparamétrisé $(p_{\varphi(\theta)})_{\theta \in \Theta}$ est égal à l’information de Fisher du modèle reparamétrisé, $I_\varphi(\theta)$.
+
+:::
+
+**Lois impropres.** J’ai évité d’utiliser le mot "densité de probabilité" pour parler de l’a priori de Jeffreys, parce que la mesure $\pi$ n’est peut-être pas une mesure de probabilité, et ne peut pas non plus être normalisée pour en être une. C’est typiquement le cas lorsque $\int \det I(\theta) d\theta = +\infty$.
+
+**Est-ce vraiment une invariance ?** L’a priori de Jeffreys n’est pas *stricto sensu* invariant par les reparamétrisations : l’information du modèle reparamétrisé, $I_\varphi(\theta)$, n’est en général pas égale à l’information du modèle original, $I(\theta)$. cependant, sa *représentation* est invariante, au sens où quel que soit le modèle, cet a priori sera toujours égal à l’information de Fisher du modèle, quelle que soit la reparamétrisation. En son temps, Jeffreys parlait de « principe » : le *principe* qui gouverne la construction de l’a priori doit être indépendant de la reparamétrisation. Le principe de Laplace ( « l’a priori doit être uniforme sur l’ensemble des possibles »)ne l’est pas, comme nous l’avons vu plus haut. 
+
+:::{.proof}
+
+Notons $\nu$ la mesure image de $\pi$ par $\varphi$. La formule du changement de variables (@eq-chg-var) dit que
+\begin{align*}
+\nu(\eta) &= \pi(\varphi^{-1}(\eta))|\det(D_{\varphi^{-1}}(\eta))|.\\
+&= \sqrt{\det(I(\varphi^{-1}(\eta)))} \left| \det(D_{\varphi^{-1}}(\eta))\right|.
+\end{align*}
+
+
+Or, la formule de reparamétrisation de l’information de Fisher (@thm-reparam-fisher) dit que l’information de Fisher $I’(\theta)$ du modèle reparamétrisé $(p_{\varphi^{-1}(\eta)})$ est donnée
+$$I’(\eta) = D_{\varphi^{-1}}(\eta)^\top I(\varphi^{-1}(\eta)) D_{\varphi^{-1}(\eta)}$$
+où $D_{\varphi^{-1}}(\eta)$ est la matrice jacobienne de $\varphi^{-1}$ en $\eta$. Par conséquent, 
+$$\det(I’(\eta)) = \det(I(\varphi^{-1}(\eta)))\det(D_{\varphi^{-1}}(\eta)^{2})$$
+et donc 
+$$\sqrt{\det(I(\varphi^{-1}(\eta)))} = \sqrt{\det(I’(\eta))}\det(D_{\varphi^{-1}}(\eta))^{-1}.$$
+On en déduit que $\nu(\eta)$ est égal à $\sqrt{\det(I’(\eta))}$, qui est l’a priori de Jeffreys du modèle reparamétrisé. 
+
+:::
+
+## Lois conjuguées
+
+
+
+[^fisher]: C’était d’ailleurs la grande critique adressée par Ronald Fisher à la statistique bayésienne dans les années 30. 
