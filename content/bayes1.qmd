@@ -1,6 +1,6 @@
 # Statistique Bayésienne
 
-## Introduction
+
 L’objectif du point de vue bayésien est de quantifier l’incertitude sur le paramètre à estimer en le traitant comme une variable aléatoire.
 Au lieu de considérer un paramètre $\theta$ fixé, on introduit une loi de probabilité $\pi$ sur $\Theta$ (la loi *a priori*), puis on met à jour cette connaissance à partir des observations via la *formule de Bayes*.
 
@@ -49,78 +49,31 @@ $$\hat{\theta}_{\text{MAP}} = \arg \max_{\theta} p(\theta \mid X).$$
 :::
 
 L’estimateur MAP n’est pas forcément l’outil le plus pertinent lorsqu’on adopte le point de vue bayésien sur les statistiques. 
+
 - pas de mesure de risque
 - le mode n'est pas forcément le point le plus probable de la loi a posteriori
 - pas invariant par reparamétrisation, contrairement à l’EMV (expliquer l’exemple de Michael Jordan)
 
+**Normalisation de l’a priori.**Le calcul de l’estimateur MAP ne nécessite pas la connaissance de la loi marginale $p(X)$ ; mais il ne nécessite même pas la connaissance totale de la loi a priori $\pi$. En fait, on peut connaître $\pi$ seulement à une constante de proportionnalité près : en effet, supposons que $\pi$ ne soit pas normalisée et que $\int \pi = c$, pas forcément égal à 1, et notons $\pi_0 = \pi / c$ la loi normalisée. Il est clair que 
+$$\arg \max_{\theta} p_\theta(x)\pi(\theta) = \arg \max_{\theta} p_\theta(x) \pi_0(\theta).$$
 
+Cette remarque n’est pas si anodine : elle implique que le calcul de l’estimateur MAP ne nécessite pas que $\pi$ soit une mesure normalisée… et en réalité, ne nécessite même pas que ce soit une mesure de probabilité. En effet, rien ne nous empêche de choisir un « a priori impropre », c’est-à-dire non intégrable. C’est typiquement le cas sur $\mathbb{R}$ : prenons l’exemple des lois gaussiennes $\mathscr{N}(\mu, 1)$. Si l’on n’a aucune connaissance a priori sur la localisation de $\mu$, c’est que $\mu$ pourrait se trouver n’importe où dans $\mathbb{R}$. Il paraît donc naturel de choisir un a priori « uniforme sur $\mathbb{R}$, à savoir $\pi(\mu) = 1$. Dans ce cas, l’estimateur MAP devient 
+$$\arg \max_{\mu} p_\mu(x)$$
+c’est-à-dire l’estimateur du maximum de vraisemblance. 
 
+**Calcul de l’a posteriori.** En revanche, le calcul de la distribution a posteriori nécessite, lui, de connaître la loi marginale $p(X)$. Cette loi marginale est égale à une intégrale, 
+$$p(x) = \int_\Theta p_\theta(x) \pi(\theta) d\theta.$$
+Cette intégrale peut être très difficile à calculer, et dans ce cas les statisticiens ont recours à des approximations numériques, via des méthodes de Monte-Carlo. 
 
 ## Exemples
 
-
-### Normal-Normale {.unnumbered}
-On veut estimer un paramètre réel $\theta$.
-On pose :
-$$\theta\sim N(\mu_0,\tau_0^2),\qquad X\mid \theta\sim N(\theta,\sigma^2),$$
-où $\sigma^2$ est supposée connue.
-
-La densité a priori est proportionnelle à $\exp\!\left(-\frac{(\theta-\mu_0)^2}{2\tau_0^2}\right)$ et la vraisemblance à
-$$p_\theta(x)\propto \exp\!\left(-\frac{(x-\theta)^2}{2\sigma^2}\right).$$
-Donc, par Bayes,
-$$Q_x(d\theta)\propto \exp\!\left(-\frac{(x-\theta)^2}{2\sigma^2}-\frac{(\theta-\mu_0)^2}{2\tau_0^2}\right)\,d\theta.$$
-
-En complétant le carré, on obtient une loi normale :
-$$\theta\mid X=x\sim \mathscr{N}(\mu_n,\tau_n^2),$$
-avec
-$$\tau_n^2=\left(\frac{1}{\tau_0^2}+\frac{1}{\sigma^2}\right)^{-1},\qquad
-\mu_n=\tau_n^2\left(\frac{\mu_0}{\tau_0^2}+\frac{x}{\sigma^2}\right).$$
-
-Dans le cas de $n$ observations i.i.d. $X_1,\dots,X_n$ telles que $X_i\mid\theta\sim \mathscr{N}(\theta,\sigma^2)$, la même conjugaison donne
-$$\tau_n^2=\left(\frac{1}{\tau_0^2}+\frac{n}{\sigma^2}\right)^{-1},\qquad
-\mu_n=\tau_n^2\left(\frac{\mu_0}{\tau_0^2}+\frac{n\bar X}{\sigma^2}\right).$$
-
-
-### Beta-Bernoulli {.unnumbered}
-
-On suppose que $\theta\in(0,1)$ et
-$$X\mid\theta\sim \mathrm{Bernoulli}(\theta).$$
-On choisit comme loi a priori une loi Beta :
-$$\theta\sim \mathrm{Beta}(a,b)\quad (a>0,\ b>0),$$
-dont la densité (par rapport à Lebesgue) est proportionnelle à
-$$\theta^{a-1}(1-\theta)^{b-1}.$$
-
-Si $x=1$, alors la vraisemblance est proportionnelle à $\theta$ et donc la loi a posteriori est proportionnelle à
-$$\theta^{a}(1-\theta)^{b-1},$$
-ce qui correspond à
-$$\theta\mid X=1\sim \mathrm{Beta}(a+1,b).$$
-
-Si $x=0$, de même on obtient
-$$\theta\mid X=0\sim \mathrm{Beta}(a,b+1).$$
-
-Plus généralement, si on observe $n$ Bernoulli indépendantes, et si $K$ est le nombre de succès, alors
-$$\theta\mid (K=k)\sim \mathrm{Beta}(a+k,\ b+n-k).$$
-:::
-
-### Gamma-Poisson {.unnumbered}
-
-On suppose $\theta>0$ et
-$$X\mid\theta\sim \mathrm{Poisson}(\theta).$$
-On choisit une loi Gamma de paramètre *taux* $\beta>0$ :
-$$\theta\sim \mathrm{Gamma}(\alpha,\beta),$$
-de densité proportionnelle à
-$$\theta^{\alpha-1}e^{-\beta\theta},$$
-où $\alpha>0$.
-
-La vraisemblance est proportionnelle à
-$$p_\theta(x)\propto e^{-\theta}\theta^x.$$
-Donc, par Bayes,
-$$Q_x(d\theta)\propto \theta^{\alpha-1+x}e^{-(\beta+1)\theta}\,d\theta,$$
-et on reconnaît encore une loi Gamma :
-$$\theta\mid X=x\sim \mathrm{Gamma}(\alpha+x,\ \beta+1).$$
-
-Avec $n$ observations i.i.d. $X_1,\dots,X_n$ de somme $S=\sum_{i=1}^n X_i$, on obtient
-$$\theta\mid (X_1,\dots,X_n)\sim \mathrm{Gamma}(\alpha+S,\ \beta+n).$$
+Plaçons-nous dans le cadre d’un modèle de Bernoulli $\mathrm{Ber}(\theta)$, avec paramètre $\theta \in [0,1]$. On utilise un a priori uniforme sur $[0,1]$, c’est-à-dire $\pi(\theta) = 1$. Si l’on observe $X_1, \dots, X_n$ i.i.d. de loi $\mathrm{Ber}(\theta)$, la vraisemblance des observations est $\theta^{s}(1-\theta)^{n-s}$, 
+où $s = x_1 + \dotsc + x_n$ est le nombre de succès. La loi marginale $p(x_1,\dotsc, x_n)$ est donnée par 
+$$\int_0^1 u^{s}(1-u)^{n-s} du$$
+et on reconnaît la fonction bêta, $B(s+1, n-s+1)$. La loi a posteriori $p(\theta \mid x_1,\dotsc, x_n)$ est donc donnée par
+$$\frac{\theta^{s}(1-\theta)^{n-s}}{B(s+1, n-s+1)}.$$
+Conditionnellement aux observations, le paramètre $\theta$ est donc une variable aléatoire qui suit une loi bêta $B(s+1, n-s+1)$. Pour calculer l’estimateur MAP dans ce modèle, il suffit de maximiser la vraisemblance, et on trouve 
+$$\hat{\theta}_{\text{MAP}} = \frac{s}{n}.$$
 
 
 
@@ -159,6 +112,21 @@ $$\mathbb{E}[|\theta - T(X)|^2].$$
 
 :::
 
-## Classification bayésienne 
 
-ROC curve, F scores , FDR
+:::{#exm-risque-bayesien-bernoulli}
+
+## Bernoulli
+
+Dans le cadre du modèle $\mathrm{Ber}(\theta)$ avec a priori uniforme, on a vu que la loi a posteriori est $B(s+1, n-s+1)$. Dans ce cadre, l’estimateur de Bayes est égal à la moyenne de cette loi, à savoir 
+$$\hat{\theta}_{\text{Bayes}} = \frac{s+1}{n+2}.$$
+
+Ce n’est pas le même estimateur que l’estimateur MAP, et il est intéressant de se demander à quoi il correspond. En fait, cet estimateur est l’estimateur de la moyenne empirique de notre échantillon, mais auquel on a ajouté deux réalisations, un succès et un échec. 
+
+
+:::
+
+## Utilisation de la loi a posteriori
+
+Une fois que l’on a calculé la loi a posteriori $p(\theta \mid X)$, on peut en déduire des quantités d’intérêt. Par exemple, dans l’exemple de Bernoulli que nous avons développé plus haut, on peut calculer la probabilité *a posteriori* (c’est-à-dire, ayant observé les données) que le paramètre $\theta$ soit supérieur à 0.5, à savoir 
+$$B(s+1, n-s+1)^{-1}\int_0^{0.5}u^{s}(1-u)^{n-s} du.$$
+Lorsque $n=100$ et $s=40$, cette probabilité vaut environ… 

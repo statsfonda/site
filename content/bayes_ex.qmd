@@ -4,3 +4,13 @@
 ## Questions
 
 - Dans le cas où $\Theta$ est un ensemble fini, montrer que l’a priori uniforme est effectivement invariant par les  « reparamétrisations » (les bijections).
+- Calculer l’estimateur MAP dans un modèle exponentiel avec un a priori uniforme. 
+
+## Exercices 
+
+:::{#ex-tramcar}
+
+Les *animes* peuvent avoir beaucoup d’épisodes. Je clique au hasard dans le catalogue d’un anime particulier, et je vois qu’il s’agit de l’épisode 133. Comment estimer le nombre total d’épisodes ? Utiliser un a priori non informatif (et impropre)$\pi(n) = 1/n$ et le justifier. 
+
+:::
+

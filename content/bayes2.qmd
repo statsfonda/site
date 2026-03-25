@@ -58,8 +58,21 @@ On en déduit que $\nu(\eta)$ est égal à $\sqrt{\det(I’(\eta))}$, qui est l�
 
 :::
 
-## Lois conjuguées
+:::{#exm-jeffreys-gaussian}
+
+Prenons l’exemple des lois gaussiennes centrées, $\mathscr{N}(0,v)$, paramétrisées par leur variance $v>0$. La log-vraisemblance est égale à $-\frac{1}{2}\ln(2\pi v)- \frac{x^2}{2v}$, et donc le score est égal à $\frac{x^2}{2v^2} - \frac{1}{2v}$. L’information de Fisher dans ce modèle est donnée par 
+$$I(v) = \mathrm{Var}\left[\frac{X^2}{2v^2}\right] = \frac{1}{2v^2}.$$
+L’a priori de Jeffreys est donc égal à 
+$$\pi(v) = \sqrt{\frac{1}{2v^2}} = \frac{1}{v\sqrt{2}}.$$
+Il n’est pas intégrable. 
+
+:::
 
 
+## Principe de Jaynes 
+
+Il existe un dernier choix d’importance pour le choix d’un a priori non-informatif, dû à Edwin Jaynes. Son raisonnement est le suivant : notre connaissance a priori sur le paramètre $\theta$ doit se formuler sous la forme d’un ensemble de contraintes. Par exemple, on peut supposer que $\theta$ est borné, que sa variance est 1, etc. On peut encoder cette connaissance sous la forme d’une contrainte linéaire : la loi de $\theta$ doit satisfaire 
+$$\int T(\theta) \pi(\theta) d\theta = c$$
+pour une certaine constante $c$. La distribution la moins informative qui satisfait ces contraintes est précisément la loi qui maximise l’entropie sous contrainte, et le principe de Boltzmann-Gibbs (@thm-boltzmann-gibbs) nous dit que cette loi est la loi exponentielle associée à $T$. Par exemple, si l’on sait que $\theta$ est centré et fluctue dans un intervalle borné, on ne perd pas grand chose à supposer que $\pi$ doit être centré réduit. La loi la moins informative qui satisfait cette contrainte est donc la loi exponentielle associée à la statistique $T(\theta) = \theta$, à savoir la loi $\mathscr{N}(0,1)$. 
 
 [^fisher]: C’était d’ailleurs la grande critique adressée par Ronald Fisher à la statistique bayésienne dans les années 30. 
