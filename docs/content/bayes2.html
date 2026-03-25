@@ -411,7 +411,6 @@ window.Quarto = {
   <ul>
   <li><a href="#le-principe-de-laplace" id="toc-le-principe-de-laplace" class="nav-link active" data-scroll-target="#le-principe-de-laplace"><span class="header-section-number">25.1</span> Le principe de Laplace</a></li>
   <li><a href="#le-principe-de-jeffreys" id="toc-le-principe-de-jeffreys" class="nav-link" data-scroll-target="#le-principe-de-jeffreys"><span class="header-section-number">25.2</span> Le principe de Jeffreys</a></li>
-  <li><a href="#lois-conjuguées" id="toc-lois-conjuguées" class="nav-link" data-scroll-target="#lois-conjuguées"><span class="header-section-number">25.3</span> Lois conjuguées</a></li>
   </ul>
 </nav>
     </div>
@@ -476,9 +475,11 @@ $$
 \end{align*}\]</span></p>
 <p>Or, la formule de reparamétrisation de l’information de Fisher (<a href="ch6_2.html#thm-reparam-fisher" class="quarto-xref">Théorème&nbsp;<span>19.2</span></a>) dit que l’information de Fisher <span class="math inline">\(I’(\theta)\)</span> du modèle reparamétrisé <span class="math inline">\((p_{\varphi^{-1}(\eta)})\)</span> est donnée <span class="math display">\[I’(\eta) = D_{\varphi^{-1}}(\eta)^\top I(\varphi^{-1}(\eta)) D_{\varphi^{-1}(\eta)}\]</span> où <span class="math inline">\(D_{\varphi^{-1}}(\eta)\)</span> est la matrice jacobienne de <span class="math inline">\(\varphi^{-1}\)</span> en <span class="math inline">\(\eta\)</span>. Par conséquent, <span class="math display">\[\det(I’(\eta)) = \det(I(\varphi^{-1}(\eta)))\det(D_{\varphi^{-1}}(\eta)^{2})\]</span> et donc <span class="math display">\[\sqrt{\det(I(\varphi^{-1}(\eta)))} = \sqrt{\det(I’(\eta))}\det(D_{\varphi^{-1}}(\eta))^{-1}.\]</span> On en déduit que <span class="math inline">\(\nu(\eta)\)</span> est égal à <span class="math inline">\(\sqrt{\det(I’(\eta))}\)</span>, qui est l’a priori de Jeffreys du modèle reparamétrisé.</p>
 </div>
-</section>
-<section id="lois-conjuguées" class="level2" data-number="25.3">
-<h2 data-number="25.3" class="anchored" data-anchor-id="lois-conjuguées"><span class="header-section-number">25.3</span> Lois conjuguées</h2>
+<div id="exm-jeffreys-gaussian" class="theorem example">
+<p><span class="theorem-title"><strong>Exemple 25.2</strong></span> Prenons l’exemple des lois gaussiennes centrées, <span class="math inline">\(\mathscr{N}(0,v)\)</span>, paramétrisées par leur variance <span class="math inline">\(v&gt;0\)</span>. La log-vraisemblance est égale à <span class="math inline">\(-\frac{1}{2}\ln(2\pi v)- \frac{x^2}{2v}\)</span>, et donc le score est égal à <span class="math inline">\(\frac{x^2}{2v^2} - \frac{1}{2v}\)</span>. L’information de Fisher dans ce modèle est donnée par <span class="math display">\[I(v) = \mathrm{Var}\left[\frac{X^2}{2v^2}\right] = \frac{1}{2v^2}.\]</span> L’a priori de Jeffreys est donc égal à <span class="math display">\[\pi(v) = \sqrt{\frac{1}{2v^2}} = \frac{1}{v\sqrt{2}}.\]</span> Il n’est pas intégrable.</p>
+</div>
+<p>## Principe de Jaynes</p>
+<p>Il existe un dernier choix d’importance pour le choix d’un a priori non-informatif, dû à Edwin Jaynes. Son raisonnement est le suivant : notre connaissance a priori sur le paramètre <span class="math inline">\(\theta\)</span> doit se formuler sous la forme d’un ensemble de contraintes. Par exemple, on peut supposer que <span class="math inline">\(\theta\)</span> est borné, que sa variance est 1, etc. On peut encoder cette connaissance sous la forme d’une contrainte linéaire : la loi de <span class="math inline">\(\theta\)</span> doit satisfaire <span class="math display">\[\int T(\theta) \pi(\theta) d\theta = c\]</span> pour une certaine constante <span class="math inline">\(c\)</span>. La distribution la moins informative qui satisfait ces contraintes est précisément la loi qui maximise l’entropie sous contrainte, et le principe de Boltzmann-Gibbs (<a href="ch6_4.html#thm-boltzmann-gibbs" class="quarto-xref">Théorème&nbsp;<span>21.1</span></a>) nous dit que cette loi est la loi exponentielle associée à <span class="math inline">\(T\)</span>. Par exemple, si l’on sait que <span class="math inline">\(\theta\)</span> est centré et fluctue dans un intervalle borné, on ne perd pas grand chose à supposer que <span class="math inline">\(\pi\)</span> doit être centré réduit. La loi la moins informative qui satisfait cette contrainte est donc la loi exponentielle associée à la statistique <span class="math inline">\(T(\theta) = \theta\)</span>, à savoir la loi <span class="math inline">\(\mathscr{N}(0,1)\)</span>.</p>
 
 
 </section>

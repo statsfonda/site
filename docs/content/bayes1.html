@@ -409,16 +409,10 @@ window.Quarto = {
     <h2 id="toc-title">Table des matières</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">24.1</span> Introduction</a></li>
-  <li><a href="#définitions" id="toc-définitions" class="nav-link" data-scroll-target="#définitions"><span class="header-section-number">24.2</span> Définitions</a></li>
-  <li><a href="#exemples" id="toc-exemples" class="nav-link" data-scroll-target="#exemples"><span class="header-section-number">24.3</span> Exemples</a>
-  <ul class="collapse">
-  <li><a href="#normal-normale" id="toc-normal-normale" class="nav-link" data-scroll-target="#normal-normale">Normal-Normale</a></li>
-  <li><a href="#beta-bernoulli" id="toc-beta-bernoulli" class="nav-link" data-scroll-target="#beta-bernoulli">Beta-Bernoulli</a></li>
-  <li><a href="#gamma-poisson" id="toc-gamma-poisson" class="nav-link" data-scroll-target="#gamma-poisson">Gamma-Poisson</a></li>
-  </ul></li>
-  <li><a href="#risque-bayésien" id="toc-risque-bayésien" class="nav-link" data-scroll-target="#risque-bayésien"><span class="header-section-number">24.4</span> Risque Bayésien</a></li>
-  <li><a href="#classification-bayésienne" id="toc-classification-bayésienne" class="nav-link" data-scroll-target="#classification-bayésienne"><span class="header-section-number">24.5</span> Classification bayésienne</a></li>
+  <li><a href="#définitions" id="toc-définitions" class="nav-link active" data-scroll-target="#définitions"><span class="header-section-number">24.1</span> Définitions</a></li>
+  <li><a href="#exemples" id="toc-exemples" class="nav-link" data-scroll-target="#exemples"><span class="header-section-number">24.2</span> Exemples</a></li>
+  <li><a href="#risque-bayésien" id="toc-risque-bayésien" class="nav-link" data-scroll-target="#risque-bayésien"><span class="header-section-number">24.3</span> Risque Bayésien</a></li>
+  <li><a href="#utilisation-de-la-loi-a-posteriori" id="toc-utilisation-de-la-loi-a-posteriori" class="nav-link" data-scroll-target="#utilisation-de-la-loi-a-posteriori"><span class="header-section-number">24.4</span> Utilisation de la loi a posteriori</a></li>
   </ul>
 </nav>
     </div>
@@ -457,13 +451,10 @@ $$
 </header>
 
 
-<section id="introduction" class="level2" data-number="24.1">
-<h2 data-number="24.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">24.1</span> Introduction</h2>
 <p>L’objectif du point de vue bayésien est de quantifier l’incertitude sur le paramètre à estimer en le traitant comme une variable aléatoire. Au lieu de considérer un paramètre <span class="math inline">\(\theta\)</span> fixé, on introduit une loi de probabilité <span class="math inline">\(\pi\)</span> sur <span class="math inline">\(\Theta\)</span> (la loi <em>a priori</em>), puis on met à jour cette connaissance à partir des observations via la <em>formule de Bayes</em>.</p>
 <p>Dans cette section, on se place dans un cadre général : on observe une variable aléatoire <span class="math inline">\(X\)</span> qui dépend du paramètre <span class="math inline">\(\theta\)</span> ; la loi de <span class="math inline">\(X\)</span> conditionnellement à <span class="math inline">\(\theta\)</span> a pour densité (ou masse) <span class="math inline">\(p_\theta(x)\)</span> par rapport à une mesure de référence.</p>
-</section>
-<section id="définitions" class="level2" data-number="24.2">
-<h2 data-number="24.2" class="anchored" data-anchor-id="définitions"><span class="header-section-number">24.2</span> Définitions</h2>
+<section id="définitions" class="level2" data-number="24.1">
+<h2 data-number="24.1" class="anchored" data-anchor-id="définitions"><span class="header-section-number">24.1</span> Définitions</h2>
 <div id="def-loi-a-priori" class="theorem definition">
 <p><span class="theorem-title"><strong>Définition 24.1 (Loi a priori)</strong></span> Une <em>loi a priori</em> est une mesure de probabilité <span class="math inline">\(\pi\)</span> sur l’ensemble des paramètres <span class="math inline">\(\Theta\)</span>.</p>
 </div>
@@ -483,35 +474,22 @@ $$
 <div id="def-map" class="theorem definition">
 <p><span class="theorem-title"><strong>Définition 24.3</strong></span> L’estimateur du Maximum A Posteriori, s’il existe, est <span class="math display">\[\hat{\theta}_{\text{MAP}} = \arg \max_{\theta} p(\theta \mid X).\]</span></p>
 </div>
-<p>L’estimateur MAP n’est pas forcément l’outil le plus pertinent lorsqu’on adopte le point de vue bayésien sur les statistiques. - pas de mesure de risque - le mode n’est pas forcément le point le plus probable de la loi a posteriori - pas invariant par reparamétrisation, contrairement à l’EMV (expliquer l’exemple de Michael Jordan)</p>
+<p>L’estimateur MAP n’est pas forcément l’outil le plus pertinent lorsqu’on adopte le point de vue bayésien sur les statistiques.</p>
+<ul>
+<li>pas de mesure de risque</li>
+<li>le mode n’est pas forcément le point le plus probable de la loi a posteriori</li>
+<li>pas invariant par reparamétrisation, contrairement à l’EMV (expliquer l’exemple de Michael Jordan)</li>
+</ul>
+<p><strong>Normalisation de l’a priori.</strong>Le calcul de l’estimateur MAP ne nécessite pas la connaissance de la loi marginale <span class="math inline">\(p(X)\)</span> ; mais il ne nécessite même pas la connaissance totale de la loi a priori <span class="math inline">\(\pi\)</span>. En fait, on peut connaître <span class="math inline">\(\pi\)</span> seulement à une constante de proportionnalité près : en effet, supposons que <span class="math inline">\(\pi\)</span> ne soit pas normalisée et que <span class="math inline">\(\int \pi = c\)</span>, pas forcément égal à 1, et notons <span class="math inline">\(\pi_0 = \pi / c\)</span> la loi normalisée. Il est clair que <span class="math display">\[\arg \max_{\theta} p_\theta(x)\pi(\theta) = \arg \max_{\theta} p_\theta(x) \pi_0(\theta).\]</span></p>
+<p>Cette remarque n’est pas si anodine : elle implique que le calcul de l’estimateur MAP ne nécessite pas que <span class="math inline">\(\pi\)</span> soit une mesure normalisée… et en réalité, ne nécessite même pas que ce soit une mesure de probabilité. En effet, rien ne nous empêche de choisir un « a priori impropre », c’est-à-dire non intégrable. C’est typiquement le cas sur <span class="math inline">\(\mathbb{R}\)</span> : prenons l’exemple des lois gaussiennes <span class="math inline">\(\mathscr{N}(\mu, 1)\)</span>. Si l’on n’a aucune connaissance a priori sur la localisation de <span class="math inline">\(\mu\)</span>, c’est que <span class="math inline">\(\mu\)</span> pourrait se trouver n’importe où dans <span class="math inline">\(\mathbb{R}\)</span>. Il paraît donc naturel de choisir un a priori « uniforme sur <span class="math inline">\(\mathbb{R}\)</span>, à savoir <span class="math inline">\(\pi(\mu) = 1\)</span>. Dans ce cas, l’estimateur MAP devient <span class="math display">\[\arg \max_{\mu} p_\mu(x)\]</span> c’est-à-dire l’estimateur du maximum de vraisemblance.</p>
+<p><strong>Calcul de l’a posteriori.</strong> En revanche, le calcul de la distribution a posteriori nécessite, lui, de connaître la loi marginale <span class="math inline">\(p(X)\)</span>. Cette loi marginale est égale à une intégrale, <span class="math display">\[p(x) = \int_\Theta p_\theta(x) \pi(\theta) d\theta.\]</span> Cette intégrale peut être très difficile à calculer, et dans ce cas les statisticiens ont recours à des approximations numériques, via des méthodes de Monte-Carlo.</p>
 </section>
-<section id="exemples" class="level2" data-number="24.3">
-<h2 data-number="24.3" class="anchored" data-anchor-id="exemples"><span class="header-section-number">24.3</span> Exemples</h2>
-<section id="normal-normale" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="normal-normale">Normal-Normale</h3>
-<p>On veut estimer un paramètre réel <span class="math inline">\(\theta\)</span>. On pose : <span class="math display">\[\theta\sim N(\mu_0,\tau_0^2),\qquad X\mid \theta\sim N(\theta,\sigma^2),\]</span> où <span class="math inline">\(\sigma^2\)</span> est supposée connue.</p>
-<p>La densité a priori est proportionnelle à <span class="math inline">\(\exp\!\left(-\frac{(\theta-\mu_0)^2}{2\tau_0^2}\right)\)</span> et la vraisemblance à <span class="math display">\[p_\theta(x)\propto \exp\!\left(-\frac{(x-\theta)^2}{2\sigma^2}\right).\]</span> Donc, par Bayes, <span class="math display">\[Q_x(d\theta)\propto \exp\!\left(-\frac{(x-\theta)^2}{2\sigma^2}-\frac{(\theta-\mu_0)^2}{2\tau_0^2}\right)\,d\theta.\]</span></p>
-<p>En complétant le carré, on obtient une loi normale : <span class="math display">\[\theta\mid X=x\sim \mathscr{N}(\mu_n,\tau_n^2),\]</span> avec <span class="math display">\[\tau_n^2=\left(\frac{1}{\tau_0^2}+\frac{1}{\sigma^2}\right)^{-1},\qquad
-\mu_n=\tau_n^2\left(\frac{\mu_0}{\tau_0^2}+\frac{x}{\sigma^2}\right).\]</span></p>
-<p>Dans le cas de <span class="math inline">\(n\)</span> observations i.i.d. <span class="math inline">\(X_1,\dots,X_n\)</span> telles que <span class="math inline">\(X_i\mid\theta\sim \mathscr{N}(\theta,\sigma^2)\)</span>, la même conjugaison donne <span class="math display">\[\tau_n^2=\left(\frac{1}{\tau_0^2}+\frac{n}{\sigma^2}\right)^{-1},\qquad
-\mu_n=\tau_n^2\left(\frac{\mu_0}{\tau_0^2}+\frac{n\bar X}{\sigma^2}\right).\]</span></p>
+<section id="exemples" class="level2" data-number="24.2">
+<h2 data-number="24.2" class="anchored" data-anchor-id="exemples"><span class="header-section-number">24.2</span> Exemples</h2>
+<p>Plaçons-nous dans le cadre d’un modèle de Bernoulli <span class="math inline">\(\mathrm{Ber}(\theta)\)</span>, avec paramètre <span class="math inline">\(\theta \in [0,1]\)</span>. On utilise un a priori uniforme sur <span class="math inline">\([0,1]\)</span>, c’est-à-dire <span class="math inline">\(\pi(\theta) = 1\)</span>. Si l’on observe <span class="math inline">\(X_1, \dots, X_n\)</span> i.i.d. de loi <span class="math inline">\(\mathrm{Ber}(\theta)\)</span>, la vraisemblance des observations est <span class="math inline">\(\theta^{s}(1-\theta)^{n-s}\)</span>, où <span class="math inline">\(s = x_1 + \dotsc + x_n\)</span> est le nombre de succès. La loi marginale <span class="math inline">\(p(x_1,\dotsc, x_n)\)</span> est donnée par <span class="math display">\[\int_0^1 u^{s}(1-u)^{n-s} du\]</span> et on reconnaît la fonction bêta, <span class="math inline">\(B(s+1, n-s+1)\)</span>. La loi a posteriori <span class="math inline">\(p(\theta \mid x_1,\dotsc, x_n)\)</span> est donc donnée par <span class="math display">\[\frac{\theta^{s}(1-\theta)^{n-s}}{B(s+1, n-s+1)}.\]</span> Conditionnellement aux observations, le paramètre <span class="math inline">\(\theta\)</span> est donc une variable aléatoire qui suit une loi bêta <span class="math inline">\(B(s+1, n-s+1)\)</span>. Pour calculer l’estimateur MAP dans ce modèle, il suffit de maximiser la vraisemblance, et on trouve <span class="math display">\[\hat{\theta}_{\text{MAP}} = \frac{s}{n}.\]</span></p>
 </section>
-<section id="beta-bernoulli" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="beta-bernoulli">Beta-Bernoulli</h3>
-<p>On suppose que <span class="math inline">\(\theta\in(0,1)\)</span> et <span class="math display">\[X\mid\theta\sim \mathrm{Bernoulli}(\theta).\]</span> On choisit comme loi a priori une loi Beta : <span class="math display">\[\theta\sim \mathrm{Beta}(a,b)\quad (a&gt;0,\ b&gt;0),\]</span> dont la densité (par rapport à Lebesgue) est proportionnelle à <span class="math display">\[\theta^{a-1}(1-\theta)^{b-1}.\]</span></p>
-<p>Si <span class="math inline">\(x=1\)</span>, alors la vraisemblance est proportionnelle à <span class="math inline">\(\theta\)</span> et donc la loi a posteriori est proportionnelle à <span class="math display">\[\theta^{a}(1-\theta)^{b-1},\]</span> ce qui correspond à <span class="math display">\[\theta\mid X=1\sim \mathrm{Beta}(a+1,b).\]</span></p>
-<p>Si <span class="math inline">\(x=0\)</span>, de même on obtient <span class="math display">\[\theta\mid X=0\sim \mathrm{Beta}(a,b+1).\]</span></p>
-<p>Plus généralement, si on observe <span class="math inline">\(n\)</span> Bernoulli indépendantes, et si <span class="math inline">\(K\)</span> est le nombre de succès, alors <span class="math display">\[\theta\mid (K=k)\sim \mathrm{Beta}(a+k,\ b+n-k).\]</span> :::</p>
-</section>
-<section id="gamma-poisson" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="gamma-poisson">Gamma-Poisson</h3>
-<p>On suppose <span class="math inline">\(\theta&gt;0\)</span> et <span class="math display">\[X\mid\theta\sim \mathrm{Poisson}(\theta).\]</span> On choisit une loi Gamma de paramètre <em>taux</em> <span class="math inline">\(\beta&gt;0\)</span> : <span class="math display">\[\theta\sim \mathrm{Gamma}(\alpha,\beta),\]</span> de densité proportionnelle à <span class="math display">\[\theta^{\alpha-1}e^{-\beta\theta},\]</span> où <span class="math inline">\(\alpha&gt;0\)</span>.</p>
-<p>La vraisemblance est proportionnelle à <span class="math display">\[p_\theta(x)\propto e^{-\theta}\theta^x.\]</span> Donc, par Bayes, <span class="math display">\[Q_x(d\theta)\propto \theta^{\alpha-1+x}e^{-(\beta+1)\theta}\,d\theta,\]</span> et on reconnaît encore une loi Gamma : <span class="math display">\[\theta\mid X=x\sim \mathrm{Gamma}(\alpha+x,\ \beta+1).\]</span></p>
-<p>Avec <span class="math inline">\(n\)</span> observations i.i.d. <span class="math inline">\(X_1,\dots,X_n\)</span> de somme <span class="math inline">\(S=\sum_{i=1}^n X_i\)</span>, on obtient <span class="math display">\[\theta\mid (X_1,\dots,X_n)\sim \mathrm{Gamma}(\alpha+S,\ \beta+n).\]</span></p>
-</section>
-</section>
-<section id="risque-bayésien" class="level2" data-number="24.4">
-<h2 data-number="24.4" class="anchored" data-anchor-id="risque-bayésien"><span class="header-section-number">24.4</span> Risque Bayésien</h2>
+<section id="risque-bayésien" class="level2" data-number="24.3">
+<h2 data-number="24.3" class="anchored" data-anchor-id="risque-bayésien"><span class="header-section-number">24.3</span> Risque Bayésien</h2>
 <p>Le risque bayésien d’ordre <span class="math inline">\(p\)</span> d’un estimateur <span class="math inline">\(T\)</span> est la moyenne de son erreur quadratique, à savoir <span class="math display">\[r_\pi(T) = \mathbb{E}_{\theta, X} [|T(X)- \theta|^p].\]</span> Si <span class="math inline">\(p=2\)</span>, on parle de risque quadratique, et si <span class="math inline">\(p=1\)</span>, on parle de risque <span class="math inline">\(L^1\)</span>. En fait, on pourrait définir ce risque pour n’importe quelle fonction de perte, et pas seulement pour la norme <span class="math inline">\(L^p\)</span> : par exemple, <span class="math inline">\(\ln|x-y|\)</span>. Mais les normes <span class="math inline">\(L^p\)</span> sont amplement suffisantes pour exposer la plupart des résultats, donc je m’y tiendrai.</p>
 <p>Les estimateurs qui ont le plus petit risque bayésien sont appelés <em>estimateurs de Bayes</em>. Ils vérifient donc <span class="math display">\[T^\star(x)\in \arg \min_T r_\pi(T)\]</span> où le minimum est pris sur l’ensemble des estimateurs.</p>
 <p>Le risque bayésien de <span class="math inline">\(T\)</span> peut aussi se calculer conditionnellement aux observations : dans ce cas on parle de risque <em>a posteriori</em>, <span class="math display">\[r_\pi(T\mid X) = \mathbb{E}_{\theta} [|T(X) - \theta|^2 \mid X].\]</span> Cela peut simplement se récrire <span class="math display">\[\int_\Theta |T(X) - \theta|^2 p(\theta \mid X) \pi(\theta)d\theta.\]</span></p>
@@ -522,10 +500,14 @@ $$
 <div class="proof">
 <p><span class="proof-title"><em>Preuve</em>. </span>L’espérance conditionnelle de <span class="math inline">\(\theta\)</span> sachant <span class="math inline">\(X\)</span> est la projection <span class="math inline">\(L^2\)</span> de <span class="math inline">\(\theta\)</span> sur l’espace des fonctions mesurables de <span class="math inline">\(X\)</span> dans <span class="math inline">\(\Theta\)</span>. Donc c’est précisément l’estimateur qui minimise <span class="math display">\[\mathbb{E}[|\theta - T(X)|^2].\]</span></p>
 </div>
+<div id="exm-risque-bayesien-bernoulli" class="theorem example">
+<p><span class="theorem-title"><strong>Exemple 24.1 (Bernoulli)</strong></span> Dans le cadre du modèle <span class="math inline">\(\mathrm{Ber}(\theta)\)</span> avec a priori uniforme, on a vu que la loi a posteriori est <span class="math inline">\(B(s+1, n-s+1)\)</span>. Dans ce cadre, l’estimateur de Bayes est égal à la moyenne de cette loi, à savoir <span class="math display">\[\hat{\theta}_{\text{Bayes}} = \frac{s+1}{n+2}.\]</span></p>
+<p>Ce n’est pas le même estimateur que l’estimateur MAP, et il est intéressant de se demander à quoi il correspond. En fait, cet estimateur est l’estimateur de la moyenne empirique de notre échantillon, mais auquel on a ajouté deux réalisations, un succès et un échec.</p>
+</div>
 </section>
-<section id="classification-bayésienne" class="level2" data-number="24.5">
-<h2 data-number="24.5" class="anchored" data-anchor-id="classification-bayésienne"><span class="header-section-number">24.5</span> Classification bayésienne</h2>
-<p>ROC curve, F scores , FDR</p>
+<section id="utilisation-de-la-loi-a-posteriori" class="level2" data-number="24.4">
+<h2 data-number="24.4" class="anchored" data-anchor-id="utilisation-de-la-loi-a-posteriori"><span class="header-section-number">24.4</span> Utilisation de la loi a posteriori</h2>
+<p>Une fois que l’on a calculé la loi a posteriori <span class="math inline">\(p(\theta \mid X)\)</span>, on peut en déduire des quantités d’intérêt. Par exemple, dans l’exemple de Bernoulli que nous avons développé plus haut, on peut calculer la probabilité <em>a posteriori</em> (c’est-à-dire, ayant observé les données) que le paramètre <span class="math inline">\(\theta\)</span> soit supérieur à 0.5, à savoir <span class="math display">\[B(s+1, n-s+1)^{-1}\int_0^{0.5}u^{s}(1-u)^{n-s} du.\]</span> Lorsque <span class="math inline">\(n=100\)</span> et <span class="math inline">\(s=40\)</span>, cette probabilité vaut environ…</p>
 
 
 </section>
