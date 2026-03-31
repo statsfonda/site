@@ -1,4 +1,4 @@
-# Introduction
+# Introduction {.unnumbered}
 
 Les outils des statistiques furent créés pour analyser des phénomènes quantitatifs dans lesquels la présence de *bruit* ou de *hasard* rend l'analyse classique moins puissante. Il peut s'agir de problèmes dans lesquels des données indépendantes ont été générées par le même phénomène. Dans cette section, nous allons développer un exemple qui illustre bien les questions qui se posent et la façon de les résoudre, puis nous poserons quelques bases qui nous permettront d'utiliser le langage des mathématiques. 
 
