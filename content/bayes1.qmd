@@ -22,6 +22,8 @@ Cette loi mesure notre connaissance sur le paramètre $\theta$ avant de voir les
 - l’aléa sur le paramètre $\theta$, 
 - puis l’aléa sur la variable $X$ conditionnellement à $\theta$.
 
+
+
 ::::{#def-loi-a-posteriori}
 ## Loi marginale, loi a posteriori
 
@@ -39,94 +41,99 @@ $$p(\theta \mid x) \propto p_\theta(x) \pi(\theta), $$
 le symbole $\propto$ signifiant « est proportionnel à ». Cette formule s’interprète de la façon classique : 
 $$\mathsf{a~posteriori} \propto \mathsf{vraisemblance} \times \mathsf{a~priori}.$$
 
- partir de cette interprétation, l’analogue de l’estimateur du maximum de vraisemblance est quasiment immédiate. 
+La loi a posteriori permet d'estimer $\theta$ de plusieurs façons possibles : moyenne, médiane, mode, etc. 
 
-:::{#def-map}
+**Constante de proportionnalité.** Nous y reviendrons plus tard, mais certains calculs (comme l'estimateur MAP) ne nécessitent pas la connaissance de la constante de proportionnalité, et ne nécessitent même pas que $\pi$ soit une mesure de probabilité. 
 
-L’estimateur du Maximum A Posteriori, s’il existe, est 
-$$\hat{\theta}_{\text{MAP}} = \arg \max_{\theta} p(\theta \mid X).$$
 
-:::
-
-L’estimateur MAP n’est pas forcément l’outil le plus pertinent lorsqu’on adopte le point de vue bayésien sur les statistiques. 
-
-- pas de mesure de risque
-- le mode n'est pas forcément le point le plus probable de la loi a posteriori
-- pas invariant par reparamétrisation, contrairement à l’EMV (expliquer l’exemple de Michael Jordan)
-
-**Normalisation de l’a priori.**Le calcul de l’estimateur MAP ne nécessite pas la connaissance de la loi marginale $p(X)$ ; mais il ne nécessite même pas la connaissance totale de la loi a priori $\pi$. En fait, on peut connaître $\pi$ seulement à une constante de proportionnalité près : en effet, supposons que $\pi$ ne soit pas normalisée et que $\int \pi = c$, pas forcément égal à 1, et notons $\pi_0 = \pi / c$ la loi normalisée. Il est clair que 
-$$\arg \max_{\theta} p_\theta(x)\pi(\theta) = \arg \max_{\theta} p_\theta(x) \pi_0(\theta).$$
-
-Cette remarque n’est pas si anodine : elle implique que le calcul de l’estimateur MAP ne nécessite pas que $\pi$ soit une mesure normalisée… et en réalité, ne nécessite même pas que ce soit une mesure de probabilité. En effet, rien ne nous empêche de choisir un « a priori impropre », c’est-à-dire non intégrable. C’est typiquement le cas sur $\mathbb{R}$ : prenons l’exemple des lois gaussiennes $\mathscr{N}(\mu, 1)$. Si l’on n’a aucune connaissance a priori sur la localisation de $\mu$, c’est que $\mu$ pourrait se trouver n’importe où dans $\mathbb{R}$. Il paraît donc naturel de choisir un a priori « uniforme sur $\mathbb{R}$, à savoir $\pi(\mu) = 1$. Dans ce cas, l’estimateur MAP devient 
-$$\arg \max_{\mu} p_\mu(x)$$
-c’est-à-dire l’estimateur du maximum de vraisemblance. 
-
-**Calcul de l’a posteriori.** En revanche, le calcul de la distribution a posteriori nécessite, lui, de connaître la loi marginale $p(X)$. Cette loi marginale est égale à une intégrale, 
+**Calcul de l’a posteriori.** En revanche, le calcul de la *distribution* a posteriori nécessite, lui, de connaître la loi marginale $p(X)$. Cette loi marginale est égale à une intégrale, 
 $$p(x) = \int_\Theta p_\theta(x) \pi(\theta) d\theta.$$
 Cette intégrale peut être très difficile à calculer, et dans ce cas les statisticiens ont recours à des approximations numériques, via des méthodes de Monte-Carlo. 
 
-## Exemples
+
+
+**Remarque.** Dans la construction bayésienne décrite ci-dessus, on doit considérer $p_\theta$ comme une mesure de probabilité qui est elle-même aléatoire, puisque $\theta$ l'est. Or, cela nécessiterait d'avoir défini ce qu'est une *mesure aléatoire*, c'est-à-dire d'avoir doté l'espace des mesures de probabilités d'une tribu, et de vérifier la mesurabilité de $\theta \mapsto p_\theta$. Le même problème se pose quand on parle de *loi conditionnelle* : si l'espérance conditionnelle est définie rigoureusement comme une variable aléaoire, alors la loi conditionnelle  est elle-même définie comme une variable aléatoire sur l'espace des mesures. 
+
+Il faut bien comprendre que, pour 99.9\% des applications de la statistique bayésienne, ces considérations techniques sont *parfaitement inutiles* et pourraient être contournées d'une façon ou d'une autre. Les difficultés ne se poseront que dans des cas très particuliers, comme par exemple si on étudie des objets plus complexes comme les mouvements browniens.  
+
+
+:::{#exm-bayes-bernoulli}
+
+## Bernoulli
 
 Plaçons-nous dans le cadre d’un modèle de Bernoulli $\mathrm{Ber}(\theta)$, avec paramètre $\theta \in [0,1]$. On utilise un a priori uniforme sur $[0,1]$, c’est-à-dire $\pi(\theta) = 1$. Si l’on observe $X_1, \dots, X_n$ i.i.d. de loi $\mathrm{Ber}(\theta)$, la vraisemblance des observations est $\theta^{s}(1-\theta)^{n-s}$, 
 où $s = x_1 + \dotsc + x_n$ est le nombre de succès. La loi marginale $p(x_1,\dotsc, x_n)$ est donnée par 
 $$\int_0^1 u^{s}(1-u)^{n-s} du$$
 et on reconnaît la fonction bêta, $B(s+1, n-s+1)$. La loi a posteriori $p(\theta \mid x_1,\dotsc, x_n)$ est donc donnée par
 $$\frac{\theta^{s}(1-\theta)^{n-s}}{B(s+1, n-s+1)}.$$
-Conditionnellement aux observations, le paramètre $\theta$ est donc une variable aléatoire qui suit une loi bêta $B(s+1, n-s+1)$. Pour calculer l’estimateur MAP dans ce modèle, il suffit de maximiser la vraisemblance, et on trouve 
-$$\hat{\theta}_{\text{MAP}} = \frac{s}{n}.$$
-
-
-
-## Risque Bayésien 
-
-
-
-Le risque bayésien d’ordre $p$ d’un estimateur $T$ est la moyenne de son erreur quadratique, à savoir 
-$$r_\pi(T) = \mathbb{E}_{\theta, X} [|T(X)- \theta|^p].$$
-Si $p=2$, on parle de risque quadratique, et si $p=1$, on parle de risque $L^1$. 
-En fait, on pourrait définir ce risque pour n’importe quelle fonction de perte, et pas seulement pour la norme $L^p$ : par exemple, $\ln|x-y|$. Mais les normes $L^p$ sont amplement suffisantes pour exposer la plupart des résultats, donc je m’y tiendrai. 
-
-
-Les estimateurs qui ont le plus petit risque bayésien sont appelés *estimateurs de Bayes*. Ils vérifient donc 
-$$T^\star(x)\in \arg \min_T r_\pi(T)$$
-où le minimum est pris sur l'ensemble des estimateurs. 
-
-Le risque bayésien de $T$ peut aussi se calculer conditionnellement aux observations : dans ce cas on parle de risque *a posteriori*, 
-$$r_\pi(T\mid X) = \mathbb{E}_{\theta} [|T(X) - \theta|^2 \mid X].$$
-Cela peut simplement se récrire 
-$$\int_\Theta |T(X) - \theta|^2 p(\theta \mid X) \pi(\theta)d\theta.$$
-
-:::{#thm-risque-bayesien}
-
-Si $\theta$ est de carré intégrable, alors
-$\mathbb{E}[\theta \mid X]$ est un estimateur de Bayes pour $p=2$. 
-
-Dans le cas où $\theta$ est réel ($d=1$) et intégrable, alors la médiane de la loi a posteriori $p(\theta\mid X)$ est un estimateur de Bayes pour $p=1$. 
+Conditionnellement aux observations, le paramètre $\theta$ est donc une variable aléatoire qui suit une loi bêta $B(s+1, n-s+1)$. 
 
 :::
+
+
+## Estimateurs a posteriori
+
+Une fois que l’on a calculé la loi a posteriori $p(\theta \mid X)$, on peut en déduire des quantités d’intérêt. Par exemple, dans l’exemple de Bernoulli que nous avons développé plus haut, on peut calculer le $\theta$ qui est "le plus probable" conditionnellement aux observations, c'est-à-dire le *mode* de la loi a posteriori. Cet estimateur est appelé *estimateur MAP* (Maximum A Posteriori). Pour calculer l’estimateur MAP dans le modèle donné dans l'exemple plus haut (@exm-bayes-bernoulli), il suffit de maximiser en $\theta$ la vraisemblance, et on trouve 
+$$\hat{\theta}_{\text{MAP}} = \frac{s}{n}.$${#eq-map-bernoulli}
+
+Dans le cas général, le théorème suivant décrit plusieurs quantités centrales en pour utiliser la loi a posteriori afin d'estimer $\theta$. 
+
+Dans le théorème, on suppose pour simplifier que tous ces objets sont bien définis et existent (en pratiquent, cela revient à dire que la loin a posteriori est $L^2$ pour la MMSE ou $L^1$ pour la MAVE).
+
+:::{#thm-map-mmse-mave}
+
+$~$ 
+
+- L’estimateur qui maximise la densité a posteriori est le mode a posteriori (**MAP**), 
+$$\hat{\theta}_{\text{MAP}} = \arg \max_{\theta} p(\theta \mid X).$$
+
+- L'estimateur qui minimise l'erreur quadratique moyenne (**MMSE**, mean square error) est la moyenne a posteriori, 
+$$\hat{\theta}_{\text{MMSE}} = \mathbb{E}[\theta \mid X].$$
+
+- En dimension 1, l'estimateur qui minimise la distance en valeur absolue (**MAVE**, minimum absolute value error) est la médiane a posteriori, 
+
+$$\hat{\theta}_{\text{MAVE}} = \text{médiane}(p(\theta \mid X)).$$
+
+:::
+
 
 :::{.proof}
+Le premier point est une évidence. Pour le second, il s'agit de vérifier que la moyenne d'une variable aléatoire $X$ est le point qui minimise l'erreur quadratique moyenne, c'est-à-dire que $$\mathbb{E}[X] = \arg \min_{x} \mathbb{E}[|X-x|^2].$$
+En écrivant la condition du premier ordre et en dérivant sous l'espérance, on voit immédiatement que l'unique point critique est donné par $x = \mathbb{E}[X]$.
 
-L’espérance conditionnelle de $\theta$ sachant $X$ est la projection $L^2$ de $\theta$ sur l'espace des fonctions mesurables de $X$ dans $\Theta$. Donc c’est précisément l’estimateur qui minimise 
-$$\mathbb{E}[|\theta - T(X)|^2].$$
+Quant au troisième point, il s'agit de vérifier que la médiane d'une variable aléatoire $X$ est le point qui minimise la distance en valeur absolue $\mathbb{E}[|X-t|]$. Soit $m$ une médiane, dont on rappelle qu'elle vérifie
+$$\mathbb{P}(X \leqslant m) \geqslant \frac{1}{2} \quad \text{et} \quad \mathbb{P}(X \geqslant m) \geqslant \frac{1}{2}.$$
 
+Pour n'importe quel $t$, on va étudier $\delta = |X-t| - |X-m|$. Sans perte de généralité, on peut suppose que $t$ est plus grand que $m$, l'autre sens étant similaire. Si $x$ est plus grand que $t$, alors $\delta$ vaut $m-t$. Si $x$ est plus petit que $m$, alors $\delta$ vaut $t-m$. Et si $x$ est entre les deux, alors $\delta$ vaut $2x - t-m$. Dans tous les cas, $|x-t| - |x-m|$ est plus grand que  
+$$(t-m)(\mathbf{1}_{X \leqslant m} - \mathbf{1}_{X > m}).$$
+En particulier, 
+$$\mathbb{E}[|X-t|] - \mathbb{E}[|X-m|]$$
+est plus grand que  $$(t-m)(\mathbb{P}(X \leqslant m) - \mathbb{P}(X > m)).$$
+Le second terme du produit est aussi égal à $2\mathbb{P}(X \leqslant m) - 1$, donc par définition de la médiane il est plus grand que 0, ce qui montre que la médiane est un minimiseur de $\mathbb{E}[|X-t|]$.
 :::
+
+
+
+**Normalisation de l’a priori.** Le calcul de l'etimateur MAP ne nécessite pas la connaissance de la loi marginale $p(X)$, ni même la connaissance totale de la loi a priori $\pi$. En fait, on peut connaître $\pi$ seulement à une constante de proportionnalité près : en effet, supposons que $\pi$ ne soit pas normalisée et que $\int \pi = c$, pas forcément égal à 1, et notons $\pi_0 = \pi / c$ la loi normalisée. Il est clair que 
+$$\arg \max_{\theta} p_\theta(x)\pi(\theta) = \arg \max_{\theta} p_\theta(x) \pi_0(\theta).$$
+
+Cette remarque n’est pas si anodine : elle implique que le calcul de l’estimateur MAP ne nécessite pas que $\pi$ soit une mesure normalisée… et en réalité, ne nécessite même pas que ce soit une mesure de probabilité. En effet, rien ne nous empêche de choisir un « a priori impropre », c’est-à-dire non intégrable. C’est typiquement le cas sur $\mathbb{R}$ : prenons l’exemple des lois gaussiennes $\mathscr{N}(\mu, 1)$. Si l’on n’a aucune connaissance a priori sur la localisation de $\mu$, c’est que $\mu$ pourrait se trouver n’importe où dans $\mathbb{R}$. Il paraît donc naturel de choisir un a priori « uniforme sur $\mathbb{R}$, à savoir $\pi(\mu) = 1$. Dans ce cas, l’estimateur MAP devient 
+$$\arg \max_{\mu} p_\mu(x)$$
+c’est-à-dire l’estimateur du maximum de vraisemblance. 
+
+
+
 
 
 :::{#exm-risque-bayesien-bernoulli}
 
 ## Bernoulli
 
-Dans le cadre du modèle $\mathrm{Ber}(\theta)$ avec a priori uniforme, on a vu que la loi a posteriori est $B(s+1, n-s+1)$. Dans ce cadre, l’estimateur de Bayes est égal à la moyenne de cette loi, à savoir 
-$$\hat{\theta}_{\text{Bayes}} = \frac{s+1}{n+2}.$$
+Dans le cadre du modèle $\mathrm{Ber}(\theta)$ avec a priori uniforme, on a vu que la loi a posteriori est $B(s+1, n-s+1)$. Dans ce cadre, l’estimateur MAP est égal à la moyenne empirique (cf @eq-map-bernoulli). 
 
-Ce n’est pas le même estimateur que l’estimateur MAP, et il est intéressant de se demander à quoi il correspond. En fait, cet estimateur est l’estimateur de la moyenne empirique de notre échantillon, mais auquel on a ajouté deux réalisations, un succès et un échec. 
+Or, l'estimateur MMSE n'est pas égal à l'estimateur MAP. En effet, le théorème ci-dessus dit que $\hat{\theta}_{\text{MMSE}} = \mathbb{E}[\theta \mid X]$, et conditionnellement à $X$, $\theta$ suit une loi bêta. La formule pour l'espérance d'une loi bêta dit alors que 
+$$\hat{\theta}_{\text{MMSE}} = \frac{s+1}{n+2}.$$
 
+On pourrait aussi calculer l'estimateur MAVE ; cependant, il n'y a pas de formule simple pour la médiane d'une loi bêta.
 
 :::
-
-## Utilisation de la loi a posteriori
-
-Une fois que l’on a calculé la loi a posteriori $p(\theta \mid X)$, on peut en déduire des quantités d’intérêt. Par exemple, dans l’exemple de Bernoulli que nous avons développé plus haut, on peut calculer la probabilité *a posteriori* (c’est-à-dire, ayant observé les données) que le paramètre $\theta$ soit supérieur à 0.5, à savoir 
-$$B(s+1, n-s+1)^{-1}\int_0^{0.5}u^{s}(1-u)^{n-s} du.$$
-Lorsque $n=100$ et $s=40$, cette probabilité vaut environ… 

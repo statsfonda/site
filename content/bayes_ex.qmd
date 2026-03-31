@@ -4,13 +4,54 @@
 ## Questions
 
 - Dans le cas où $\Theta$ est un ensemble fini, montrer que l’a priori uniforme est effectivement invariant par les  « reparamétrisations » (les bijections).
-- Calculer l’estimateur MAP dans un modèle exponentiel avec un a priori uniforme. 
+- Calculer l’estimateur MAP dans un modèle exponentiel avec un a priori "uniforme sur $\mathbb{R}_+$". 
+- Si le quotient intellectuel suit une loi $\mathscr{N}(100, 15^2)$, quelle est la probabilité pour qu'une personne ait un QI négatif ? Combien de personnes, sur les 8 milliards d'être humains, devraient avoir un QI négatif ?
 
 ## Exercices 
 
-:::{#ex-tramcar}
+:::{#exr-tramcar}
 
-Les *animes* peuvent avoir beaucoup d’épisodes. Je clique au hasard dans le catalogue d’un anime particulier, et je vois qu’il s’agit de l’épisode 133. Comment estimer le nombre total d’épisodes ? Utiliser un a priori non informatif (et impropre)$\pi(n) = 1/n$ et le justifier. 
+Les *animes* peuvent avoir beaucoup d’épisodes. Je clique au hasard dans le catalogue d’un anime particulier, et je vois qu’il s’agit de l’épisode 133. Comment estimer le nombre total d’épisodes ? Utiliser un a priori non informatif (et impropre) $\pi(n) = 1/n$ et le justifier. 
 
 :::
 
+
+:::{#exr-gaussianbayes}
+
+Un signal binaire peut prendre les valeurs $0$ ou $1$. Cependant, le signal n'est pas observé tel quel : il est bruité par un bruit blanc additif $\varepsilon \sim \mathscr{N}(0, \sigma^2)$, et on observe donc $Y= x + \varepsilon$. On cherche à estimer $x$ sachant $Y$. 
+
+1. Formuler ce problème dans le langage bayésien, avec une loi a priori de Bernoulli, et calculer la loi a posteriori. 
+
+2. Montrer que l'estimateur MAP est le signe de $Y$. 
+
+3. Montrer que l'estimateur MMSE est $\tanh(Y/\sigma^2)$.
+
+:::
+
+:::{#exr-gaussianbayes-cauchy}
+
+On observe $Y=X+\varepsilon$, où $X$ est un paramètre réel à estimer, et $\varepsilon$ suit une loi de Cauchy. On choisit pour $X$ une loi a priori gaussienne centrée $\mathscr{N}(0, 1)$.
+
+1. Montrer que la loi a posteriori est proportionnelle à $e^{-x^2/2}/((y-x)^2+1)$.
+
+2. Est-ce que la loi a priori est intégrable ? Et la loi du modèle ? La marginale ? La loi a posteriori ? 
+
+3. ($\star$ : très calculatoire, nécessite un peu d'analyse complexe) Montrer que l'estimateur MMSE dans ce modèle est donné par 
+$$\mathbb{E}[X \mid Y] = Y + \frac{\mathrm{Im}(f(Y))}{\mathrm{Re}(f(Y))}$$
+où 
+$$f(y)= e^{i y} \mathrm{erfc}\left(\frac{1+iy}{\sqrt{2}}\right).$$
+
+::: 
+
+
+:::{#exr-gaussianrisk}
+
+Dans un modèle bayésien avec loi  a priori $\pi$, le risque bayésien $L^p$ est défini par 
+$$r_p(\pi) = \min_{T} \mathbb{E}[|T(X) - \theta|^p]$$
+où l'argument $T$ est pris sur l'ensemble des estimateurs, et où les variables $\theta,X$ ont pour densité jointe $\pi(\theta)p_\theta(x)$. On note $T_\star$ n'importe quel estimateur qui minimise ce risque, s'il existe[^defba] Montrer que si $T$ minimise le risque empirique, 
+$$r_p(\pi \mid X) = \min_{T} \mathbb{E}[|T(X) - \theta|^p \mid X].$$
+
+alors il minimise aussi le risque bayésien. 
+:::
+
+[^defba]: Un estimateur $T$ est dit *bayésien* si il minimise le risque bayésien. 

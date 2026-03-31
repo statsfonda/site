@@ -5,3 +5,37 @@
 - Pour n'importe quel nombre réel $x$, trouver des lois à densité dont l'entropie est égale à $x$.
 - Calculer la divergence de KL entre deux lois d'un même modèle exponentiel. 
 - Montrer que la divergence de KL n'est pas une distance, mais que $d_\mathrm{KL}(P,Q) = 0$ si et seulement si $P = Q$.
+
+## Exercices {.unnumbered}
+
+:::{#exr-exp-entropie}
+
+Soient $X,Y$ deux variables aléatoires ayant une densité jointe $f_{X,Y}$. On note $f_X, f_Y$ les densités marginales de $X$ et $Y$. L'information mutuelle de $X$ et $Y$ est définie par
+$$I(X,Y) = \dkl(f_{X,Y} \mid f_X \otimes f_Y).$$
+
+1. Montrer que $I(X, Y) \geqslant 0$ et que $I(X,Y) = 0$ si et seulement si $X$ et $Y$ sont indépendantes.
+2. Montrer que si $(X,Y)$ forme un vecteur gaussien et que la corrélation entre $X$ et $Y$ est $\rho$, alors $I(X, Y) = \frac{1}{2} \ln(1-\rho^2)$.
+
+:::
+
+
+:::{#exr-password}
+
+## Le problème du mot de passe
+
+Un hacker tente d'accéder à votre messagerie personnelle. Les mots de passe sont des suites binaires de longueur $n$. Vous avez choisi votre propre mot de passe selon une variable aléatoire d'entropie $h$. Pour chaque mot de passe $m \in \{0,1\}^n$, on note $p(m)$ la probabilité que vous ayez choisi ce mot de passe, et on ordonne ces $2^n$ probabilités par ordre décroissant, $p_1 \geqslant p_2 \geqslant \cdots \geqslant p_{2^n}$. 
+
+1. Montrer que la meilleure stratégie consiste à tester les mots un par un dans l'ordre donné par les probabilités $p_i$. Si on note $N$ le nombre d'essais nécessaires pour trouver le mot de passe, calculer $\mathbb{E}_p[N]$.
+
+2. On pose
+$$q_i = (1-\alpha)\alpha^{i-1}$$
+pour un certain $0 < \alpha < 1$. Montrer que si $\ent(p) = \ent(q)$, alors 
+$$\mathbb{E}_p[N] \geqslant \mathbb{E}_q[N].$$
+
+3. Calculer $\ent(q)$ en fonction de $\alpha$. 
+
+4. En déduire que pour tout $0 < \alpha < 1$, on a $1 < (1-\alpha)2^{\ent(q)} < e$.
+
+5. En déduire que $\mathbb{E}_p[N] > \frac{1}{e}2^h$. Interpréter ce résultat.
+
+:::

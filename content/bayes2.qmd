@@ -1,6 +1,6 @@
 # Lois a priori
 
-Un des reproches récurrents qui sont portés à la statistique bayésienne concerne le choix d’un a priori, auquel la théorie est particulièrement sensible[^fisher]. Lors d’une analyse statistique, la première étape consiste à choisir cet a priori $\pi(\theta)$ de façon à encoder notre connaissance sur le paramètre $\theta$. 
+La principale faiblesse de la statistique bayésienne était, est et sera toujours le choix d’un a priori, auquel la théorie est particulièrement sensible[^fisher]. Lors d’une analyse statistique, la première étape consiste à choisir cet a priori $\pi(\theta)$ de façon à encoder notre connaissance sur le paramètre $\theta$ ; mais cette connaissance peut être floue, mal définie, impossible à modéliser, voire tout simplement inconnue. Ce chapitre passe en revue quelques méthodes de choix et leurs limites. 
 
 ## Le principe de Laplace
 
@@ -69,10 +69,102 @@ Il n’est pas intégrable.
 :::
 
 
-## Principe de Jaynes 
+## Principe de Jaynes 
 
 Il existe un dernier choix d’importance pour le choix d’un a priori non-informatif, dû à Edwin Jaynes. Son raisonnement est le suivant : notre connaissance a priori sur le paramètre $\theta$ doit se formuler sous la forme d’un ensemble de contraintes. Par exemple, on peut supposer que $\theta$ est borné, que sa variance est 1, etc. On peut encoder cette connaissance sous la forme d’une contrainte linéaire : la loi de $\theta$ doit satisfaire 
 $$\int T(\theta) \pi(\theta) d\theta = c$$
 pour une certaine constante $c$. La distribution la moins informative qui satisfait ces contraintes est précisément la loi qui maximise l’entropie sous contrainte, et le principe de Boltzmann-Gibbs (@thm-boltzmann-gibbs) nous dit que cette loi est la loi exponentielle associée à $T$. Par exemple, si l’on sait que $\theta$ est centré et fluctue dans un intervalle borné, on ne perd pas grand chose à supposer que $\pi$ doit être centré réduit. La loi la moins informative qui satisfait cette contrainte est donc la loi exponentielle associée à la statistique $T(\theta) = \theta$, à savoir la loi $\mathscr{N}(0,1)$. 
+
+
+## Le principe de conjugaison 
+
+Les principes énoncés ci-dessus sont plutôt philosophiques, au sens où ne relèvent pas de considérations purement mathématiques. Cependant, puisque le choix d'une loi a priori est tout à fait libre, on pourrait aussi faire le choix de familles de lois qui *simplifient les calculs*, pourvu que ça ne soit pas au détriment de la richesse du modèle. C'est en fait souvent la méthode la plus raisonnable. 
+
+:::{#def-conjugaison}
+
+## Famille conjuguée
+
+Soit $(p_\theta)_{\theta \in \Theta}$ un modèle statistique. Une famille de lois $\mathscr{F}$ sur $\Theta$ est dite *conjuguée* au modèle $(p_\theta)$ si, pour tout a priori $\pi \in \mathscr{F}$ et toute observation $x$, la loi a posteriori $p(\theta \mid x)$ est encore dans $\mathscr{F}$. 
+
+:::
+
+L'intérêt est immédiat : si l'on choisit un a priori dans une famille conjuguée, la loi a posteriori reste dans la même famille, et il suffit de mettre à jour les *paramètres* de l'a priori. Il n'y a pas besoin de recalculer une intégrale compliquée pour normaliser. 
+
+
+Nous avons déjà rencontré un exemple de conjugaison. Dans le modèle $\mathrm{Ber}(\theta)$ avec un a priori uniforme $\pi(\theta)=1$ (c'est-à-dire une loi $\mathrm{Beta}(1,1)$), nous avons vu que la loi a posteriori est une loi $\mathrm{Beta}(s+1, n-s+1)$. Ce résultat s'étend immédiatement à un a priori $\mathrm{Beta}(a,b)$ quelconque.
+
+:::{#exm-beta-bernoulli}
+
+## Bêta-Bernoulli
+
+On observe $X_1, \dotsc, X_n$ iid $\mathrm{Ber}(\theta)$ et on choisit l'a priori $\theta \sim \mathrm{Beta}(a,b)$, de densité $\pi(\theta) \propto \theta^{a-1}(1-\theta)^{b-1}$. Alors la loi a posteriori est 
+$$p(\theta \mid x_1, \dotsc, x_n) \propto \theta^{s+a-1}(1-\theta)^{n-s+b-1}$$
+soit la loi $\mathrm{Beta}(a+s, b+n-s)$, où $s = \sum x_i$. L'estimateur de Bayes (MMSE) est  
+$$\hat{\theta}_{\mathrm{Bayes}} = \frac{a + s}{a+b+n}.$$
+
+Les paramètres $a$ et $b$ s'interprètent comme des « pseudo-observations » : tout se passe comme si, avant de voir les données, on avait déjà observé $a-1$ succès et $b-1$ échecs.
+
+:::
+
+:::{#exm-gamma-poisson}
+
+## Gamma-Poisson
+
+On observe $X_1, \dotsc, X_n$ iid de loi $\mathrm{Poisson}(\lambda)$ et on choisit l'a priori $\lambda \sim \Gamma(\alpha, \beta)$, de densité $\pi(\lambda) \propto \lambda^{\alpha-1}e^{-\beta \lambda}$. La vraisemblance est proportionnelle à $\lambda^{s} e^{-n\lambda}$ avec $s = \sum x_i$. La loi a posteriori est alors 
+$$p(\lambda \mid x_1, \dotsc, x_n) \propto \lambda^{s + \alpha - 1} e^{-(n+\beta)\lambda}$$
+et on reconnaît la loi $\Gamma(\alpha + s, \beta + n)$. L'estimateur de Bayes est 
+$$\hat{\lambda}_{\mathrm{Bayes}} = \frac{\alpha + s}{\beta + n}.$$
+
+:::
+
+:::{#exm-normale-normale}
+
+## Normale-Normale
+
+On observe $X_1, \dotsc, X_n$ iid $\mathscr{N}(\mu, \sigma^2)$ avec $\sigma^2$ connu, et on choisit l'a priori $\mu \sim \mathscr{N}(\mu_0, \tau^2)$. La loi a posteriori est alors $\mathscr{N}(\mu_n, \sigma_n^2)$ avec 
+$$\mu_n = \frac{\frac{\mu_0}{\tau^2} + \frac{n\bar{x}}{\sigma^2}}{\frac{1}{\tau^2} + \frac{n}{\sigma^2}}, \qquad \sigma_n^2 = \frac{1}{\frac{1}{\tau^2} + \frac{n}{\sigma^2}}.$$
+
+L'estimateur de Bayes $\mu_n$ est une moyenne pondérée entre la moyenne a priori $\mu_0$ et la moyenne empirique $\bar{x}$, les poids étant donnés par les *précisions* (inverses des variances). Plus il y a d'observations, plus le poids de $\bar{x}$ est important ; et quand $n\to \infty$, $\mu_n \to \bar{x}$ et $\sigma_n^2 \to 0$, de sorte que la loi a posteriori se concentre autour de la moyenne empirique, quelle que soit la loi a priori. 
+
+:::
+
+
+Ce n'est pas un hasard si les exemples ci-dessus font tous intervenir des modèles exponentiels. En fait, les modèles exponentiels admettent *toujours* une famille conjuguée naturelle. 
+
+:::{#thm-conjugaison-exponentielle}
+
+Dans un modèle exponentiel de la forme $p_\theta(x) = e^{\langle \theta, T(x)\rangle - F(\theta)}$ avec $F(\theta) = \ln Z(\theta)$, la famille de lois a priori 
+$$\pi_{\nu,\lambda}(\theta) \propto e^{\langle \nu, \theta \rangle - \lambda F(\theta)}, \qquad \nu \in \mathbb{R}^p, \, \lambda > 0$$
+est conjuguée au modèle. 
+
+Si l'on observe $x_1, \dotsc, x_n$ iid de loi $p_\theta$, le choix de loi a priori $\pi_{\nu_0,\lambda_0}$ donne une loi a posteriori $\pi_{\nu_1, \lambda_1}$ avec 
+$$\nu_1 = \nu_0 + \sum_{i=1}^n T(x_i), \qquad \lambda_1 = \lambda_0 + n.$$
+
+:::
+
+:::{.proof}
+
+La vraisemblance s'écrit $\prod_{i=1}^n p_\theta(x_i) = e^{\langle \theta, \sum T(x_i)\rangle - nF(\theta)}$. En multipliant par l'a priori, on obtient 
+$$p(\theta \mid x_1, \dotsc, x_n) \propto e^{\langle \nu + \sum T(x_i), \theta \rangle - (\lambda + n) F(\theta)}$$
+qui est bien de la même forme que $\pi_{\nu_0,\lambda_0}$ avec les paramètres $\nu_1 = \nu_0 + \sum_{i=1}^n T(x_i)$ et $\lambda_1 = \lambda_0 + n$. 
+
+:::
+
+
+Le tableau suivant résume les principales lois conjuguées. 
+
+| Modèle | A priori | A posteriori | 
+|---|---|---|
+| $\mathrm{Ber}(\theta)$ | $\mathrm{Beta}(a,b)$ | $\mathrm{Beta}(a+s, b+n-s)$ |
+| $\mathrm{Poisson}(\lambda)$ | $\Gamma(\alpha, \beta)$ | $\Gamma(\alpha + s, \beta + n)$ |
+| $\mathscr{N}(\mu, \sigma^2)$, $\sigma^2$ connu | $\mathscr{N}(\mu_0, \tau^2)$ | $\mathscr{N}(\mu_n, \sigma_n^2)$ |
+| $\mathrm{Exp}(\lambda)$ | $\Gamma(\alpha, \beta)$ | $\Gamma(\alpha + n, \beta + s)$ |
+| $\mathscr{N}(\mu, \sigma^2)$, $\mu$ connu | $\Gamma^{-1}(\alpha, \beta)$ | $\Gamma^{-1}(\alpha + n/2, \beta + \sum(x_i - \mu)^2/2)$ |
+
+
+
+
+
+
 
 [^fisher]: C’était d’ailleurs la grande critique adressée par Ronald Fisher à la statistique bayésienne dans les années 30. 

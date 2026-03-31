@@ -40,7 +40,7 @@ La démonstration générale de @thm-boltzmann-gibbs nécessite des outils de ca
 $$ m(p) = \sum_{i=1}^n p_i T(i) - c$$
 et qui maximise l'entropie $H(p)$, où $H(p)$ est le nombre de $[0, \infty]$ défini par
 $$H(p)= -\sum_{i=1}^n p_i \ln p_i.$$
-Ce nombre vaut $+\infty$ si et seulement si l'un des $p_i$ est nul. 
+
 Le fait que $p$ soit une loi de probabilité se traduit en pratique par des contraintes supplémentaires, à savoir $s(p)=0$ où 
 $$ -1 + \sum_{i=1}^n p_i = 0. $$ Il s'agit d'un problème d'optimisation sous contraintes dans^[Si l'un des $p_i$ est nul, $H(p)=+\infty$, donc on peut se restreindre aux $p_i >0$. ] $[0,1]^n$ : 
 $$ \begin{cases} \max_{p\in [0,1]^n} H(p) \\

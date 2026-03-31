@@ -121,3 +121,4 @@ où $\bt \in \mathbb{R}^d$.
 3. Mêmes questions lorsque la fonction $p$ s'écrit sous forme « probit », $p(\bx) = \Phi(\bx \bt)$ avec $\Phi$ la fonction de répartition de $N(0,1)$. 
 
 :::
+
