@@ -353,14 +353,14 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/bayes_ex.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exercices</span></a>
+  <a href="../content/tweedie.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Formules de Tweedie</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/ch8_0.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Fisher VS Bayes</span></span></a>
+  <a href="../content/bayes_ex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercices</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -411,6 +411,8 @@ window.Quarto = {
   <ul>
   <li><a href="#le-principe-de-laplace" id="toc-le-principe-de-laplace" class="nav-link active" data-scroll-target="#le-principe-de-laplace"><span class="header-section-number">25.1</span> Le principe de Laplace</a></li>
   <li><a href="#le-principe-de-jeffreys" id="toc-le-principe-de-jeffreys" class="nav-link" data-scroll-target="#le-principe-de-jeffreys"><span class="header-section-number">25.2</span> Le principe de Jeffreys</a></li>
+  <li><a href="#principe-de-jaynes" id="toc-principe-de-jaynes" class="nav-link" data-scroll-target="#principe-de-jaynes"><span class="header-section-number">25.3</span> Principe de Jaynes</a></li>
+  <li><a href="#le-principe-de-conjugaison" id="toc-le-principe-de-conjugaison" class="nav-link" data-scroll-target="#le-principe-de-conjugaison"><span class="header-section-number">25.4</span> Le principe de conjugaison</a></li>
   </ul>
 </nav>
     </div>
@@ -449,7 +451,7 @@ $$
 </header>
 
 
-<p>Un des reproches récurrents qui sont portés à la statistique bayésienne concerne le choix d’un a priori, auquel la théorie est particulièrement sensible<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Lors d’une analyse statistique, la première étape consiste à choisir cet a priori <span class="math inline">\(\pi(\theta)\)</span> de façon à encoder notre connaissance sur le paramètre <span class="math inline">\(\theta\)</span>.</p>
+<p>La principale faiblesse de la statistique bayésienne était, est et sera toujours le choix d’un a priori, auquel la théorie est particulièrement sensible<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Lors d’une analyse statistique, la première étape consiste à choisir cet a priori <span class="math inline">\(\pi(\theta)\)</span> de façon à encoder notre connaissance sur le paramètre <span class="math inline">\(\theta\)</span> ; mais cette connaissance peut être floue, mal définie, impossible à modéliser, voire tout simplement inconnue. Ce chapitre passe en revue quelques méthodes de choix et leurs limites.</p>
 <section id="le-principe-de-laplace" class="level2" data-number="25.1">
 <h2 data-number="25.1" class="anchored" data-anchor-id="le-principe-de-laplace"><span class="header-section-number">25.1</span> Le principe de Laplace</h2>
 <p>Lorsqu’il n’y a <em>aucune connaissance a priori</em> sur le paramètre, il n’y a pas de raison de donner à certains <span class="math inline">\(\theta\)</span> une probabilité plus grande qu’une autre. Par conséquent, il est naturel de choisir comme a priori une loi uniforme sur l’espace des paramètres. Ce choix est souvent appelé <strong>principe de Laplace</strong> ; il peut sembler raisonnable, et il l’est à certains égards ; mais à y regarder de plus près, on se rend compte qu’il porte en lui des effets indésirables.</p>
@@ -478,8 +480,81 @@ $$
 <div id="exm-jeffreys-gaussian" class="theorem example">
 <p><span class="theorem-title"><strong>Exemple 25.2</strong></span> Prenons l’exemple des lois gaussiennes centrées, <span class="math inline">\(\mathscr{N}(0,v)\)</span>, paramétrisées par leur variance <span class="math inline">\(v&gt;0\)</span>. La log-vraisemblance est égale à <span class="math inline">\(-\frac{1}{2}\ln(2\pi v)- \frac{x^2}{2v}\)</span>, et donc le score est égal à <span class="math inline">\(\frac{x^2}{2v^2} - \frac{1}{2v}\)</span>. L’information de Fisher dans ce modèle est donnée par <span class="math display">\[I(v) = \mathrm{Var}\left[\frac{X^2}{2v^2}\right] = \frac{1}{2v^2}.\]</span> L’a priori de Jeffreys est donc égal à <span class="math display">\[\pi(v) = \sqrt{\frac{1}{2v^2}} = \frac{1}{v\sqrt{2}}.\]</span> Il n’est pas intégrable.</p>
 </div>
-<p>## Principe de Jaynes</p>
+</section>
+<section id="principe-de-jaynes" class="level2" data-number="25.3">
+<h2 data-number="25.3" class="anchored" data-anchor-id="principe-de-jaynes"><span class="header-section-number">25.3</span> Principe de Jaynes</h2>
 <p>Il existe un dernier choix d’importance pour le choix d’un a priori non-informatif, dû à Edwin Jaynes. Son raisonnement est le suivant : notre connaissance a priori sur le paramètre <span class="math inline">\(\theta\)</span> doit se formuler sous la forme d’un ensemble de contraintes. Par exemple, on peut supposer que <span class="math inline">\(\theta\)</span> est borné, que sa variance est 1, etc. On peut encoder cette connaissance sous la forme d’une contrainte linéaire : la loi de <span class="math inline">\(\theta\)</span> doit satisfaire <span class="math display">\[\int T(\theta) \pi(\theta) d\theta = c\]</span> pour une certaine constante <span class="math inline">\(c\)</span>. La distribution la moins informative qui satisfait ces contraintes est précisément la loi qui maximise l’entropie sous contrainte, et le principe de Boltzmann-Gibbs (<a href="ch6_4.html#thm-boltzmann-gibbs" class="quarto-xref">Théorème&nbsp;<span>21.1</span></a>) nous dit que cette loi est la loi exponentielle associée à <span class="math inline">\(T\)</span>. Par exemple, si l’on sait que <span class="math inline">\(\theta\)</span> est centré et fluctue dans un intervalle borné, on ne perd pas grand chose à supposer que <span class="math inline">\(\pi\)</span> doit être centré réduit. La loi la moins informative qui satisfait cette contrainte est donc la loi exponentielle associée à la statistique <span class="math inline">\(T(\theta) = \theta\)</span>, à savoir la loi <span class="math inline">\(\mathscr{N}(0,1)\)</span>.</p>
+</section>
+<section id="le-principe-de-conjugaison" class="level2" data-number="25.4">
+<h2 data-number="25.4" class="anchored" data-anchor-id="le-principe-de-conjugaison"><span class="header-section-number">25.4</span> Le principe de conjugaison</h2>
+<p>Les principes énoncés ci-dessus sont plutôt philosophiques, au sens où ne relèvent pas de considérations purement mathématiques. Cependant, puisque le choix d’une loi a priori est tout à fait libre, on pourrait aussi faire le choix de familles de lois qui <em>simplifient les calculs</em>, pourvu que ça ne soit pas au détriment de la richesse du modèle. C’est en fait souvent la méthode la plus raisonnable.</p>
+<div id="def-conjugaison" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 25.1 (Famille conjuguée)</strong></span> Soit <span class="math inline">\((p_\theta)_{\theta \in \Theta}\)</span> un modèle statistique. Une famille de lois <span class="math inline">\(\mathscr{F}\)</span> sur <span class="math inline">\(\Theta\)</span> est dite <em>conjuguée</em> au modèle <span class="math inline">\((p_\theta)\)</span> si, pour tout a priori <span class="math inline">\(\pi \in \mathscr{F}\)</span> et toute observation <span class="math inline">\(x\)</span>, la loi a posteriori <span class="math inline">\(p(\theta \mid x)\)</span> est encore dans <span class="math inline">\(\mathscr{F}\)</span>.</p>
+</div>
+<p>L’intérêt est immédiat : si l’on choisit un a priori dans une famille conjuguée, la loi a posteriori reste dans la même famille, et il suffit de mettre à jour les <em>paramètres</em> de l’a priori. Il n’y a pas besoin de recalculer une intégrale compliquée pour normaliser.</p>
+<p>Nous avons déjà rencontré un exemple de conjugaison. Dans le modèle <span class="math inline">\(\mathrm{Ber}(\theta)\)</span> avec un a priori uniforme <span class="math inline">\(\pi(\theta)=1\)</span> (c’est-à-dire une loi <span class="math inline">\(\mathrm{Beta}(1,1)\)</span>), nous avons vu que la loi a posteriori est une loi <span class="math inline">\(\mathrm{Beta}(s+1, n-s+1)\)</span>. Ce résultat s’étend immédiatement à un a priori <span class="math inline">\(\mathrm{Beta}(a,b)\)</span> quelconque.</p>
+<div id="exm-beta-bernoulli" class="theorem example">
+<p><span class="theorem-title"><strong>Exemple 25.3 (Bêta-Bernoulli)</strong></span> On observe <span class="math inline">\(X_1, \dotsc, X_n\)</span> iid <span class="math inline">\(\mathrm{Ber}(\theta)\)</span> et on choisit l’a priori <span class="math inline">\(\theta \sim \mathrm{Beta}(a,b)\)</span>, de densité <span class="math inline">\(\pi(\theta) \propto \theta^{a-1}(1-\theta)^{b-1}\)</span>. Alors la loi a posteriori est <span class="math display">\[p(\theta \mid x_1, \dotsc, x_n) \propto \theta^{s+a-1}(1-\theta)^{n-s+b-1}\]</span> soit la loi <span class="math inline">\(\mathrm{Beta}(a+s, b+n-s)\)</span>, où <span class="math inline">\(s = \sum x_i\)</span>. L’estimateur de Bayes (MMSE) est<br>
+<span class="math display">\[\hat{\theta}_{\mathrm{Bayes}} = \frac{a + s}{a+b+n}.\]</span></p>
+<p>Les paramètres <span class="math inline">\(a\)</span> et <span class="math inline">\(b\)</span> s’interprètent comme des « pseudo-observations » : tout se passe comme si, avant de voir les données, on avait déjà observé <span class="math inline">\(a-1\)</span> succès et <span class="math inline">\(b-1\)</span> échecs.</p>
+</div>
+<div id="exm-gamma-poisson" class="theorem example">
+<p><span class="theorem-title"><strong>Exemple 25.4 (Gamma-Poisson)</strong></span> On observe <span class="math inline">\(X_1, \dotsc, X_n\)</span> iid de loi <span class="math inline">\(\mathrm{Poisson}(\lambda)\)</span> et on choisit l’a priori <span class="math inline">\(\lambda \sim \Gamma(\alpha, \beta)\)</span>, de densité <span class="math inline">\(\pi(\lambda) \propto \lambda^{\alpha-1}e^{-\beta \lambda}\)</span>. La vraisemblance est proportionnelle à <span class="math inline">\(\lambda^{s} e^{-n\lambda}\)</span> avec <span class="math inline">\(s = \sum x_i\)</span>. La loi a posteriori est alors <span class="math display">\[p(\lambda \mid x_1, \dotsc, x_n) \propto \lambda^{s + \alpha - 1} e^{-(n+\beta)\lambda}\]</span> et on reconnaît la loi <span class="math inline">\(\Gamma(\alpha + s, \beta + n)\)</span>. L’estimateur de Bayes est <span class="math display">\[\hat{\lambda}_{\mathrm{Bayes}} = \frac{\alpha + s}{\beta + n}.\]</span></p>
+</div>
+<div id="exm-normale-normale" class="theorem example">
+<p><span class="theorem-title"><strong>Exemple 25.5 (Normale-Normale)</strong></span> On observe <span class="math inline">\(X_1, \dotsc, X_n\)</span> iid <span class="math inline">\(\mathscr{N}(\mu, \sigma^2)\)</span> avec <span class="math inline">\(\sigma^2\)</span> connu, et on choisit l’a priori <span class="math inline">\(\mu \sim \mathscr{N}(\mu_0, \tau^2)\)</span>. La loi a posteriori est alors <span class="math inline">\(\mathscr{N}(\mu_n, \sigma_n^2)\)</span> avec <span class="math display">\[\mu_n = \frac{\frac{\mu_0}{\tau^2} + \frac{n\bar{x}}{\sigma^2}}{\frac{1}{\tau^2} + \frac{n}{\sigma^2}}, \qquad \sigma_n^2 = \frac{1}{\frac{1}{\tau^2} + \frac{n}{\sigma^2}}.\]</span></p>
+<p>L’estimateur de Bayes <span class="math inline">\(\mu_n\)</span> est une moyenne pondérée entre la moyenne a priori <span class="math inline">\(\mu_0\)</span> et la moyenne empirique <span class="math inline">\(\bar{x}\)</span>, les poids étant donnés par les <em>précisions</em> (inverses des variances). Plus il y a d’observations, plus le poids de <span class="math inline">\(\bar{x}\)</span> est important ; et quand <span class="math inline">\(n\to \infty\)</span>, <span class="math inline">\(\mu_n \to \bar{x}\)</span> et <span class="math inline">\(\sigma_n^2 \to 0\)</span>, de sorte que la loi a posteriori se concentre autour de la moyenne empirique, quelle que soit la loi a priori.</p>
+</div>
+<p>Ce n’est pas un hasard si les exemples ci-dessus font tous intervenir des modèles exponentiels. En fait, les modèles exponentiels admettent <em>toujours</em> une famille conjuguée naturelle.</p>
+<div id="thm-conjugaison-exponentielle" class="theorem">
+<p><span class="theorem-title"><strong>Théorème 25.2</strong></span> Dans un modèle exponentiel de la forme <span class="math inline">\(p_\theta(x) = e^{\langle \theta, T(x)\rangle - F(\theta)}\)</span> avec <span class="math inline">\(F(\theta) = \ln Z(\theta)\)</span>, la famille de lois a priori <span class="math display">\[\pi_{\nu,\lambda}(\theta) \propto e^{\langle \nu, \theta \rangle - \lambda F(\theta)}, \qquad \nu \in \mathbb{R}^p, \, \lambda &gt; 0\]</span> est conjuguée au modèle.</p>
+<p>Si l’on observe <span class="math inline">\(x_1, \dotsc, x_n\)</span> iid de loi <span class="math inline">\(p_\theta\)</span>, le choix de loi a priori <span class="math inline">\(\pi_{\nu_0,\lambda_0}\)</span> donne une loi a posteriori <span class="math inline">\(\pi_{\nu_1, \lambda_1}\)</span> avec <span class="math display">\[\nu_1 = \nu_0 + \sum_{i=1}^n T(x_i), \qquad \lambda_1 = \lambda_0 + n.\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Preuve</em>. </span>La vraisemblance s’écrit <span class="math inline">\(\prod_{i=1}^n p_\theta(x_i) = e^{\langle \theta, \sum T(x_i)\rangle - nF(\theta)}\)</span>. En multipliant par l’a priori, on obtient <span class="math display">\[p(\theta \mid x_1, \dotsc, x_n) \propto e^{\langle \nu + \sum T(x_i), \theta \rangle - (\lambda + n) F(\theta)}\]</span> qui est bien de la même forme que <span class="math inline">\(\pi_{\nu_0,\lambda_0}\)</span> avec les paramètres <span class="math inline">\(\nu_1 = \nu_0 + \sum_{i=1}^n T(x_i)\)</span> et <span class="math inline">\(\lambda_1 = \lambda_0 + n\)</span>.</p>
+</div>
+<p>Le tableau suivant résume les principales lois conjuguées.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Modèle</th>
+<th>A priori</th>
+<th>A posteriori</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\mathrm{Ber}(\theta)\)</span></td>
+<td><span class="math inline">\(\mathrm{Beta}(a,b)\)</span></td>
+<td><span class="math inline">\(\mathrm{Beta}(a+s, b+n-s)\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\mathrm{Poisson}(\lambda)\)</span></td>
+<td><span class="math inline">\(\Gamma(\alpha, \beta)\)</span></td>
+<td><span class="math inline">\(\Gamma(\alpha + s, \beta + n)\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\mathscr{N}(\mu, \sigma^2)\)</span>, <span class="math inline">\(\sigma^2\)</span> connu</td>
+<td><span class="math inline">\(\mathscr{N}(\mu_0, \tau^2)\)</span></td>
+<td><span class="math inline">\(\mathscr{N}(\mu_n, \sigma_n^2)\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\mathrm{Exp}(\lambda)\)</span></td>
+<td><span class="math inline">\(\Gamma(\alpha, \beta)\)</span></td>
+<td><span class="math inline">\(\Gamma(\alpha + n, \beta + s)\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\mathscr{N}(\mu, \sigma^2)\)</span>, <span class="math inline">\(\mu\)</span> connu</td>
+<td><span class="math inline">\(\Gamma^{-1}(\alpha, \beta)\)</span></td>
+<td><span class="math inline">\(\Gamma^{-1}(\alpha + n/2, \beta + \sum(x_i - \mu)^2/2)\)</span></td>
+</tr>
+</tbody>
+</table>
 
 
 </section>

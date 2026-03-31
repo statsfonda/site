@@ -353,14 +353,14 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/bayes_ex.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exercices</span></a>
+  <a href="../content/tweedie.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Formules de Tweedie</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/ch8_0.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Fisher VS Bayes</span></span></a>
+  <a href="../content/bayes_ex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercices</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -410,6 +410,7 @@ window.Quarto = {
    
   <ul>
   <li><a href="#questions" id="toc-questions" class="nav-link active" data-scroll-target="#questions">Questions</a></li>
+  <li><a href="#exercices" id="toc-exercices" class="nav-link" data-scroll-target="#exercices">Exercices</a></li>
   </ul>
 </nav>
     </div>
@@ -455,6 +456,26 @@ $$
 <li>Calculer la divergence de KL entre deux lois d’un même modèle exponentiel.</li>
 <li>Montrer que la divergence de KL n’est pas une distance, mais que <span class="math inline">\(d_\mathrm{KL}(P,Q) = 0\)</span> si et seulement si <span class="math inline">\(P = Q\)</span>.</li>
 </ul>
+</section>
+<section id="exercices" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="exercices">Exercices</h2>
+<div id="exr-exp-entropie" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 1</strong></span> Soient <span class="math inline">\(X,Y\)</span> deux variables aléatoires ayant une densité jointe <span class="math inline">\(f_{X,Y}\)</span>. On note <span class="math inline">\(f_X, f_Y\)</span> les densités marginales de <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span>. L’information mutuelle de <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> est définie par <span class="math display">\[I(X,Y) = \dkl(f_{X,Y} \mid f_X \otimes f_Y).\]</span></p>
+<ol type="1">
+<li>Montrer que <span class="math inline">\(I(X, Y) \geqslant 0\)</span> et que <span class="math inline">\(I(X,Y) = 0\)</span> si et seulement si <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> sont indépendantes.</li>
+<li>Montrer que si <span class="math inline">\((X,Y)\)</span> forme un vecteur gaussien et que la corrélation entre <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> est <span class="math inline">\(\rho\)</span>, alors <span class="math inline">\(I(X, Y) = \frac{1}{2} \ln(1-\rho^2)\)</span>.</li>
+</ol>
+</div>
+<div id="exr-password" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 2 (Le problème du mot de passe)</strong></span> Un hacker tente d’accéder à votre messagerie personnelle. Les mots de passe sont des suites binaires de longueur <span class="math inline">\(n\)</span>. Vous avez choisi votre propre mot de passe selon une variable aléatoire d’entropie <span class="math inline">\(h\)</span>. Pour chaque mot de passe <span class="math inline">\(m \in \{0,1\}^n\)</span>, on note <span class="math inline">\(p(m)\)</span> la probabilité que vous ayez choisi ce mot de passe, et on ordonne ces <span class="math inline">\(2^n\)</span> probabilités par ordre décroissant, <span class="math inline">\(p_1 \geqslant p_2 \geqslant \cdots \geqslant p_{2^n}\)</span>.</p>
+<ol type="1">
+<li><p>Montrer que la meilleure stratégie consiste à tester les mots un par un dans l’ordre donné par les probabilités <span class="math inline">\(p_i\)</span>. Si on note <span class="math inline">\(N\)</span> le nombre d’essais nécessaires pour trouver le mot de passe, calculer <span class="math inline">\(\mathbb{E}_p[N]\)</span>.</p></li>
+<li><p>On pose <span class="math display">\[q_i = (1-\alpha)\alpha^{i-1}\]</span> pour un certain <span class="math inline">\(0 &lt; \alpha &lt; 1\)</span>. Montrer que si <span class="math inline">\(\ent(p) = \ent(q)\)</span>, alors <span class="math display">\[\mathbb{E}_p[N] \geqslant \mathbb{E}_q[N].\]</span></p></li>
+<li><p>Calculer <span class="math inline">\(\ent(q)\)</span> en fonction de <span class="math inline">\(\alpha\)</span>.</p></li>
+<li><p>En déduire que pour tout <span class="math inline">\(0 &lt; \alpha &lt; 1\)</span>, on a <span class="math inline">\(1 &lt; (1-\alpha)2^{\ent(q)} &lt; e\)</span>.</p></li>
+<li><p>En déduire que <span class="math inline">\(\mathbb{E}_p[N] &gt; \frac{1}{e}2^h\)</span>. Interpréter ce résultat.</p></li>
+</ol>
+</div>
 
 
 </section>

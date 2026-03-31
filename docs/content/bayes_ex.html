@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../content/ch8_0.html" rel="next">
-<link href="../content/bayes3.html" rel="prev">
+<link href="../content/references.html" rel="next">
+<link href="../content/tweedie.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -353,14 +353,14 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/bayes_ex.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Exercices</span></a>
+  <a href="../content/tweedie.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Formules de Tweedie</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/ch8_0.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Fisher VS Bayes</span></span></a>
+  <a href="../content/bayes_ex.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Exercices</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -453,16 +453,43 @@ $$
 <h2 class="anchored" data-anchor-id="questions">Questions</h2>
 <ul>
 <li>Dans le cas où <span class="math inline">\(\Theta\)</span> est un ensemble fini, montrer que l’a priori uniforme est effectivement invariant par les « reparamétrisations » (les bijections).</li>
-<li>Calculer l’estimateur MAP dans un modèle exponentiel avec un a priori uniforme.</li>
+<li>Calculer l’estimateur MAP dans un modèle exponentiel avec un a priori “uniforme sur <span class="math inline">\(\mathbb{R}_+\)</span>”.</li>
+<li>Si le quotient intellectuel suit une loi <span class="math inline">\(\mathscr{N}(100, 15^2)\)</span>, quelle est la probabilité pour qu’une personne ait un QI négatif ? Combien de personnes, sur les 8 milliards d’être humains, devraient avoir un QI négatif ?</li>
 </ul>
 </section>
 <section id="exercices" class="level2">
 <h2 class="anchored" data-anchor-id="exercices">Exercices</h2>
-<div id="ex-tramcar">
-<p>Les <em>animes</em> peuvent avoir beaucoup d’épisodes. Je clique au hasard dans le catalogue d’un anime particulier, et je vois qu’il s’agit de l’épisode 133. Comment estimer le nombre total d’épisodes ? Utiliser un a priori non informatif (et impropre)<span class="math inline">\(\pi(n) = 1/n\)</span> et le justifier.</p>
+<div id="exr-tramcar" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 1</strong></span> Les <em>animes</em> peuvent avoir beaucoup d’épisodes. Je clique au hasard dans le catalogue d’un anime particulier, et je vois qu’il s’agit de l’épisode 133. Comment estimer le nombre total d’épisodes ? Utiliser un a priori non informatif (et impropre) <span class="math inline">\(\pi(n) = 1/n\)</span> et le justifier.</p>
+</div>
+<div id="exr-gaussianbayes" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 2</strong></span> Un signal binaire peut prendre les valeurs <span class="math inline">\(0\)</span> ou <span class="math inline">\(1\)</span>. Cependant, le signal n’est pas observé tel quel : il est bruité par un bruit blanc additif <span class="math inline">\(\varepsilon \sim \mathscr{N}(0, \sigma^2)\)</span>, et on observe donc <span class="math inline">\(Y= x + \varepsilon\)</span>. On cherche à estimer <span class="math inline">\(x\)</span> sachant <span class="math inline">\(Y\)</span>.</p>
+<ol type="1">
+<li><p>Formuler ce problème dans le langage bayésien, avec une loi a priori de Bernoulli, et calculer la loi a posteriori.</p></li>
+<li><p>Montrer que l’estimateur MAP est le signe de <span class="math inline">\(Y\)</span>.</p></li>
+<li><p>Montrer que l’estimateur MMSE est <span class="math inline">\(\tanh(Y/\sigma^2)\)</span>.</p></li>
+</ol>
+</div>
+<div id="exr-gaussianbayes-cauchy" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 3</strong></span> On observe <span class="math inline">\(Y=X+\varepsilon\)</span>, où <span class="math inline">\(X\)</span> est un paramètre réel à estimer, et <span class="math inline">\(\varepsilon\)</span> suit une loi de Cauchy. On choisit pour <span class="math inline">\(X\)</span> une loi a priori gaussienne centrée <span class="math inline">\(\mathscr{N}(0, 1)\)</span>.</p>
+<ol type="1">
+<li><p>Montrer que la loi a posteriori est proportionnelle à <span class="math inline">\(e^{-x^2/2}/((y-x)^2+1)\)</span>.</p></li>
+<li><p>Est-ce que la loi a priori est intégrable ? Et la loi du modèle ? La marginale ? La loi a posteriori ?</p></li>
+<li><p>(<span class="math inline">\(\star\)</span> : très calculatoire, nécessite un peu d’analyse complexe) Montrer que l’estimateur MMSE dans ce modèle est donné par <span class="math display">\[\mathbb{E}[X \mid Y] = Y + \frac{\mathrm{Im}(f(Y))}{\mathrm{Re}(f(Y))}\]</span> où <span class="math display">\[f(y)= e^{i y} \mathrm{erfc}\left(\frac{1+iy}{\sqrt{2}}\right).\]</span></p></li>
+</ol>
+</div>
+<div id="exr-gaussianrisk" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 4</strong></span> Dans un modèle bayésien avec loi a priori <span class="math inline">\(\pi\)</span>, le risque bayésien <span class="math inline">\(L^p\)</span> est défini par <span class="math display">\[r_p(\pi) = \min_{T} \mathbb{E}[|T(X) - \theta|^p]\]</span> où l’argument <span class="math inline">\(T\)</span> est pris sur l’ensemble des estimateurs, et où les variables <span class="math inline">\(\theta,X\)</span> ont pour densité jointe <span class="math inline">\(\pi(\theta)p_\theta(x)\)</span>. On note <span class="math inline">\(T_\star\)</span> n’importe quel estimateur qui minimise ce risque, s’il existe<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Montrer que si <span class="math inline">\(T\)</span> minimise le risque empirique, <span class="math display">\[r_p(\pi \mid X) = \min_{T} \mathbb{E}[|T(X) - \theta|^p \mid X].\]</span></p>
+<p>alors il minimise aussi le risque bayésien.</p>
 </div>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Un estimateur <span class="math inline">\(T\)</span> est dit <em>bayésien</em> si il minimise le risque bayésien.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
@@ -867,13 +894,13 @@ $$
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../content/bayes3.html" class="pagination-link" aria-label="Régression linéaire bayésienne">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Régression linéaire bayésienne</span></span>
+      <a href="../content/tweedie.html" class="pagination-link" aria-label="Formules de Tweedie">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Formules de Tweedie</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../content/ch8_0.html" class="pagination-link" aria-label="Fisher VS Bayes">
-        <span class="nav-page-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Fisher VS Bayes</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../content/references.html" class="pagination-link" aria-label="Et après ?">
+        <span class="nav-page-text">Et après ?</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
