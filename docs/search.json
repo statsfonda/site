@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Statistiques Fondamentales",
     "section": "",
-    "text": "Organisation\nLa statistique est l’outil qui, en sciences, permet d’étudier le hasard : le décrire, l’analyser, distinguer différents types de hasard, séparer ce qui est dû au hasard et ce qui ne l’est pas.\nLa statistique se parle en langage mathématique, et ce cours ne fera pas exception à cette règle ; mais elle ne s’y réduit pas. Qu’on le veuille ou non, sa puissance a fait d’elle un outil omniprésent dans tous les domaines de la vie où des phénomènes sont mesurés et quantifiés, qu’il s’agisse de science, d’industrie, de commerce ou de politique. Depuis quelques dizaines d’années, les idées venues de la statistique ont même donné à des problèmes purement mathématiques (et parfois anciens) un nouvel éclairage ; certaines des questions les plus ardues de mathématiques pures sont de nature statistique.\nDans ce cours, mon objectif est vous apprendre à penser en statistique, quel que soit le domaine auquel vous vous destinez. On apprendra donc :",
+    "text": "Organisation\nLa statistique est l’outil qui, en sciences, permet d’étudier le hasard : le décrire, l’analyser, distinguer différents types de hasard, séparer ce qui est dû au hasard et ce qui ne l’est pas.\nLa statistique se parle en langage mathématique, et ce cours ne fera pas exception à cette règle ; mais elle ne s’y réduit pas. Qu’on le veuille ou non, sa puissance a fait d’elle un outil omniprésent dans tous les domaines de la vie où des phénomènes sont mesurés et quantifiés, qu’il s’agisse de science, d’industrie, de commerce ou de politique. Depuis quelques dizaines d’années, les idées venues de la statistique ont même donné à des problèmes purement mathématiques (et parfois anciens) un nouvel éclairage ; certaines des questions les plus ardues de mathématiques pures sont de nature statistique.\nDans ce cours, mon objectif est vous apprendre à penser en statistique, quel que soit le domaine auquel vous vous destinez. On apprendra donc :\n\\[F = \\max\\left(E, \\frac{E+P}{2}, \\frac{4E+2P+CC1+CC2}{8}\\right).\\]",
     "crumbs": [
       "Organisation"
     ]
@@ -14,7 +14,7 @@
     "href": "index.html#organisation",
     "title": "Statistiques Fondamentales",
     "section": "",
-    "text": "Le cours a lieu tout le second semestre, du 8 janvier au 3 avril, avec une semaine de vacances du 2 au 7 mars.\nLes CM ont lieu le mercredi de 13h45 à 15h15 en salle 1009 et le vendredi de 8h30 à 10h en salle 1009.\nLes TD sont assurés par Hugo Capot et ont lieu le mercredi de 15h30 à 17h30 en salle 1009 et le vendredi de 10h45 à 12h45 en salle 1009.\nLe CC2 aura lieu la semaine du 23 mars.",
+    "text": "Le cours a lieu tout le second semestre, du 8 janvier au 3 avril, avec une semaine de vacances du 2 au 7 mars.\nLes CM ont lieu le mercredi de 13h45 à 15h15 en salle 1009 et le vendredi de 8h30 à 10h en salle 1009.\nLes TD sont assurés par Hugo Capot et ont lieu le mercredi de 15h30 à 17h30 en salle 1009 et le vendredi de 10h45 à 12h45 en salle 1009.\nLa note finale \\(F\\) est calculée en fonction des notes d’Examen (E), du partiel (P) et des deux contrôles continus (CC1 et CC2) selon la formule suivante :",
     "crumbs": [
       "Organisation"
     ]
