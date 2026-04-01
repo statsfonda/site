@@ -454,6 +454,8 @@ $$
 <ul>
 <li>Le Lemme <a href="ch7_0.html#lem-gc" class="quarto-xref">Lemme&nbsp;<span>20.1</span></a> est-il encore vrai lorsque <span class="math inline">\(F\)</span> n’est pas continue ?</li>
 <li>Construire un intervalle de confiance asymptotique pour <span class="math inline">\(F(x)\)</span> lorsque <span class="math inline">\(x\)</span> est fixé.</li>
+<li>Démontrer le lemme de Glivenko-Cantelli à la main dans le cas où les <span class="math inline">\(X_i\)</span> sont des variables iid de Bernoulli.</li>
+<li>Calculer <span class="math inline">\(\mathbb{P}(|F_n - F|_\infty &gt; 2)\)</span>.</li>
 </ul>
 </section>
 <section id="exercices" class="level2">
@@ -464,6 +466,13 @@ $$
 <li><p>Montrer que la densité de <span class="math inline">\(U_{(i)}\)</span> est <span class="math display">\[\varrho_k(x) = \mathbf{1}_{x\in [0,1]}k\binom{n}{k}x^{k-1}(1-x)^{n-k}.\]</span> Autrement dit, <span class="math inline">\(U_{(i)}\)</span> est une loi Bêta de paramètres <span class="math inline">\((k, n-k+1)\)</span>.</p></li>
 <li><p>On suppose, pour être concret, que <span class="math inline">\(n=20\)</span>. Je choisis secrètement un <span class="math inline">\(k\)</span> entre 1 et <span class="math inline">\(n\)</span>, et je vous dévoile solennellement que <span class="math inline">\(U_{(k)}\)</span> vaut environ 0.12. Estimez <span class="math inline">\(k\)</span>.</p></li>
 <li><p>Calculer les 4 premiers moments de <span class="math inline">\(U_{(i)}\)</span> (attention, c’est calculatoire). En déduire que <span class="math inline">\(\mathbb{E}[|U_{(i)}- i/n|] = O(1/n)\)</span>.</p></li>
+</ol>
+</div>
+<div id="exr-gk-max" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 2</strong></span> Supposons que <span class="math inline">\(X_1, \dotsc, X_n\)</span> sont des variables iid de loi <span class="math inline">\(\mathscr{N}(0,1)\)</span>.</p>
+<ol type="1">
+<li><p>Montrer que, avec probabilité tendant vers 1 lorsque <span class="math inline">\(n\to\infty\)</span>, on a <span class="math inline">\(\max_{1\leqslant i\leqslant n} |X_i| \leqslant (1+o(1))\sqrt{2\ln(n)}\)</span>. (<em>indice : c’était le dernier exercice du partiel 2026.</em>)</p></li>
+<li><p>En déduire qu’il y a une constante <span class="math inline">\(c\)</span> telle que, avec probabilité tendant vers 1 lorsque <span class="math inline">\(n\to\infty\)</span>, on a <span class="math inline">\(|F_n - F|_\infty \geqslant \frac{c}{\sqrt{n\ln(n)}}\)</span>.</p></li>
 </ol>
 </div>
 
