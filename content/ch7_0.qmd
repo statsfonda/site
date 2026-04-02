@@ -80,6 +80,6 @@ $$\mathbb{P}(|F_n - F|_\infty > t) \leqslant 2e^{-2nt^2}.$${#eq-dkw}
 
 :::
 
-Il faut comparer ce résultat avec @eq-predkw, dans lequel la borne est effectivement décroissante en $nt^2$, mais polynomialement. L'inégalité DKW donne une décroissance *exponentielle* en $nt^2$. 
+Il faut comparer ce résultat avec @eq-predkw, dans lequel la borne est effectivement décroissante en $nt^2$, mais avec un préfacteur $1/t$ polynomial. L'inégalité DKW donne une décroissance *exponentielle* en $nt^2$. 
 
 [^1]: Prudence : il faut aussi que $N$ soit plus grand que 1, car sinon les quantiles n'ont pas de sens. Mais $\lceil 2/t\rceil$ vaut 1 uniquement lorsque $t$ est plus grand que 2 : dans ce cas, $\mathbb{P}(|F_n - F|_\infty > t) = 0$, puisque $|F_n - F|_\infty \leqslant |F|_\infty + |F_n|_\infty =2$. 

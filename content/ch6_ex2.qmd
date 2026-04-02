@@ -15,7 +15,7 @@ Soient $X,Y$ deux variables aléatoires ayant une densité jointe $f_{X,Y}$. On 
 $$I(X,Y) = \dkl(f_{X,Y} \mid f_X \otimes f_Y).$$
 
 1. Montrer que $I(X, Y) \geqslant 0$ et que $I(X,Y) = 0$ si et seulement si $X$ et $Y$ sont indépendantes.
-2. Montrer que si $(X,Y)$ forme un vecteur gaussien et que la corrélation entre $X$ et $Y$ est $\rho$, alors $I(X, Y) = \frac{1}{2} \ln(1-\rho^2)$.
+2. Montrer que si $(X,Y)$ forme un vecteur gaussien et que la corrélation entre $X$ et $Y$ est $\rho$, alors $I(X, Y) = -\frac{1}{2} \ln(1-\rho^2)$.
 
 :::
 

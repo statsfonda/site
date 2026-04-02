@@ -5,7 +5,8 @@
 - Le Lemme @lem-gc est-il encore vrai lorsque $F$ n'est pas continue ?
 - Construire un intervalle de confiance asymptotique pour $F(x)$ lorsque $x$ est fixé.
 - Démontrer le lemme de Glivenko-Cantelli à la main dans le cas où les $X_i$ sont des variables iid de Bernoulli. 
-- Calculer $\mathbb{P}(|F_n - F|_\infty > 2)$.  
+- Calculer $\mathbb{P}(|F_n - F|_\infty > 2)$. 
+-  
 
 ## Exercices
 
@@ -27,6 +28,6 @@ Supposons que $X_1, \dotsc, X_n$ sont des variables iid de loi $\mathscr{N}(0,1)
 
 1. Montrer que, avec probabilité tendant vers 1 lorsque $n\to\infty$, on a $\max_{1\leqslant i\leqslant n} |X_i| \leqslant (1+o(1))\sqrt{2\ln(n)}$. (*indice : c’était le dernier exercice du partiel 2026.*)
 
-2. En déduire qu’il y a une constante $c$ telle que, avec probabilité tendant vers 1 lorsque $n\to\infty$, on a $|F_n - F|_\infty \geqslant \frac{c}{\sqrt{n\ln(n)}}$.
+2. En déduire qu’il y a une constante $c$ telle que, avec probabilité tendant vers 1 lorsque $n\to\infty$, on a $|F_n - F|_\infty \geqslant \frac{c}{n\sqrt{\ln(n)}}$.
 
 :::
