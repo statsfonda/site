@@ -342,24 +342,30 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/bayes2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Lois a priori</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/bayes3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Régression linéaire bayésienne</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/tweedie.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Formules de Tweedie</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Choix d’un <em>a priori</em></span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/bayes_ex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercices</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/tweedie.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Formules de Tweedie</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/kalman.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Filtre de Kalman</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/bayes_ex_2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercices</span></a>
   </div>
 </li>
@@ -477,7 +483,7 @@ $$
 <div id="exr-reparam" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercice 3</strong></span> Soit <span class="math inline">\((p_\theta)\)</span> un modèle statistique, avec <span class="math inline">\(\theta\)</span> dans un ouvert <span class="math inline">\(U\)</span>. Soit <span class="math inline">\(\phi\)</span> un difféomorphisme de <span class="math inline">\(V\)</span> vers un ouvert <span class="math inline">\(U\)</span>. On considère le modèle statistique <span class="math inline">\((p_{\phi(\mu)})\)</span>, où <span class="math inline">\(\mu\)</span> est dans <span class="math inline">\(V\)</span>. On note <span class="math inline">\(I_1(\theta)\)</span> la matrice d’information de Fisher du modèle <span class="math inline">\((p_\theta)\)</span>, et <span class="math inline">\(I_2(\mu)\)</span> celle du modèle <span class="math inline">\((p_{\phi(\mu)})\)</span>.</p>
 <ol type="1">
-<li><p>Montrer que <span class="math inline">\(I_2(\mu) = J_\phi(\mu) I(\phi(\mu)) J_\phi(\mu)^\top\)</span>, où <span class="math inline">\(J_\phi(\mu)\)</span> est la matrice jacobienne de <span class="math inline">\(\phi\)</span> en <span class="math inline">\(\mu\)</span>.</p></li>
+<li><p>Montrer que <span class="math inline">\(I_2(\mu) = J_\phi(\mu)^\top I_1(\phi(\mu)) J_\phi(\mu)\)</span>, où <span class="math inline">\(J_\phi(\mu)\)</span> est la matrice jacobienne de <span class="math inline">\(\phi\)</span> en <span class="math inline">\(\mu\)</span>.</p></li>
 <li><p>Retrouver les formules pour l’information de Fisher des lois de Bernoulli dans la section <a href="ch6_2.html#sec-interp-fisher" class="quarto-xref"><span>Que mesure l’information de Fisher ?</span></a>.</p></li>
 </ol>
 </div>

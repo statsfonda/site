@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../content/references.html" rel="next">
-<link href="../content/tweedie.html" rel="prev">
+<link href="../content/tweedie.html" rel="next">
+<link href="../content/bayes2.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -342,24 +342,30 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/bayes2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Lois a priori</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/bayes3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Régression linéaire bayésienne</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/tweedie.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Formules de Tweedie</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Choix d’un <em>a priori</em></span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/bayes_ex.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Exercices</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/tweedie.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Formules de Tweedie</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/kalman.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Filtre de Kalman</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/bayes_ex_2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercices</span></a>
   </div>
 </li>
@@ -455,6 +461,11 @@ $$
 <li>Dans le cas où <span class="math inline">\(\Theta\)</span> est un ensemble fini, montrer que l’a priori uniforme est effectivement invariant par les « reparamétrisations » (les bijections).</li>
 <li>Calculer l’estimateur MAP dans un modèle exponentiel avec un a priori “uniforme sur <span class="math inline">\(\mathbb{R}_+\)</span>”.</li>
 <li>Si le quotient intellectuel suit une loi <span class="math inline">\(\mathscr{N}(100, 15^2)\)</span>, quelle est la probabilité pour qu’une personne ait un QI négatif ? Combien de personnes, sur les 8 milliards d’être humains, devraient avoir un QI négatif ?</li>
+<li>Calculer l’a priori de Jeffreys dans les modèles de Bernoulli.</li>
+<li>Calculer l’a priori de Jeffreys dans les modèles gaussiens <span class="math inline">\(\mathscr{N}(\mu, 1)\)</span>, avec <span class="math inline">\(\theta\in\mathbb{R}\)</span>.</li>
+<li>Calculer l’a priori de Jeffreys pour les lois de Poisson.</li>
+<li>Quelle est la loi sur <span class="math inline">\(\mathbb{R}\)</span> d’entropie maximale et qui vérifie <span class="math inline">\(\mathbb{E}[|X|] = 1\)</span> ?</li>
+<li>Quelle est la loi sur <span class="math inline">\(\mathbb{R}\)</span> d’entropie maximale et qui vérifie <span class="math inline">\(\mathbb{E}[\ln(1+X^2)] = 2\ln 2\)</span> ?</li>
 </ul>
 </section>
 <section id="exercices" class="level2">
@@ -463,7 +474,7 @@ $$
 <p><span class="theorem-title"><strong>Exercice 1</strong></span> Les <em>animes</em> peuvent avoir beaucoup d’épisodes. Je clique au hasard dans le catalogue d’un anime particulier, et je vois qu’il s’agit de l’épisode 133. Comment estimer le nombre total d’épisodes ? Utiliser un a priori non informatif (et impropre) <span class="math inline">\(\pi(n) = 1/n\)</span> et le justifier.</p>
 </div>
 <div id="exr-gaussianbayes" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 2</strong></span> Un signal binaire peut prendre les valeurs <span class="math inline">\(0\)</span> ou <span class="math inline">\(1\)</span>. Cependant, le signal n’est pas observé tel quel : il est bruité par un bruit blanc additif <span class="math inline">\(\varepsilon \sim \mathscr{N}(0, \sigma^2)\)</span>, et on observe donc <span class="math inline">\(Y= x + \varepsilon\)</span>. On cherche à estimer <span class="math inline">\(x\)</span> sachant <span class="math inline">\(Y\)</span>.</p>
+<p><span class="theorem-title"><strong>Exercice 2 ((Bernoulli + Gauss))</strong></span> Un signal binaire peut prendre les valeurs <span class="math inline">\(0\)</span> ou <span class="math inline">\(1\)</span>. Cependant, le signal n’est pas observé tel quel : il est bruité par un bruit blanc additif <span class="math inline">\(\varepsilon \sim \mathscr{N}(0, \sigma^2)\)</span>, et on observe donc <span class="math inline">\(Y= x + \varepsilon\)</span>. On cherche à estimer <span class="math inline">\(x\)</span> sachant <span class="math inline">\(Y\)</span>.</p>
 <ol type="1">
 <li><p>Formuler ce problème dans le langage bayésien, avec une loi a priori de Bernoulli, et calculer la loi a posteriori.</p></li>
 <li><p>Montrer que l’estimateur MAP est le signe de <span class="math inline">\(Y\)</span>.</p></li>
@@ -471,7 +482,7 @@ $$
 </ol>
 </div>
 <div id="exr-gaussianbayes-cauchy" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 3</strong></span> On observe <span class="math inline">\(Y=X+\varepsilon\)</span>, où <span class="math inline">\(X\)</span> est un paramètre réel à estimer, et <span class="math inline">\(\varepsilon\)</span> suit une loi de Cauchy. On choisit pour <span class="math inline">\(X\)</span> une loi a priori gaussienne centrée <span class="math inline">\(\mathscr{N}(0, 1)\)</span>.</p>
+<p><span class="theorem-title"><strong>Exercice 3 (Gauss + Cauchy)</strong></span> On observe <span class="math inline">\(Y=X+\varepsilon\)</span>, où <span class="math inline">\(X\)</span> est un paramètre réel à estimer, et <span class="math inline">\(\varepsilon\)</span> suit une loi de Cauchy. On choisit pour <span class="math inline">\(X\)</span> une loi a priori gaussienne centrée <span class="math inline">\(\mathscr{N}(0, 1)\)</span>.</p>
 <ol type="1">
 <li><p>Montrer que la loi a posteriori est proportionnelle à <span class="math inline">\(e^{-x^2/2}/((y-x)^2+1)\)</span>.</p></li>
 <li><p>Est-ce que la loi a priori est intégrable ? Et la loi du modèle ? La marginale ? La loi a posteriori ?</p></li>
@@ -481,6 +492,24 @@ $$
 <div id="exr-gaussianrisk" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercice 4</strong></span> Dans un modèle bayésien avec loi a priori <span class="math inline">\(\pi\)</span>, le risque bayésien <span class="math inline">\(L^p\)</span> est défini par <span class="math display">\[r_p(\pi) = \min_{T} \mathbb{E}[|T(X) - \theta|^p]\]</span> où l’argument <span class="math inline">\(T\)</span> est pris sur l’ensemble des estimateurs, et où les variables <span class="math inline">\(\theta,X\)</span> ont pour densité jointe <span class="math inline">\(\pi(\theta)p_\theta(x)\)</span>. On note <span class="math inline">\(T_\star\)</span> n’importe quel estimateur qui minimise ce risque, s’il existe<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Montrer que si <span class="math inline">\(T\)</span> minimise le risque empirique, <span class="math display">\[r_p(\pi \mid X) = \min_{T} \mathbb{E}[|T(X) - \theta|^p \mid X].\]</span></p>
 <p>alors il minimise aussi le risque bayésien.</p>
+</div>
+<div id="exr-bayes-beta" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 5</strong></span> Pour tout <span class="math inline">\(\theta\in]0,1[\)</span>, on définit une loi <span class="math inline">\(p_\theta\)</span> sur <span class="math inline">\(\mathbb{N}\)</span> par <span class="math inline">\(p_\theta(n) = (n+1)(1-\theta)^2 \theta^n\)</span> ; cette loi s’appelle la <em>loi géométrique biaisée par la taille</em>. On choisit pour a priori une loi bêta <span class="math inline">\(B(a,b)\)</span>, avec <span class="math inline">\(a,b&gt;0\)</span>. On observe un échantillon iid <span class="math inline">\(x_1, \dotsc, x_n\)</span> de loi <span class="math inline">\(p_\theta\)</span>.</p>
+<ol type="1">
+<li><p>Calculer la loi a posteriori de <span class="math inline">\(\theta\)</span> conditionnellement à l’échantillon.</p></li>
+<li><p>Calculer l’estimateur <span class="math inline">\(\hat{\theta}_{\text{MMSE}}\)</span> (la moyenne a posteriori).</p></li>
+</ol>
+</div>
+<div id="exr-gauss-mean-var" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 6 (Famille gaussienne (<span class="math inline">\(\star\)</span>))</strong></span> La loi inverse-Gamma <span class="math inline">\(\Gamma^{-1}(a,b)\)</span>, avec <span class="math inline">\(a,b&gt;0\)</span>, est la loi sur <span class="math inline">\([0,+\infty[\)</span> de densité <span class="math display">\[\frac{b^a}{\Gamma(a)} x^{-(a+1)} e^{-b/x}.\]</span> La loi <em>normale-inverse-gamma</em> sur <span class="math inline">\(\Theta = \mathbb{R}\times [0,+\infty[\)</span>, notée <span class="math inline">\(\mathrm{IGN}(a,b,c,d)\)</span>, est définie comme la loi de <span class="math inline">\((\mu, \sigma^2)\)</span> où <span class="math inline">\(\sigma^2\)</span> suit une loi inverse-Gamma et <span class="math inline">\(\mu\)</span> suit une normale de variance proportionnelle à <span class="math inline">\(\sigma^2\)</span> : <span class="math display">\[\mu \mid \sigma^2 \sim \mathscr{N}\left(a, \frac{\sigma^2}{b}\right)\]</span> <span class="math display">\[\sigma^2 \sim \Gamma^{-1}(c,d).\]</span></p>
+<p>On observe un échantillon <span class="math inline">\(X_1, \dotsc, X_n\)</span> iid de loi <span class="math inline">\(\mathscr{N}(\mu, \sigma^2)\)</span>, avec <span class="math inline">\((\mu, \sigma^2) \in \Theta\)</span>, et on cherche à estimer <span class="math inline">\((\mu, \sigma^2)\)</span>. On choisit pour a priori impropre sur <span class="math inline">\(\Theta\)</span> la mesure de densité <span class="math display">\[\pi(\mu,\sigma^2) = \frac{1}{\sigma^2}.\]</span></p>
+<ol type="1">
+<li><p>Calculer la « loi » a posteriori dans ce modèle.</p></li>
+<li><p>Montrer que la loi a posteriori de <span class="math inline">\(\sigma^2\)</span> est <span class="math inline">\(\Gamma^{-1}\!\left(\frac{n-1}{2}, \frac{n s^2}{2}\right)\)</span>, où <span class="math inline">\(s^2 = \frac{1}{n}\sum_{i=1}^n (X_i - \overline{X}_n)^2\)</span>.</p></li>
+<li><p>Montrer que conditionnellement à <span class="math inline">\(\sigma^2\)</span> et aux observations, <span class="math inline">\(\mu\)</span> est gaussienne.</p></li>
+<li><p>En déduire que la loi a posteriori du problème est une normale-inverse-gamma.</p></li>
+<li><p>Montrer que la loi a posteriori de <span class="math inline">\((\mu - \bar{x}_n)/\sqrt{s^2/n}\)</span> est la loi de Student à <span class="math inline">\(n-1\)</span> degrés de liberté.</p></li>
+</ol>
 </div>
 
 
@@ -894,13 +923,13 @@ $$
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../content/tweedie.html" class="pagination-link" aria-label="Formules de Tweedie">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Formules de Tweedie</span></span>
+      <a href="../content/bayes2.html" class="pagination-link" aria-label="Choix d’un *a priori*">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Choix d’un <em>a priori</em></span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../content/references.html" class="pagination-link" aria-label="Et après ?">
-        <span class="nav-page-text">Et après ?</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../content/tweedie.html" class="pagination-link" aria-label="Formules de Tweedie">
+        <span class="nav-page-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Formules de Tweedie</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
