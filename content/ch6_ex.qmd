@@ -38,7 +38,7 @@ On observe un échantillon iid $(X_1, \dotsc, X_n)$ de lois de Laplace, c'est-à
 
 Soit $(p_\theta)$ un modèle statistique, avec $\theta$ dans un ouvert $U$. Soit $\phi$ un difféomorphisme de $V$ vers un ouvert $U$. On considère le modèle statistique $(p_{\phi(\mu)})$, où $\mu$ est dans $V$. On note $I_1(\theta)$ la matrice d'information de Fisher du modèle $(p_\theta)$, et $I_2(\mu)$ celle du modèle $(p_{\phi(\mu)})$. 
 
-1. Montrer que $I_2(\mu) = J_\phi(\mu) I(\phi(\mu)) J_\phi(\mu)^\top$, où $J_\phi(\mu)$ est la matrice jacobienne de $\phi$ en $\mu$.
+1. Montrer que $I_2(\mu) = J_\phi(\mu)^\top I_1(\phi(\mu)) J_\phi(\mu)$, où $J_\phi(\mu)$ est la matrice jacobienne de $\phi$ en $\mu$.
 
 2. Retrouver les formules pour l'information de Fisher des lois de Bernoulli dans la section @sec-interp-fisher. 
 
