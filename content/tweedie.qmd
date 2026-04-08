@@ -85,6 +85,7 @@ Le cadre de ces formules est le suivant : on cherche à estimer un *paramètre* 
 Les formules de Tweedie relient l'estimateur Bayes-Optimal (l'estimateur MMSE) à ce qu'on appelle le *score des données*, $\nabla_x \ln p(x)$. J'insiste sur le terme *score des données* : en statistiques classiques, on réserve le mot "score" à $\nabla_\theta \ln p_\theta(x)$, la dérivée en le paramètre $\theta$ du modèle. Mais dans de nombreux articles (surtout en machine learning génératif), le mot "score" désigne le "grad log p" où la dérivée est prise par rapport à la variable $x$ observée. En cas d'ambiguité, je recommande d'utiliser les termes "score des données" et "score des paramètres". 
 
 
+
 :::{#thm-tweedie-formulas}
 
 ## Formules de Tweedie, premier ordre
@@ -106,9 +107,19 @@ et à la formule de *débruitage*,
 
 :::
 
-Ces formules montrent que la log-densité marginale $\ln p_\sigma$ contient est un *prédicteur de bruit* optimal. 
+Ces formules montrent que la log-densité marginale $\ln p_\sigma$ contient est un *prédicteur de bruit* optimal. Dans le langage bayésien, elles donnent précisément l’estimateur $\hat{\theta}_{\text{MMSE}}$ d’un modèle $\mathscr{N}(\theta, \sigma^2)$ avec $\sigma^2$ connu et un a priori quelconque sur $\theta$. 
+
 
 :::{.proof}
+
+La densité marginale de $Y$ est $p_\sigma(y) = \int \pi(x)\, \varphi_\sigma(y-x)\, \mathrm{d}x$, où $\varphi_\sigma$ est la densité de $\mathscr{N}(0, \sigma^2 I_d)$. On dérive sous l'intégrale :
+$$\nabla_y p_\sigma(y) = \int \pi(x)\, \nabla_y \varphi_\sigma(y-x)\, \mathrm{d}x.$$
+Or, pour la densité gaussienne, $\nabla_z \varphi_\sigma(z) = -\frac{z}{\sigma^2}\varphi_\sigma(z)$, donc $\nabla_y p_\sigma(y)$ vaut $$-\frac{1}{\sigma^2}\int (y-x)\, \pi(x)\,\varphi_\sigma(y-x)\, \mathrm{d}x.$$
+En divisant par $p_\sigma(y)$, on reconnaît la densité a posteriori $\pi(x)\varphi_\sigma(y-x)/p_\sigma(y)$, et donc l’expression ci-dessus est égale à 
+$$-\frac{1}{\sigma^2}\int (y-x)\, p(x\mid y)\, \mathrm{d}x.$$
+Comme $\varepsilon = Y-X$, cette expression vaut aussi
+$$-\mathbb{E}\!\left[\frac{\varepsilon}{\sigma^2}\,\middle|\, Y=y\right].$$
+Les deux autres formulations s'en déduisent : en multipliant par $-\sigma^2$ on obtient la prédiction du bruit, et en utilisant $X = Y - \varepsilon$ on obtient la formule de débruitage. 
 
 :::
 
@@ -126,7 +137,7 @@ Ces formules montrent que la log-densité marginale $\ln p_\sigma$ contient est 
 \mathrm{Cov}(X \mid Y) &= \sigma^2 I_d + \sigma^4 \nabla^2 \ln p_\sigma(Y).
 \end{align}
 
-L'erreur de débruitage optimale (le Minimum Mean Squared Error) est donnée par 
+L'erreur de débruitage optimale est donnée par 
 \begin{align}
 \mathrm{MMSE} &= \mathrm{trace}\left(\mathrm{Cov}(X \mid Y)\right)\\
 &= \sigma^2 d + \sigma^4 \mathrm{trace}\left(\nabla^2 \ln p_\sigma(Y)\right).
@@ -136,6 +147,12 @@ L'erreur de débruitage optimale (le Minimum Mean Squared Error) est donnée par
 
 :::{.proof}
 
+On utilise l'identité $\nabla^2 \ln f = \nabla^2 f / f - (\nabla \ln f)(\nabla \ln f)^\top$ et la formule $\nabla_y \varphi_\sigma(y-x) = -\frac{y-x}{\sigma^2}\varphi_\sigma(y-x)$. Cela montre directement que $\nabla^2_y \varphi_\sigma(y-x)$ vaut
+$$\frac{1}{\sigma^2}\left[\frac{(y-x)(y-x)^\top}{\sigma^2} - I_d\right]\varphi_\sigma(y-x).$$
+En intégrant contre $\pi(x)$ et en divisant par $p_\sigma(y)$, on reconnaît la loi a posteriori $p(x\mid y)$ :
+$$\frac{\nabla^2 p_\sigma(y)}{p_\sigma(y)} = \frac{1}{\sigma^4}\mathbb{E}[\varepsilon\varepsilon^\top \mid Y] - \frac{I_d}{\sigma^2}.$$
+Par ailleurs, la formule du premier ordre donne $\nabla \ln p_\sigma(y) = -\mathbb{E}[\varepsilon/\sigma^2 \mid Y]$, d'où l’on voit que $\nabla^2 \ln p_\sigma(y)$ est égal à $$\frac{1}{\sigma^4}\mathbb{E}[\varepsilon\varepsilon^\top \mid Y] - \frac{I_d}{\sigma^2} - \frac{1}{\sigma^4}\mathbb{E}[\varepsilon \mid Y]\mathbb{E}[\varepsilon \mid Y]^\top ,$$et ceci se simplifie en  $$-\frac{I_d}{\sigma^2} + \mathrm{Cov}\!\left(\frac{\varepsilon}{\sigma^2}\,\middle|\, Y\right).$$
+Les deux autres formulations s'obtiennent en multipliant par $\sigma^4$, et en utilisant $\mathrm{Cov}(X\mid Y) = \mathrm{Cov}(\varepsilon \mid Y)$ (puisque $X = Y - \varepsilon$ et $Y$ est fixé dans le conditionnement).
 
 :::
 

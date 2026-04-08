@@ -6,6 +6,11 @@
 - Dans le cas où $\Theta$ est un ensemble fini, montrer que l’a priori uniforme est effectivement invariant par les  « reparamétrisations » (les bijections).
 - Calculer l’estimateur MAP dans un modèle exponentiel avec un a priori "uniforme sur $\mathbb{R}_+$". 
 - Si le quotient intellectuel suit une loi $\mathscr{N}(100, 15^2)$, quelle est la probabilité pour qu'une personne ait un QI négatif ? Combien de personnes, sur les 8 milliards d'être humains, devraient avoir un QI négatif ?
+- Calculer l’a priori de Jeffreys dans les modèles de Bernoulli. 
+- Calculer l’a priori de Jeffreys dans les modèles gaussiens $\mathscr{N}(\mu, 1)$, avec $\theta\in\mathbb{R}$.
+- Calculer l’a priori de Jeffreys pour les lois de Poisson.
+- Quelle est la loi sur $\mathbb{R}$ d’entropie maximale et qui vérifie $\mathbb{E}[|X|] = 1$ ?
+- Quelle est la loi sur $\mathbb{R}$ d’entropie maximale et qui vérifie $\mathbb{E}[\ln(1+X^2)] = 2\ln 2$ ?
 
 ## Exercices 
 
@@ -18,6 +23,8 @@ Les *animes* peuvent avoir beaucoup d’épisodes. Je clique au hasard dans le c
 
 :::{#exr-gaussianbayes}
 
+## (Bernoulli + Gauss)
+
 Un signal binaire peut prendre les valeurs $0$ ou $1$. Cependant, le signal n'est pas observé tel quel : il est bruité par un bruit blanc additif $\varepsilon \sim \mathscr{N}(0, \sigma^2)$, et on observe donc $Y= x + \varepsilon$. On cherche à estimer $x$ sachant $Y$. 
 
 1. Formuler ce problème dans le langage bayésien, avec une loi a priori de Bernoulli, et calculer la loi a posteriori. 
@@ -29,6 +36,8 @@ Un signal binaire peut prendre les valeurs $0$ ou $1$. Cependant, le signal n'es
 :::
 
 :::{#exr-gaussianbayes-cauchy}
+
+## Gauss + Cauchy
 
 On observe $Y=X+\varepsilon$, où $X$ est un paramètre réel à estimer, et $\varepsilon$ suit une loi de Cauchy. On choisit pour $X$ une loi a priori gaussienne centrée $\mathscr{N}(0, 1)$.
 
@@ -54,4 +63,45 @@ $$r_p(\pi \mid X) = \min_{T} \mathbb{E}[|T(X) - \theta|^p \mid X].$$
 alors il minimise aussi le risque bayésien. 
 :::
 
+
+
+:::{#exr-bayes-beta}
+
+Pour tout $\theta\in]0,1[$, on définit une loi $p_\theta$ sur $\mathbb{N}$ par $p_\theta(n) = (n+1)(1-\theta)^2 \theta^n$ ; cette loi s’appelle la *loi géométrique biaisée par la taille*. On choisit pour a priori une loi bêta $B(a,b)$, avec $a,b>0$. On observe un échantillon iid $x_1, \dotsc, x_n$ de loi $p_\theta$. 
+
+1. Calculer la loi a posteriori de $\theta$ conditionnellement à l'échantillon. 
+
+2. Calculer l’estimateur $\hat{\theta}_{\text{MMSE}}$ (la moyenne a posteriori).  
+
+:::
+
 [^defba]: Un estimateur $T$ est dit *bayésien* si il minimise le risque bayésien. 
+
+:::{#exr-gauss-mean-var}
+
+## Famille gaussienne ($\star$)
+
+La loi inverse-Gamma $\Gamma^{-1}(a,b)$, avec $a,b>0$, est la loi sur $[0,+\infty[$ de densité
+$$\frac{b^a}{\Gamma(a)} x^{-(a+1)} e^{-b/x}.$$
+La loi *normale-inverse-gamma* sur $\Theta = \mathbb{R}\times [0,+\infty[$, notée $\mathrm{IGN}(a,b,c,d)$, est définie comme la loi de $(\mu, \sigma^2)$ où $\sigma^2$ suit une loi inverse-Gamma et $\mu$ suit une normale de variance proportionnelle à $\sigma^2$ : 
+$$\mu \mid \sigma^2 \sim \mathscr{N}\left(a, \frac{\sigma^2}{b}\right)$$
+$$\sigma^2 \sim \Gamma^{-1}(c,d).$$
+
+On observe un échantillon $X_1, \dotsc, X_n$ iid de loi $\mathscr{N}(\mu, \sigma^2)$, avec $(\mu, \sigma^2) \in \Theta$, et on cherche à estimer $(\mu, \sigma^2)$. On choisit pour a priori impropre sur $\Theta$ la mesure de densité 
+$$\pi(\mu,\sigma^2) = \frac{1}{\sigma^2}.$$
+
+
+1. Calculer la « loi » a posteriori dans ce modèle. 
+
+
+
+2. Montrer que la loi a posteriori de $\sigma^2$ est $\Gamma^{-1}\!\left(\frac{n-1}{2}, \frac{n s^2}{2}\right)$, où $s^2 = \frac{1}{n}\sum_{i=1}^n (X_i - \overline{X}_n)^2$.
+
+3. Montrer que conditionnellement à $\sigma^2$ et aux observations, $\mu$ est gaussienne. 
+
+4. En déduire que la loi a posteriori du problème est une normale-inverse-gamma. 
+
+4. Montrer que la loi a posteriori de $(\mu - \bar{x}_n)/\sqrt{s^2/n}$ est la loi de Student à $n-1$ degrés de liberté.
+
+:::
+

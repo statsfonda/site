@@ -1,4 +1,4 @@
-# Lois a priori
+# Choix d’un *a priori*
 
 La principale faiblesse de la statistique bayésienne était, est et sera toujours le choix d’un a priori, auquel la théorie est particulièrement sensible[^fisher]. Lors d’une analyse statistique, la première étape consiste à choisir cet a priori $\pi(\theta)$ de façon à encoder notre connaissance sur le paramètre $\theta$ ; mais cette connaissance peut être floue, mal définie, impossible à modéliser, voire tout simplement inconnue. Ce chapitre passe en revue quelques méthodes de choix et leurs limites. 
 

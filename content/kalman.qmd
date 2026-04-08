@@ -1,0 +1,78 @@
+# Filtre de Kalman
+
+
+Dans le chapitre précédent, on a vu comment estimer un paramètre $X$ à partir d'une observation bruitée $Y = X + \varepsilon$. Le filtre de Kalman généralise cette idée au cas où le paramètre *évolue dans le temps* : on observe une suite de mesures bruitées $Y_1, Y_2, \dotsc$, et l'on cherche à estimer en temps réel l'état caché $X_t$ à chaque instant $t$. C'est l'un des algorithmes les plus importants du vingtième siècle : il est utilisé en navigation (GPS, guidage de fusées), en traitement du signal, en finance, en robotique.
+
+## Le modèle espace-état linéaire gaussien 
+
+On considère le modèle suivant, appelé *modèle espace-état linéaire gaussien* ou *modèle de Kalman*. L'état caché $(X_t)_{t \geq 0}$ vit dans $\mathbb{R}^d$ et les observations $(Y_t)_{t \geq 1}$ dans $\mathbb{R}^m$. 
+
+:::{#def-kalman-model}
+
+## Modèle linéaire gaussien
+
+L'**équation d'état** décrit l'évolution de l'état caché :
+$$X_{t} = A_t X_{t-1} + \eta_t, \qquad \eta_t \sim \mathscr{N}(0, Q_t)$$
+et l'**équation d'observation** relie l'état à la mesure :
+$$Y_t = H_t X_t + \varepsilon_t, \qquad \varepsilon_t \sim \mathscr{N}(0, R_t).$$
+Les bruits $(\eta_t)$ et $(\varepsilon_t)$ sont tous indépendants entre eux et indépendants de l'état initial $X_0 \sim \mathscr{N}(\mu_0, \Sigma_0)$.
+
+:::
+
+Les matrices $A_t$ (transition), $H_t$ (observation), $Q_t$ (covariance du bruit d'état) et $R_t$ (covariance du bruit de mesure) sont supposées connues. En pratique, elles sont souvent constantes ($A_t = A$, etc.), mais la théorie s'applique au cas général.
+
+**Exemples.** (à faire)
+
+## Le filtre de Kalman
+
+Le problème central est le *filtrage* : à chaque instant $t$, estimer $X_t$ à partir des observations passées $Y_1, \dotsc, Y_t$. Comme le modèle est gaussien, toutes les lois conditionnelles restent gaussiennes, et ne dépendent donc que de deux paramètres : leur moyenne et leur covariance. Ce qu’on appelle communément le *filtre de Kalman* est la règle qui permet « d’actualiser » ces deux paramètres quand une nouvelle observation est disponible.
+
+
+:::{#thm-kalman-filter}
+
+## Filtre de Kalman
+
+Supposons que la loi de $X_{t-1}$ sachant $Y_1, \dotsc, Y_{t-1}$ est gaussienne, de moyenne $\hat{X}_{t-1}$ et de covariance $P_{t-1}$. Alors, la loi de $X_t$ sachant $Y_1, \dotsc, Y_t$ est encore gaussienne, de moyenne $\hat{X}_t$ et de covariance $P_t$, calculées en deux étapes.
+
+- **Prédiction.** 
+\begin{align}
+\hat{X}_{t|t-1} &= A_t \hat{X}_{t-1},\\
+P_{t|t-1} &= A_t P_{t-1} A_t^\top + Q_t.
+\end{align}
+
+- **Correction.** 
+\begin{align}
+K_t &= P_{t|t-1} H_t^\top (H_t P_{t|t-1} H_t^\top + R_t)^{-1},\\
+\hat{X}_t &= \hat{X}_{t|t-1} + K_t(Y_t - H_t \hat{X}_{t|t-1}),\\
+P_t &= (I_d - K_t H_t) P_{t|t-1}.
+\end{align}
+
+:::
+
+La matrice $K_t$ s'appelle le *gain de Kalman*. La quantité $Y_t - H_t \hat{X}_{t|t-1}$ est l'*innovation* : c'est la surprise apportée par la nouvelle observation $Y_t$ par rapport à ce qu'on aurait prédit. Le filtre corrige la prédiction en ajoutant un multiple de cette innovation, pondéré par le gain de Kalman.
+
+:::{.proof}
+
+:::
+
+**Interprétation.** La formule de correction est exactement analogue à la formule de Bayes dans le cas gaussien. En effet, après l'étape de prédiction, on a un « a priori » gaussien $\mathscr{N}(\hat{X}_{t|t-1}, P_{t|t-1})$ sur $X_t$, et la vraisemblance de $Y_t$ sachant $X_t$ est $\mathscr{N}(H_t X_t, R_t)$. L'étape de correction est simplement la mise à jour bayésienne, comme dans l'exemple Normal-Normal. Le gain de Kalman joue le rôle du ratio de précisions dans la formule @eq-prejs.
+
+
+
+
+## Le cas scalaire
+
+Dans le cas $d = m = 1$ et avec des matrices constantes ($A_t = a$, $H_t = 1$, $Q_t = q$, $R_t = r$), les formules se simplifient considérablement. Le filtre de Kalman devient :
+\begin{align}
+\hat{X}_{t|t-1} &= a \hat{X}_{t-1},\\
+P_{t|t-1} &= a^2 P_{t-1} + q,\\
+K_t &= \frac{P_{t|t-1}}{P_{t|t-1} + r},\\
+\hat{X}_t &= \hat{X}_{t|t-1} + K_t(Y_t - \hat{X}_{t|t-1}),\\
+P_t &= (1 - K_t) P_{t|t-1}.
+\end{align}
+
+Le gain de Kalman est ici un scalaire entre 0 et 1. S'il est proche de 1, on fait davantage confiance à l'observation ; s'il est proche de 0, on fait confiance à la prédiction. La formule $\hat{X}_t = (1-K_t)\hat{X}_{t|t-1} + K_t Y_t$ est une *moyenne pondérée* entre la prédiction et l'observation, exactement comme dans l'estimation bayésienne gaussienne.
+
+Lorsque $t \to \infty$, la covariance $P_t$ converge vers une valeur stationnaire $P_\infty$ qui est la solution positive de l'*équation algébrique de Riccati* :
+$$P_\infty = a^2 P_\infty + q - \frac{a^2 P_\infty^2}{P_\infty + r}$$
+et le gain de Kalman converge vers $K_\infty = P_\infty / (P_\infty + r)$. Asymptotiquement, le filtre atteint un régime stationnaire où la confiance relative entre prédiction et observation ne change plus.

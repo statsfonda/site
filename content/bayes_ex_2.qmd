@@ -1,0 +1,24 @@
+# Exercices {.unnumbered}
+
+
+## Questions
+
+- Écrire la formule de Tweedie quand $X$ suit une mixture de deux gaussiennes.
+
+
+## Exercices 
+
+:::{#exr-tweedie-expo}
+
+## Formule de Tweedie dans les modèles exponentiels
+
+Soit $p_\theta(x) = e^{\langle \theta, T(x)\rangle - \ln Z(\theta)}$ un modèle exponentiel par rapport à une mesure de référence ayant une densité $\nu$ sur $\mathbb{R}$. Soit $\pi$ une loi a priori sur l’espace des paramètres et soit $\theta \sim \pi$. 
+
+1. On pose $\Lambda(x) = \ln (\pi(x)/\nu(x))$. Montrer que la loi a posteriori de $\theta$ conditionnellement à une observation $x$ est donnée par 
+$$p(\theta \mid x)  = e^{x\theta - \Lambda(x)} (\pi(\theta)e^{-\ln Z(\theta)}).$$
+
+2. En déduire que $\mathbb{E}[\theta \mid x] = \Lambda'(x)$ et que $\mathrm{Var}(\theta \mid x) = \Lambda''(x)$. Dans le cas gaussien, retrouver les formules de Tweedie. 
+
+3. On suppose que $\nu$ est la densité de $(\Gamma - m)/\sqrt{m}$, où $\Gamma$ suit une loi gamma de paramètres $m$ et $1$. Montrer 
+$$\mathbb{E}[\theta \mid X] = \frac{X + \gamma/2}{1 + X\gamma/2} + (\ln \pi)’(x)$$
+où $\gamma$ est le coefficient d’asymétrie de la loi ci-dessus, que l’on vérifiera être égal à $\gamma=\frac{2}{\sqrt{m}}$. 
