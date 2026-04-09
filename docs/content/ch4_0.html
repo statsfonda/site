@@ -311,12 +311,6 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/problemes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problèmes et sujets</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../content/ch7_0.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Estimation de densité</span></span></a>
   </div>
@@ -371,6 +365,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../content/problemes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Problèmes et sujets</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../content/references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Et après ?</span></a>
   </div>
@@ -417,8 +417,8 @@ window.Quarto = {
   <ul>
   <li><a href="#exemples-de-tests-gaussiens" id="toc-exemples-de-tests-gaussiens" class="nav-link active" data-scroll-target="#exemples-de-tests-gaussiens"><span class="header-section-number">8.1</span> Exemples de tests gaussiens</a>
   <ul class="collapse">
-  <li><a href="#construction-du-test" id="toc-construction-du-test" class="nav-link" data-scroll-target="#construction-du-test"><span class="header-section-number">8.1.1</span> Construction du test</a></li>
-  <li><a href="#calcul-de-la-puissance-et-hypothèse-alternative" id="toc-calcul-de-la-puissance-et-hypothèse-alternative" class="nav-link" data-scroll-target="#calcul-de-la-puissance-et-hypothèse-alternative"><span class="header-section-number">8.1.2</span> Calcul de la puissance et hypothèse alternative</a></li>
+  <li><a href="#construction-du-test" id="toc-construction-du-test" class="nav-link" data-scroll-target="#construction-du-test">Construction du test</a></li>
+  <li><a href="#calcul-de-la-puissance-et-hypothèse-alternative" id="toc-calcul-de-la-puissance-et-hypothèse-alternative" class="nav-link" data-scroll-target="#calcul-de-la-puissance-et-hypothèse-alternative">Calcul de la puissance et hypothèse alternative</a></li>
   </ul></li>
   <li><a href="#la-notion-de-p-valeur" id="toc-la-notion-de-p-valeur" class="nav-link" data-scroll-target="#la-notion-de-p-valeur"><span class="header-section-number">8.2</span> La notion de <span class="math inline">\(p\)</span>-valeur</a></li>
   </ul>
@@ -481,14 +481,14 @@ $$
 <section id="exemples-de-tests-gaussiens" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="exemples-de-tests-gaussiens"><span class="header-section-number">8.1</span> Exemples de tests gaussiens</h2>
 <p>On se place dans un modèle où <span class="math inline">\(X_1, \dotsc, X_n\)</span> sont des gaussiennes <span class="math inline">\(N(\mu, \sigma^2)\)</span>. Nous avons déjà vu plusieurs fois que <span class="math inline">\(\bar{X}_n \sim N(\mu, \sigma^2/n)\)</span>.</p>
-<section id="construction-du-test" class="level3" data-number="8.1.1">
-<h3 data-number="8.1.1" class="anchored" data-anchor-id="construction-du-test"><span class="header-section-number">8.1.1</span> Construction du test</h3>
+<section id="construction-du-test" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="construction-du-test">Construction du test</h3>
 <p>On cherche à réfuter l’hypothèse selon laquelle ces variables aléatoires sont centrées ; autrement dit, on posera <span class="math inline">\(H_0 = \{\mu=0\}\)</span>. Sous cette hypothèse, nos variables aléatoires sont donc des variables <span class="math inline">\(N(0,\sigma^2)\)</span>.</p>
 <p><strong>Supposons dans un premier temps que <span class="math inline">\(\sigma^2\)</span> est connue.</strong> Sous <span class="math inline">\(H_0\)</span>, on a donc <span class="math display">\[ \frac{\sqrt{n}\bar{X}_n}{\sigma} \sim N(0,1)\]</span> et par conséquent, <span class="math inline">\(P_0(|\bar{X}_n| &lt; z_{1-\alpha} \sigma / \sqrt{n}) = 1-\alpha\)</span>. Autrement dit, sous l’hypothèse <span class="math inline">\(\mu = 0\)</span>, on devrait observer l’événement <span class="math display">\[ \bar{X}_n \in \left[ \pm \frac{z_{1-\alpha} \sigma}{\sqrt{n}}\right]\]</span> avec probabilité élevée <span class="math inline">\(1-\alpha\)</span>. Si cet événement n’est pas observé, il est alors très douteux que <span class="math inline">\(\mu\)</span> soit effectivement égal à zéro !&nbsp;On pose donc <span class="math display">\[ \mathsf{rejeter}_\alpha = \{|\bar{X}_n | &gt; z_{1-\alpha} \sigma / \sqrt{n}\}.\]</span> Le niveau de ce test est bien <span class="math inline">\(1-\alpha\)</span> : nous l’avons construit pour cela.</p>
 <p><strong>Supposons maintenant que <span class="math inline">\(\sigma\)</span> n’est pas connue.</strong> En l’estimant via <span class="math inline">\(\hat{\sigma}_n\)</span>, nous savons que (toujours sous l’hypothèse selon laquelle <span class="math inline">\(\mu=0\)</span>) <span class="math display">\[ \frac{\sqrt{n}\bar{X}_n}{\hat{\sigma}_n} \sim \mathscr{T}(n-1).\]</span> On reproduit alors le raisonnement ci-dessus : comme <span class="math inline">\(\mathbb{P}(|\bar{X}_n| &lt; t_{n-1, 1-\alpha}\hat{\sigma}_n / \sqrt{n}) = \alpha\)</span> où <span class="math inline">\(t_{n-1,1-\alpha}\)</span> est le quantile symétrique de <span class="math inline">\(\mathscr{T}(n-1)\)</span>, on voit que l’événement <span class="math display">\[ \mathsf{rejeter}_\alpha = \{|\bar{X}_n| &gt; t_{n-1,1-\alpha}\hat{\sigma}_n / \sqrt{n}\}\]</span> est bien un test de niveau <span class="math inline">\(1-\alpha\)</span>.</p>
 </section>
-<section id="calcul-de-la-puissance-et-hypothèse-alternative" class="level3" data-number="8.1.2">
-<h3 data-number="8.1.2" class="anchored" data-anchor-id="calcul-de-la-puissance-et-hypothèse-alternative"><span class="header-section-number">8.1.2</span> Calcul de la puissance et hypothèse alternative</h3>
+<section id="calcul-de-la-puissance-et-hypothèse-alternative" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="calcul-de-la-puissance-et-hypothèse-alternative">Calcul de la puissance et hypothèse alternative</h3>
 <p>Nous n’avons pas encore eu besoin de spécifier une hypothèse alternative, mais nous allons en avoir besoin pour calculer la puissance du test. Pour commencer, on va supposer que, si <span class="math inline">\(\mu\)</span> n’est pas nulle, alors elle ne peut être égale qu’à 1. Autrement dit, <span class="math inline">\(H_1 = \{1\}\)</span>. Ce genre d’hypothèse alternative ne peut évidemment avoir de pertinence qu’en fonction du problème réel sous-jacent !</p>
 <p>Sous l’hypothèse alternative, donc, nous savons que <span class="math inline">\(\bar{X}_n \sim N(1, \sigma^2)\)</span>. La puissance du test est définie par <span class="math inline">\(1-\beta\)</span> où <span class="math inline">\(\beta=P_1(\mathsf{accepter}_\alpha)\)</span> c’est-à-dire <span class="math display">\[\begin{align}\beta &amp;= P_1(|\bar{X}_n|\leqslant z_{1-\alpha} \sigma / \sqrt{n}) \\
 &amp;= P_1 \left(-\frac{z_{1-\alpha} \sigma}{\sqrt{n}}\leqslant \bar{X}_n \leqslant \frac{z_{1-\alpha} \sigma}{\sqrt{n}} \right) \\

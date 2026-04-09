@@ -311,12 +311,6 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/problemes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problèmes et sujets</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../content/ch7_0.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Estimation de densité</span></span></a>
   </div>
@@ -371,6 +365,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../content/problemes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Problèmes et sujets</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../content/references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Et après ?</span></a>
   </div>
@@ -417,13 +417,13 @@ window.Quarto = {
   <ul>
   <li><a href="#inégalités-de-concentration" id="toc-inégalités-de-concentration" class="nav-link active" data-scroll-target="#inégalités-de-concentration"><span class="header-section-number">7.1</span> Inégalités de concentration</a>
   <ul class="collapse">
-  <li><a href="#inégalité-de-bienaymé-tchebychev" id="toc-inégalité-de-bienaymé-tchebychev" class="nav-link" data-scroll-target="#inégalité-de-bienaymé-tchebychev"><span class="header-section-number">7.1.1</span> Inégalité de Bienaymé-Tchebychev</a></li>
-  <li><a href="#inégalité-de-hoeffding" id="toc-inégalité-de-hoeffding" class="nav-link" data-scroll-target="#inégalité-de-hoeffding"><span class="header-section-number">7.1.2</span> Inégalité de Hoeffding</a></li>
+  <li><a href="#inégalité-de-bienaymé-tchebychev" id="toc-inégalité-de-bienaymé-tchebychev" class="nav-link" data-scroll-target="#inégalité-de-bienaymé-tchebychev">Inégalité de Bienaymé-Tchebychev</a></li>
+  <li><a href="#inégalité-de-hoeffding" id="toc-inégalité-de-hoeffding" class="nav-link" data-scroll-target="#inégalité-de-hoeffding">Inégalité de Hoeffding</a></li>
   </ul></li>
-  <li><a href="#intervalles-de-confiance-non-gaussiens" id="toc-intervalles-de-confiance-non-gaussiens" class="nav-link" data-scroll-target="#intervalles-de-confiance-non-gaussiens"><span class="header-section-number">7.2</span> Intervalles de confiance non-gaussiens</a>
+  <li><a href="#sec-icber" id="toc-sec-icber" class="nav-link" data-scroll-target="#sec-icber"><span class="header-section-number">7.2</span> Intervalles de confiance non-gaussiens</a>
   <ul class="collapse">
-  <li><a href="#sec-icber" id="toc-sec-icber" class="nav-link" data-scroll-target="#sec-icber"><span class="header-section-number">7.2.1</span> Estimation du paramètre <span class="math inline">\(p\)</span> dans un modèle de Bernoulli.</a></li>
-  <li><a href="#estimation-de-moyenne-dans-un-modèle-non-gaussien." id="toc-estimation-de-moyenne-dans-un-modèle-non-gaussien." class="nav-link" data-scroll-target="#estimation-de-moyenne-dans-un-modèle-non-gaussien."><span class="header-section-number">7.2.2</span> Estimation de moyenne dans un modèle non-gaussien.</a></li>
+  <li><a href="#estimation-du-paramètre-p-dans-un-modèle-de-bernoulli." id="toc-estimation-du-paramètre-p-dans-un-modèle-de-bernoulli." class="nav-link" data-scroll-target="#estimation-du-paramètre-p-dans-un-modèle-de-bernoulli.">Estimation du paramètre <span class="math inline">\(p\)</span> dans un modèle de Bernoulli.</a></li>
+  <li><a href="#estimation-de-moyenne-dans-un-modèle-non-gaussien." id="toc-estimation-de-moyenne-dans-un-modèle-non-gaussien." class="nav-link" data-scroll-target="#estimation-de-moyenne-dans-un-modèle-non-gaussien.">Estimation de moyenne dans un modèle non-gaussien.</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -467,8 +467,8 @@ $$
 <section id="inégalités-de-concentration" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="inégalités-de-concentration"><span class="header-section-number">7.1</span> Inégalités de concentration</h2>
 <p>L’inégalité de concentration la plus élémentaire est l’inégalité de Markov. Si <span class="math inline">\(X\)</span> est une variable aléatoire positive, alors il est évident que pour n’importe quel nombre <span class="math inline">\(a\)</span>, on a <span class="math inline">\(a \mathbf{1}_{X&gt;a} \leqslant X \mathbf{1}{X&gt;a}\)</span>, donc en intégrant cette relation on obtient <span class="math inline">\(a \mathbb{P}(X&gt;a)\leqslant \mathbb{E}[X \mathbf{1}_{X&gt;a}]\leqslant \mathbb{E}[X]\)</span>. L’inégalité de Bienaymé-Chebychev est un raffinement.</p>
-<section id="inégalité-de-bienaymé-tchebychev" class="level3" data-number="7.1.1">
-<h3 data-number="7.1.1" class="anchored" data-anchor-id="inégalité-de-bienaymé-tchebychev"><span class="header-section-number">7.1.1</span> Inégalité de Bienaymé-Tchebychev</h3>
+<section id="inégalité-de-bienaymé-tchebychev" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="inégalité-de-bienaymé-tchebychev">Inégalité de Bienaymé-Tchebychev</h3>
 <div id="thm-bt" class="theorem">
 <p><span class="theorem-title"><strong>Théorème 7.1</strong></span> Soit <span class="math inline">\(X\)</span> une variable aléatoire de carré intégrable. Alors, <span class="math display">\[ \mathbb{P}(|X - \mathbb{E}[X]|\geqslant x)\leqslant \frac{\mathrm{Var}(X)}{x^2}.\]</span></p>
 </div>
@@ -476,8 +476,8 @@ $$
 <p><span class="proof-title"><em>Preuve</em>. </span>Élever au carré les deux membres de l’inégalité dans <span class="math inline">\(\mathbb{P}\)</span>, puis appliquer l’inégalité de Markov à la variable aléatoire positive <span class="math inline">\(|X - \mathbb{E}X|^2\)</span> dont l’espérance est <span class="math inline">\(\mathrm{Var}(X)\)</span>.</p>
 </div>
 </section>
-<section id="inégalité-de-hoeffding" class="level3" data-number="7.1.2">
-<h3 data-number="7.1.2" class="anchored" data-anchor-id="inégalité-de-hoeffding"><span class="header-section-number">7.1.2</span> Inégalité de Hoeffding</h3>
+<section id="inégalité-de-hoeffding" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="inégalité-de-hoeffding">Inégalité de Hoeffding</h3>
 <div id="thm-hoeffding" class="theorem">
 <p><span class="theorem-title"><strong>Théorème 7.2 (Inégalité de Hoeffding)</strong></span> Soient <span class="math inline">\(X_1, \dotsc, X_n\)</span> des variables aléatoires indépendantes, pas forcément de même loi. On suppose que chaque <span class="math inline">\(X_i\)</span> est à valeurs dans un intervalle borné <span class="math inline">\([a_i, b_i]\)</span> et on pose <span class="math inline">\(S_n = X_1 + \dotsc + X_n\)</span>. Pour tout <span class="math inline">\(t&gt;0\)</span>,</p>
 <p><span id="eq-hoeffding"><span class="math display">\[\mathbb{P}(S_n - \mathbb{E}[S_n] \geqslant t) \leqslant e^{-\frac{2t^2}{\sum_{i=1}^n(b_i - a_i)^2}} \tag{7.1}\]</span></span> et <span id="eq-hoeffdingsym"><span class="math display">\[\mathbb{P}(|S_n - \mathbb{E}[S_n]| \geqslant t) \leqslant 2e^{-\frac{2t^2}{\sum_{i=1}^n(b_i - a_i)^2}}.  \tag{7.2}\]</span></span></p>
@@ -494,11 +494,11 @@ $$
 <p>La démonstration de l’inégalité de Hoeffding ne dépend pas directement du fait que <span class="math inline">\(X\)</span> est bornée, mais plutôt de <a href="#eq-lemme_hoeffding" class="quarto-xref">Équation&nbsp;<span>7.3</span></a>. Toutes les variables aléatoires qui vérifient une inégalité de type <span class="math inline">\(\mathbb{E}[e^{tX}]\leqslant e^{c t^2}\)</span> pour une constante <span class="math inline">\(c\)</span> peuvent donc avoir leur propre inégalité de Hoeffding.</p>
 </section>
 </section>
-<section id="intervalles-de-confiance-non-gaussiens" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="intervalles-de-confiance-non-gaussiens"><span class="header-section-number">7.2</span> Intervalles de confiance non-gaussiens</h2>
+<section id="sec-icber" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="sec-icber"><span class="header-section-number">7.2</span> Intervalles de confiance non-gaussiens</h2>
 <p>Les inégalités de concentration servent à construire des intervalles de confiance dans de nombreux cas où il est difficile de connaître exactement la loi de la statistique de test. Dans cette partie, on développe plusieurs exemples.</p>
-<section id="sec-icber" class="level3" data-number="7.2.1">
-<h3 data-number="7.2.1" class="anchored" data-anchor-id="sec-icber"><span class="header-section-number">7.2.1</span> Estimation du paramètre <span class="math inline">\(p\)</span> dans un modèle de Bernoulli.</h3>
+<section id="estimation-du-paramètre-p-dans-un-modèle-de-bernoulli." class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="estimation-du-paramètre-p-dans-un-modèle-de-bernoulli.">Estimation du paramètre <span class="math inline">\(p\)</span> dans un modèle de Bernoulli.</h3>
 <p>Soient <span class="math inline">\(X_1, \dotsc, X_n\)</span> des variables indépendantes de loi <span class="math inline">\(\mathscr{B}(p)\)</span>, dont on cherche à estimer le paramètre <span class="math inline">\(p\in ]0,1[\)</span>. La moyenne empirique, <span class="math inline">\(\hat{p}_n = (X_1 + \dotsb + X_n)/n\)</span> est un estimateur est non biaisé de <span class="math inline">\(p\)</span> et son risque quadratique <span class="math inline">\(p(1-p)/n\)</span>. De plus, la loi de <span class="math inline">\(\hat{p}_n\)</span> est connue : <span class="math inline">\(n\hat{p}_n \sim \mathrm{Bin}(n,p)\)</span>. Par conséquent, si l’on connaît les quantiles de <span class="math inline">\(\mathrm{Bin}(n,p)-p\)</span>, on pourra construire des intervalles de confiance de niveau <span class="math inline">\(1-\alpha\)</span>. Ces quantiles peuvent être calculés par des méthodes numériques, mais il y a plus simple.</p>
 <p><strong>Inégalité BT. </strong> L’inégalité de Bienaymé-Tchebychev dit que <span id="eq-btbin"><span class="math display">\[P_p(|\hat{p}_n - p|&gt;t)\leqslant \frac{p(1-p)}{nt^2}.  \tag{7.4}\]</span></span> Si l’on choisit <span class="math display">\[t = \sqrt{\frac{p(1-p)}{n\alpha}},\]</span> cette probabilité est plus petite que <span class="math inline">\(\alpha\)</span>. En pivotant, on en déduit que l’intervalle <span class="math inline">\([\hat{p_n} \pm \sqrt{p(1-p)/n\alpha}]\)</span> contient <span class="math inline">\(p\)</span> avec une probabilité supérieure à <span class="math inline">\(1-\alpha\)</span>. Mais les bornes de cet intervalle ne sont pas des statistiques, car elles dépendent de <span class="math inline">\(p\)</span> ! Fort heureusement, on sait que <span class="math inline">\(p\)</span> est entre <span class="math inline">\(0\)</span> et <span class="math inline">\(1\)</span>, ce qui entraîne que <span class="math inline">\(p(1-p)\)</span> est plus petit que <span class="math inline">\(1/4\)</span>, donc l’intervalle ci-dessus est contenu dans l’intervalle plus grand <span class="math display">\[ \left[\hat{p}_n \pm \frac{1}{2\sqrt{n\alpha}}\right]. \]</span> Ce dernier est bien un intervalle de confiance de niveau <span class="math inline">\(1-\alpha\)</span> pour l’estimation de <span class="math inline">\(p\)</span>.</p>
 <p><strong>TCL. </strong> On a mentionné que les quantiles des lois binomiales pourraient être calculés ; or, ils peuvent également être approchés grâce au théorème central-limite. Celui-ci dit que <span id="eq-tclbin"><span class="math display">\[ \frac{\sqrt{n}(\hat{p}_n - p)}{\sqrt{p(1-p)}} \to N(0,1). \tag{7.5}\]</span></span> Si <span class="math inline">\(z_\alpha\)</span> est le quantile symétrique d’ordre <span class="math inline">\(\alpha\)</span> de <span class="math inline">\(N(0,1)\)</span>, alors on en déduit que <span class="math display">\[\mathbb{P}\left(\left|\frac{\sqrt{n}(\hat{p}_n - p)}{\sqrt{p(1-p)}} \right|&gt;z_\alpha \right) \to \alpha. \]</span> En pivotant, on voit alors que l’intervalle <span class="math display">\[\left[\hat{p}_n \pm z_\alpha \sqrt{p(1-p)/n}\right] \]</span> contient <span class="math inline">\(p\)</span> avec une probabilité <em>qui tend lorsque <span class="math inline">\(n\to\infty\)</span> vers <span class="math inline">\(1-\alpha\)</span></em>. Là encore, cet intervalle n’est pas un intervalle de confiance. On pourrait utiliser deux techniques.</p>
@@ -508,8 +508,8 @@ $$
 </ol>
 <p><strong>Hoeffding.</strong> L’inégalité de Bienaymé-Tchebychev n’est pas très fine. Il existe de nombreuses autres inégalités de concentration :&nbsp;l’inégalité de Hoeffding (<a href="#thm-hoeffding" class="quarto-xref">Théorème&nbsp;<span>7.2</span></a>) concerne les variables bornées, comme ici où les <span class="math inline">\(X_i\)</span> sont dans <span class="math inline">\([0,1]\)</span> . Cette inégalité dit que <span class="math display">\[\mathbb{P}(|\hat{p}_n - p|&gt;t)\leqslant 2 e^{-2nt^2}. \]</span> Le choix <span class="math display">\[ t = \sqrt{\frac{1}{2n}\ln\left(\frac{2}{\alpha}\right)}\]</span> donne une probabilité inférieure à <span class="math inline">\(\alpha\)</span>, et fournit donc l’intervalle de confiance <strong>non-asymptotique</strong> de niveau <span class="math inline">\(1-\alpha\)</span> suivant :&nbsp; <span class="math display">\[ \left[\bar{X}_n \pm \frac{\ln(2/\alpha)}{\sqrt{2n}}\right].\]</span></p>
 </section>
-<section id="estimation-de-moyenne-dans-un-modèle-non-gaussien." class="level3" data-number="7.2.2">
-<h3 data-number="7.2.2" class="anchored" data-anchor-id="estimation-de-moyenne-dans-un-modèle-non-gaussien."><span class="header-section-number">7.2.2</span> Estimation de moyenne dans un modèle non-gaussien.</h3>
+<section id="estimation-de-moyenne-dans-un-modèle-non-gaussien." class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="estimation-de-moyenne-dans-un-modèle-non-gaussien.">Estimation de moyenne dans un modèle non-gaussien.</h3>
 <p>Les deux techniques ci-dessus n’ont rien de spécifique au cas de variables de Bernoulli. En fait, elles s’appliquent à tout modèle statistique iid dont on cherche à estimer la moyenne <span class="math inline">\(\mu\)</span>, pourvu que la variance existe.</p>
 <p>La première méthode utilisant Bienaymé-Tchebychev nécessite de borner la variance. Cela peut se faire dans certains cas, mais pas dans tous. L’inégalité de Hoeffding est beaucoup plus fine que l’inégalité de Bienaymé-Tchebychev, mais elle ne s’applique qu’aux variables qui sont bornées ou sous-gaussiennes.</p>
 <p>La seconde méthode s’applique systématiquement en utilisant l’estimateur de la variance empirique <span class="math inline">\(\hat{\sigma}_n^2\)</span>. En effet, la convergence <span class="math display">\[\frac{\sqrt{n}}{\hat{\sigma}_n}(\bar{X}_n - \mu) \to N(0,1)\]</span> est toujours vraie d’après le théorème de Slutsky.</p>

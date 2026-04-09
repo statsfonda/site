@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../content/ref.html" rel="next">
-<link href="../content/bayes_ex_2.html" rel="prev">
+<link href="../content/problemes.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -311,12 +311,6 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/problemes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problèmes et sujets</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../content/ch7_0.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Estimation de densité</span></span></a>
   </div>
@@ -371,6 +365,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../content/problemes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Problèmes et sujets</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../content/references.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Et après ?</span></a>
   </div>
@@ -415,8 +415,7 @@ window.Quarto = {
     <h2 id="toc-title">Table des matières</h2>
    
   <ul>
-  <li><a href="#statistiques-bayésiennes" id="toc-statistiques-bayésiennes" class="nav-link active" data-scroll-target="#statistiques-bayésiennes">Statistiques Bayésiennes</a></li>
-  <li><a href="#séries-temporelles" id="toc-séries-temporelles" class="nav-link" data-scroll-target="#séries-temporelles">Séries temporelles</a></li>
+  <li><a href="#séries-temporelles" id="toc-séries-temporelles" class="nav-link active" data-scroll-target="#séries-temporelles">Séries temporelles</a></li>
   <li><a href="#statistiques-en-grande-dimension" id="toc-statistiques-en-grande-dimension" class="nav-link" data-scroll-target="#statistiques-en-grande-dimension">Statistiques en grande dimension</a></li>
   <li><a href="#statistiques-non-paramétriques" id="toc-statistiques-non-paramétriques" class="nav-link" data-scroll-target="#statistiques-non-paramétriques">Statistiques non-paramétriques</a></li>
   <li><a href="#machine-learning" id="toc-machine-learning" class="nav-link" data-scroll-target="#machine-learning">Machine learning</a></li>
@@ -459,27 +458,25 @@ $$
 </header>
 
 
-<section id="statistiques-bayésiennes" class="level2">
-<h2 class="anchored" data-anchor-id="statistiques-bayésiennes">Statistiques Bayésiennes</h2>
-</section>
 <section id="séries-temporelles" class="level2">
 <h2 class="anchored" data-anchor-id="séries-temporelles">Séries temporelles</h2>
+<p>Dans tout ce cours, on a supposé que les observations étaient indépendantes et identiquement distribuées. En pratique, c’est rarement le cas : les données sont souvent indexées par le temps, et l’observation d’aujourd’hui dépend de celle d’hier. Les séries temporelles étudient exactement cette situation. On modélise les observations comme un processus <span class="math inline">\((X_t)_{t\in\mathbb{Z}}\)</span> dont les valeurs successives sont corrélées, et l’on cherche à estimer la structure de cette dépendance — typiquement, l’autocorrélation ou la densité spectrale. Les modèles les plus classiques sont les processus ARMA, qui sont des combinaisons linéaires de bruits passés et d’observations passées ; leur théorie repose sur la notion de <em>stationnarité</em>, qui remplace l’hypothèse iid. Le problème central est la <em>prévision</em> : à partir de l’historique <span class="math inline">\(X_1, \dotsc, X_n\)</span>, construire un estimateur de <span class="math inline">\(X_{n+1}\)</span>. Les résultats fondamentaux sont le théorème ergodique (qui remplace la loi des grands nombres), le théorème de Wold (qui dit que tout processus stationnaire se décompose en une partie déterministe et une partie purement aléatoire), et le filtre de Kalman pour la prévision optimale dans les modèles linéaires gaussiens.</p>
 </section>
 <section id="statistiques-en-grande-dimension" class="level2">
 <h2 class="anchored" data-anchor-id="statistiques-en-grande-dimension">Statistiques en grande dimension</h2>
-<p><span class="math inline">\(n,d\to\infty\)</span> mais <span class="math inline">\(p\)</span> n’est pas trop grand :&nbsp;matrices aléatoires, PCA, compressed sensing, clustering, SVM</p>
-<p>Modèles parcimonieux : ondelettes, LASSO, régression ridge</p>
+<p>Le cadre classique de ce cours suppose que la dimension <span class="math inline">\(d\)</span> du paramètre est fixée tandis que <span class="math inline">\(n\to\infty\)</span>. En grande dimension, les deux grandeurs <span class="math inline">\(n\)</span> et <span class="math inline">\(d\)</span> tendent vers l’infini simultanément, et leur rapport <span class="math inline">\(d/n\)</span> joue un rôle crucial. Ce régime est celui des données modernes : on a souvent autant — voire plus — de variables explicatives que d’observations. Le problème principal est que les outils classiques, comme l’EMV ou les moindres carrés ordinaires, cessent de fonctionner correctement : par exemple, la matrice <span class="math inline">\(X^\top X / n\)</span> ne converge plus vers une matrice fixe, et l’estimateur des MCO n’est même plus défini lorsque <span class="math inline">\(d&gt;n\)</span>. Pour s’en sortir, on introduit des hypothèses de <em>parcimonie</em> : on suppose que seule une petite fraction des coefficients est non nulle. Les méthodes phares de ce domaine sont le LASSO (qui ajoute une pénalité <span class="math inline">\(\ell_1\)</span> à la vraisemblance), la régression ridge (pénalité <span class="math inline">\(\ell_2\)</span>), et le compressed sensing (qui montre qu’un signal parcimonieux peut être reconstruit à partir de très peu de mesures). Du côté des matrices aléatoires, la loi de Marchenko-Pastur remplace la loi des grands nombres pour les valeurs propres de <span class="math inline">\(X^\top X/n\)</span>, et permet de comprendre ce qui se passe pour la PCA en grande dimension.</p>
 </section>
 <section id="statistiques-non-paramétriques" class="level2">
 <h2 class="anchored" data-anchor-id="statistiques-non-paramétriques">Statistiques non-paramétriques</h2>
-<p>Histogrammes, kernel methods, fenêtres glissantes, malédiction de la dimension, VC&nbsp;dimension, complexité</p>
+<p>Dans les modèles paramétriques, on suppose que la loi des observations appartient à une famille indexée par un paramètre de dimension finie. Les statistiques non-paramétriques lèvent cette hypothèse : on ne suppose presque rien sur la loi <span class="math inline">\(P\)</span> des observations, si ce n’est éventuellement une certaine régularité (par exemple, que la densité est lipschitzienne). Le problème est d’estimer des objets fonctionnels — la densité, la fonction de répartition, ou une fonction de régression — sans passer par un modèle exponentiel. Les outils principaux sont les estimateurs à noyaux (qui généralisent les histogrammes en lissant les données), les estimateurs par ondelettes, et les méthodes de plus proches voisins. La difficulté majeure est la <em>malédiction de la dimension</em> : en dimension <span class="math inline">\(d\)</span>, la quantité de données nécessaire pour estimer une densité avec une précision donnée croît exponentiellement en <span class="math inline">\(d\)</span>. Les résultats fondamentaux sont les vitesses minimax d’estimation (qui disent qu’aucun estimateur ne peut faire mieux qu’une certaine vitesse, et exhibent un estimateur qui l’atteint), et la théorie de la complexité statistique via la dimension de Vapnik-Chervonenkis.</p>
 </section>
 <section id="machine-learning" class="level2">
 <h2 class="anchored" data-anchor-id="machine-learning">Machine learning</h2>
-<p>Input-output et apprentissage supervisé :&nbsp;classification, régressions logistiques, arbres de décision, online learning, reinforcement learning</p>
+<p>L’apprentissage automatique part d’un problème un peu différent : on dispose de couples <span class="math inline">\((x_i, y_i)\)</span> et l’on cherche à construire une fonction <span class="math inline">\(\hat{f}\)</span> qui prédit <span class="math inline">\(y\)</span> à partir de <span class="math inline">\(x\)</span>, sans nécessairement supposer que <span class="math inline">\(y = f(x) + \varepsilon\)</span> pour une certaine <span class="math inline">\(f\)</span> linéaire. Le cadre est celui de l’<em>apprentissage supervisé</em> : on minimise un risque empirique sur un ensemble d’entraînement, et l’on espère que la fonction obtenue généralisera bien à de nouvelles données. Lorsque <span class="math inline">\(y\)</span> est un réel, on parle de <em>régression</em> ; lorsque <span class="math inline">\(y\)</span> prend un nombre fini de valeurs, on parle de <em>classification</em>. Les méthodes classiques incluent la régression logistique, les arbres de décision, les machines à vecteurs de support (SVM), et les méthodes d’ensemble comme le boosting et les forêts aléatoires. Le problème central est celui du <em>compromis biais-variance</em> : un modèle trop simple ne capte pas la structure des données, tandis qu’un modèle trop riche s’ajuste au bruit. Les résultats théoriques fondamentaux sont les bornes de généralisation, qui relient le risque réel d’un estimateur à son risque empirique via des mesures de complexité du modèle.</p>
 </section>
 <section id="deep-learning-et-réseaux-de-neurones" class="level2">
 <h2 class="anchored" data-anchor-id="deep-learning-et-réseaux-de-neurones">Deep learning et réseaux de neurones</h2>
+<p>Les réseaux de neurones sont des fonctions paramétriques de la forme <span class="math inline">\(x \mapsto \sigma(W_L \sigma(W_{L-1}\dotsb \sigma(W_1 x)))\)</span> où les <span class="math inline">\(W_i\)</span> sont des matrices et <span class="math inline">\(\sigma\)</span> une non-linéarité appliquée composante par composante. Le nombre de paramètres est gigantesque — souvent des millions, voire des milliards — et la fonction de perte n’est plus convexe : on perd donc toutes les garanties d’optimalité de l’EMV classique. L’apprentissage se fait par des variantes de la descente de gradient stochastique, et repose sur l’algorithme de <em>rétropropagation</em> pour calculer efficacement les gradients. Le théorème d’approximation universelle dit que les réseaux de neurones à une couche cachée peuvent approcher n’importe quelle fonction continue, mais ce résultat est essentiellement non constructif. Le mystère principal du deep learning est qu’il fonctionne malgré la non-convexité et le sur-paramétrage : des modèles ayant bien plus de paramètres que de données généralisent quand même bien, ce qui contredit l’intuition classique du compromis biais-variance. La compréhension théorique de ce phénomène est l’un des grands problèmes ouverts des statistiques et de l’informatique.</p>
 
 
 </section>
@@ -886,8 +883,8 @@ $$
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../content/bayes_ex_2.html" class="pagination-link" aria-label="Exercices">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Exercices</span>
+      <a href="../content/problemes.html" class="pagination-link" aria-label="Problèmes et sujets">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Problèmes et sujets</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
