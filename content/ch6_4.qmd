@@ -34,7 +34,7 @@ Il est alors naturel de chercher $P$ parmi toutes les lois qui vérifient la con
 :::{exm-example-gaussien-entropie}
 
 
-### Démonstration
+**Démonstration.**
 
 La démonstration générale de @thm-boltzmann-gibbs nécessite des outils de calcul des variations, puisqu'il s'agit d'un problème s'optimisation en dimension infinie. Ce n'est pas difficile formellement, mais garantir l'existence d'un maximiseur peut s'avérer technique^[Après discussion avec mes collègues, il y a consensus sur la nécessité d'utiliser un critère de compacité L1 de type Dunford-Pettis. ]. En revanche, l'esprit de la preuve est très simple : on écrit le lagrangien du problème contraint. Lorsque l'espace d'états $\mathcal{X}$ est fini, c'est très simple. On supposera donc que $\mathcal{X} = \{1, \dotsc, n\}$, et on cherche une loi de probabilité sur $\mathcal{X}$, disons $p=(p_1, \dotsc, p_n)$, qui vérifie la contrainte de moments $m(p)=0$, où
 $$ m(p) = \sum_{i=1}^n p_i T(i) - c$$

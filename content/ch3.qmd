@@ -24,7 +24,7 @@ Il n'y a rien d'autre à savoir sur les intervalles de confiance ; tout l'art de
 
 On dispose de variables aléatoires $X_1, \dotsc, X_n$ de loi $N(\mu, \sigma^2)$. On va donner des intervalles de confiance pour l'estimation des paramètres $\mu$ et $\sigma$ dans plusieurs cas de figure. 
 
-### Estimation de $\mu$
+### Estimation de la moyenne {.unnumbered}
 
 **Lorsque $\sigma$ est connue. **
 
@@ -72,7 +72,7 @@ Un intervalle de confiance de niveau $1-\alpha$ pour l'estimation de $\mu$ lorsq
 $$\left[\bar{X}_n \pm \frac{t_{n-1, 1-\alpha}\hat{\sigma}_n}{\sqrt{n}}\right].$$
 :::
 
-### Estimation de $\sigma$
+### Estimation de l’écart-type {.unnumbered}
 
 Supposons maintenant qu'on désire estimer la variance $\sigma^2$. 
 
@@ -95,9 +95,9 @@ $$\left[\frac{(n-1)\hat{\sigma}_n^2}{k^+_{n-1,\alpha}} ~~;~~ \frac{(n-1)\hat{\si
 
 
 
-## Loi de la statistique de Student
+## Loi de la statistique de Student {#sec-student2}
 
-### Expression
+### Expression {.unnumbered}
 
 Les lois de Student sont décrites dans la section @sec-densite de l’appendice. En résumé, la loi de Student d’indice $n$, notée $\mathscr{T}(n)$, est la loi de $N(0,1) / \sqrt{\chi_2(n)/n}$ où le numérateur et le dénominateur sont indépendants, et sa densité est donnée par 
 
@@ -105,7 +105,7 @@ $$t_n(x) = \frac{1}{Z_n}\left(\frac{1}{1 + \frac{x^2}{n}}\right)^{\frac{n+1}{2}}
 où la constante de normalisation est
 $$Z_n = \sqrt{n\pi}\frac{\Gamma\left(\frac{n}{2}\right)}{\Gamma\left(\frac{n+1}{2}\right)}.$$
 
-### Loi de la statistique de Student {#sec-student2}
+### Loi de la statistique de Student {.unnumbered}
 
 Soient $X_1, \dotsc, X_n$ des variables gaussiennes $N(\mu, \sigma^2)$ indépendantes, et soit $T_n = \sqrt{n}(\bar{X}_n-\mu)/\sqrt{\hat{\sigma}^2_n}$, où 
 $$\hat{\sigma}^2_n = \frac{\sum_{i=1}^n (X_i - \bar{X}_n)^2}{n-1}. $$

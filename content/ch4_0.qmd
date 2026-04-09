@@ -39,7 +39,7 @@ C'est pour cela que les tests sont une forme de logique statistique. Le raisonne
 
 On se place dans un modèle où $X_1, \dotsc, X_n$ sont des gaussiennes $N(\mu, \sigma^2)$. Nous avons déjà vu plusieurs fois que $\bar{X}_n \sim N(\mu, \sigma^2/n)$. 
 
-### Construction du test
+### Construction du test {.unnumbered}
 
 On cherche à réfuter l'hypothèse selon laquelle ces variables aléatoires sont centrées ; autrement dit, on posera $H_0 = \{\mu=0\}$. Sous cette hypothèse, nos variables aléatoires sont donc des variables $N(0,\sigma^2)$. 
 
@@ -57,7 +57,7 @@ On reproduit alors le raisonnement ci-dessus : comme $\mathbb{P}(|\bar{X}_n| < t
 $$ \rejet_\alpha = \{|\bar{X}_n| > t_{n-1,1-\alpha}\hat{\sigma}_n / \sqrt{n}\}$$
 est bien un test de niveau $1-\alpha$.  
 
-### Calcul de la puissance et hypothèse alternative
+### Calcul de la puissance et hypothèse alternative {.unnumbered}
 
 Nous n'avons pas encore eu besoin de spécifier une hypothèse alternative, mais nous allons en avoir besoin pour calculer la puissance du test. Pour commencer, on va supposer que, si $\mu$ n'est pas nulle, alors elle ne peut être égale qu'à 1. Autrement dit, $H_1 = \{1\}$. Ce genre d'hypothèse alternative ne peut évidemment avoir de pertinence qu'en fonction du problème réel sous-jacent !
 

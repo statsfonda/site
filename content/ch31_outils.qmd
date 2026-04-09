@@ -10,7 +10,7 @@ Les outils de base pour construire des intervalles de confiance dans des circons
 L’inégalité de concentration la plus élémentaire est l’inégalité de Markov. Si $X$ est une variable aléatoire positive, alors il est évident que pour n’importe quel nombre $a$, on a $a \mathbf{1}_{X>a} \leqslant X \mathbf{1}{X>a}$, donc en intégrant cette relation on obtient $a \mathbb{P}(X>a)\leqslant \mathbb{E}[X \mathbf{1}_{X>a}]\leqslant \mathbb{E}[X]$. L’inégalité de Bienaymé-Chebychev est un raffinement. 
 
 
-### Inégalité de Bienaymé-Tchebychev
+### Inégalité de Bienaymé-Tchebychev {.unnumbered}
 
 
 :::{#thm-bt}
@@ -26,7 +26,7 @@ $$ \mathbb{P}(|X - \mathbb{E}[X]|\geqslant x)\leqslant \frac{\mathrm{Var}(X)}{x^
 Élever au carré les deux membres de l'inégalité dans $\mathbb{P}$, puis appliquer l'inégalité de Markov à la variable aléatoire positive $|X - \mathbb{E}X|^2$ dont l'espérance est $\mathrm{Var}(X)$. 
 :::
 
-### Inégalité de Hoeffding
+### Inégalité de Hoeffding {.unnumbered}
 
 
 :::{#thm-hoeffding}
@@ -77,12 +77,12 @@ Le minimum en $\lambda$ du terme dans l'exponentielle est atteint au point $4t /
 La démonstration de l'inégalité de Hoeffding ne dépend pas directement du fait que $X$ est bornée, mais plutôt de @eq-lemme_hoeffding. Toutes les variables aléatoires qui vérifient une inégalité de type $\mathbb{E}[e^{tX}]\leqslant e^{c t^2}$ pour une constante $c$ peuvent donc avoir leur propre inégalité de Hoeffding. 
 
 
-## Intervalles de confiance non-gaussiens
+## Intervalles de confiance non-gaussiens {#sec-icber}
 
 Les inégalités de concentration servent à construire des intervalles de confiance dans de nombreux cas où il est difficile de connaître exactement la loi de la statistique de test. Dans cette partie, on développe plusieurs exemples. 
 
 
-### Estimation du paramètre $p$ dans un modèle de Bernoulli. {#sec-icber}
+### Estimation du paramètre $p$ dans un modèle de Bernoulli. {.unnumbered}
 
 Soient $X_1, \dotsc, X_n$ des variables indépendantes de loi $\mathscr{B}(p)$, dont on cherche à estimer le paramètre $p\in ]0,1[$. La moyenne empirique, $\hat{p}_n = (X_1 + \dotsb + X_n)/n$ est un estimateur est non biaisé de $p$ et son risque quadratique $p(1-p)/n$. De plus, la loi de $\hat{p}_n$ est connue : $n\hat{p}_n \sim \mathrm{Bin}(n,p)$. Par conséquent, si l'on connaît les quantiles de $\mathrm{Bin}(n,p)-p$, on pourra construire des intervalles de confiance de niveau $1-\alpha$. Ces quantiles peuvent être calculés par des méthodes numériques, mais il y a plus simple. 
 
@@ -114,7 +114,7 @@ Le choix
 $$ t = \sqrt{\frac{1}{2n}\ln\left(\frac{2}{\alpha}\right)}$$ donne une probabilité inférieure à $\alpha$, et fournit donc l'intervalle de confiance **non-asymptotique** de niveau $1-\alpha$ suivant : 
 $$ \left[\bar{X}_n \pm \frac{\ln(2/\alpha)}{\sqrt{2n}}\right].$$
 
-### Estimation de moyenne dans un modèle non-gaussien. 
+### Estimation de moyenne dans un modèle non-gaussien. {.unnumbered}
 
 Les deux techniques ci-dessus n'ont rien de spécifique au cas de variables de Bernoulli. En fait, elles s'appliquent à tout modèle statistique iid dont on cherche à estimer la moyenne $\mu$, pourvu que la variance existe. 
 

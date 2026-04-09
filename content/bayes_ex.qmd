@@ -23,11 +23,11 @@ Les *animes* peuvent avoir beaucoup d’épisodes. Je clique au hasard dans le c
 
 :::{#exr-gaussianbayes}
 
-## (Bernoulli + Gauss)
+## Rademacher + Gauss
 
-Un signal binaire peut prendre les valeurs $0$ ou $1$. Cependant, le signal n'est pas observé tel quel : il est bruité par un bruit blanc additif $\varepsilon \sim \mathscr{N}(0, \sigma^2)$, et on observe donc $Y= x + \varepsilon$. On cherche à estimer $x$ sachant $Y$. 
+Un signal binaire peut prendre les valeurs $-1$ ou $1$. Cependant, le signal n'est pas observé tel quel : il est bruité par un bruit blanc additif $\varepsilon \sim \mathscr{N}(0, \sigma^2)$, et on observe donc $Y= x + \varepsilon$. On cherche à estimer $x$ sachant $Y$. 
 
-1. Formuler ce problème dans le langage bayésien, avec une loi a priori de Bernoulli, et calculer la loi a posteriori. 
+1. Formuler ce problème dans le langage bayésien, avec une loi a priori de Rademacher, et calculer la loi a posteriori. 
 
 2. Montrer que l'estimateur MAP est le signe de $Y$. 
 
