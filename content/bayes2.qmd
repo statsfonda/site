@@ -99,8 +99,8 @@ Nous avons déjà rencontré un exemple de conjugaison. Dans le modèle $\mathrm
 
 On observe $X_1, \dotsc, X_n$ iid $\mathrm{Ber}(\theta)$ et on choisit l'a priori $\theta \sim \mathrm{Beta}(a,b)$, de densité $\pi(\theta) \propto \theta^{a-1}(1-\theta)^{b-1}$. Alors la loi a posteriori est 
 $$p(\theta \mid x_1, \dotsc, x_n) \propto \theta^{s+a-1}(1-\theta)^{n-s+b-1}$$
-soit la loi $\mathrm{Beta}(a+s, b+n-s)$, où $s = \sum x_i$. L'estimateur de Bayes (MMSE) est  
-$$\hat{\theta}_{\mathrm{Bayes}} = \frac{a + s}{a+b+n}.$$
+soit la loi $\mathrm{Beta}(a+s, b+n-s)$, où $s = \sum x_i$. L'estimateur de la moyenne a posteriori est 
+$$\hat{\theta}_{\mathrm{MMSE}} = \frac{a + s}{a+b+n}.$$
 
 Les paramètres $a$ et $b$ s'interprètent comme des « pseudo-observations » : tout se passe comme si, avant de voir les données, on avait déjà observé $a-1$ succès et $b-1$ échecs.
 
@@ -112,8 +112,8 @@ Les paramètres $a$ et $b$ s'interprètent comme des « pseudo-observations » :
 
 On observe $X_1, \dotsc, X_n$ iid de loi $\mathrm{Poisson}(\lambda)$ et on choisit l'a priori $\lambda \sim \Gamma(\alpha, \beta)$, de densité $\pi(\lambda) \propto \lambda^{\alpha-1}e^{-\beta \lambda}$. La vraisemblance est proportionnelle à $\lambda^{s} e^{-n\lambda}$ avec $s = \sum x_i$. La loi a posteriori est alors 
 $$p(\lambda \mid x_1, \dotsc, x_n) \propto \lambda^{s + \alpha - 1} e^{-(n+\beta)\lambda}$$
-et on reconnaît la loi $\Gamma(\alpha + s, \beta + n)$. L'estimateur de Bayes est 
-$$\hat{\lambda}_{\mathrm{Bayes}} = \frac{\alpha + s}{\beta + n}.$$
+et on reconnaît la loi $\Gamma(\alpha + s, \beta + n)$. L'estimateur de la moyenne a posteriori est 
+$$\hat{\lambda}_{\mathrm{MMSE}} = \frac{\alpha + s}{\beta + n}.$$
 
 :::
 
