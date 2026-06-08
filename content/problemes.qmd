@@ -95,5 +95,7 @@ Pour la table ci-dessus, on trouve $p = 0.001346$.
 
 - [Partiel 2026](/pdfs/partiel_26.pdf) avec sa correction. 
 
+- [Examen 2026](/pdfs/examen_26.pdf) avec sa correction. 
+
 
 [^1]: une dénomination très vieillote, je vous le concède. 
