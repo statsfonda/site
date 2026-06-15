@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>20&nbsp; Estimation de densité – Statistiques Fondamentales</title>
+<title>Exercices – Statistiques Fondamentales</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../content/ch7_1.html" rel="next">
-<link href="../content/problemes.html" rel="prev">
+<link href="../content/tweedie.html" rel="next">
+<link href="../content/bayes2.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -112,7 +112,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/ch7_0.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Estimation de densité</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/bayes_ex.html">Exercices</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Recherche" onclick="window.quartoOpenSearch();">
@@ -317,7 +317,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/ch7_0.html" class="sidebar-item-text sidebar-link active">
+  <a href="../content/ch7_0.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Estimation de densité</span></span></a>
   </div>
 </li>
@@ -347,7 +347,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/bayes_ex.html" class="sidebar-item-text sidebar-link">
+  <a href="../content/bayes_ex.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Exercices</span></a>
   </div>
 </li>
@@ -409,10 +409,8 @@ window.Quarto = {
     <h2 id="toc-title">Table des matières</h2>
    
   <ul>
-  <li><a href="#la-répartition-empirique" id="toc-la-répartition-empirique" class="nav-link active" data-scroll-target="#la-répartition-empirique"><span class="header-section-number">20.1</span> La répartition empirique</a></li>
-  <li><a href="#sec-gc-calcul" id="toc-sec-gc-calcul" class="nav-link" data-scroll-target="#sec-gc-calcul"><span class="header-section-number">20.2</span> Calculabilité et loi</a></li>
-  <li><a href="#démonstration-du-théorème-de-glivenko-cantelli" id="toc-démonstration-du-théorème-de-glivenko-cantelli" class="nav-link" data-scroll-target="#démonstration-du-théorème-de-glivenko-cantelli"><span class="header-section-number">20.3</span> Démonstration du théorème de Glivenko-Cantelli</a></li>
-  <li><a href="#inégalité-dkw" id="toc-inégalité-dkw" class="nav-link" data-scroll-target="#inégalité-dkw"><span class="header-section-number">20.4</span> Inégalité DKW</a></li>
+  <li><a href="#questions" id="toc-questions" class="nav-link active" data-scroll-target="#questions">Questions</a></li>
+  <li><a href="#exercices" id="toc-exercices" class="nav-link" data-scroll-target="#exercices">Exercices</a></li>
   </ul>
 </nav>
     </div>
@@ -434,7 +432,7 @@ $$
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Estimation de densité</span></h1>
+<h1 class="title">Exercices</h1>
 </div>
 
 
@@ -451,50 +449,69 @@ $$
 </header>
 
 
-<p>Soient <span class="math inline">\(X_1, \dotsc, X_n\)</span> des variables iid, de fonction de répartition <span class="math inline">\(F\)</span>. Le problème de l’estimation de densité est celui d’estimer la densité ou la fonction de répartition de <span class="math inline">\(F\)</span> à partir de réalisations des <span class="math inline">\(X_i\)</span> : c’est un exemple typique d’estimation non-paramétrique. Dans toute la suite, on se placera dans le cas où la fonction de répartition est <em>continue</em>.</p>
-<section id="la-répartition-empirique" class="level2" data-number="20.1">
-<h2 data-number="20.1" class="anchored" data-anchor-id="la-répartition-empirique"><span class="header-section-number">20.1</span> La répartition empirique</h2>
-<p>La fonction de répartition empirique des <span class="math inline">\(X_i\)</span> est <span class="math display">\[ F_n(t) = \frac{1}{n}\#\{i : X_i \leqslant t\}.\]</span> La loi des grands nombres montre que, <span class="math inline">\(\mathbb{P}\)</span>-presque sûrement, <span class="math inline">\(F_n(t)\)</span> converge vers <span class="math inline">\(\mathbb{P}(X_i \leqslant t)=F(t)\)</span>. On peut étendre ce résultat simultanément à une quantité dénombrable de <span class="math inline">\(t\)</span> (par exemple, <span class="math inline">\(\mathbb{Q}\)</span>) mais pas à tous. De plus, ce résultat ne dit pas si la <em>fonction</em> <span class="math inline">\(F_n\)</span> est proche de la fonction <span class="math inline">\(F\)</span>, au sens de la norme uniforme par exemple. Le théorème suivant, parfois appelé <em>théorème fondamental de l’estimation</em>, confirme que c’est le cas au sens de la norme uniforme<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
-<div id="thm-glivenko" class="theorem">
-<p><span class="theorem-title"><strong>Théorème 20.1 (Théorème de Glivenko-Cantelli)</strong></span> <span class="math inline">\(\mathbb{P}\)</span>-presque sûrement, <span class="math inline">\(\lim_{n\to \infty}|F_n - F|_\infty = 0\)</span>.</p>
-</div>
-<p>Ce théorème dit que <span class="math inline">\(F_n\)</span> est un estimateur « convergent au sens de la norme uniforme » de <span class="math inline">\(F\)</span>. Il est en fait valable même si la fonction de répartition <span class="math inline">\(F\)</span> n’est pas continue, mais la démonstration est un peu plus technique.</p>
-<p>On va utiliser ce théorème pour faire des tests : si <span class="math inline">\(|F_n - F|\)</span> n’est pas suffisamment proche de zéro, on rejettera l’hypothèse selon laquelle les <span class="math inline">\(X_i\)</span> ont <span class="math inline">\(F\)</span> pour fonction de répartition. Le critère exact est appelé <em>test de Kolmogorov-Smirnov</em> et sera vu dans la section suivante.</p>
+<section id="questions" class="level2">
+<h2 class="anchored" data-anchor-id="questions">Questions</h2>
+<ul>
+<li>Dans le cas où <span class="math inline">\(\Theta\)</span> est un ensemble fini, montrer que l’a priori uniforme est effectivement invariant par les « reparamétrisations » (les bijections).</li>
+<li>Calculer l’estimateur MAP dans un modèle exponentiel avec un a priori “uniforme sur <span class="math inline">\(\mathbb{R}_+\)</span>”.</li>
+<li>Si le quotient intellectuel suit une loi <span class="math inline">\(\mathscr{N}(100, 15^2)\)</span>, quelle est la probabilité pour qu’une personne ait un QI négatif ? Combien de personnes, sur les 8 milliards d’être humains, devraient avoir un QI négatif ?</li>
+<li>Calculer l’a priori de Jeffreys dans les modèles de Bernoulli.</li>
+<li>Calculer l’a priori de Jeffreys dans les modèles gaussiens <span class="math inline">\(\mathscr{N}(\mu, 1)\)</span>, avec <span class="math inline">\(\theta\in\mathbb{R}\)</span>.</li>
+<li>Calculer l’a priori de Jeffreys pour les lois de Poisson.</li>
+<li>Quelle est la loi sur <span class="math inline">\(\mathbb{R}\)</span> d’entropie maximale et qui vérifie <span class="math inline">\(\mathbb{E}[|X|] = 1\)</span> ?</li>
+<li>Quelle est la loi sur <span class="math inline">\(\mathbb{R}\)</span> d’entropie maximale et qui vérifie <span class="math inline">\(\mathbb{E}[\ln(1+X^2)] = 2\ln 2\)</span> ?</li>
+</ul>
 </section>
-<section id="sec-gc-calcul" class="level2" data-number="20.2">
-<h2 data-number="20.2" class="anchored" data-anchor-id="sec-gc-calcul"><span class="header-section-number">20.2</span> Calculabilité et loi</h2>
-<p>Soit <span class="math inline">\((X_{(1)}, \dotsc, X_{(n)})\)</span> l’échantillon trié en ordre croissant. Par convention, on pose <span class="math inline">\(X_{(0)} = -\infty\)</span> et <span class="math inline">\(X_{(n+1)} = \infty\)</span>. La quantité <span class="math inline">\(|F_n - F|_\infty\)</span> est calculable grâce à la représentation suivante : <span id="eq-supf"><span class="math display">\[|F_n - F|_\infty = \sup_{i\in \{0, \dotsc, n\}}\left|\frac{i}{n} - F(X_{(i)})\right| \vee \left| \frac{i}{n} - F(X_{(i+1)}-)\right|,   \tag{20.1}\]</span></span> où <span class="math inline">\(F(x-)\)</span> est la limite à gauche de <span class="math inline">\(F\)</span> en <span class="math inline">\(x\)</span>, c’est-à-dire la limite de <span class="math inline">\(F(x-t)\)</span> lorsque <span class="math inline">\(t&gt;0\)</span>, <span class="math inline">\(t\to 0\)</span>. Ainsi, lorsque <span class="math inline">\(F\)</span> est continue, <span class="math inline">\(F(X_{(i)}) = F(X_{(i+1)}-)\)</span>.</p>
-<div class="proof">
-<p><span class="proof-title"><em>Preuve</em>. </span>La fonction <span class="math inline">\(F\)</span> est croissante, et la fonction <span class="math inline">\(\hat{F}_n\)</span> est constante par morceaux sur tous les intervalles <span class="math inline">\([X_{(i)}, X_{(i+1)}[\)</span>. En effet, à chaque <span class="math inline">\(X_{(i)}\)</span>, elle saute de la valeur à gauche <span class="math inline">\((i-1)/n\)</span> a la valeur à droite <span class="math inline">\(i/n\)</span>. Ainsi, le maximum de <span class="math inline">\(F - \hat{F}_n\)</span> sur l’intervalle <span class="math inline">\([X_{(i)}, X_{(i+1)}[\)</span> est forcément atteint à une des deux bornes, et vaut donc soit <span class="math inline">\(|i/n - F(X_{(i)})|\)</span>, soit <span class="math inline">\(|i/n - F(X_{(i+1)}-)|\)</span>, selon celui qui est le plus grand. Le supremum de <span class="math inline">\(|F - \hat{F}_n|\)</span> sur <span class="math inline">\(\mathbb{R}\)</span> étant aussi le supremum des supremums sur tous ces intervalles, la représentation ci-dessus est vraie.</p>
+<section id="exercices" class="level2">
+<h2 class="anchored" data-anchor-id="exercices">Exercices</h2>
+<div id="exr-tramcar" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 1</strong></span> Les <em>animes</em> peuvent avoir beaucoup d’épisodes. Je clique au hasard dans le catalogue d’un anime particulier, et je vois qu’il s’agit de l’épisode 133. Comment estimer le nombre total d’épisodes ? Utiliser un a priori non informatif (et impropre) <span class="math inline">\(\pi(n) = 1/n\)</span> et le justifier.</p>
 </div>
-<div id="lem-gc" class="theorem lemma">
-<p><span class="theorem-title"><strong>Lemme 20.1</strong></span> Si <span class="math inline">\(F\)</span> est continue, <span class="math inline">\(|F_n - F|_\infty\)</span> a la même loi que <span class="math display">\[ \sup_{i\in \{0, \dotsc, n\}}\left|\frac{i}{n} - U_{(i)}\right| \vee \left| \frac{i}{n} - U_{(i+1)}\right|\]</span> où les <span class="math inline">\(U_{(i)}\)</span> sont des lois uniformes sur <span class="math inline">\([0,1]\)</span>, indépendantes, et triées dans l’ordre croissant.</p>
+<div id="exr-gaussianbayes" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 2 (Rademacher + Gauss)</strong></span> Un signal binaire peut prendre les valeurs <span class="math inline">\(-1\)</span> ou <span class="math inline">\(1\)</span>. Cependant, le signal n’est pas observé tel quel : il est bruité par un bruit blanc additif <span class="math inline">\(\varepsilon \sim \mathscr{N}(0, \sigma^2)\)</span>, et on observe donc <span class="math inline">\(Y= x + \varepsilon\)</span>. On cherche à estimer <span class="math inline">\(x\)</span> sachant <span class="math inline">\(Y\)</span>.</p>
+<ol type="1">
+<li><p>Formuler ce problème dans le langage bayésien, avec une loi a priori de Rademacher, et calculer la loi a posteriori.</p></li>
+<li><p>Montrer que l’estimateur MAP est le signe de <span class="math inline">\(Y\)</span>.</p></li>
+<li><p>Montrer que l’estimateur MMSE est <span class="math inline">\(\tanh(Y/\sigma^2)\)</span>.</p></li>
+</ol>
 </div>
-<div class="proof">
-<p><span class="proof-title"><em>Preuve</em>. </span>Lorsque <span class="math inline">\(X\)</span> est une variable aléatoire dont la fonction de répartition <span class="math inline">\(F\)</span> est continue et strictement croissante, <span class="math inline">\(F(X)\)</span> suit une loi <span class="math inline">\(\mathscr{U}[0,1]\)</span>. En effet, si <span class="math inline">\(t\in [0,1]\)</span>, alors <span class="math inline">\(\mathbb{P}(F(X)&lt;t)\)</span> est égal à <span class="math inline">\(\mathbb{P}(X \leqslant F^{-1}(t))\)</span>, c’est-à-dire <span class="math inline">\(F(F^{-1}(t)) = t\)</span>. Lorsque <span class="math inline">\(F\)</span> est seulement continue, la même démonstration est vraie, mais il faut remplacer l’inverse <span class="math inline">\(F^{-1}(t)\)</span> par la « transformation quantile », à savoir <span class="math inline">\(F^{\leftarrow}(t) = \inf\{x : F(x)\geqslant t\}\)</span>. Les <span class="math inline">\(F(X_i)\)</span> sont donc des variables iid de loi <span class="math inline">\(\mathscr{U}[0,1]\)</span>, ce qui conclut la démonstration compte tenu de <a href="#eq-supf" class="quarto-xref">Équation&nbsp;<span>20.1</span></a>.</p>
+<div id="exr-gaussianbayes-cauchy" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 3 (Gauss + Cauchy)</strong></span> On observe <span class="math inline">\(Y=X+\varepsilon\)</span>, où <span class="math inline">\(X\)</span> est un paramètre réel à estimer, et <span class="math inline">\(\varepsilon\)</span> suit une loi de Cauchy. On choisit pour <span class="math inline">\(X\)</span> une loi a priori gaussienne centrée <span class="math inline">\(\mathscr{N}(0, 1)\)</span>.</p>
+<ol type="1">
+<li><p>Montrer que la loi a posteriori est proportionnelle à <span class="math inline">\(e^{-x^2/2}/((y-x)^2+1)\)</span>.</p></li>
+<li><p>Est-ce que la loi a priori est intégrable ? Et la loi du modèle ? La marginale ? La loi a posteriori ?</p></li>
+<li><p>(<span class="math inline">\(\star\)</span> : très calculatoire, nécessite un peu d’analyse complexe) Montrer que l’estimateur MMSE dans ce modèle est donné par <span class="math display">\[\mathbb{E}[X \mid Y] = Y + \frac{\mathrm{Im}(f(Y))}{\mathrm{Re}(f(Y))}\]</span> où <span class="math display">\[f(y)= e^{i y} \mathrm{erfc}\left(\frac{1+iy}{\sqrt{2}}\right).\]</span></p></li>
+</ol>
 </div>
-<p>En particulier, la loi de <span class="math inline">\(|F_n - F|_\infty\)</span> ne dépend pas de <span class="math inline">\(F\)</span> : on dit que cette statistique est <em>libre</em>.</p>
-</section>
-<section id="démonstration-du-théorème-de-glivenko-cantelli" class="level2" data-number="20.3">
-<h2 data-number="20.3" class="anchored" data-anchor-id="démonstration-du-théorème-de-glivenko-cantelli"><span class="header-section-number">20.3</span> Démonstration du théorème de Glivenko-Cantelli</h2>
-<p>On se place dans le cas où <span class="math inline">\(F\)</span> est continue. Notons <span class="math inline">\(q_j\)</span> le <span class="math inline">\(j\)</span>-ème quantile d’ordre <span class="math inline">\(N\)</span> de <span class="math inline">\(F\)</span> (on choisira l’entier <span class="math inline">\(N\)</span> plus tard) :&nbsp;il est bien défini, et il vérifie <span class="math inline">\(F(q_j) = j/N\)</span>. Soit <span class="math inline">\(x\)</span> entre <span class="math inline">\(q_j\)</span> et <span class="math inline">\(q_{j+1}\)</span>. Par croissance, <span class="math inline">\(F_n(x)\)</span> est entre <span class="math inline">\(F_n(q_j)\)</span> et <span class="math inline">\(F_n(q_{j+1})\)</span>, et <span class="math inline">\(F(x)\)</span> est entre <span class="math inline">\(j/N\)</span> et <span class="math inline">\((j+1)/N\)</span>. Ainsi, <span class="math inline">\(F_n(x) - F(x)\)</span> est plus grand que <span class="math display">\[ F_n(q_j) - \frac{j}{N} - \frac{1}{N}\]</span> et plus petit que <span class="math display">\[ F_n(q_{j+1})- \frac{j}{n} = F_n(q_{j+1})- \frac{j+1}{N}  + \frac{1}{N}.\]</span> Quoi qu’il arrive, <span class="math inline">\(|F_n(x) - F(x)|\)</span> est plus petit que le plus grand des <span class="math inline">\(|F_n(q_j) - j/N|\)</span> augmenté de <span class="math inline">\(1/N\)</span>, donc <span class="math inline">\(|F_n - F|\)</span> aussi. Pour n’importe quel <span class="math inline">\(t&gt;0\)</span>, nous pouvons utiliser la borne de l’union afin de borner <span class="math inline">\(\mathbb{P}(|F_n - F|_\infty &gt; t)\)</span> par <span id="eq-uniongc"><span class="math display">\[\sum_{j=0}^N\mathbb{P}\left(\frac{1}{N} + |F_n(q_j) - j/N|&gt;t\right). \tag{20.2}\]</span></span> Or, <span class="math inline">\(nF_n(q_j)\)</span> suit une loi <span class="math inline">\(\mathrm{Bin}(n, j/N)\)</span>, donc si<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> <span class="math inline">\(t-1/N&gt;0\)</span> on peut utiliser l’inégalité de Hoeffding :&nbsp; <span class="math display">\[\mathbb{P}\left(\frac{1}{N} + |F_n(q_j) - j/N|&gt;t\right) \leqslant 2\exp\left\lbrace - 2 n\left(t - \frac{1}{N}\right)^2 \right\rbrace.\]</span> En choisissant par exemple <span class="math inline">\(N = \lceil 2/t\rceil\)</span>, le terme entre parenthèses est plus grand que <span class="math inline">\(t/2\)</span>, et la borne devient elle-même plus petite que <span class="math inline">\(2e^{-2nt^2/4}\)</span>. Le terme <a href="#eq-uniongc" class="quarto-xref">Équation&nbsp;<span>20.2</span></a> est alors plus petit que <span class="math inline">\(N 2e^{-nt^2/2}\)</span>, c’est-à-dire <span id="eq-predkw"><span class="math display">\[\mathbb{P}(|F_n - F|_\infty &gt; t) \leqslant \frac{6}{t}e^{-nt^2/2} \tag{20.3}\]</span></span> où on a utilisé la borne très grossière <span class="math inline">\(N \leqslant 3/t\)</span>.</p>
-<p>Si l’on choisit une suite <span class="math inline">\(t_n\)</span> qui tend vers 0, et telle que <span class="math inline">\(\sum_n e^{-nt_n^2/2}/t_n &lt; \infty\)</span>, alors le lemme de Borel-Cantelli permet de conclure :&nbsp;presque sûrement, à partir d’un certain rang, on a <span class="math inline">\(|F - F_n|_\infty \leqslant t_n\)</span>, et donc <span class="math inline">\(|F_n - F|_\infty \to 0\)</span>. N’importe quel choix de type <span class="math inline">\(t_n = n^{0.5 - \varepsilon}\)</span> pour <span class="math inline">\(\varepsilon &gt; 0\)</span> convient, et donne même que <span class="math inline">\(|F_n - F|_\infty = O(n^{0.5-\varepsilon})\)</span>.</p>
-</section>
-<section id="inégalité-dkw" class="level2" data-number="20.4">
-<h2 data-number="20.4" class="anchored" data-anchor-id="inégalité-dkw"><span class="header-section-number">20.4</span> Inégalité DKW</h2>
-<p>Le théorème de Glivenko-Cantelli possède une version beaucoup plus puissante car elle est entièrement quantitative, appelée <em>inégalité DKW</em>.</p>
-<div id="thm-DKW" class="theorem">
-<p><span class="theorem-title"><strong>Théorème 20.2 (Dvoretzky-Kiefer-Wolfowitz)</strong></span> Dans le même contexte, pour tout <span class="math inline">\(t&gt;0\)</span> on a <span id="eq-dkw"><span class="math display">\[\mathbb{P}(|F_n - F|_\infty &gt; t) \leqslant 2e^{-2nt^2}. \tag{20.4}\]</span></span></p>
+<div id="exr-gaussianrisk" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 4</strong></span> Dans un modèle bayésien avec loi a priori <span class="math inline">\(\pi\)</span>, le risque bayésien <span class="math inline">\(L^p\)</span> est défini par <span class="math display">\[r_p(\pi) = \min_{T} \mathbb{E}[|T(X) - \theta|^p]\]</span> où l’argument <span class="math inline">\(T\)</span> est pris sur l’ensemble des estimateurs, et où les variables <span class="math inline">\(\theta,X\)</span> ont pour densité jointe <span class="math inline">\(\pi(\theta)p_\theta(x)\)</span>. On note <span class="math inline">\(T_\star\)</span> n’importe quel estimateur qui minimise ce risque, s’il existe<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Montrer que si <span class="math inline">\(T\)</span> minimise le risque empirique, <span class="math display">\[r_p(\pi \mid X) = \min_{T} \mathbb{E}[|T(X) - \theta|^p \mid X].\]</span></p>
+<p>alors il minimise aussi le risque bayésien.</p>
 </div>
-<p>Il faut comparer ce résultat avec <a href="#eq-predkw" class="quarto-xref">Équation&nbsp;<span>20.3</span></a>, dans lequel la borne est effectivement décroissante en <span class="math inline">\(nt^2\)</span>, mais avec un préfacteur <span class="math inline">\(1/t\)</span> polynomial. L’inégalité DKW donne une décroissance <em>exponentielle</em> en <span class="math inline">\(nt^2\)</span>.</p>
+<div id="exr-bayes-beta" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 5</strong></span> Pour tout <span class="math inline">\(\theta\in]0,1[\)</span>, on définit une loi <span class="math inline">\(p_\theta\)</span> sur <span class="math inline">\(\mathbb{N}\)</span> par <span class="math inline">\(p_\theta(n) = (n+1)(1-\theta)^2 \theta^n\)</span> ; cette loi s’appelle la <em>loi géométrique biaisée par la taille</em>. On choisit pour a priori une loi bêta <span class="math inline">\(B(a,b)\)</span>, avec <span class="math inline">\(a,b&gt;0\)</span>. On observe un échantillon iid <span class="math inline">\(x_1, \dotsc, x_n\)</span> de loi <span class="math inline">\(p_\theta\)</span>.</p>
+<ol type="1">
+<li><p>Calculer la loi a posteriori de <span class="math inline">\(\theta\)</span> conditionnellement à l’échantillon.</p></li>
+<li><p>Calculer l’estimateur <span class="math inline">\(\hat{\theta}_{\text{MMSE}}\)</span> (la moyenne a posteriori).</p></li>
+</ol>
+</div>
+<div id="exr-gauss-mean-var" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 6 (Famille gaussienne (<span class="math inline">\(\star\)</span>))</strong></span> La loi inverse-Gamma <span class="math inline">\(\Gamma^{-1}(a,b)\)</span>, avec <span class="math inline">\(a,b&gt;0\)</span>, est la loi sur <span class="math inline">\([0,+\infty[\)</span> de densité <span class="math display">\[\frac{b^a}{\Gamma(a)} x^{-(a+1)} e^{-b/x}.\]</span> La loi <em>normale-inverse-gamma</em> sur <span class="math inline">\(\Theta = \mathbb{R}\times [0,+\infty[\)</span>, notée <span class="math inline">\(\mathrm{IGN}(a,b,c,d)\)</span>, est définie comme la loi de <span class="math inline">\((\mu, \sigma^2)\)</span> où <span class="math inline">\(\sigma^2\)</span> suit une loi inverse-Gamma et <span class="math inline">\(\mu\)</span> suit une normale de variance proportionnelle à <span class="math inline">\(\sigma^2\)</span> : <span class="math display">\[\mu \mid \sigma^2 \sim \mathscr{N}\left(a, \frac{\sigma^2}{b}\right)\]</span> <span class="math display">\[\sigma^2 \sim \Gamma^{-1}(c,d).\]</span></p>
+<p>On observe un échantillon <span class="math inline">\(X_1, \dotsc, X_n\)</span> iid de loi <span class="math inline">\(\mathscr{N}(\mu, \sigma^2)\)</span>, avec <span class="math inline">\((\mu, \sigma^2) \in \Theta\)</span>, et on cherche à estimer <span class="math inline">\((\mu, \sigma^2)\)</span>. On choisit pour a priori impropre sur <span class="math inline">\(\Theta\)</span> la mesure de densité <span class="math display">\[\pi(\mu,\sigma^2) = \frac{1}{\sigma^2}.\]</span></p>
+<ol type="1">
+<li><p>Calculer la « loi » a posteriori dans ce modèle.</p></li>
+<li><p>Montrer que la loi a posteriori de <span class="math inline">\(\sigma^2\)</span> est <span class="math inline">\(\Gamma^{-1}\!\left(\frac{n-1}{2}, \frac{n s^2}{2}\right)\)</span>, où <span class="math inline">\(s^2 = \frac{1}{n}\sum_{i=1}^n (X_i - \overline{X}_n)^2\)</span>.</p></li>
+<li><p>Montrer que conditionnellement à <span class="math inline">\(\sigma^2\)</span> et aux observations, <span class="math inline">\(\mu\)</span> est gaussienne.</p></li>
+<li><p>En déduire que la loi a posteriori du problème est une normale-inverse-gamma.</p></li>
+<li><p>Montrer que la loi a posteriori de <span class="math inline">\((\mu - \bar{x}_n)/\sqrt{s^2/n}\)</span> est la loi de Student à <span class="math inline">\(n-1\)</span> degrés de liberté.</p></li>
+</ol>
+</div>
 
 
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>On rappelle que <span class="math inline">\(|g|_\infty = \sup_{x\in\mathbb{R}}|g(x)|\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Que se passe-t-il si <span class="math inline">\(t\leqslant 1/N\)</span> ?<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Un estimateur <span class="math inline">\(T\)</span> est dit <em>bayésien</em> si il minimise le risque bayésien.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -900,13 +917,13 @@ $$
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../content/problemes.html" class="pagination-link" aria-label="Problèmes et sujets">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Problèmes et sujets</span>
+      <a href="../content/bayes2.html" class="pagination-link" aria-label="Choix d’un *a priori*">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Choix d’un <em>a priori</em></span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../content/ch7_1.html" class="pagination-link" aria-label="Test de Kolmogorov-Smirnov">
-        <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Test de Kolmogorov-Smirnov</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../content/tweedie.html" class="pagination-link" aria-label="Formules de Tweedie">
+        <span class="nav-page-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Formules de Tweedie</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

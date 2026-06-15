@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>20&nbsp; Estimation de densité – Statistiques Fondamentales</title>
+<title>Exercices – Statistiques Fondamentales</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../content/ch7_1.html" rel="next">
-<link href="../content/problemes.html" rel="prev">
+<link href="../content/ch6_0.html" rel="next">
+<link href="../content/ch5_2.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -112,7 +112,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/ch7_0.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Estimation de densité</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/ch5_ex.html">Exercices</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Recherche" onclick="window.quartoOpenSearch();">
@@ -263,7 +263,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/ch5_ex.html" class="sidebar-item-text sidebar-link">
+  <a href="../content/ch5_ex.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Exercices</span></a>
   </div>
 </li>
@@ -317,7 +317,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/ch7_0.html" class="sidebar-item-text sidebar-link active">
+  <a href="../content/ch7_0.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Estimation de densité</span></span></a>
   </div>
 </li>
@@ -409,10 +409,8 @@ window.Quarto = {
     <h2 id="toc-title">Table des matières</h2>
    
   <ul>
-  <li><a href="#la-répartition-empirique" id="toc-la-répartition-empirique" class="nav-link active" data-scroll-target="#la-répartition-empirique"><span class="header-section-number">20.1</span> La répartition empirique</a></li>
-  <li><a href="#sec-gc-calcul" id="toc-sec-gc-calcul" class="nav-link" data-scroll-target="#sec-gc-calcul"><span class="header-section-number">20.2</span> Calculabilité et loi</a></li>
-  <li><a href="#démonstration-du-théorème-de-glivenko-cantelli" id="toc-démonstration-du-théorème-de-glivenko-cantelli" class="nav-link" data-scroll-target="#démonstration-du-théorème-de-glivenko-cantelli"><span class="header-section-number">20.3</span> Démonstration du théorème de Glivenko-Cantelli</a></li>
-  <li><a href="#inégalité-dkw" id="toc-inégalité-dkw" class="nav-link" data-scroll-target="#inégalité-dkw"><span class="header-section-number">20.4</span> Inégalité DKW</a></li>
+  <li><a href="#questions" id="toc-questions" class="nav-link active" data-scroll-target="#questions">Questions</a></li>
+  <li><a href="#exercices" id="toc-exercices" class="nav-link" data-scroll-target="#exercices">Exercices</a></li>
   </ul>
 </nav>
     </div>
@@ -434,7 +432,7 @@ $$
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Estimation de densité</span></h1>
+<h1 class="title">Exercices</h1>
 </div>
 
 
@@ -451,50 +449,107 @@ $$
 </header>
 
 
-<p>Soient <span class="math inline">\(X_1, \dotsc, X_n\)</span> des variables iid, de fonction de répartition <span class="math inline">\(F\)</span>. Le problème de l’estimation de densité est celui d’estimer la densité ou la fonction de répartition de <span class="math inline">\(F\)</span> à partir de réalisations des <span class="math inline">\(X_i\)</span> : c’est un exemple typique d’estimation non-paramétrique. Dans toute la suite, on se placera dans le cas où la fonction de répartition est <em>continue</em>.</p>
-<section id="la-répartition-empirique" class="level2" data-number="20.1">
-<h2 data-number="20.1" class="anchored" data-anchor-id="la-répartition-empirique"><span class="header-section-number">20.1</span> La répartition empirique</h2>
-<p>La fonction de répartition empirique des <span class="math inline">\(X_i\)</span> est <span class="math display">\[ F_n(t) = \frac{1}{n}\#\{i : X_i \leqslant t\}.\]</span> La loi des grands nombres montre que, <span class="math inline">\(\mathbb{P}\)</span>-presque sûrement, <span class="math inline">\(F_n(t)\)</span> converge vers <span class="math inline">\(\mathbb{P}(X_i \leqslant t)=F(t)\)</span>. On peut étendre ce résultat simultanément à une quantité dénombrable de <span class="math inline">\(t\)</span> (par exemple, <span class="math inline">\(\mathbb{Q}\)</span>) mais pas à tous. De plus, ce résultat ne dit pas si la <em>fonction</em> <span class="math inline">\(F_n\)</span> est proche de la fonction <span class="math inline">\(F\)</span>, au sens de la norme uniforme par exemple. Le théorème suivant, parfois appelé <em>théorème fondamental de l’estimation</em>, confirme que c’est le cas au sens de la norme uniforme<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
-<div id="thm-glivenko" class="theorem">
-<p><span class="theorem-title"><strong>Théorème 20.1 (Théorème de Glivenko-Cantelli)</strong></span> <span class="math inline">\(\mathbb{P}\)</span>-presque sûrement, <span class="math inline">\(\lim_{n\to \infty}|F_n - F|_\infty = 0\)</span>.</p>
-</div>
-<p>Ce théorème dit que <span class="math inline">\(F_n\)</span> est un estimateur « convergent au sens de la norme uniforme » de <span class="math inline">\(F\)</span>. Il est en fait valable même si la fonction de répartition <span class="math inline">\(F\)</span> n’est pas continue, mais la démonstration est un peu plus technique.</p>
-<p>On va utiliser ce théorème pour faire des tests : si <span class="math inline">\(|F_n - F|\)</span> n’est pas suffisamment proche de zéro, on rejettera l’hypothèse selon laquelle les <span class="math inline">\(X_i\)</span> ont <span class="math inline">\(F\)</span> pour fonction de répartition. Le critère exact est appelé <em>test de Kolmogorov-Smirnov</em> et sera vu dans la section suivante.</p>
+<section id="questions" class="level2">
+<h2 class="anchored" data-anchor-id="questions">Questions</h2>
+<ul>
+<li>Retrouver la formule des MCO par une méthode analytique.</li>
+<li>Construire un intervalle de confiance de niveau <span class="math inline">\(1-\alpha\)</span> pour le coefficient <span class="math inline">\(\theta_j\)</span> d’une régression.</li>
+<li>Soit <span class="math inline">\(X\)</span> une matrice. Pourquoi les nombres <span class="math inline">\(\ell^2_j = ((X^\top X)^{-1})_{j,j}\)</span> sont-ils toujours des nombres positifs ?</li>
+<li>Écrire explicitement les deux leviers dans un modèle linéaire simple en une dimension.</li>
+<li>Concrètement, comment s’interprète la condition “la matrice des variables explicatives <span class="math inline">\(X\)</span> est de rang <span class="math inline">\(d\)</span>” ? Qu’est-ce qui ne va pas lorsque ce n’est pas le cas ?</li>
+<li>Au lieu de faire un test de significativité sur un coefficient d’une régression linéaire (<a href="ch5_2.html#thm-teststudent" class="quarto-xref">Théorème&nbsp;<span>14.1</span></a>), tester <span class="math inline">\(\theta_j=x\)</span> pour n’importe quel <span class="math inline">\(x\)</span> (pas forcément <span class="math inline">\(0\)</span>).</li>
+<li>Dans un ajustement affine sans constante <span class="math inline">\(y_i=\beta x_i\)</span>, monter que <span class="math inline">\(\hat{\beta} = \sum_{i=1}^n p_i y_i\)</span> où <span class="math inline">\(p_i = x_i/|x|^2\)</span>.</li>
+<li>Calculer la limite en loi de <span class="math inline">\(\mathscr{F}_{r,n}\)</span> lorsque <span class="math inline">\(r\)</span> est fixé et <span class="math inline">\(n \to \infty\)</span>.</li>
+<li>Calculer la limite en loi de <span class="math inline">\(\mathscr{F}_{n,n}\)</span> lorsque <span class="math inline">\(n \to \infty\)</span>.</li>
+<li>Réfléchir au tweet suivant :&nbsp;<a href="https://x.com/nntaleb/status/1280090844113100801">random points ALWAYS produce a slope</a>.</li>
+</ul>
 </section>
-<section id="sec-gc-calcul" class="level2" data-number="20.2">
-<h2 data-number="20.2" class="anchored" data-anchor-id="sec-gc-calcul"><span class="header-section-number">20.2</span> Calculabilité et loi</h2>
-<p>Soit <span class="math inline">\((X_{(1)}, \dotsc, X_{(n)})\)</span> l’échantillon trié en ordre croissant. Par convention, on pose <span class="math inline">\(X_{(0)} = -\infty\)</span> et <span class="math inline">\(X_{(n+1)} = \infty\)</span>. La quantité <span class="math inline">\(|F_n - F|_\infty\)</span> est calculable grâce à la représentation suivante : <span id="eq-supf"><span class="math display">\[|F_n - F|_\infty = \sup_{i\in \{0, \dotsc, n\}}\left|\frac{i}{n} - F(X_{(i)})\right| \vee \left| \frac{i}{n} - F(X_{(i+1)}-)\right|,   \tag{20.1}\]</span></span> où <span class="math inline">\(F(x-)\)</span> est la limite à gauche de <span class="math inline">\(F\)</span> en <span class="math inline">\(x\)</span>, c’est-à-dire la limite de <span class="math inline">\(F(x-t)\)</span> lorsque <span class="math inline">\(t&gt;0\)</span>, <span class="math inline">\(t\to 0\)</span>. Ainsi, lorsque <span class="math inline">\(F\)</span> est continue, <span class="math inline">\(F(X_{(i)}) = F(X_{(i+1)}-)\)</span>.</p>
-<div class="proof">
-<p><span class="proof-title"><em>Preuve</em>. </span>La fonction <span class="math inline">\(F\)</span> est croissante, et la fonction <span class="math inline">\(\hat{F}_n\)</span> est constante par morceaux sur tous les intervalles <span class="math inline">\([X_{(i)}, X_{(i+1)}[\)</span>. En effet, à chaque <span class="math inline">\(X_{(i)}\)</span>, elle saute de la valeur à gauche <span class="math inline">\((i-1)/n\)</span> a la valeur à droite <span class="math inline">\(i/n\)</span>. Ainsi, le maximum de <span class="math inline">\(F - \hat{F}_n\)</span> sur l’intervalle <span class="math inline">\([X_{(i)}, X_{(i+1)}[\)</span> est forcément atteint à une des deux bornes, et vaut donc soit <span class="math inline">\(|i/n - F(X_{(i)})|\)</span>, soit <span class="math inline">\(|i/n - F(X_{(i+1)}-)|\)</span>, selon celui qui est le plus grand. Le supremum de <span class="math inline">\(|F - \hat{F}_n|\)</span> sur <span class="math inline">\(\mathbb{R}\)</span> étant aussi le supremum des supremums sur tous ces intervalles, la représentation ci-dessus est vraie.</p>
+<section id="exercices" class="level2">
+<h2 class="anchored" data-anchor-id="exercices">Exercices</h2>
+<div id="exr-corrcaus" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 1 (Les limites du coefficient de détermination)</strong></span> &nbsp;</p>
+<ol type="1">
+<li>Construire un jeu de variables explicatives <span class="math inline">\(x_i\)</span> et expliquées <span class="math inline">\(y_i\)</span> tel que l’ajustement affine des <span class="math inline">\(x\)</span> vers les <span class="math inline">\(y\)</span> possède un <span class="math inline">\(R^2\)</span> égal à 0 (aucune significativité linéaire), mais tel que les <span class="math inline">\(y_i\)</span> sont parfaitement déterminés par les <span class="math inline">\(x_i\)</span> (c’est-à-dire tels qu’il y a une fonction <span class="math inline">\(f\)</span> avec <span class="math inline">\(f(x_i)=y_i\)</span> pour tout <span class="math inline">\(i\)</span>).</li>
+<li>Montrer qu’ajouter des variables explicatives dans un modèle augmente le coefficient de détermination.</li>
+</ol>
 </div>
-<div id="lem-gc" class="theorem lemma">
-<p><span class="theorem-title"><strong>Lemme 20.1</strong></span> Si <span class="math inline">\(F\)</span> est continue, <span class="math inline">\(|F_n - F|_\infty\)</span> a la même loi que <span class="math display">\[ \sup_{i\in \{0, \dotsc, n\}}\left|\frac{i}{n} - U_{(i)}\right| \vee \left| \frac{i}{n} - U_{(i+1)}\right|\]</span> où les <span class="math inline">\(U_{(i)}\)</span> sont des lois uniformes sur <span class="math inline">\([0,1]\)</span>, indépendantes, et triées dans l’ordre croissant.</p>
+<div id="exr-regl2" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 2 (Pénalité <span class="math inline">\(\ell^2\)</span> (régression <em>ridge</em>))</strong></span> Dans une régression de type <span class="math inline">\(Y = X\bt + \varepsilon\)</span>, on s’intéresse au problème <span class="math display">\[ \arg \min |Y - X\theta|^2 + \lambda |\theta|^2.\]</span> Il s’agit du problème des moindres carrées, mais où la présence de la pénalité <span class="math inline">\(\lambda|\theta|^2\)</span> impose que les coefficients de <span class="math inline">\(\theta\)</span> ne soient pas trop grands au sens <span class="math inline">\(\ell^2\)</span>.</p>
+<ol type="1">
+<li>Montrer que la solution au problème est donnée par <span class="math inline">\(\hat{\bt}_{\lambda} = (X^\top X + \lambda I_d)^{-1}X^\top Y\)</span> sans aucune contrainte de rang sur <span class="math inline">\(X\)</span>.</li>
+<li>Calculer la loi de <span class="math inline">\(\hat{\bt}_{\lambda}\)</span> lorsque les résidus sont gaussiens. Quel est son biais ?</li>
+</ol>
 </div>
-<div class="proof">
-<p><span class="proof-title"><em>Preuve</em>. </span>Lorsque <span class="math inline">\(X\)</span> est une variable aléatoire dont la fonction de répartition <span class="math inline">\(F\)</span> est continue et strictement croissante, <span class="math inline">\(F(X)\)</span> suit une loi <span class="math inline">\(\mathscr{U}[0,1]\)</span>. En effet, si <span class="math inline">\(t\in [0,1]\)</span>, alors <span class="math inline">\(\mathbb{P}(F(X)&lt;t)\)</span> est égal à <span class="math inline">\(\mathbb{P}(X \leqslant F^{-1}(t))\)</span>, c’est-à-dire <span class="math inline">\(F(F^{-1}(t)) = t\)</span>. Lorsque <span class="math inline">\(F\)</span> est seulement continue, la même démonstration est vraie, mais il faut remplacer l’inverse <span class="math inline">\(F^{-1}(t)\)</span> par la « transformation quantile », à savoir <span class="math inline">\(F^{\leftarrow}(t) = \inf\{x : F(x)\geqslant t\}\)</span>. Les <span class="math inline">\(F(X_i)\)</span> sont donc des variables iid de loi <span class="math inline">\(\mathscr{U}[0,1]\)</span>, ce qui conclut la démonstration compte tenu de <a href="#eq-supf" class="quarto-xref">Équation&nbsp;<span>20.1</span></a>.</p>
+<div id="exr-uniquecontrainte" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 3</strong></span> Dans un modèle linéaire <span class="math inline">\(Y = X\bt + \varepsilon\)</span>, on cherche à tester une unique contrainte linéaire, à savoir <span class="math inline">\(\langle z, \bt \rangle = c\)</span> où <span class="math inline">\(z \in \mathbb{R}^d\)</span> et <span class="math inline">\(c \in \mathbb{R}\)</span>.</p>
+<ol type="1">
+<li>Montrer que dans ce cas, la statistique de Wald s’écrit <span class="math display">\[ |\langle z, \hat{\bt}\rangle - c|^2/\hat{\sigma}_n^2\langle z, (X^\top X)^{-1}z\rangle.\]</span> Écrire le test associé à cette statistique.</li>
+<li>Trouver un estimateur <span class="math inline">\(\hat{\tau}^2\)</span> de la variance de <span class="math inline">\(\langle z, \hat{\bt}\rangle -c\)</span>. Sous l’hypothèse nulle, quelle est la loi de <span class="math inline">\((\langle z, \hat{\bt}\rangle -c)/\hat{\tau}_n\)</span> ? En déduire un test associé à cette statistique.</li>
+<li>Montrer que les deux tests sont équivalents.</li>
+</ol>
 </div>
-<p>En particulier, la loi de <span class="math inline">\(|F_n - F|_\infty\)</span> ne dépend pas de <span class="math inline">\(F\)</span> : on dit que cette statistique est <em>libre</em>.</p>
-</section>
-<section id="démonstration-du-théorème-de-glivenko-cantelli" class="level2" data-number="20.3">
-<h2 data-number="20.3" class="anchored" data-anchor-id="démonstration-du-théorème-de-glivenko-cantelli"><span class="header-section-number">20.3</span> Démonstration du théorème de Glivenko-Cantelli</h2>
-<p>On se place dans le cas où <span class="math inline">\(F\)</span> est continue. Notons <span class="math inline">\(q_j\)</span> le <span class="math inline">\(j\)</span>-ème quantile d’ordre <span class="math inline">\(N\)</span> de <span class="math inline">\(F\)</span> (on choisira l’entier <span class="math inline">\(N\)</span> plus tard) :&nbsp;il est bien défini, et il vérifie <span class="math inline">\(F(q_j) = j/N\)</span>. Soit <span class="math inline">\(x\)</span> entre <span class="math inline">\(q_j\)</span> et <span class="math inline">\(q_{j+1}\)</span>. Par croissance, <span class="math inline">\(F_n(x)\)</span> est entre <span class="math inline">\(F_n(q_j)\)</span> et <span class="math inline">\(F_n(q_{j+1})\)</span>, et <span class="math inline">\(F(x)\)</span> est entre <span class="math inline">\(j/N\)</span> et <span class="math inline">\((j+1)/N\)</span>. Ainsi, <span class="math inline">\(F_n(x) - F(x)\)</span> est plus grand que <span class="math display">\[ F_n(q_j) - \frac{j}{N} - \frac{1}{N}\]</span> et plus petit que <span class="math display">\[ F_n(q_{j+1})- \frac{j}{n} = F_n(q_{j+1})- \frac{j+1}{N}  + \frac{1}{N}.\]</span> Quoi qu’il arrive, <span class="math inline">\(|F_n(x) - F(x)|\)</span> est plus petit que le plus grand des <span class="math inline">\(|F_n(q_j) - j/N|\)</span> augmenté de <span class="math inline">\(1/N\)</span>, donc <span class="math inline">\(|F_n - F|\)</span> aussi. Pour n’importe quel <span class="math inline">\(t&gt;0\)</span>, nous pouvons utiliser la borne de l’union afin de borner <span class="math inline">\(\mathbb{P}(|F_n - F|_\infty &gt; t)\)</span> par <span id="eq-uniongc"><span class="math display">\[\sum_{j=0}^N\mathbb{P}\left(\frac{1}{N} + |F_n(q_j) - j/N|&gt;t\right). \tag{20.2}\]</span></span> Or, <span class="math inline">\(nF_n(q_j)\)</span> suit une loi <span class="math inline">\(\mathrm{Bin}(n, j/N)\)</span>, donc si<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> <span class="math inline">\(t-1/N&gt;0\)</span> on peut utiliser l’inégalité de Hoeffding :&nbsp; <span class="math display">\[\mathbb{P}\left(\frac{1}{N} + |F_n(q_j) - j/N|&gt;t\right) \leqslant 2\exp\left\lbrace - 2 n\left(t - \frac{1}{N}\right)^2 \right\rbrace.\]</span> En choisissant par exemple <span class="math inline">\(N = \lceil 2/t\rceil\)</span>, le terme entre parenthèses est plus grand que <span class="math inline">\(t/2\)</span>, et la borne devient elle-même plus petite que <span class="math inline">\(2e^{-2nt^2/4}\)</span>. Le terme <a href="#eq-uniongc" class="quarto-xref">Équation&nbsp;<span>20.2</span></a> est alors plus petit que <span class="math inline">\(N 2e^{-nt^2/2}\)</span>, c’est-à-dire <span id="eq-predkw"><span class="math display">\[\mathbb{P}(|F_n - F|_\infty &gt; t) \leqslant \frac{6}{t}e^{-nt^2/2} \tag{20.3}\]</span></span> où on a utilisé la borne très grossière <span class="math inline">\(N \leqslant 3/t\)</span>.</p>
-<p>Si l’on choisit une suite <span class="math inline">\(t_n\)</span> qui tend vers 0, et telle que <span class="math inline">\(\sum_n e^{-nt_n^2/2}/t_n &lt; \infty\)</span>, alors le lemme de Borel-Cantelli permet de conclure :&nbsp;presque sûrement, à partir d’un certain rang, on a <span class="math inline">\(|F - F_n|_\infty \leqslant t_n\)</span>, et donc <span class="math inline">\(|F_n - F|_\infty \to 0\)</span>. N’importe quel choix de type <span class="math inline">\(t_n = n^{0.5 - \varepsilon}\)</span> pour <span class="math inline">\(\varepsilon &gt; 0\)</span> convient, et donne même que <span class="math inline">\(|F_n - F|_\infty = O(n^{0.5-\varepsilon})\)</span>.</p>
-</section>
-<section id="inégalité-dkw" class="level2" data-number="20.4">
-<h2 data-number="20.4" class="anchored" data-anchor-id="inégalité-dkw"><span class="header-section-number">20.4</span> Inégalité DKW</h2>
-<p>Le théorème de Glivenko-Cantelli possède une version beaucoup plus puissante car elle est entièrement quantitative, appelée <em>inégalité DKW</em>.</p>
-<div id="thm-DKW" class="theorem">
-<p><span class="theorem-title"><strong>Théorème 20.2 (Dvoretzky-Kiefer-Wolfowitz)</strong></span> Dans le même contexte, pour tout <span class="math inline">\(t&gt;0\)</span> on a <span id="eq-dkw"><span class="math display">\[\mathbb{P}(|F_n - F|_\infty &gt; t) \leqslant 2e^{-2nt^2}. \tag{20.4}\]</span></span></p>
+<div id="exr-aju" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 4</strong></span> Soient <span class="math inline">\((x_1, y_1), \dotsc, (x_n, y_n)\)</span> des points dans <span class="math inline">\(\mathbb{R}^2\)</span>. Comparer l’ajustement affine des <span class="math inline">\(x\)</span> vers les <span class="math inline">\(y\)</span>, et l’ajustement affine des <span class="math inline">\(y\)</span> vers les <span class="math inline">\(x\)</span> (sans constantes).</p>
 </div>
-<p>Il faut comparer ce résultat avec <a href="#eq-predkw" class="quarto-xref">Équation&nbsp;<span>20.3</span></a>, dans lequel la borne est effectivement décroissante en <span class="math inline">\(nt^2\)</span>, mais avec un préfacteur <span class="math inline">\(1/t\)</span> polynomial. L’inégalité DKW donne une décroissance <em>exponentielle</em> en <span class="math inline">\(nt^2\)</span>.</p>
+<div id="exr-fw" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 5 (Théorème de Frish-Waugh)</strong></span> &nbsp;</p>
+<ol type="1">
+<li>À&nbsp;quelle condition sur les variables <span class="math inline">\(X,Z\)</span> a-t-on <span class="math inline">\(\hat{\bt}_X = \hat{\bt}\)</span> ?</li>
+<li>Montrer que centrer les variables explicatives d’un modèle revient à enlever la constante.</li>
+</ol>
+</div>
+<div id="exr-chow" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 6 (Test de Chow)</strong></span> On dispose de deux jeux de données, disons <span class="math inline">\((X^1_1, Y^1_1), \dotsc, (X^1_n, Y^2_n)\)</span> et <span class="math inline">\((X^2_{1}, Y^2_{1}), \dotsc, (X^2_m, Y^2_m)\)</span>. Dans les deux régressions <span class="math inline">\(Y^1 = X^1 \bt^1+ \varepsilon^1\)</span> et <span class="math inline">\(Y^2 = X^2\bt^2+\varepsilon^2\)</span>, on souhaite tester si <span class="math inline">\(\bt^1 = \bt^2\)</span>.</p>
+<ol type="1">
+<li>On suppose dans un premier temps que les erreurs <span class="math inline">\(\varepsilon^1, \varepsilon^2\)</span> ont la même loi, avec une variance <span class="math inline">\(\sigma^2\)</span> connue. Proposer un test simple de l’hypothèse nulle.</li>
+<li>Même question lorsque <span class="math inline">\(\sigma\)</span> n’est pas connue.</li>
+<li>Même question lorsque <span class="math inline">\(\varepsilon^1,\varepsilon^2\)</span> n’ont pas la même variance mais que <span class="math inline">\(\sigma_1,\sigma_2\)</span> sont connus.</li>
+</ol>
+</div>
+<div id="exr-covnonscal" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 7</strong></span> On se place dans un modèle linéaire <em>gaussien</em> de la forme <span class="math inline">\(Y = X\bt + \varepsilon\)</span>, mais on suppose que les entrées de <span class="math inline">\(\varepsilon_i\)</span> ne sont plus iid, mais possèdent une covariance <span class="math inline">\(\Sigma\)</span> non scalaire. On suppose que l’on connaît <span class="math inline">\(\Sigma\)</span>. Montrer que <span class="math display">\[\hat{\bt}_{\mathrm{MCG}}= (X^\top \Sigma^{-1} X)^{-1}X^\top \Sigma^{-1}Y\]</span> est un estimateur sans biais de <span class="math inline">\(\bt\)</span>, appelé <em>estimateur des moindres carrés généralisés</em>, dont on calculera la loi.</p>
+</div>
+<div id="exr-prediction" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 8</strong></span> On considère le modèle de régression linéaire <span class="math inline">\(y_i=b_0+b_1x_i+\varepsilon_i\)</span> où <span class="math inline">\(i = 1, \dotsc, n\)</span> et les <span class="math inline">\(\varepsilon_i\)</span> sont des variables aléatoires indépendantes <span class="math inline">\({\mathcal N}(0,\sigma^2)\)</span> et <span class="math inline">\(b_0,b_1\)</span> et <span class="math inline">\(\sigma^2\)</span> sont inconnus.</p>
+<ol type="1">
+<li>Donner les estimateurs des moindres carrés ordinaires <span class="math inline">\(\hat{b}_0,\hat{b}_1\)</span> et <span class="math inline">\(\hat{\sigma}^2\)</span> et leur loi jointe.</li>
+<li>On dispose d’une nouvelle observation, disons <span class="math inline">\(y_0\)</span>, pour laquelle la valeur de <span class="math inline">\(x_0\)</span> de la variable explicative est inconnue. L’objectif est d’estimer <span class="math inline">\(x_0\)</span>. On suppose que <span class="math inline">\(y_0\)</span> est une réalisation d’une variable aléatoire <span class="math inline">\(Y_0\)</span> s’écrivant <span class="math inline">\(Y_0=b_0+b_1x_0+\eta\)</span>, avec <span class="math inline">\(\eta\)</span> une erreur d’observation de loi <span class="math inline">\(N(0,\sigma^2)\)</span> indépendante des <span class="math inline">\(\varepsilon_i\)</span>. On suppose en outre que la variable que l’on cherche, <span class="math inline">\(x_0\)</span>, n’est pas trop éloignée des autres <span class="math inline">\(x_i\)</span> : <span class="math inline">\(|x_0- \bar x| \leq 1\)</span>.
+<ol type="i">
+<li>Quelle est la loi de <span class="math inline">\(Y_0-\hat{b}_0-\hat{b}_1x_0\)</span> ?</li>
+<li>En utilisant l’estimateur <span class="math inline">\(\hat{\sigma}\)</span> de <span class="math inline">\({\sigma}\)</span>, déterminer un intervalle de confiance de niveau <span class="math inline">\(1-\alpha\)</span> pour <span class="math inline">\(x_0\)</span>.</li>
+</ol></li>
+<li>On dispose maintenant de <span class="math inline">\(m\)</span> observations <span class="math inline">\(y_{0,1},\dots,y_{0,m}\)</span> correspondant à la valeur <span class="math inline">\(x_0\)</span> inconnue ; ce sont des réalisations de copies indépendantes <span class="math inline">\(Y_{0,j}\)</span> de <span class="math inline">\(Y_0\)</span>.
+<ol type="i">
+<li>Montrer que <span class="math display">\[\tilde{\sigma}^2=\frac{(n-2)\hat{\sigma}^2+\sum_{j=1}^{m}(Y_{0j}-\bar{Y}_0)^2}{n+m-3}\]</span> est un estimateur sans biais de <span class="math inline">\(\sigma^2\)</span>. Quelle est sa loi ?</li>
+<li>Quelle est la loi de <span class="math inline">\(\bar{Y}_0-\hat{b}_0-\hat{b}_1x_0\)</span> ?</li>
+<li>A l’aide de <span class="math inline">\(\tilde{\sigma}^2\)</span> et de <span class="math inline">\(\bar{Y}_0\)</span>, donner un intervalle de confiance pour <span class="math inline">\(x_0\)</span> de niveau <span class="math inline">\(1-\alpha\)</span>.</li>
+<li>Aurait-on pu construire un intervalle de confiance pour <span class="math inline">\(x_0\)</span> à l’aide de <span class="math inline">\(\hat{\sigma}^2\)</span> et de <span class="math inline">\(\bar{Y}_0\)</span> ?</li>
+</ol></li>
+</ol>
+</div>
+<div id="exr-gaussmarkov" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 9 (Théorème de Gauss-Markov)</strong></span> On se place dans un modèle linéaire gaussien <span class="math inline">\(Y = X\bt + \varepsilon\)</span>. L’objectif est de montrer que <span class="math inline">\(\hat{\bt}\)</span>, l’estimateur des moindres carrés, est le meilleur estimateur linéaire de <span class="math inline">\(\bt\)</span> qui soit sans biais<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Soit donc <span class="math inline">\(\tilde{\bt}\)</span> un autre estimateur linéaire sans biais, disons <span class="math inline">\(\tilde{\bt} = MY\)</span>.</p>
+<ol type="1">
+<li>Montrer que <span class="math inline">\((M - (X^\top X)^{-1}X^\top)X= 0\)</span>.</li>
+<li>Calculer la matrice de variance de <span class="math inline">\(\tilde{\bt}\)</span> en fonction de <span class="math inline">\(M - (X^\top X)^{-1}X^\top\)</span> et conclure.</li>
+</ol>
+</div>
+<div id="exr-regpoly" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 10 (Régression polynomiale (examen 25-bis))</strong></span> On dispose de <span class="math inline">\(n\)</span> variables <span class="math inline">\(x_1, \dotsc, x_n \in \mathbb{R}\)</span>, et <span class="math inline">\(n\)</span> variables à expliquer <span class="math inline">\(y_1, \dotsc, y_n \in \mathbb{R}\)</span>. L’objectif est de trouver le meilleur polynôme possible de degré <span class="math inline">\(d\)</span> qui relie les <span class="math inline">\(x_i\)</span> aux <span class="math inline">\(y_i\)</span>.</p>
+<ol type="1">
+<li>Soit <span class="math inline">\(\mathscr{F}_d\)</span> l’ensemble des polynômes à coefficients réels, de degré inférieur ou égal à <span class="math inline">\(d\)</span>. On veut trouver <span class="math inline">\(f\in \mathscr{F}_d\)</span> tel que <span class="math display">\[ f \in \arg\min_{g\in \mathscr{F}_d} \sum_{i=1}^n (y_i - g(x_i))^2.\]</span> Exprimer ce problème de minimisation comme un problème de moindres carrés et exprimer la solution <span class="math inline">\(f\)</span> en fonction des <span class="math inline">\(x_i\)</span> et des <span class="math inline">\(y_i\)</span> (on pourra faire des hypothèses raisonnables sur les <span class="math inline">\(x_i\)</span>).</li>
+<li>On suppose qu’il existe un polynôme <span class="math inline">\(f_\star\)</span> de degré au plus <span class="math inline">\(d\)</span> tel que <span class="math inline">\(y_i = f_\star(x_i) + \varepsilon_i\)</span> où les <span class="math inline">\(\varepsilon_i\)</span> sont des variables aléatoires indépendantes de loi <span class="math inline">\(N(0,\sigma^2)\)</span>, avec <span class="math inline">\(\sigma^2\)</span> une variance inconnue. On note <span class="math inline">\(\hat{f}\)</span> l’estimateur trouvé à la question précédente. Quelle est la loi des coefficients de <span class="math inline">\(\hat{f}\)</span> ? Donner aussi l’estimateur de <span class="math inline">\(\sigma^2\)</span> et sa loi.</li>
+<li>Tester l’hypothèse selon laquelle <span class="math inline">\(f_\star\)</span> est en réalité de degré strictement inférieur à <span class="math inline">\(d\)</span>.</li>
+<li>Maintenant, on suppose que les <span class="math inline">\(x_i\)</span> sont de dimension <span class="math inline">\(2\)</span>. On souhaite faire une régression polynomiale de degré <span class="math inline">\(d\)</span> comme ci-dessus des <span class="math inline">\(x_i\)</span> vers les <span class="math inline">\(y_i\)</span>. Quelle est la dimension de cette nouvelle régression ? Tester l’hypothèse selon laquelle les <span class="math inline">\(y_i\)</span> dépendent seulement des <span class="math inline">\(|x_i|^2\)</span> (difficile).</li>
+</ol>
+</div>
 
 
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>On rappelle que <span class="math inline">\(|g|_\infty = \sup_{x\in\mathbb{R}}|g(x)|\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Que se passe-t-il si <span class="math inline">\(t\leqslant 1/N\)</span> ?<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>BLUE, <em>best linear unbiased estimator</em>. <a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -900,13 +955,13 @@ $$
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../content/problemes.html" class="pagination-link" aria-label="Problèmes et sujets">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Problèmes et sujets</span>
+      <a href="../content/ch5_2.html" class="pagination-link" aria-label="Tests linéaires">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Tests linéaires</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../content/ch7_1.html" class="pagination-link" aria-label="Test de Kolmogorov-Smirnov">
-        <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Test de Kolmogorov-Smirnov</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../content/ch6_0.html" class="pagination-link" aria-label="Modèles exponentiels">
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Modèles exponentiels</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

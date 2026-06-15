@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>20&nbsp; Estimation de densité – Statistiques Fondamentales</title>
+<title>17&nbsp; L’information de Fisher – Statistiques Fondamentales</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../content/ch7_1.html" rel="next">
-<link href="../content/problemes.html" rel="prev">
+<link href="../content/ch6_ex.html" rel="next">
+<link href="../content/ch6_1.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -112,7 +112,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/ch7_0.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Estimation de densité</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/ch6_2.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">L’information de Fisher</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Recherche" onclick="window.quartoOpenSearch();">
@@ -281,7 +281,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/ch6_2.html" class="sidebar-item-text sidebar-link">
+  <a href="../content/ch6_2.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">L’information de Fisher</span></span></a>
   </div>
 </li>
@@ -317,7 +317,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/ch7_0.html" class="sidebar-item-text sidebar-link active">
+  <a href="../content/ch7_0.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Estimation de densité</span></span></a>
   </div>
 </li>
@@ -409,10 +409,13 @@ window.Quarto = {
     <h2 id="toc-title">Table des matières</h2>
    
   <ul>
-  <li><a href="#la-répartition-empirique" id="toc-la-répartition-empirique" class="nav-link active" data-scroll-target="#la-répartition-empirique"><span class="header-section-number">20.1</span> La répartition empirique</a></li>
-  <li><a href="#sec-gc-calcul" id="toc-sec-gc-calcul" class="nav-link" data-scroll-target="#sec-gc-calcul"><span class="header-section-number">20.2</span> Calculabilité et loi</a></li>
-  <li><a href="#démonstration-du-théorème-de-glivenko-cantelli" id="toc-démonstration-du-théorème-de-glivenko-cantelli" class="nav-link" data-scroll-target="#démonstration-du-théorème-de-glivenko-cantelli"><span class="header-section-number">20.3</span> Démonstration du théorème de Glivenko-Cantelli</a></li>
-  <li><a href="#inégalité-dkw" id="toc-inégalité-dkw" class="nav-link" data-scroll-target="#inégalité-dkw"><span class="header-section-number">20.4</span> Inégalité DKW</a></li>
+  <li><a href="#définitions" id="toc-définitions" class="nav-link active" data-scroll-target="#définitions"><span class="header-section-number">17.1</span> Définitions</a></li>
+  <li><a href="#borne-de-cramér-rao" id="toc-borne-de-cramér-rao" class="nav-link" data-scroll-target="#borne-de-cramér-rao"><span class="header-section-number">17.2</span> Borne de Cramér-Rao</a></li>
+  <li><a href="#sec-interp-fisher" id="toc-sec-interp-fisher" class="nav-link" data-scroll-target="#sec-interp-fisher"><span class="header-section-number">17.3</span> Que mesure l’information de Fisher ?</a>
+  <ul class="collapse">
+  <li><a href="#exemple-des-modèles-de-bernoulli" id="toc-exemple-des-modèles-de-bernoulli" class="nav-link" data-scroll-target="#exemple-des-modèles-de-bernoulli">Exemple des modèles de Bernoulli</a></li>
+  <li><a href="#reparamétrisation-du-modèle" id="toc-reparamétrisation-du-modèle" class="nav-link" data-scroll-target="#reparamétrisation-du-modèle">Reparamétrisation du modèle</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -434,7 +437,7 @@ $$
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Estimation de densité</span></h1>
+<h1 class="title"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">L’information de Fisher</span></h1>
 </div>
 
 
@@ -451,50 +454,84 @@ $$
 </header>
 
 
-<p>Soient <span class="math inline">\(X_1, \dotsc, X_n\)</span> des variables iid, de fonction de répartition <span class="math inline">\(F\)</span>. Le problème de l’estimation de densité est celui d’estimer la densité ou la fonction de répartition de <span class="math inline">\(F\)</span> à partir de réalisations des <span class="math inline">\(X_i\)</span> : c’est un exemple typique d’estimation non-paramétrique. Dans toute la suite, on se placera dans le cas où la fonction de répartition est <em>continue</em>.</p>
-<section id="la-répartition-empirique" class="level2" data-number="20.1">
-<h2 data-number="20.1" class="anchored" data-anchor-id="la-répartition-empirique"><span class="header-section-number">20.1</span> La répartition empirique</h2>
-<p>La fonction de répartition empirique des <span class="math inline">\(X_i\)</span> est <span class="math display">\[ F_n(t) = \frac{1}{n}\#\{i : X_i \leqslant t\}.\]</span> La loi des grands nombres montre que, <span class="math inline">\(\mathbb{P}\)</span>-presque sûrement, <span class="math inline">\(F_n(t)\)</span> converge vers <span class="math inline">\(\mathbb{P}(X_i \leqslant t)=F(t)\)</span>. On peut étendre ce résultat simultanément à une quantité dénombrable de <span class="math inline">\(t\)</span> (par exemple, <span class="math inline">\(\mathbb{Q}\)</span>) mais pas à tous. De plus, ce résultat ne dit pas si la <em>fonction</em> <span class="math inline">\(F_n\)</span> est proche de la fonction <span class="math inline">\(F\)</span>, au sens de la norme uniforme par exemple. Le théorème suivant, parfois appelé <em>théorème fondamental de l’estimation</em>, confirme que c’est le cas au sens de la norme uniforme<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
-<div id="thm-glivenko" class="theorem">
-<p><span class="theorem-title"><strong>Théorème 20.1 (Théorème de Glivenko-Cantelli)</strong></span> <span class="math inline">\(\mathbb{P}\)</span>-presque sûrement, <span class="math inline">\(\lim_{n\to \infty}|F_n - F|_\infty = 0\)</span>.</p>
+<section id="définitions" class="level2" data-number="17.1">
+<h2 data-number="17.1" class="anchored" data-anchor-id="définitions"><span class="header-section-number">17.1</span> Définitions</h2>
+<p>Nous avons vu apparaître naturellement la <em>variance</em> du moment dans un modèle exponentiel, à savoir <span class="math inline">\(\mathrm{Var}_\theta(T)\)</span>. Cette quantité s’appelle <em>information de Fisher</em>, parce qu’elle quantifie l’information relative au paramètre <span class="math inline">\(\theta\)</span> qui est « contenue » dans la distribution <span class="math inline">\(p_\theta\)</span>.</p>
+<div id="def-information" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 17.1 (Information de Fisher dans les modèles exponentiels)</strong></span> Dans le modèle exonentiel associé à <span class="math inline">\(T\)</span>, la matrice d’information de Fisher <span class="math inline">\(I(\theta)\)</span> est la matrice de covariance de <span class="math inline">\(T\)</span>,</p>
+<p><span class="math display">\[E_\theta[T(X)T(X)^\top] - E_\theta[T(X)]E_\theta[T(X)]^\top.\]</span></p>
 </div>
-<p>Ce théorème dit que <span class="math inline">\(F_n\)</span> est un estimateur « convergent au sens de la norme uniforme » de <span class="math inline">\(F\)</span>. Il est en fait valable même si la fonction de répartition <span class="math inline">\(F\)</span> n’est pas continue, mais la démonstration est un peu plus technique.</p>
-<p>On va utiliser ce théorème pour faire des tests : si <span class="math inline">\(|F_n - F|\)</span> n’est pas suffisamment proche de zéro, on rejettera l’hypothèse selon laquelle les <span class="math inline">\(X_i\)</span> ont <span class="math inline">\(F\)</span> pour fonction de répartition. Le critère exact est appelé <em>test de Kolmogorov-Smirnov</em> et sera vu dans la section suivante.</p>
+<p>L’information de Fisher possède de nombreuses expressions alternatives. La plus importante, outre la définition, est qu’on peut interpréter <span class="math inline">\(I(\theta)\)</span> comme la matrice de covariance du <em>score</em> du modèle.</p>
+<div id="def-score" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 17.2 (Fonction de score)</strong></span> Le score est la dérivée de la log-vraisemblance : <span class="math display">\[\nabla_\theta \ln p_\theta(x).\]</span></p>
+</div>
+<p>Dans un modèle exponentiel <span class="math inline">\(p_\theta(x) = \exp(\langle \theta, T(x)\rangle - \ln Z_\theta)\)</span>, nous avons déjà vu que le score est égal à <span id="eq-score-expp"><span class="math display">\[T(x) - \nabla \ln Z(\theta). \tag{17.1}\]</span></span> Le score dépend des observations, et donc est une variable aléatoire. En fait, <a href="ch6_0.html#eq-grad-exp" class="quarto-xref">Équation&nbsp;<span>15.1</span></a> montre que l’espérance du score, <span class="math inline">\(E_\theta[T(X)] - \nabla \ln Z(\theta)\)</span>, vaut précisément zéro :&nbsp;le score est centré. Au vu de <a href="#eq-score-expp" class="quarto-xref">Équation&nbsp;<span>17.1</span></a>, l’information de Fisher coïncide avec la variance du score. C’est cette dernière définition qu’on retient en général, car elle n’est pas propre aux modèles exponentiels.</p>
+<div id="def-information-gen" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 17.3 (Information de Fisher dans les modèles généraux)</strong></span> Dans un modèle statistique général <span class="math inline">\((p_\theta)_{\theta \in \Theta}\)</span>, l’information de Fisher est définie comme la variance du score :</p>
+<p><span class="math display">\[ I(\theta) = \mathrm{Var}_\theta(\nabla_\theta \ln p_\theta(X)), \]</span></p>
+<p>pourvu que tout soit bien défini (la densité doit être dérivable, etc.).</p>
+</div>
+<p>On rappelle que le gradient de la fonction <span class="math inline">\(\ln p_\theta :&nbsp;\mathbb{R}^d \to \mathbb{R}\)</span> est vu comme un vecteur colonne. Par conséquent, la variance de la variable aléatoire <span class="math inline">\(\nabla_\theta \ln p_\theta(X)\)</span> (qui est centrée) est la matrice <span class="math display">\[ \mathbb{E}_\theta[\nabla_\theta \ln p_\theta(X)\nabla_\theta \ln p_\theta(X)^\top].\]</span></p>
 </section>
-<section id="sec-gc-calcul" class="level2" data-number="20.2">
-<h2 data-number="20.2" class="anchored" data-anchor-id="sec-gc-calcul"><span class="header-section-number">20.2</span> Calculabilité et loi</h2>
-<p>Soit <span class="math inline">\((X_{(1)}, \dotsc, X_{(n)})\)</span> l’échantillon trié en ordre croissant. Par convention, on pose <span class="math inline">\(X_{(0)} = -\infty\)</span> et <span class="math inline">\(X_{(n+1)} = \infty\)</span>. La quantité <span class="math inline">\(|F_n - F|_\infty\)</span> est calculable grâce à la représentation suivante : <span id="eq-supf"><span class="math display">\[|F_n - F|_\infty = \sup_{i\in \{0, \dotsc, n\}}\left|\frac{i}{n} - F(X_{(i)})\right| \vee \left| \frac{i}{n} - F(X_{(i+1)}-)\right|,   \tag{20.1}\]</span></span> où <span class="math inline">\(F(x-)\)</span> est la limite à gauche de <span class="math inline">\(F\)</span> en <span class="math inline">\(x\)</span>, c’est-à-dire la limite de <span class="math inline">\(F(x-t)\)</span> lorsque <span class="math inline">\(t&gt;0\)</span>, <span class="math inline">\(t\to 0\)</span>. Ainsi, lorsque <span class="math inline">\(F\)</span> est continue, <span class="math inline">\(F(X_{(i)}) = F(X_{(i+1)}-)\)</span>.</p>
+<section id="borne-de-cramér-rao" class="level2" data-number="17.2">
+<h2 data-number="17.2" class="anchored" data-anchor-id="borne-de-cramér-rao"><span class="header-section-number">17.2</span> Borne de Cramér-Rao</h2>
+<div id="thm-cramer-rao" class="theorem">
+<p><span class="theorem-title"><strong>Théorème 17.1 (Borne de Cramér-Rao)</strong></span> Pour tout estimateur sans biais <span class="math inline">\(\hat{\theta}\)</span> de <span class="math inline">\(\theta\)</span>, on a<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="math inline">\(I(\theta)^{-1} \preceq \mathrm{Cov}_\theta(\hat{\theta})\)</span>.</p>
+</div>
+<p>Lorsque le paramètre <span class="math inline">\(\theta\)</span> est réel, la borne de Cramér-Rao dit que le risque quadratique de n’importe quel estimateur sans biais ne peut pas être plus petit que <span class="math inline">\(1/I(\theta)\)</span>. Les estimateurs sans biais qui atteignent cette borne sont appelés <em>efficaces</em>, ou asymptotiquement efficaces si leur risque quadratique converge vers cette borne.</p>
+<p>La borne <span class="math inline">\(I(\theta)\)</span> est très petite lorsque l’information est très grande, ce qui est intuitif :&nbsp;si les observations portent beaucoup d’information sur le paramètre, le risque quadratique du meilleur estimateur peut certainement être très petit. Inversement, si <span class="math inline">\(I(\theta)\)</span> est très grande, cela signifie que les observations ne portent pas beaucoup d’information sur le paramètre, et donc que le risque quadratique sera nécessairement assez grand.</p>
 <div class="proof">
-<p><span class="proof-title"><em>Preuve</em>. </span>La fonction <span class="math inline">\(F\)</span> est croissante, et la fonction <span class="math inline">\(\hat{F}_n\)</span> est constante par morceaux sur tous les intervalles <span class="math inline">\([X_{(i)}, X_{(i+1)}[\)</span>. En effet, à chaque <span class="math inline">\(X_{(i)}\)</span>, elle saute de la valeur à gauche <span class="math inline">\((i-1)/n\)</span> a la valeur à droite <span class="math inline">\(i/n\)</span>. Ainsi, le maximum de <span class="math inline">\(F - \hat{F}_n\)</span> sur l’intervalle <span class="math inline">\([X_{(i)}, X_{(i+1)}[\)</span> est forcément atteint à une des deux bornes, et vaut donc soit <span class="math inline">\(|i/n - F(X_{(i)})|\)</span>, soit <span class="math inline">\(|i/n - F(X_{(i+1)}-)|\)</span>, selon celui qui est le plus grand. Le supremum de <span class="math inline">\(|F - \hat{F}_n|\)</span> sur <span class="math inline">\(\mathbb{R}\)</span> étant aussi le supremum des supremums sur tous ces intervalles, la représentation ci-dessus est vraie.</p>
+<p><span class="proof-title"><em>Preuve</em>. </span>Commençons par la dimension 1. Comme <span class="math inline">\(T\)</span> est sans biais, <span class="math inline">\(\int p_\theta(x)T(x)dx=\theta\)</span>. Comme <span class="math inline">\(\nabla p_\theta = p_\theta \nabla_\theta \ln p_\theta = p_\theta s_\theta\)</span>, en intervertissant intégrale et dérivée, on obtient donc <span class="math inline">\(1 = \int p_\theta (x)s_\theta(x)T(x)dx = E_\theta[s_\theta(X)T(X)]\)</span>. Nous avons déjà vu que le score est centré : ainsi, ce dernier terme vaut aussi <span class="math inline">\(E_\theta[s_\theta(X)(T(X) - \theta)]\)</span>. L’inégalité de Cauchy-Schwarz donne alors <span class="math display">\[1 \leqslant \sqrt{E_\theta[|T(X)-\theta|^2]I(\theta)}, \]</span> qui est le résultat voulu. Pour la dimension supérieure, il suffit d’appliquer ce résultat à <span class="math inline">\(\langle y, T(X)\rangle\)</span>, qui est un estimateur sans biais de <span class="math inline">\(\langle y, \theta \rangle\)</span> (ici, <span class="math inline">\(y\)</span> est n’importe quel vecteur de <span class="math inline">\(\mathbb{R}^p\)</span>). L’inégalité ci-dessus, après quelques menues manipulations, devient <span class="math display">\[\langle y, I(\theta)^{-1}y\rangle \leqslant \langle y, \mathrm{Cov}_\theta(T)y\rangle, \]</span> qui montre bien que <span class="math inline">\(I(\theta)^{-1} \preceq \mathrm{Cov}_\theta(T)\)</span>.</p>
 </div>
-<div id="lem-gc" class="theorem lemma">
-<p><span class="theorem-title"><strong>Lemme 20.1</strong></span> Si <span class="math inline">\(F\)</span> est continue, <span class="math inline">\(|F_n - F|_\infty\)</span> a la même loi que <span class="math display">\[ \sup_{i\in \{0, \dotsc, n\}}\left|\frac{i}{n} - U_{(i)}\right| \vee \left| \frac{i}{n} - U_{(i+1)}\right|\]</span> où les <span class="math inline">\(U_{(i)}\)</span> sont des lois uniformes sur <span class="math inline">\([0,1]\)</span>, indépendantes, et triées dans l’ordre croissant.</p>
+</section>
+<section id="sec-interp-fisher" class="level2" data-number="17.3">
+<h2 data-number="17.3" class="anchored" data-anchor-id="sec-interp-fisher"><span class="header-section-number">17.3</span> Que mesure l’information de Fisher ?</h2>
+<p>L’information de Fisher d’un modèle dépend crucialement de <em>comment</em> on paramétrise le modèle.</p>
+<section id="exemple-des-modèles-de-bernoulli" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="exemple-des-modèles-de-bernoulli">Exemple des modèles de Bernoulli</h3>
+<p>Prenons l’exemple de la loi de Bernoulli, et considérons d’abord sa paramétrisation usuelle, <span class="math display">\[ p_\theta(x) = \theta^x(1-\theta)^{1-x}\]</span> avec <span class="math inline">\(x \in \{0,1\}\)</span>, et <span class="math inline">\(\theta\)</span> est dans <span class="math inline">\(]0,1[\)</span>. La fonction de score est donnée par <span class="math inline">\((x\ln \theta + (1-x)\ln(1-\theta))'\)</span>, soit <span class="math inline">\(\frac{x}{\theta} - \frac{1-x}{1-\theta}\)</span>, ou encore <span class="math display">\[ \frac{x}{\theta(1-\theta)} + \frac{1}{1-\theta}, \]</span> et donc l’information de Fisher de ce modèle est égale à la variance de <span class="math inline">\(X/\theta(1-\theta) + 1/(1-\theta)\)</span>, qui vaut <span class="math inline">\(1/\theta(1-\theta)\)</span> :&nbsp; <span id="eq-info-ber1"><span class="math display">\[I(\theta) = \frac{1}{\theta(1-\theta)}. \tag{17.2}\]</span></span></p>
+<p>Maintenant, nous allons paramétriser le modèle de Bernoulli avec les logits :&nbsp;plutôt que de considérer <span class="math inline">\(p\)</span>, nous allons paramétriser <span class="math inline">\(z = \ln(\theta/(1-\theta))\)</span>. La densité de Bernoulli s’écrit alors <span class="math display">\[p_z(x) = \frac{e^{zx}}{1+e^z}.\]</span> Comme <span class="math inline">\(x\)</span> vaut 0 ou 1, on voit que la probabilité d’obtenir 1 est égale à <span class="math inline">\(\theta = \theta(z) = e^z/(1+e^z)\)</span>. Il s’agit donc d’une autre paramétrisation de <span class="math inline">\(p\)</span>, mais celle-ci a l’avantage d’exprimer les lois de Bernoulli sous forme exponentielle, avec <span class="math inline">\(T(x) = x\)</span>. L’information de Fisher dans cette autre paramétrisation du modèle de Bernoulli est donnée par la formule <span class="math inline">\(\mathrm{Var}_z(X) = \frac{e^z}{(1+e^z)^2}\)</span>, soit <span id="eq-info-ber2"><span class="math display">\[\tilde{I}(z) = \theta(z)(1-\theta(z)). \tag{17.3}\]</span></span></p>
+<p><img src="../images/fisher_bernoulli.png" class="img-fluid" style="width:90.0%"></p>
+<p>Les formules <a href="#eq-info-ber1" class="quarto-xref">Équation&nbsp;<span>17.2</span></a> et <a href="#eq-info-ber2" class="quarto-xref">Équation&nbsp;<span>17.3</span></a> (qui sont bien celles que j’ai obtenues en cours ce matin) sont toutes les deux correctes, mais elles ne coïncident pas. Pourquoi ?</p>
+<p>La réponse est que <span class="math inline">\(I(\theta)\)</span> et <span class="math inline">\(\tilde{I}(z)\)</span> quantifient la quantité d’information <strong>sur le paramètre estimé</strong> qui et contenue dans les observations, et que le paramètre n’est pas le même dans les deux cas.</p>
+<ul>
+<li>pour le modèle <a href="#eq-info-ber1" class="quarto-xref">Équation&nbsp;<span>17.2</span></a>, le paramètre est <span class="math inline">\(\theta\)</span>. Dans ce cas, l’information contenue dans les observations est maximale lorsque <span class="math inline">\(\theta\)</span> est proche de 0 ou 1.<br>
+</li>
+<li>pour le modèle <a href="#eq-info-ber2" class="quarto-xref">Équation&nbsp;<span>17.3</span></a>, le paramètre est <span class="math inline">\(z\)</span>. Dans ce cas, c’est le contraire :&nbsp;on voit que l’information contenue dans les observations est maximale lorsque <span class="math inline">\(z\)</span> est proche de 0, ce qui correspond à <span class="math inline">\(\theta = 1/2\)</span>.</li>
+</ul>
+<p>Considérons les deux modèles en parallèle, dans le régime où la probabilité de succès est très proche de 1, c’est-à-dire <span class="math inline">\(\theta\)</span> proche de <span class="math inline">\(1\)</span> ou <span class="math inline">\(z\)</span> très grand<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<ul>
+<li>dans le premier cas, une infime variation de <span class="math inline">\(\theta\)</span> peut entraîner une grande variation du modèle :&nbsp;par exemple, passer de 99% à 99.999%(une variation de moins de 1%) se verra tout de suite sur les observations.</li>
+<li>dans le second cas, même de grandes variations de <span class="math inline">\(z\)</span> n’auront aucune incidence sur les données. Passer de <span class="math inline">\(z = 10\)</span> à <span class="math inline">\(z = 100\)</span> revient à passer d’une probabilité de succès de 99.99% à 99.99999%.</li>
+</ul>
+<p>Autrement dit, la paramétrisation a radicalement changé l’information, parce que le paramètre dans chacun des deux modèles n’est pas le même et ne représente pas la même chose.</p>
+</section>
+<section id="reparamétrisation-du-modèle" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="reparamétrisation-du-modèle">Reparamétrisation du modèle</h3>
+<p>Considérons un modèle statistique <span class="math inline">\((p_\theta)_{\theta \in \Theta}\)</span> et un difféomorphisme <span class="math inline">\(\varphi : \Theta \to \Theta'\)</span>. On reparamétrise le modèle par <span class="math inline">\(\nu = \varphi(\theta)\)</span>.</p>
+<div id="thm-reparam-fisher" class="theorem">
+<p><span class="theorem-title"><strong>Théorème 17.2 (Reparamétrisation et information de Fisher)</strong></span> Notons <span class="math inline">\(I(\theta)\)</span> l’information de Fisher du modèle <span class="math inline">\((p_\theta)_{\theta \in \Theta}\)</span> et <span class="math inline">\(I_\varphi(\theta)\)</span> celle dans le modèle reparamétrisé <span class="math inline">\((p_{\varphi(\theta)})\)</span>. Alors,</p>
+<p><span class="math display">\[I_\varphi(\theta) = D_\varphi(\theta)^\top I(\varphi(\theta)) D_\varphi(\theta).\]</span></p>
+<p>En particulier, en dimension 1 on a <span class="math inline">\(I_\varphi(\theta) = \varphi’(\theta)^2 I(\varphi(\theta))\)</span>.</p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Preuve</em>. </span>Lorsque <span class="math inline">\(X\)</span> est une variable aléatoire dont la fonction de répartition <span class="math inline">\(F\)</span> est continue et strictement croissante, <span class="math inline">\(F(X)\)</span> suit une loi <span class="math inline">\(\mathscr{U}[0,1]\)</span>. En effet, si <span class="math inline">\(t\in [0,1]\)</span>, alors <span class="math inline">\(\mathbb{P}(F(X)&lt;t)\)</span> est égal à <span class="math inline">\(\mathbb{P}(X \leqslant F^{-1}(t))\)</span>, c’est-à-dire <span class="math inline">\(F(F^{-1}(t)) = t\)</span>. Lorsque <span class="math inline">\(F\)</span> est seulement continue, la même démonstration est vraie, mais il faut remplacer l’inverse <span class="math inline">\(F^{-1}(t)\)</span> par la « transformation quantile », à savoir <span class="math inline">\(F^{\leftarrow}(t) = \inf\{x : F(x)\geqslant t\}\)</span>. Les <span class="math inline">\(F(X_i)\)</span> sont donc des variables iid de loi <span class="math inline">\(\mathscr{U}[0,1]\)</span>, ce qui conclut la démonstration compte tenu de <a href="#eq-supf" class="quarto-xref">Équation&nbsp;<span>20.1</span></a>.</p>
+<p><span class="proof-title"><em>Preuve</em>. </span>Notons <span class="math inline">\(q_\theta = p_{\varphi(\theta)}\)</span>. L’information de Fisher est la variance du score, <span class="math display">\[\begin{align*}
+I_\varphi(\theta) &amp;= \mathrm{Var}_{X\sim q_\theta}(\nabla_\theta \ln q_\theta(X)).
+\end{align*}\]</span> Notons <span class="math inline">\(s_\theta(x) = \nabla_\theta \ln p_\theta(x)\)</span> et <span class="math inline">\(D_\varphi(\theta)\)</span> la matrice jacobienne de <span class="math inline">\(\varphi\)</span> en <span class="math inline">\(\theta\)</span>. La formule de la dérivée des fonctions composées dit que <span class="math display">\[\nabla_\theta \ln q_\theta(x) = D_\varphi(\theta)^\top s_{\varphi(\theta)}(x).\]</span> Par conséquent, <span class="math display">\[\begin{align*}
+I_\varphi(\theta) &amp;= \mathrm{Var}_{X\sim q_\theta}(D_\varphi(\theta)^\top s_{\varphi(\theta)}(X)\\
+&amp;= D_\varphi(\theta)^\top \mathrm{Var}_{X\sim p_{\varphi(\theta)}}(s_{\varphi(\theta)}(X)) D_\varphi(\theta)\\
+&amp;= D_\varphi(\theta)^\top I(\varphi(\theta)) D_\varphi(\theta).
+\end{align*}\]</span></p>
 </div>
-<p>En particulier, la loi de <span class="math inline">\(|F_n - F|_\infty\)</span> ne dépend pas de <span class="math inline">\(F\)</span> : on dit que cette statistique est <em>libre</em>.</p>
-</section>
-<section id="démonstration-du-théorème-de-glivenko-cantelli" class="level2" data-number="20.3">
-<h2 data-number="20.3" class="anchored" data-anchor-id="démonstration-du-théorème-de-glivenko-cantelli"><span class="header-section-number">20.3</span> Démonstration du théorème de Glivenko-Cantelli</h2>
-<p>On se place dans le cas où <span class="math inline">\(F\)</span> est continue. Notons <span class="math inline">\(q_j\)</span> le <span class="math inline">\(j\)</span>-ème quantile d’ordre <span class="math inline">\(N\)</span> de <span class="math inline">\(F\)</span> (on choisira l’entier <span class="math inline">\(N\)</span> plus tard) :&nbsp;il est bien défini, et il vérifie <span class="math inline">\(F(q_j) = j/N\)</span>. Soit <span class="math inline">\(x\)</span> entre <span class="math inline">\(q_j\)</span> et <span class="math inline">\(q_{j+1}\)</span>. Par croissance, <span class="math inline">\(F_n(x)\)</span> est entre <span class="math inline">\(F_n(q_j)\)</span> et <span class="math inline">\(F_n(q_{j+1})\)</span>, et <span class="math inline">\(F(x)\)</span> est entre <span class="math inline">\(j/N\)</span> et <span class="math inline">\((j+1)/N\)</span>. Ainsi, <span class="math inline">\(F_n(x) - F(x)\)</span> est plus grand que <span class="math display">\[ F_n(q_j) - \frac{j}{N} - \frac{1}{N}\]</span> et plus petit que <span class="math display">\[ F_n(q_{j+1})- \frac{j}{n} = F_n(q_{j+1})- \frac{j+1}{N}  + \frac{1}{N}.\]</span> Quoi qu’il arrive, <span class="math inline">\(|F_n(x) - F(x)|\)</span> est plus petit que le plus grand des <span class="math inline">\(|F_n(q_j) - j/N|\)</span> augmenté de <span class="math inline">\(1/N\)</span>, donc <span class="math inline">\(|F_n - F|\)</span> aussi. Pour n’importe quel <span class="math inline">\(t&gt;0\)</span>, nous pouvons utiliser la borne de l’union afin de borner <span class="math inline">\(\mathbb{P}(|F_n - F|_\infty &gt; t)\)</span> par <span id="eq-uniongc"><span class="math display">\[\sum_{j=0}^N\mathbb{P}\left(\frac{1}{N} + |F_n(q_j) - j/N|&gt;t\right). \tag{20.2}\]</span></span> Or, <span class="math inline">\(nF_n(q_j)\)</span> suit une loi <span class="math inline">\(\mathrm{Bin}(n, j/N)\)</span>, donc si<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> <span class="math inline">\(t-1/N&gt;0\)</span> on peut utiliser l’inégalité de Hoeffding :&nbsp; <span class="math display">\[\mathbb{P}\left(\frac{1}{N} + |F_n(q_j) - j/N|&gt;t\right) \leqslant 2\exp\left\lbrace - 2 n\left(t - \frac{1}{N}\right)^2 \right\rbrace.\]</span> En choisissant par exemple <span class="math inline">\(N = \lceil 2/t\rceil\)</span>, le terme entre parenthèses est plus grand que <span class="math inline">\(t/2\)</span>, et la borne devient elle-même plus petite que <span class="math inline">\(2e^{-2nt^2/4}\)</span>. Le terme <a href="#eq-uniongc" class="quarto-xref">Équation&nbsp;<span>20.2</span></a> est alors plus petit que <span class="math inline">\(N 2e^{-nt^2/2}\)</span>, c’est-à-dire <span id="eq-predkw"><span class="math display">\[\mathbb{P}(|F_n - F|_\infty &gt; t) \leqslant \frac{6}{t}e^{-nt^2/2} \tag{20.3}\]</span></span> où on a utilisé la borne très grossière <span class="math inline">\(N \leqslant 3/t\)</span>.</p>
-<p>Si l’on choisit une suite <span class="math inline">\(t_n\)</span> qui tend vers 0, et telle que <span class="math inline">\(\sum_n e^{-nt_n^2/2}/t_n &lt; \infty\)</span>, alors le lemme de Borel-Cantelli permet de conclure :&nbsp;presque sûrement, à partir d’un certain rang, on a <span class="math inline">\(|F - F_n|_\infty \leqslant t_n\)</span>, et donc <span class="math inline">\(|F_n - F|_\infty \to 0\)</span>. N’importe quel choix de type <span class="math inline">\(t_n = n^{0.5 - \varepsilon}\)</span> pour <span class="math inline">\(\varepsilon &gt; 0\)</span> convient, et donne même que <span class="math inline">\(|F_n - F|_\infty = O(n^{0.5-\varepsilon})\)</span>.</p>
-</section>
-<section id="inégalité-dkw" class="level2" data-number="20.4">
-<h2 data-number="20.4" class="anchored" data-anchor-id="inégalité-dkw"><span class="header-section-number">20.4</span> Inégalité DKW</h2>
-<p>Le théorème de Glivenko-Cantelli possède une version beaucoup plus puissante car elle est entièrement quantitative, appelée <em>inégalité DKW</em>.</p>
-<div id="thm-DKW" class="theorem">
-<p><span class="theorem-title"><strong>Théorème 20.2 (Dvoretzky-Kiefer-Wolfowitz)</strong></span> Dans le même contexte, pour tout <span class="math inline">\(t&gt;0\)</span> on a <span id="eq-dkw"><span class="math display">\[\mathbb{P}(|F_n - F|_\infty &gt; t) \leqslant 2e^{-2nt^2}. \tag{20.4}\]</span></span></p>
-</div>
-<p>Il faut comparer ce résultat avec <a href="#eq-predkw" class="quarto-xref">Équation&nbsp;<span>20.3</span></a>, dans lequel la borne est effectivement décroissante en <span class="math inline">\(nt^2\)</span>, mais avec un préfacteur <span class="math inline">\(1/t\)</span> polynomial. L’inégalité DKW donne une décroissance <em>exponentielle</em> en <span class="math inline">\(nt^2\)</span>.</p>
 
 
+</section>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>On rappelle que <span class="math inline">\(|g|_\infty = \sup_{x\in\mathbb{R}}|g(x)|\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Que se passe-t-il si <span class="math inline">\(t\leqslant 1/N\)</span> ?<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Rappelons que (cf <a href="app1.html#sec-defpos" class="quarto-xref"><span>Section 27.4</span></a>) lorsque <span class="math inline">\(A,B\)</span> sont des matrices symétriques, <span class="math inline">\(A \preceq B\)</span> équivaut à ce que <span class="math inline">\(\langle y, Ay\rangle \leqslant \langle y, By\rangle\)</span> pour tout <span class="math inline">\(y\)</span>. <a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>à titre d’exemple, toute valeur de <span class="math inline">\(z\)</span> plus grande que 10 donne un <span class="math inline">\(\theta(z)\)</span> plus grand que <span class="math inline">\(99.99\%\)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -900,13 +937,13 @@ $$
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../content/problemes.html" class="pagination-link" aria-label="Problèmes et sujets">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Problèmes et sujets</span>
+      <a href="../content/ch6_1.html" class="pagination-link" aria-label="Maximum de vraisemblance">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Maximum de vraisemblance</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../content/ch7_1.html" class="pagination-link" aria-label="Test de Kolmogorov-Smirnov">
-        <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Test de Kolmogorov-Smirnov</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../content/ch6_ex.html" class="pagination-link" aria-label="Exercices">
+        <span class="nav-page-text">Exercices</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>20&nbsp; Estimation de densité – Statistiques Fondamentales</title>
+<title>23&nbsp; Choix d’un a priori – Statistiques Fondamentales</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../content/ch7_1.html" rel="next">
-<link href="../content/problemes.html" rel="prev">
+<link href="../content/bayes_ex.html" rel="next">
+<link href="../content/bayes1.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -112,7 +112,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/ch7_0.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Estimation de densité</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/bayes2.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Choix d’un <em>a priori</em></span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Recherche" onclick="window.quartoOpenSearch();">
@@ -317,7 +317,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/ch7_0.html" class="sidebar-item-text sidebar-link active">
+  <a href="../content/ch7_0.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Estimation de densité</span></span></a>
   </div>
 </li>
@@ -341,7 +341,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/bayes2.html" class="sidebar-item-text sidebar-link">
+  <a href="../content/bayes2.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Choix d’un <em>a priori</em></span></span></a>
   </div>
 </li>
@@ -409,10 +409,10 @@ window.Quarto = {
     <h2 id="toc-title">Table des matières</h2>
    
   <ul>
-  <li><a href="#la-répartition-empirique" id="toc-la-répartition-empirique" class="nav-link active" data-scroll-target="#la-répartition-empirique"><span class="header-section-number">20.1</span> La répartition empirique</a></li>
-  <li><a href="#sec-gc-calcul" id="toc-sec-gc-calcul" class="nav-link" data-scroll-target="#sec-gc-calcul"><span class="header-section-number">20.2</span> Calculabilité et loi</a></li>
-  <li><a href="#démonstration-du-théorème-de-glivenko-cantelli" id="toc-démonstration-du-théorème-de-glivenko-cantelli" class="nav-link" data-scroll-target="#démonstration-du-théorème-de-glivenko-cantelli"><span class="header-section-number">20.3</span> Démonstration du théorème de Glivenko-Cantelli</a></li>
-  <li><a href="#inégalité-dkw" id="toc-inégalité-dkw" class="nav-link" data-scroll-target="#inégalité-dkw"><span class="header-section-number">20.4</span> Inégalité DKW</a></li>
+  <li><a href="#le-principe-de-laplace" id="toc-le-principe-de-laplace" class="nav-link active" data-scroll-target="#le-principe-de-laplace"><span class="header-section-number">23.1</span> Le principe de Laplace</a></li>
+  <li><a href="#le-principe-de-jeffreys" id="toc-le-principe-de-jeffreys" class="nav-link" data-scroll-target="#le-principe-de-jeffreys"><span class="header-section-number">23.2</span> Le principe de Jeffreys</a></li>
+  <li><a href="#principe-de-jaynes" id="toc-principe-de-jaynes" class="nav-link" data-scroll-target="#principe-de-jaynes"><span class="header-section-number">23.3</span> Principe de Jaynes</a></li>
+  <li><a href="#le-principe-de-conjugaison" id="toc-le-principe-de-conjugaison" class="nav-link" data-scroll-target="#le-principe-de-conjugaison"><span class="header-section-number">23.4</span> Le principe de conjugaison</a></li>
   </ul>
 </nav>
     </div>
@@ -434,7 +434,7 @@ $$
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Estimation de densité</span></h1>
+<h1 class="title"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Choix d’un <em>a priori</em></span></h1>
 </div>
 
 
@@ -451,50 +451,116 @@ $$
 </header>
 
 
-<p>Soient <span class="math inline">\(X_1, \dotsc, X_n\)</span> des variables iid, de fonction de répartition <span class="math inline">\(F\)</span>. Le problème de l’estimation de densité est celui d’estimer la densité ou la fonction de répartition de <span class="math inline">\(F\)</span> à partir de réalisations des <span class="math inline">\(X_i\)</span> : c’est un exemple typique d’estimation non-paramétrique. Dans toute la suite, on se placera dans le cas où la fonction de répartition est <em>continue</em>.</p>
-<section id="la-répartition-empirique" class="level2" data-number="20.1">
-<h2 data-number="20.1" class="anchored" data-anchor-id="la-répartition-empirique"><span class="header-section-number">20.1</span> La répartition empirique</h2>
-<p>La fonction de répartition empirique des <span class="math inline">\(X_i\)</span> est <span class="math display">\[ F_n(t) = \frac{1}{n}\#\{i : X_i \leqslant t\}.\]</span> La loi des grands nombres montre que, <span class="math inline">\(\mathbb{P}\)</span>-presque sûrement, <span class="math inline">\(F_n(t)\)</span> converge vers <span class="math inline">\(\mathbb{P}(X_i \leqslant t)=F(t)\)</span>. On peut étendre ce résultat simultanément à une quantité dénombrable de <span class="math inline">\(t\)</span> (par exemple, <span class="math inline">\(\mathbb{Q}\)</span>) mais pas à tous. De plus, ce résultat ne dit pas si la <em>fonction</em> <span class="math inline">\(F_n\)</span> est proche de la fonction <span class="math inline">\(F\)</span>, au sens de la norme uniforme par exemple. Le théorème suivant, parfois appelé <em>théorème fondamental de l’estimation</em>, confirme que c’est le cas au sens de la norme uniforme<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
-<div id="thm-glivenko" class="theorem">
-<p><span class="theorem-title"><strong>Théorème 20.1 (Théorème de Glivenko-Cantelli)</strong></span> <span class="math inline">\(\mathbb{P}\)</span>-presque sûrement, <span class="math inline">\(\lim_{n\to \infty}|F_n - F|_\infty = 0\)</span>.</p>
+<p>La principale faiblesse de la statistique bayésienne était, est et sera toujours le choix d’un a priori, auquel la théorie est particulièrement sensible<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Lors d’une analyse statistique, la première étape consiste à choisir cet a priori <span class="math inline">\(\pi(\theta)\)</span> de façon à encoder notre connaissance sur le paramètre <span class="math inline">\(\theta\)</span> ; mais cette connaissance peut être floue, mal définie, impossible à modéliser, voire tout simplement inconnue. Ce chapitre passe en revue quelques méthodes de choix et leurs limites.</p>
+<section id="le-principe-de-laplace" class="level2" data-number="23.1">
+<h2 data-number="23.1" class="anchored" data-anchor-id="le-principe-de-laplace"><span class="header-section-number">23.1</span> Le principe de Laplace</h2>
+<p>Lorsqu’il n’y a <em>aucune connaissance a priori</em> sur le paramètre, il n’y a pas de raison de donner à certains <span class="math inline">\(\theta\)</span> une probabilité plus grande qu’une autre. Par conséquent, il est naturel de choisir comme a priori une loi uniforme sur l’espace des paramètres. Ce choix est souvent appelé <strong>principe de Laplace</strong> ; il peut sembler raisonnable, et il l’est à certains égards ; mais à y regarder de plus près, on se rend compte qu’il porte en lui des effets indésirables.</p>
+<div id="exm-priori-de-jeffreys" class="theorem example">
+<p><span class="theorem-title"><strong>Exemple 23.1</strong></span> Considérons le cas d’un modèle de Bernoulli, avec paramètre <span class="math inline">\(\theta \in [0,1]\)</span>. Si l’on veut estimer <span class="math inline">\(\theta\)</span>, tout va bien, l’a-priori uniforme ne favorise aucun <span class="math inline">\(\theta\)</span> en particulier. Mais peut-être que l’on veut estimer autre chose qui dépend de <span class="math inline">\(\theta\)</span>, comme par exemple <span class="math inline">\(\nu=\theta^2\)</span>, la probabilité de gagner deux fois de suite. Or, dans ce cas, la loi de <span class="math inline">\(\nu\)</span> peut se calculer par la formule du changement de variable : si l’on note <span class="math inline">\(\rho\)</span> la densité de <span class="math inline">\(\nu\)</span>, alors <span class="math display">\[\rho(t) = \frac{1}{2\sqrt{s}}\mathrm{d}s.\]</span> Ceci est une loi bêta, <span class="math inline">\(B(1/2, 1)\)</span>. Ce n’est plus du tout une loi uniforme sur l’espace des paramètres de <span class="math inline">\(\nu\)</span>, qui est encore <span class="math inline">\([0,1]\)</span>.</p>
 </div>
-<p>Ce théorème dit que <span class="math inline">\(F_n\)</span> est un estimateur « convergent au sens de la norme uniforme » de <span class="math inline">\(F\)</span>. Il est en fait valable même si la fonction de répartition <span class="math inline">\(F\)</span> n’est pas continue, mais la démonstration est un peu plus technique.</p>
-<p>On va utiliser ce théorème pour faire des tests : si <span class="math inline">\(|F_n - F|\)</span> n’est pas suffisamment proche de zéro, on rejettera l’hypothèse selon laquelle les <span class="math inline">\(X_i\)</span> ont <span class="math inline">\(F\)</span> pour fonction de répartition. Le critère exact est appelé <em>test de Kolmogorov-Smirnov</em> et sera vu dans la section suivante.</p>
+<p>Dans cet exemple, l’a priori uniforme ne reste pas uniforme lorsqu’on reparamétrise le modèle : en posant <span class="math inline">\(\eta=\theta^2\)</span>, cet a priori favorise les petites valeurs de <span class="math inline">\(\eta\)</span> sans que nous l’ayons réellement voulu. Un bon a priori devrait donc être aussi invariant que possible par les reparamétrisations du paramètre.</p>
+<p>Notons <span class="math inline">\(\pi\)</span> une densité sur l’espace des paramètres <span class="math inline">\(\Theta\)</span>. La formule du changement de variables dit que, si <span class="math inline">\(\varphi\)</span> est un difféomorphisme de <span class="math inline">\(\Theta\)</span>, alors la densité de la mesure image de <span class="math inline">\(\pi\)</span> par <span class="math inline">\(\varphi\)</span>, à savoir la mesure définie par <span class="math inline">\(\nu(A) = \pi(\varphi^{-1}(A))\)</span>, est donnée par <span id="eq-chg-var"><span class="math display">\[\nu(\eta) = \pi(\varphi^{-1}(\eta))|\det(D_{\varphi^{-1}}(\eta))|. \tag{23.1}\]</span></span></p>
+<p>En choisissant l’a priori uniforme et en utilisant le fait que <span class="math inline">\(D_{\varphi^{-1}}(\eta) = D_\varphi(\varphi^{-1}(\eta))^{-1}\)</span>, on voit qu’en toute généralité, l’a priori pour la reparamétrisation <span class="math inline">\(\eta=\varphi(\theta)\)</span> est donné par <span class="math display">\[\nu(\eta) = \frac{1}{|\det(D_\varphi(\varphi^{-1}(\eta)))|}.\]</span> Celui-ci n’est en général pas uniforme.</p>
 </section>
-<section id="sec-gc-calcul" class="level2" data-number="20.2">
-<h2 data-number="20.2" class="anchored" data-anchor-id="sec-gc-calcul"><span class="header-section-number">20.2</span> Calculabilité et loi</h2>
-<p>Soit <span class="math inline">\((X_{(1)}, \dotsc, X_{(n)})\)</span> l’échantillon trié en ordre croissant. Par convention, on pose <span class="math inline">\(X_{(0)} = -\infty\)</span> et <span class="math inline">\(X_{(n+1)} = \infty\)</span>. La quantité <span class="math inline">\(|F_n - F|_\infty\)</span> est calculable grâce à la représentation suivante : <span id="eq-supf"><span class="math display">\[|F_n - F|_\infty = \sup_{i\in \{0, \dotsc, n\}}\left|\frac{i}{n} - F(X_{(i)})\right| \vee \left| \frac{i}{n} - F(X_{(i+1)}-)\right|,   \tag{20.1}\]</span></span> où <span class="math inline">\(F(x-)\)</span> est la limite à gauche de <span class="math inline">\(F\)</span> en <span class="math inline">\(x\)</span>, c’est-à-dire la limite de <span class="math inline">\(F(x-t)\)</span> lorsque <span class="math inline">\(t&gt;0\)</span>, <span class="math inline">\(t\to 0\)</span>. Ainsi, lorsque <span class="math inline">\(F\)</span> est continue, <span class="math inline">\(F(X_{(i)}) = F(X_{(i+1)}-)\)</span>.</p>
+<section id="le-principe-de-jeffreys" class="level2" data-number="23.2">
+<h2 data-number="23.2" class="anchored" data-anchor-id="le-principe-de-jeffreys"><span class="header-section-number">23.2</span> Le principe de Jeffreys</h2>
+<p>Le principe de Jeffreys dit que la construction d’un a priori ne doit pas dépendre de la reparamétrisation choisie. Cette notion d’invariance assez subtile n’a essentiellement qu’une seule solution.</p>
+<div id="thm-priori-de-jeffreys" class="theorem">
+<p><span class="theorem-title"><strong>Théorème 23.1</strong></span> Soit <span class="math inline">\((p_\theta)_{\theta \in \Theta}\)</span> un modèle statistique. L’<em>a priori de Jeffreys</em> est la mesure <span class="math display">\[\pi(\theta) = \sqrt{\det(I(\theta))}\]</span> où <span class="math inline">\(I(\theta)\)</span> es l’information de Fisher. Cette mesure est « invariante » par les reparamétrisations du modèle, au sens où si <span class="math inline">\(\varphi\)</span> est un difféomorphisme de <span class="math inline">\(\Theta\)</span> dans lui-même, alors l’a priori de Jeffreys dans le modèle reparamétrisé <span class="math inline">\((p_{\varphi(\theta)})_{\theta \in \Theta}\)</span> est égal à l’information de Fisher du modèle reparamétrisé, <span class="math inline">\(I_\varphi(\theta)\)</span>.</p>
+</div>
+<p><strong>Lois impropres.</strong> J’ai évité d’utiliser le mot “densité de probabilité” pour parler de l’a priori de Jeffreys, parce que la mesure <span class="math inline">\(\pi\)</span> n’est peut-être pas une mesure de probabilité, et ne peut pas non plus être normalisée pour en être une. C’est typiquement le cas lorsque <span class="math inline">\(\int \det I(\theta) d\theta = +\infty\)</span>.</p>
+<p><strong>Est-ce vraiment une invariance ?</strong> L’a priori de Jeffreys n’est pas <em>stricto sensu</em> invariant par les reparamétrisations : l’information du modèle reparamétrisé, <span class="math inline">\(I_\varphi(\theta)\)</span>, n’est en général pas égale à l’information du modèle original, <span class="math inline">\(I(\theta)\)</span>. cependant, sa <em>représentation</em> est invariante, au sens où quel que soit le modèle, cet a priori sera toujours égal à l’information de Fisher du modèle, quelle que soit la reparamétrisation. En son temps, Jeffreys parlait de « principe » : le <em>principe</em> qui gouverne la construction de l’a priori doit être indépendant de la reparamétrisation. Le principe de Laplace ( « l’a priori doit être uniforme sur l’ensemble des possibles »)ne l’est pas, comme nous l’avons vu plus haut.</p>
 <div class="proof">
-<p><span class="proof-title"><em>Preuve</em>. </span>La fonction <span class="math inline">\(F\)</span> est croissante, et la fonction <span class="math inline">\(\hat{F}_n\)</span> est constante par morceaux sur tous les intervalles <span class="math inline">\([X_{(i)}, X_{(i+1)}[\)</span>. En effet, à chaque <span class="math inline">\(X_{(i)}\)</span>, elle saute de la valeur à gauche <span class="math inline">\((i-1)/n\)</span> a la valeur à droite <span class="math inline">\(i/n\)</span>. Ainsi, le maximum de <span class="math inline">\(F - \hat{F}_n\)</span> sur l’intervalle <span class="math inline">\([X_{(i)}, X_{(i+1)}[\)</span> est forcément atteint à une des deux bornes, et vaut donc soit <span class="math inline">\(|i/n - F(X_{(i)})|\)</span>, soit <span class="math inline">\(|i/n - F(X_{(i+1)}-)|\)</span>, selon celui qui est le plus grand. Le supremum de <span class="math inline">\(|F - \hat{F}_n|\)</span> sur <span class="math inline">\(\mathbb{R}\)</span> étant aussi le supremum des supremums sur tous ces intervalles, la représentation ci-dessus est vraie.</p>
+<p><span class="proof-title"><em>Preuve</em>. </span>Notons <span class="math inline">\(\nu\)</span> la mesure image de <span class="math inline">\(\pi\)</span> par <span class="math inline">\(\varphi\)</span>. La formule du changement de variables (<a href="#eq-chg-var" class="quarto-xref">Équation&nbsp;<span>23.1</span></a>) dit que <span class="math display">\[\begin{align*}
+\nu(\eta) &amp;= \pi(\varphi^{-1}(\eta))|\det(D_{\varphi^{-1}}(\eta))|.\\
+&amp;= \sqrt{\det(I(\varphi^{-1}(\eta)))} \left| \det(D_{\varphi^{-1}}(\eta))\right|.
+\end{align*}\]</span></p>
+<p>Or, la formule de reparamétrisation de l’information de Fisher (<a href="ch6_2.html#thm-reparam-fisher" class="quarto-xref">Théorème&nbsp;<span>17.2</span></a>) dit que l’information de Fisher <span class="math inline">\(I’(\theta)\)</span> du modèle reparamétrisé <span class="math inline">\((p_{\varphi^{-1}(\eta)})\)</span> est donnée <span class="math display">\[I’(\eta) = D_{\varphi^{-1}}(\eta)^\top I(\varphi^{-1}(\eta)) D_{\varphi^{-1}(\eta)}\]</span> où <span class="math inline">\(D_{\varphi^{-1}}(\eta)\)</span> est la matrice jacobienne de <span class="math inline">\(\varphi^{-1}\)</span> en <span class="math inline">\(\eta\)</span>. Par conséquent, <span class="math display">\[\det(I’(\eta)) = \det(I(\varphi^{-1}(\eta)))\det(D_{\varphi^{-1}}(\eta)^{2})\]</span> et donc <span class="math display">\[\sqrt{\det(I(\varphi^{-1}(\eta)))} = \sqrt{\det(I’(\eta))}\det(D_{\varphi^{-1}}(\eta))^{-1}.\]</span> On en déduit que <span class="math inline">\(\nu(\eta)\)</span> est égal à <span class="math inline">\(\sqrt{\det(I’(\eta))}\)</span>, qui est l’a priori de Jeffreys du modèle reparamétrisé.</p>
 </div>
-<div id="lem-gc" class="theorem lemma">
-<p><span class="theorem-title"><strong>Lemme 20.1</strong></span> Si <span class="math inline">\(F\)</span> est continue, <span class="math inline">\(|F_n - F|_\infty\)</span> a la même loi que <span class="math display">\[ \sup_{i\in \{0, \dotsc, n\}}\left|\frac{i}{n} - U_{(i)}\right| \vee \left| \frac{i}{n} - U_{(i+1)}\right|\]</span> où les <span class="math inline">\(U_{(i)}\)</span> sont des lois uniformes sur <span class="math inline">\([0,1]\)</span>, indépendantes, et triées dans l’ordre croissant.</p>
+<div id="exm-jeffreys-gaussian" class="theorem example">
+<p><span class="theorem-title"><strong>Exemple 23.2</strong></span> Prenons l’exemple des lois gaussiennes centrées, <span class="math inline">\(\mathscr{N}(0,v)\)</span>, paramétrisées par leur variance <span class="math inline">\(v&gt;0\)</span>. La log-vraisemblance est égale à <span class="math inline">\(-\frac{1}{2}\ln(2\pi v)- \frac{x^2}{2v}\)</span>, et donc le score est égal à <span class="math inline">\(\frac{x^2}{2v^2} - \frac{1}{2v}\)</span>. L’information de Fisher dans ce modèle est donnée par <span class="math display">\[I(v) = \mathrm{Var}\left[\frac{X^2}{2v^2}\right] = \frac{1}{2v^2}.\]</span> L’a priori de Jeffreys est donc égal à <span class="math display">\[\pi(v) = \sqrt{\frac{1}{2v^2}} = \frac{1}{v\sqrt{2}}.\]</span> Il n’est pas intégrable.</p>
+</div>
+</section>
+<section id="principe-de-jaynes" class="level2" data-number="23.3">
+<h2 data-number="23.3" class="anchored" data-anchor-id="principe-de-jaynes"><span class="header-section-number">23.3</span> Principe de Jaynes</h2>
+<p>Il existe un dernier choix d’importance pour le choix d’un a priori non-informatif, dû à Edwin Jaynes. Son raisonnement est le suivant : notre connaissance a priori sur le paramètre <span class="math inline">\(\theta\)</span> doit se formuler sous la forme d’un ensemble de contraintes. Par exemple, on peut supposer que <span class="math inline">\(\theta\)</span> est borné, que sa variance est 1, etc. On peut encoder cette connaissance sous la forme d’une contrainte linéaire : la loi de <span class="math inline">\(\theta\)</span> doit satisfaire <span class="math display">\[\int T(\theta) \pi(\theta) d\theta = c\]</span> pour une certaine constante <span class="math inline">\(c\)</span>. La distribution la moins informative qui satisfait ces contraintes est précisément la loi qui maximise l’entropie sous contrainte, et le principe de Boltzmann-Gibbs (<a href="ch6_4.html#thm-boltzmann-gibbs" class="quarto-xref">Théorème&nbsp;<span>19.1</span></a>) nous dit que cette loi est la loi exponentielle associée à <span class="math inline">\(T\)</span>. Par exemple, si l’on sait que <span class="math inline">\(\theta\)</span> est centré et fluctue dans un intervalle borné, on ne perd pas grand chose à supposer que <span class="math inline">\(\pi\)</span> doit être centré réduit. La loi la moins informative qui satisfait cette contrainte est donc la loi exponentielle associée à la statistique <span class="math inline">\(T(\theta) = \theta\)</span>, à savoir la loi <span class="math inline">\(\mathscr{N}(0,1)\)</span>.</p>
+</section>
+<section id="le-principe-de-conjugaison" class="level2" data-number="23.4">
+<h2 data-number="23.4" class="anchored" data-anchor-id="le-principe-de-conjugaison"><span class="header-section-number">23.4</span> Le principe de conjugaison</h2>
+<p>Les principes énoncés ci-dessus sont plutôt philosophiques, au sens où ne relèvent pas de considérations purement mathématiques. Cependant, puisque le choix d’une loi a priori est tout à fait libre, on pourrait aussi faire le choix de familles de lois qui <em>simplifient les calculs</em>, pourvu que ça ne soit pas au détriment de la richesse du modèle. C’est en fait souvent la méthode la plus raisonnable.</p>
+<div id="def-conjugaison" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 23.1 (Famille conjuguée)</strong></span> Soit <span class="math inline">\((p_\theta)_{\theta \in \Theta}\)</span> un modèle statistique. Une famille de lois <span class="math inline">\(\mathscr{F}\)</span> sur <span class="math inline">\(\Theta\)</span> est dite <em>conjuguée</em> au modèle <span class="math inline">\((p_\theta)\)</span> si, pour tout a priori <span class="math inline">\(\pi \in \mathscr{F}\)</span> et toute observation <span class="math inline">\(x\)</span>, la loi a posteriori <span class="math inline">\(p(\theta \mid x)\)</span> est encore dans <span class="math inline">\(\mathscr{F}\)</span>.</p>
+</div>
+<p>L’intérêt est immédiat : si l’on choisit un a priori dans une famille conjuguée, la loi a posteriori reste dans la même famille, et il suffit de mettre à jour les <em>paramètres</em> de l’a priori. Il n’y a pas besoin de recalculer une intégrale compliquée pour normaliser.</p>
+<p>Nous avons déjà rencontré un exemple de conjugaison. Dans le modèle <span class="math inline">\(\mathrm{Ber}(\theta)\)</span> avec un a priori uniforme <span class="math inline">\(\pi(\theta)=1\)</span> (c’est-à-dire une loi <span class="math inline">\(\mathrm{Beta}(1,1)\)</span>), nous avons vu que la loi a posteriori est une loi <span class="math inline">\(\mathrm{Beta}(s+1, n-s+1)\)</span>. Ce résultat s’étend immédiatement à un a priori <span class="math inline">\(\mathrm{Beta}(a,b)\)</span> quelconque.</p>
+<div id="exm-beta-bernoulli" class="theorem example">
+<p><span class="theorem-title"><strong>Exemple 23.3 (Bêta-Bernoulli)</strong></span> On observe <span class="math inline">\(X_1, \dotsc, X_n\)</span> iid <span class="math inline">\(\mathrm{Ber}(\theta)\)</span> et on choisit l’a priori <span class="math inline">\(\theta \sim \mathrm{Beta}(a,b)\)</span>, de densité <span class="math inline">\(\pi(\theta) \propto \theta^{a-1}(1-\theta)^{b-1}\)</span>. Alors la loi a posteriori est <span class="math display">\[p(\theta \mid x_1, \dotsc, x_n) \propto \theta^{s+a-1}(1-\theta)^{n-s+b-1}\]</span> soit la loi <span class="math inline">\(\mathrm{Beta}(a+s, b+n-s)\)</span>, où <span class="math inline">\(s = \sum x_i\)</span>. L’estimateur de la moyenne a posteriori est <span class="math display">\[\hat{\theta}_{\mathrm{MMSE}} = \frac{a + s}{a+b+n}.\]</span></p>
+<p>Les paramètres <span class="math inline">\(a\)</span> et <span class="math inline">\(b\)</span> s’interprètent comme des « pseudo-observations » : tout se passe comme si, avant de voir les données, on avait déjà observé <span class="math inline">\(a-1\)</span> succès et <span class="math inline">\(b-1\)</span> échecs.</p>
+</div>
+<div id="exm-gamma-poisson" class="theorem example">
+<p><span class="theorem-title"><strong>Exemple 23.4 (Gamma-Poisson)</strong></span> On observe <span class="math inline">\(X_1, \dotsc, X_n\)</span> iid de loi <span class="math inline">\(\mathrm{Poisson}(\lambda)\)</span> et on choisit l’a priori <span class="math inline">\(\lambda \sim \Gamma(\alpha, \beta)\)</span>, de densité <span class="math inline">\(\pi(\lambda) \propto \lambda^{\alpha-1}e^{-\beta \lambda}\)</span>. La vraisemblance est proportionnelle à <span class="math inline">\(\lambda^{s} e^{-n\lambda}\)</span> avec <span class="math inline">\(s = \sum x_i\)</span>. La loi a posteriori est alors <span class="math display">\[p(\lambda \mid x_1, \dotsc, x_n) \propto \lambda^{s + \alpha - 1} e^{-(n+\beta)\lambda}\]</span> et on reconnaît la loi <span class="math inline">\(\Gamma(\alpha + s, \beta + n)\)</span>. L’estimateur de la moyenne a posteriori est <span class="math display">\[\hat{\lambda}_{\mathrm{MMSE}} = \frac{\alpha + s}{\beta + n}.\]</span></p>
+</div>
+<div id="exm-normale-normale" class="theorem example">
+<p><span class="theorem-title"><strong>Exemple 23.5 (Normale-Normale)</strong></span> On observe <span class="math inline">\(X_1, \dotsc, X_n\)</span> iid <span class="math inline">\(\mathscr{N}(\mu, \sigma^2)\)</span> avec <span class="math inline">\(\sigma^2\)</span> connu, et on choisit l’a priori <span class="math inline">\(\mu \sim \mathscr{N}(\mu_0, \tau^2)\)</span>. La loi a posteriori est alors <span class="math inline">\(\mathscr{N}(\mu_n, \sigma_n^2)\)</span> avec <span class="math display">\[\mu_n = \frac{\frac{\mu_0}{\tau^2} + \frac{n\bar{x}}{\sigma^2}}{\frac{1}{\tau^2} + \frac{n}{\sigma^2}}, \qquad \sigma_n^2 = \frac{1}{\frac{1}{\tau^2} + \frac{n}{\sigma^2}}.\]</span></p>
+<p>L’estimateur de Bayes <span class="math inline">\(\mu_n\)</span> est une moyenne pondérée entre la moyenne a priori <span class="math inline">\(\mu_0\)</span> et la moyenne empirique <span class="math inline">\(\bar{x}\)</span>, les poids étant donnés par les <em>précisions</em> (inverses des variances). Plus il y a d’observations, plus le poids de <span class="math inline">\(\bar{x}\)</span> est important ; et quand <span class="math inline">\(n\to \infty\)</span>, <span class="math inline">\(\mu_n \to \bar{x}\)</span> et <span class="math inline">\(\sigma_n^2 \to 0\)</span>, de sorte que la loi a posteriori se concentre autour de la moyenne empirique, quelle que soit la loi a priori.</p>
+</div>
+<p>Ce n’est pas un hasard si les exemples ci-dessus font tous intervenir des modèles exponentiels. En fait, les modèles exponentiels admettent <em>toujours</em> une famille conjuguée naturelle.</p>
+<div id="thm-conjugaison-exponentielle" class="theorem">
+<p><span class="theorem-title"><strong>Théorème 23.2</strong></span> Dans un modèle exponentiel de la forme <span class="math inline">\(p_\theta(x) = e^{\langle \theta, T(x)\rangle - F(\theta)}\)</span> avec <span class="math inline">\(F(\theta) = \ln Z(\theta)\)</span>, la famille de lois a priori <span class="math display">\[\pi_{\nu,\lambda}(\theta) \propto e^{\langle \nu, \theta \rangle - \lambda F(\theta)}, \qquad \nu \in \mathbb{R}^p, \, \lambda &gt; 0\]</span> est conjuguée au modèle.</p>
+<p>Si l’on observe <span class="math inline">\(x_1, \dotsc, x_n\)</span> iid de loi <span class="math inline">\(p_\theta\)</span>, le choix de loi a priori <span class="math inline">\(\pi_{\nu_0,\lambda_0}\)</span> donne une loi a posteriori <span class="math inline">\(\pi_{\nu_1, \lambda_1}\)</span> avec <span class="math display">\[\nu_1 = \nu_0 + \sum_{i=1}^n T(x_i), \qquad \lambda_1 = \lambda_0 + n.\]</span></p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Preuve</em>. </span>Lorsque <span class="math inline">\(X\)</span> est une variable aléatoire dont la fonction de répartition <span class="math inline">\(F\)</span> est continue et strictement croissante, <span class="math inline">\(F(X)\)</span> suit une loi <span class="math inline">\(\mathscr{U}[0,1]\)</span>. En effet, si <span class="math inline">\(t\in [0,1]\)</span>, alors <span class="math inline">\(\mathbb{P}(F(X)&lt;t)\)</span> est égal à <span class="math inline">\(\mathbb{P}(X \leqslant F^{-1}(t))\)</span>, c’est-à-dire <span class="math inline">\(F(F^{-1}(t)) = t\)</span>. Lorsque <span class="math inline">\(F\)</span> est seulement continue, la même démonstration est vraie, mais il faut remplacer l’inverse <span class="math inline">\(F^{-1}(t)\)</span> par la « transformation quantile », à savoir <span class="math inline">\(F^{\leftarrow}(t) = \inf\{x : F(x)\geqslant t\}\)</span>. Les <span class="math inline">\(F(X_i)\)</span> sont donc des variables iid de loi <span class="math inline">\(\mathscr{U}[0,1]\)</span>, ce qui conclut la démonstration compte tenu de <a href="#eq-supf" class="quarto-xref">Équation&nbsp;<span>20.1</span></a>.</p>
+<p><span class="proof-title"><em>Preuve</em>. </span>La vraisemblance s’écrit <span class="math inline">\(\prod_{i=1}^n p_\theta(x_i) = e^{\langle \theta, \sum T(x_i)\rangle - nF(\theta)}\)</span>. En multipliant par l’a priori, on obtient <span class="math display">\[p(\theta \mid x_1, \dotsc, x_n) \propto e^{\langle \nu + \sum T(x_i), \theta \rangle - (\lambda + n) F(\theta)}\]</span> qui est bien de la même forme que <span class="math inline">\(\pi_{\nu_0,\lambda_0}\)</span> avec les paramètres <span class="math inline">\(\nu_1 = \nu_0 + \sum_{i=1}^n T(x_i)\)</span> et <span class="math inline">\(\lambda_1 = \lambda_0 + n\)</span>.</p>
 </div>
-<p>En particulier, la loi de <span class="math inline">\(|F_n - F|_\infty\)</span> ne dépend pas de <span class="math inline">\(F\)</span> : on dit que cette statistique est <em>libre</em>.</p>
-</section>
-<section id="démonstration-du-théorème-de-glivenko-cantelli" class="level2" data-number="20.3">
-<h2 data-number="20.3" class="anchored" data-anchor-id="démonstration-du-théorème-de-glivenko-cantelli"><span class="header-section-number">20.3</span> Démonstration du théorème de Glivenko-Cantelli</h2>
-<p>On se place dans le cas où <span class="math inline">\(F\)</span> est continue. Notons <span class="math inline">\(q_j\)</span> le <span class="math inline">\(j\)</span>-ème quantile d’ordre <span class="math inline">\(N\)</span> de <span class="math inline">\(F\)</span> (on choisira l’entier <span class="math inline">\(N\)</span> plus tard) :&nbsp;il est bien défini, et il vérifie <span class="math inline">\(F(q_j) = j/N\)</span>. Soit <span class="math inline">\(x\)</span> entre <span class="math inline">\(q_j\)</span> et <span class="math inline">\(q_{j+1}\)</span>. Par croissance, <span class="math inline">\(F_n(x)\)</span> est entre <span class="math inline">\(F_n(q_j)\)</span> et <span class="math inline">\(F_n(q_{j+1})\)</span>, et <span class="math inline">\(F(x)\)</span> est entre <span class="math inline">\(j/N\)</span> et <span class="math inline">\((j+1)/N\)</span>. Ainsi, <span class="math inline">\(F_n(x) - F(x)\)</span> est plus grand que <span class="math display">\[ F_n(q_j) - \frac{j}{N} - \frac{1}{N}\]</span> et plus petit que <span class="math display">\[ F_n(q_{j+1})- \frac{j}{n} = F_n(q_{j+1})- \frac{j+1}{N}  + \frac{1}{N}.\]</span> Quoi qu’il arrive, <span class="math inline">\(|F_n(x) - F(x)|\)</span> est plus petit que le plus grand des <span class="math inline">\(|F_n(q_j) - j/N|\)</span> augmenté de <span class="math inline">\(1/N\)</span>, donc <span class="math inline">\(|F_n - F|\)</span> aussi. Pour n’importe quel <span class="math inline">\(t&gt;0\)</span>, nous pouvons utiliser la borne de l’union afin de borner <span class="math inline">\(\mathbb{P}(|F_n - F|_\infty &gt; t)\)</span> par <span id="eq-uniongc"><span class="math display">\[\sum_{j=0}^N\mathbb{P}\left(\frac{1}{N} + |F_n(q_j) - j/N|&gt;t\right). \tag{20.2}\]</span></span> Or, <span class="math inline">\(nF_n(q_j)\)</span> suit une loi <span class="math inline">\(\mathrm{Bin}(n, j/N)\)</span>, donc si<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> <span class="math inline">\(t-1/N&gt;0\)</span> on peut utiliser l’inégalité de Hoeffding :&nbsp; <span class="math display">\[\mathbb{P}\left(\frac{1}{N} + |F_n(q_j) - j/N|&gt;t\right) \leqslant 2\exp\left\lbrace - 2 n\left(t - \frac{1}{N}\right)^2 \right\rbrace.\]</span> En choisissant par exemple <span class="math inline">\(N = \lceil 2/t\rceil\)</span>, le terme entre parenthèses est plus grand que <span class="math inline">\(t/2\)</span>, et la borne devient elle-même plus petite que <span class="math inline">\(2e^{-2nt^2/4}\)</span>. Le terme <a href="#eq-uniongc" class="quarto-xref">Équation&nbsp;<span>20.2</span></a> est alors plus petit que <span class="math inline">\(N 2e^{-nt^2/2}\)</span>, c’est-à-dire <span id="eq-predkw"><span class="math display">\[\mathbb{P}(|F_n - F|_\infty &gt; t) \leqslant \frac{6}{t}e^{-nt^2/2} \tag{20.3}\]</span></span> où on a utilisé la borne très grossière <span class="math inline">\(N \leqslant 3/t\)</span>.</p>
-<p>Si l’on choisit une suite <span class="math inline">\(t_n\)</span> qui tend vers 0, et telle que <span class="math inline">\(\sum_n e^{-nt_n^2/2}/t_n &lt; \infty\)</span>, alors le lemme de Borel-Cantelli permet de conclure :&nbsp;presque sûrement, à partir d’un certain rang, on a <span class="math inline">\(|F - F_n|_\infty \leqslant t_n\)</span>, et donc <span class="math inline">\(|F_n - F|_\infty \to 0\)</span>. N’importe quel choix de type <span class="math inline">\(t_n = n^{0.5 - \varepsilon}\)</span> pour <span class="math inline">\(\varepsilon &gt; 0\)</span> convient, et donne même que <span class="math inline">\(|F_n - F|_\infty = O(n^{0.5-\varepsilon})\)</span>.</p>
-</section>
-<section id="inégalité-dkw" class="level2" data-number="20.4">
-<h2 data-number="20.4" class="anchored" data-anchor-id="inégalité-dkw"><span class="header-section-number">20.4</span> Inégalité DKW</h2>
-<p>Le théorème de Glivenko-Cantelli possède une version beaucoup plus puissante car elle est entièrement quantitative, appelée <em>inégalité DKW</em>.</p>
-<div id="thm-DKW" class="theorem">
-<p><span class="theorem-title"><strong>Théorème 20.2 (Dvoretzky-Kiefer-Wolfowitz)</strong></span> Dans le même contexte, pour tout <span class="math inline">\(t&gt;0\)</span> on a <span id="eq-dkw"><span class="math display">\[\mathbb{P}(|F_n - F|_\infty &gt; t) \leqslant 2e^{-2nt^2}. \tag{20.4}\]</span></span></p>
-</div>
-<p>Il faut comparer ce résultat avec <a href="#eq-predkw" class="quarto-xref">Équation&nbsp;<span>20.3</span></a>, dans lequel la borne est effectivement décroissante en <span class="math inline">\(nt^2\)</span>, mais avec un préfacteur <span class="math inline">\(1/t\)</span> polynomial. L’inégalité DKW donne une décroissance <em>exponentielle</em> en <span class="math inline">\(nt^2\)</span>.</p>
+<p>Le tableau suivant résume les principales lois conjuguées.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Modèle</th>
+<th>A priori</th>
+<th>A posteriori</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\mathrm{Ber}(\theta)\)</span></td>
+<td><span class="math inline">\(\mathrm{Beta}(a,b)\)</span></td>
+<td><span class="math inline">\(\mathrm{Beta}(a+s, b+n-s)\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\mathrm{Poisson}(\lambda)\)</span></td>
+<td><span class="math inline">\(\Gamma(\alpha, \beta)\)</span></td>
+<td><span class="math inline">\(\Gamma(\alpha + s, \beta + n)\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\mathscr{N}(\mu, \sigma^2)\)</span>, <span class="math inline">\(\sigma^2\)</span> connu</td>
+<td><span class="math inline">\(\mathscr{N}(\mu_0, \tau^2)\)</span></td>
+<td><span class="math inline">\(\mathscr{N}(\mu_n, \sigma_n^2)\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\mathrm{Exp}(\lambda)\)</span></td>
+<td><span class="math inline">\(\Gamma(\alpha, \beta)\)</span></td>
+<td><span class="math inline">\(\Gamma(\alpha + n, \beta + s)\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\mathscr{N}(\mu, \sigma^2)\)</span>, <span class="math inline">\(\mu\)</span> connu</td>
+<td><span class="math inline">\(\Gamma^{-1}(\alpha, \beta)\)</span></td>
+<td><span class="math inline">\(\Gamma^{-1}(\alpha + n/2, \beta + \sum(x_i - \mu)^2/2)\)</span></td>
+</tr>
+</tbody>
+</table>
 
 
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>On rappelle que <span class="math inline">\(|g|_\infty = \sup_{x\in\mathbb{R}}|g(x)|\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Que se passe-t-il si <span class="math inline">\(t\leqslant 1/N\)</span> ?<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>C’était d’ailleurs la grande critique adressée par Ronald Fisher à la statistique bayésienne dans les années 30.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -900,13 +966,13 @@ $$
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../content/problemes.html" class="pagination-link" aria-label="Problèmes et sujets">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Problèmes et sujets</span>
+      <a href="../content/bayes1.html" class="pagination-link" aria-label="Statistique Bayésienne">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Statistique Bayésienne</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../content/ch7_1.html" class="pagination-link" aria-label="Test de Kolmogorov-Smirnov">
-        <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Test de Kolmogorov-Smirnov</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../content/bayes_ex.html" class="pagination-link" aria-label="Exercices">
+        <span class="nav-page-text">Exercices</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

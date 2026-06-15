@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>20&nbsp; Estimation de densité – Statistiques Fondamentales</title>
+<title>22&nbsp; Statistique Bayésienne – Statistiques Fondamentales</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../content/ch7_1.html" rel="next">
-<link href="../content/problemes.html" rel="prev">
+<link href="../content/bayes2.html" rel="next">
+<link href="../content/ch7_ex.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -112,7 +112,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/ch7_0.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Estimation de densité</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/bayes1.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Statistique Bayésienne</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Recherche" onclick="window.quartoOpenSearch();">
@@ -317,7 +317,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/ch7_0.html" class="sidebar-item-text sidebar-link active">
+  <a href="../content/ch7_0.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Estimation de densité</span></span></a>
   </div>
 </li>
@@ -335,7 +335,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/bayes1.html" class="sidebar-item-text sidebar-link">
+  <a href="../content/bayes1.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Statistique Bayésienne</span></span></a>
   </div>
 </li>
@@ -409,10 +409,8 @@ window.Quarto = {
     <h2 id="toc-title">Table des matières</h2>
    
   <ul>
-  <li><a href="#la-répartition-empirique" id="toc-la-répartition-empirique" class="nav-link active" data-scroll-target="#la-répartition-empirique"><span class="header-section-number">20.1</span> La répartition empirique</a></li>
-  <li><a href="#sec-gc-calcul" id="toc-sec-gc-calcul" class="nav-link" data-scroll-target="#sec-gc-calcul"><span class="header-section-number">20.2</span> Calculabilité et loi</a></li>
-  <li><a href="#démonstration-du-théorème-de-glivenko-cantelli" id="toc-démonstration-du-théorème-de-glivenko-cantelli" class="nav-link" data-scroll-target="#démonstration-du-théorème-de-glivenko-cantelli"><span class="header-section-number">20.3</span> Démonstration du théorème de Glivenko-Cantelli</a></li>
-  <li><a href="#inégalité-dkw" id="toc-inégalité-dkw" class="nav-link" data-scroll-target="#inégalité-dkw"><span class="header-section-number">20.4</span> Inégalité DKW</a></li>
+  <li><a href="#définitions" id="toc-définitions" class="nav-link active" data-scroll-target="#définitions"><span class="header-section-number">22.1</span> Définitions</a></li>
+  <li><a href="#estimateurs-a-posteriori" id="toc-estimateurs-a-posteriori" class="nav-link" data-scroll-target="#estimateurs-a-posteriori"><span class="header-section-number">22.2</span> Estimateurs a posteriori</a></li>
   </ul>
 </nav>
     </div>
@@ -434,7 +432,7 @@ $$
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Estimation de densité</span></h1>
+<h1 class="title"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Statistique Bayésienne</span></h1>
 </div>
 
 
@@ -451,51 +449,63 @@ $$
 </header>
 
 
-<p>Soient <span class="math inline">\(X_1, \dotsc, X_n\)</span> des variables iid, de fonction de répartition <span class="math inline">\(F\)</span>. Le problème de l’estimation de densité est celui d’estimer la densité ou la fonction de répartition de <span class="math inline">\(F\)</span> à partir de réalisations des <span class="math inline">\(X_i\)</span> : c’est un exemple typique d’estimation non-paramétrique. Dans toute la suite, on se placera dans le cas où la fonction de répartition est <em>continue</em>.</p>
-<section id="la-répartition-empirique" class="level2" data-number="20.1">
-<h2 data-number="20.1" class="anchored" data-anchor-id="la-répartition-empirique"><span class="header-section-number">20.1</span> La répartition empirique</h2>
-<p>La fonction de répartition empirique des <span class="math inline">\(X_i\)</span> est <span class="math display">\[ F_n(t) = \frac{1}{n}\#\{i : X_i \leqslant t\}.\]</span> La loi des grands nombres montre que, <span class="math inline">\(\mathbb{P}\)</span>-presque sûrement, <span class="math inline">\(F_n(t)\)</span> converge vers <span class="math inline">\(\mathbb{P}(X_i \leqslant t)=F(t)\)</span>. On peut étendre ce résultat simultanément à une quantité dénombrable de <span class="math inline">\(t\)</span> (par exemple, <span class="math inline">\(\mathbb{Q}\)</span>) mais pas à tous. De plus, ce résultat ne dit pas si la <em>fonction</em> <span class="math inline">\(F_n\)</span> est proche de la fonction <span class="math inline">\(F\)</span>, au sens de la norme uniforme par exemple. Le théorème suivant, parfois appelé <em>théorème fondamental de l’estimation</em>, confirme que c’est le cas au sens de la norme uniforme<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
-<div id="thm-glivenko" class="theorem">
-<p><span class="theorem-title"><strong>Théorème 20.1 (Théorème de Glivenko-Cantelli)</strong></span> <span class="math inline">\(\mathbb{P}\)</span>-presque sûrement, <span class="math inline">\(\lim_{n\to \infty}|F_n - F|_\infty = 0\)</span>.</p>
+<p>L’objectif du point de vue bayésien est de quantifier l’incertitude sur le paramètre à estimer en le traitant comme une variable aléatoire. Au lieu de considérer un paramètre <span class="math inline">\(\theta\)</span> fixé, on introduit une loi de probabilité <span class="math inline">\(\pi\)</span> sur <span class="math inline">\(\Theta\)</span> (la loi <em>a priori</em>), puis on met à jour cette connaissance à partir des observations via la <em>formule de Bayes</em>.</p>
+<p>Dans cette section, on se place dans un cadre général : on observe une variable aléatoire <span class="math inline">\(X\)</span> qui dépend du paramètre <span class="math inline">\(\theta\)</span> ; la loi de <span class="math inline">\(X\)</span> conditionnellement à <span class="math inline">\(\theta\)</span> a pour densité (ou masse) <span class="math inline">\(p_\theta(x)\)</span> par rapport à une mesure de référence.</p>
+<section id="définitions" class="level2" data-number="22.1">
+<h2 data-number="22.1" class="anchored" data-anchor-id="définitions"><span class="header-section-number">22.1</span> Définitions</h2>
+<div id="def-loi-a-priori" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 22.1 (Loi a priori)</strong></span> Une <em>loi a priori</em> est une mesure de probabilité <span class="math inline">\(\pi\)</span> sur l’ensemble des paramètres <span class="math inline">\(\Theta\)</span>.</p>
 </div>
-<p>Ce théorème dit que <span class="math inline">\(F_n\)</span> est un estimateur « convergent au sens de la norme uniforme » de <span class="math inline">\(F\)</span>. Il est en fait valable même si la fonction de répartition <span class="math inline">\(F\)</span> n’est pas continue, mais la démonstration est un peu plus technique.</p>
-<p>On va utiliser ce théorème pour faire des tests : si <span class="math inline">\(|F_n - F|\)</span> n’est pas suffisamment proche de zéro, on rejettera l’hypothèse selon laquelle les <span class="math inline">\(X_i\)</span> ont <span class="math inline">\(F\)</span> pour fonction de répartition. Le critère exact est appelé <em>test de Kolmogorov-Smirnov</em> et sera vu dans la section suivante.</p>
+<p>Cette loi mesure notre connaissance sur le paramètre <span class="math inline">\(\theta\)</span> avant de voir les données. Typiquement, si l’on est sûr que le « vrai » paramètre est égal à <span class="math inline">\(0\)</span>, alors la loi a priori est une masse de Dirac en <span class="math inline">\(0\)</span>. Si l’on est sûrs que le « vrai » paramètre est dans un ensemble <span class="math inline">\(A \subset \Theta\)</span>, alors la loi a priori aura toute sa masse sur <span class="math inline">\(A\)</span>.</p>
+<p>Étant donné une rélisation <span class="math inline">\(\theta\)</span> de <span class="math inline">\(\pi\)</span>, on génère un échantillon <span class="math inline">\(X \sim p_\theta\)</span>. À ce stade, il y a deux niveaux d’aléas : </p>
+<ul>
+<li>l’aléa sur le paramètre <span class="math inline">\(\theta\)</span>,</li>
+<li>puis l’aléa sur la variable <span class="math inline">\(X\)</span> conditionnellement à <span class="math inline">\(\theta\)</span>.</li>
+</ul>
+<div id="def-loi-a-posteriori" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 22.2 (Loi marginale, loi a posteriori)</strong></span> La loi de <span class="math inline">\(X\)</span> s’appelle la <em>loi marginale</em> de <span class="math inline">\(X\)</span>, et on la note abusivement <span class="math inline">\(p(X)\)</span>. Elle est donnée par <span class="math display">\[p(X) = \int_\Theta p_\theta(X) \pi(\theta) d\theta.\]</span></p>
+<p>La loi de <span class="math inline">\(\theta\)</span> sachant <span class="math inline">\(X\)</span> s’appelle la <em>loi a posteriori</em> et on la note abusivement <span class="math inline">\(p(\theta \mid X)\)</span>. La formule de Bayes dit que</p>
+<p><span class="math display">\[p(\theta \mid X) = \frac{p_\theta(X) \pi(\theta)}{p(X)}.\]</span></p>
+</div>
+<p>La loi a posteriori donne en quelque sorte la distribution de probabilité sur le paramètre <span class="math inline">\(\theta\)</span> qui est la plus compatible avec les données observées <span class="math inline">\(X\)</span>. Comme la loi marginale <span class="math inline">\(p(X)\)</span> ne dépend pas du tout du paramètre, on écrit souvent l’équation ci-dessus avec une constante de proportionnalité, <span class="math display">\[p(\theta \mid x) \propto p_\theta(x) \pi(\theta), \]</span> le symbole <span class="math inline">\(\propto\)</span> signifiant « est proportionnel à ». Cette formule s’interprète de la façon classique : <span class="math display">\[\mathsf{a~posteriori} \propto \mathsf{vraisemblance} \times \mathsf{a~priori}.\]</span></p>
+<p>La loi a posteriori permet d’estimer <span class="math inline">\(\theta\)</span> de plusieurs façons possibles : moyenne, médiane, mode, etc.</p>
+<p><strong>Constante de proportionnalité.</strong> Nous y reviendrons plus tard, mais certains calculs (comme l’estimateur MAP) ne nécessitent pas la connaissance de la constante de proportionnalité, et ne nécessitent même pas que <span class="math inline">\(\pi\)</span> soit une mesure de probabilité.</p>
+<p><strong>Calcul de l’a posteriori.</strong> En revanche, le calcul de la <em>distribution</em> a posteriori nécessite, lui, de connaître la loi marginale <span class="math inline">\(p(X)\)</span>. Cette loi marginale est égale à une intégrale, <span class="math display">\[p(x) = \int_\Theta p_\theta(x) \pi(\theta) d\theta.\]</span> Cette intégrale peut être très difficile à calculer, et dans ce cas les statisticiens ont recours à des approximations numériques, via des méthodes de Monte-Carlo.</p>
+<p><strong>Remarque.</strong> Dans la construction bayésienne décrite ci-dessus, on doit considérer <span class="math inline">\(p_\theta\)</span> comme une mesure de probabilité qui est elle-même aléatoire, puisque <span class="math inline">\(\theta\)</span> l’est. Or, cela nécessiterait d’avoir défini ce qu’est une <em>mesure aléatoire</em>, c’est-à-dire d’avoir doté l’espace des mesures de probabilités d’une tribu, et de vérifier la mesurabilité de <span class="math inline">\(\theta \mapsto p_\theta\)</span>. Le même problème se pose quand on parle de <em>loi conditionnelle</em> : si l’espérance conditionnelle est définie rigoureusement comme une variable aléaoire, alors la loi conditionnelle est elle-même définie comme une variable aléatoire sur l’espace des mesures.</p>
+<p>Il faut bien comprendre que, pour 99.9% des applications de la statistique bayésienne, ces considérations techniques sont <em>parfaitement inutiles</em> et pourraient être contournées d’une façon ou d’une autre. Les difficultés ne se poseront que dans des cas très particuliers, comme par exemple si on étudie des objets plus complexes comme les mouvements browniens.</p>
+<div id="exm-bayes-bernoulli" class="theorem example">
+<p><span class="theorem-title"><strong>Exemple 22.1 (Bernoulli)</strong></span> Plaçons-nous dans le cadre d’un modèle de Bernoulli <span class="math inline">\(\mathrm{Ber}(\theta)\)</span>, avec paramètre <span class="math inline">\(\theta \in [0,1]\)</span>. On utilise un a priori uniforme sur <span class="math inline">\([0,1]\)</span>, c’est-à-dire <span class="math inline">\(\pi(\theta) = 1\)</span>. Si l’on observe <span class="math inline">\(X_1, \dots, X_n\)</span> i.i.d. de loi <span class="math inline">\(\mathrm{Ber}(\theta)\)</span>, la vraisemblance des observations est <span class="math inline">\(\theta^{s}(1-\theta)^{n-s}\)</span>, où <span class="math inline">\(s = x_1 + \dotsc + x_n\)</span> est le nombre de succès. La loi marginale <span class="math inline">\(p(x_1,\dotsc, x_n)\)</span> est donnée par <span class="math display">\[\int_0^1 u^{s}(1-u)^{n-s} du\]</span> et on reconnaît la fonction bêta, <span class="math inline">\(B(s+1, n-s+1)\)</span>. La loi a posteriori <span class="math inline">\(p(\theta \mid x_1,\dotsc, x_n)\)</span> est donc donnée par <span class="math display">\[\frac{\theta^{s}(1-\theta)^{n-s}}{B(s+1, n-s+1)}.\]</span> Conditionnellement aux observations, le paramètre <span class="math inline">\(\theta\)</span> est donc une variable aléatoire qui suit une loi bêta <span class="math inline">\(B(s+1, n-s+1)\)</span>.</p>
+</div>
 </section>
-<section id="sec-gc-calcul" class="level2" data-number="20.2">
-<h2 data-number="20.2" class="anchored" data-anchor-id="sec-gc-calcul"><span class="header-section-number">20.2</span> Calculabilité et loi</h2>
-<p>Soit <span class="math inline">\((X_{(1)}, \dotsc, X_{(n)})\)</span> l’échantillon trié en ordre croissant. Par convention, on pose <span class="math inline">\(X_{(0)} = -\infty\)</span> et <span class="math inline">\(X_{(n+1)} = \infty\)</span>. La quantité <span class="math inline">\(|F_n - F|_\infty\)</span> est calculable grâce à la représentation suivante : <span id="eq-supf"><span class="math display">\[|F_n - F|_\infty = \sup_{i\in \{0, \dotsc, n\}}\left|\frac{i}{n} - F(X_{(i)})\right| \vee \left| \frac{i}{n} - F(X_{(i+1)}-)\right|,   \tag{20.1}\]</span></span> où <span class="math inline">\(F(x-)\)</span> est la limite à gauche de <span class="math inline">\(F\)</span> en <span class="math inline">\(x\)</span>, c’est-à-dire la limite de <span class="math inline">\(F(x-t)\)</span> lorsque <span class="math inline">\(t&gt;0\)</span>, <span class="math inline">\(t\to 0\)</span>. Ainsi, lorsque <span class="math inline">\(F\)</span> est continue, <span class="math inline">\(F(X_{(i)}) = F(X_{(i+1)}-)\)</span>.</p>
+<section id="estimateurs-a-posteriori" class="level2" data-number="22.2">
+<h2 data-number="22.2" class="anchored" data-anchor-id="estimateurs-a-posteriori"><span class="header-section-number">22.2</span> Estimateurs a posteriori</h2>
+<p>Une fois que l’on a calculé la loi a posteriori <span class="math inline">\(p(\theta \mid X)\)</span>, on peut en déduire des quantités d’intérêt. Par exemple, dans l’exemple de Bernoulli que nous avons développé plus haut, on peut calculer le <span class="math inline">\(\theta\)</span> qui est “le plus probable” conditionnellement aux observations, c’est-à-dire le <em>mode</em> de la loi a posteriori. Cet estimateur est appelé <em>estimateur MAP</em> (Maximum A Posteriori). Pour calculer l’estimateur MAP dans le modèle donné dans l’exemple plus haut (<a href="#exm-bayes-bernoulli" class="quarto-xref">Exemple&nbsp;<span>22.1</span></a>), il suffit de maximiser en <span class="math inline">\(\theta\)</span> la vraisemblance, et on trouve <span id="eq-map-bernoulli"><span class="math display">\[\hat{\theta}_{\text{MAP}} = \frac{s}{n}. \tag{22.1}\]</span></span></p>
+<p>Dans le cas général, le théorème suivant décrit plusieurs quantités centrales en pour utiliser la loi a posteriori afin d’estimer <span class="math inline">\(\theta\)</span>.</p>
+<p>Dans le théorème, on suppose pour simplifier que tous ces objets sont bien définis et existent (en pratiquent, cela revient à dire que la loin a posteriori est <span class="math inline">\(L^2\)</span> pour la MMSE ou <span class="math inline">\(L^1\)</span> pour la MAVE).</p>
+<div id="thm-map-mmse-mave" class="theorem">
+<p><span class="theorem-title"><strong>Théorème 22.1</strong></span> <span class="math inline">\(~\)</span></p>
+<ul>
+<li><p>L’estimateur qui maximise la densité a posteriori est le mode a posteriori (<strong>MAP</strong>), <span class="math display">\[\hat{\theta}_{\text{MAP}} = \arg \max_{\theta} p(\theta \mid X).\]</span></p></li>
+<li><p>L’estimateur qui minimise l’erreur quadratique moyenne (<strong>MMSE</strong>, mean square error) est la moyenne a posteriori, <span class="math display">\[\hat{\theta}_{\text{MMSE}} = \mathbb{E}[\theta \mid X].\]</span></p></li>
+<li><p>En dimension 1, l’estimateur qui minimise la distance en valeur absolue (<strong>MAVE</strong>, minimum absolute value error) est la médiane a posteriori,</p></li>
+</ul>
+<p><span class="math display">\[\hat{\theta}_{\text{MAVE}} = \text{médiane}(p(\theta \mid X)).\]</span></p>
+</div>
 <div class="proof">
-<p><span class="proof-title"><em>Preuve</em>. </span>La fonction <span class="math inline">\(F\)</span> est croissante, et la fonction <span class="math inline">\(\hat{F}_n\)</span> est constante par morceaux sur tous les intervalles <span class="math inline">\([X_{(i)}, X_{(i+1)}[\)</span>. En effet, à chaque <span class="math inline">\(X_{(i)}\)</span>, elle saute de la valeur à gauche <span class="math inline">\((i-1)/n\)</span> a la valeur à droite <span class="math inline">\(i/n\)</span>. Ainsi, le maximum de <span class="math inline">\(F - \hat{F}_n\)</span> sur l’intervalle <span class="math inline">\([X_{(i)}, X_{(i+1)}[\)</span> est forcément atteint à une des deux bornes, et vaut donc soit <span class="math inline">\(|i/n - F(X_{(i)})|\)</span>, soit <span class="math inline">\(|i/n - F(X_{(i+1)}-)|\)</span>, selon celui qui est le plus grand. Le supremum de <span class="math inline">\(|F - \hat{F}_n|\)</span> sur <span class="math inline">\(\mathbb{R}\)</span> étant aussi le supremum des supremums sur tous ces intervalles, la représentation ci-dessus est vraie.</p>
+<p><span class="proof-title"><em>Preuve</em>. </span>Le premier point est une évidence. Pour le second, il s’agit de vérifier que la moyenne d’une variable aléatoire <span class="math inline">\(X\)</span> est le point qui minimise l’erreur quadratique moyenne, c’est-à-dire que <span class="math display">\[\mathbb{E}[X] = \arg \min_{x} \mathbb{E}[|X-x|^2].\]</span> En écrivant la condition du premier ordre et en dérivant sous l’espérance, on voit immédiatement que l’unique point critique est donné par <span class="math inline">\(x = \mathbb{E}[X]\)</span>.</p>
+<p>Quant au troisième point, il s’agit de vérifier que la médiane d’une variable aléatoire <span class="math inline">\(X\)</span> est le point qui minimise la distance en valeur absolue <span class="math inline">\(\mathbb{E}[|X-t|]\)</span>. Soit <span class="math inline">\(m\)</span> une médiane, dont on rappelle qu’elle vérifie <span class="math display">\[\mathbb{P}(X \leqslant m) \geqslant \frac{1}{2} \quad \text{et} \quad \mathbb{P}(X \geqslant m) \geqslant \frac{1}{2}.\]</span></p>
+<p>Pour n’importe quel <span class="math inline">\(t\)</span>, on va étudier <span class="math inline">\(\delta = |X-t| - |X-m|\)</span>. Sans perte de généralité, on peut suppose que <span class="math inline">\(t\)</span> est plus grand que <span class="math inline">\(m\)</span>, l’autre sens étant similaire. Si <span class="math inline">\(x\)</span> est plus grand que <span class="math inline">\(t\)</span>, alors <span class="math inline">\(\delta\)</span> vaut <span class="math inline">\(m-t\)</span>. Si <span class="math inline">\(x\)</span> est plus petit que <span class="math inline">\(m\)</span>, alors <span class="math inline">\(\delta\)</span> vaut <span class="math inline">\(t-m\)</span>. Et si <span class="math inline">\(x\)</span> est entre les deux, alors <span class="math inline">\(\delta\)</span> vaut <span class="math inline">\(2x - t-m\)</span>. Dans tous les cas, <span class="math inline">\(|x-t| - |x-m|\)</span> est plus grand que<br>
+<span class="math display">\[(t-m)(\mathbf{1}_{X \leqslant m} - \mathbf{1}_{X &gt; m}).\]</span> En particulier, <span class="math display">\[\mathbb{E}[|X-t|] - \mathbb{E}[|X-m|]\]</span> est plus grand que <span class="math display">\[(t-m)(\mathbb{P}(X \leqslant m) - \mathbb{P}(X &gt; m)).\]</span> Le second terme du produit est aussi égal à <span class="math inline">\(2\mathbb{P}(X \leqslant m) - 1\)</span>, donc par définition de la médiane il est plus grand que 0, ce qui montre que la médiane est un minimiseur de <span class="math inline">\(\mathbb{E}[|X-t|]\)</span>.</p>
 </div>
-<div id="lem-gc" class="theorem lemma">
-<p><span class="theorem-title"><strong>Lemme 20.1</strong></span> Si <span class="math inline">\(F\)</span> est continue, <span class="math inline">\(|F_n - F|_\infty\)</span> a la même loi que <span class="math display">\[ \sup_{i\in \{0, \dotsc, n\}}\left|\frac{i}{n} - U_{(i)}\right| \vee \left| \frac{i}{n} - U_{(i+1)}\right|\]</span> où les <span class="math inline">\(U_{(i)}\)</span> sont des lois uniformes sur <span class="math inline">\([0,1]\)</span>, indépendantes, et triées dans l’ordre croissant.</p>
+<p><strong>Normalisation de l’a priori.</strong> Le calcul de l’etimateur MAP ne nécessite pas la connaissance de la loi marginale <span class="math inline">\(p(X)\)</span>, ni même la connaissance totale de la loi a priori <span class="math inline">\(\pi\)</span>. En fait, on peut connaître <span class="math inline">\(\pi\)</span> seulement à une constante de proportionnalité près : en effet, supposons que <span class="math inline">\(\pi\)</span> ne soit pas normalisée et que <span class="math inline">\(\int \pi = c\)</span>, pas forcément égal à 1, et notons <span class="math inline">\(\pi_0 = \pi / c\)</span> la loi normalisée. Il est clair que <span class="math display">\[\arg \max_{\theta} p_\theta(x)\pi(\theta) = \arg \max_{\theta} p_\theta(x) \pi_0(\theta).\]</span></p>
+<p>Cette remarque n’est pas si anodine : elle implique que le calcul de l’estimateur MAP ne nécessite pas que <span class="math inline">\(\pi\)</span> soit une mesure normalisée… et en réalité, ne nécessite même pas que ce soit une mesure de probabilité. En effet, rien ne nous empêche de choisir un « a priori impropre », c’est-à-dire non intégrable. C’est typiquement le cas sur <span class="math inline">\(\mathbb{R}\)</span> : prenons l’exemple des lois gaussiennes <span class="math inline">\(\mathscr{N}(\mu, 1)\)</span>. Si l’on n’a aucune connaissance a priori sur la localisation de <span class="math inline">\(\mu\)</span>, c’est que <span class="math inline">\(\mu\)</span> pourrait se trouver n’importe où dans <span class="math inline">\(\mathbb{R}\)</span>. Il paraît donc naturel de choisir un a priori « uniforme sur <span class="math inline">\(\mathbb{R}\)</span>, à savoir <span class="math inline">\(\pi(\mu) = 1\)</span>. Dans ce cas, l’estimateur MAP devient <span class="math display">\[\arg \max_{\mu} p_\mu(x)\]</span> c’est-à-dire l’estimateur du maximum de vraisemblance.</p>
+<div id="exm-risque-bayesien-bernoulli" class="theorem example">
+<p><span class="theorem-title"><strong>Exemple 22.2 (Bernoulli)</strong></span> Dans le cadre du modèle <span class="math inline">\(\mathrm{Ber}(\theta)\)</span> avec a priori uniforme, on a vu que la loi a posteriori est <span class="math inline">\(B(s+1, n-s+1)\)</span>. Dans ce cadre, l’estimateur MAP est égal à la moyenne empirique (cf <a href="#eq-map-bernoulli" class="quarto-xref">Équation&nbsp;<span>22.1</span></a>).</p>
+<p>Or, l’estimateur MMSE n’est pas égal à l’estimateur MAP. En effet, le théorème ci-dessus dit que <span class="math inline">\(\hat{\theta}_{\text{MMSE}} = \mathbb{E}[\theta \mid X]\)</span>, et conditionnellement à <span class="math inline">\(X\)</span>, <span class="math inline">\(\theta\)</span> suit une loi bêta. La formule pour l’espérance d’une loi bêta dit alors que <span class="math display">\[\hat{\theta}_{\text{MMSE}} = \frac{s+1}{n+2}.\]</span></p>
+<p>On pourrait aussi calculer l’estimateur MAVE ; cependant, il n’y a pas de formule simple pour la médiane d’une loi bêta.</p>
 </div>
-<div class="proof">
-<p><span class="proof-title"><em>Preuve</em>. </span>Lorsque <span class="math inline">\(X\)</span> est une variable aléatoire dont la fonction de répartition <span class="math inline">\(F\)</span> est continue et strictement croissante, <span class="math inline">\(F(X)\)</span> suit une loi <span class="math inline">\(\mathscr{U}[0,1]\)</span>. En effet, si <span class="math inline">\(t\in [0,1]\)</span>, alors <span class="math inline">\(\mathbb{P}(F(X)&lt;t)\)</span> est égal à <span class="math inline">\(\mathbb{P}(X \leqslant F^{-1}(t))\)</span>, c’est-à-dire <span class="math inline">\(F(F^{-1}(t)) = t\)</span>. Lorsque <span class="math inline">\(F\)</span> est seulement continue, la même démonstration est vraie, mais il faut remplacer l’inverse <span class="math inline">\(F^{-1}(t)\)</span> par la « transformation quantile », à savoir <span class="math inline">\(F^{\leftarrow}(t) = \inf\{x : F(x)\geqslant t\}\)</span>. Les <span class="math inline">\(F(X_i)\)</span> sont donc des variables iid de loi <span class="math inline">\(\mathscr{U}[0,1]\)</span>, ce qui conclut la démonstration compte tenu de <a href="#eq-supf" class="quarto-xref">Équation&nbsp;<span>20.1</span></a>.</p>
-</div>
-<p>En particulier, la loi de <span class="math inline">\(|F_n - F|_\infty\)</span> ne dépend pas de <span class="math inline">\(F\)</span> : on dit que cette statistique est <em>libre</em>.</p>
-</section>
-<section id="démonstration-du-théorème-de-glivenko-cantelli" class="level2" data-number="20.3">
-<h2 data-number="20.3" class="anchored" data-anchor-id="démonstration-du-théorème-de-glivenko-cantelli"><span class="header-section-number">20.3</span> Démonstration du théorème de Glivenko-Cantelli</h2>
-<p>On se place dans le cas où <span class="math inline">\(F\)</span> est continue. Notons <span class="math inline">\(q_j\)</span> le <span class="math inline">\(j\)</span>-ème quantile d’ordre <span class="math inline">\(N\)</span> de <span class="math inline">\(F\)</span> (on choisira l’entier <span class="math inline">\(N\)</span> plus tard) :&nbsp;il est bien défini, et il vérifie <span class="math inline">\(F(q_j) = j/N\)</span>. Soit <span class="math inline">\(x\)</span> entre <span class="math inline">\(q_j\)</span> et <span class="math inline">\(q_{j+1}\)</span>. Par croissance, <span class="math inline">\(F_n(x)\)</span> est entre <span class="math inline">\(F_n(q_j)\)</span> et <span class="math inline">\(F_n(q_{j+1})\)</span>, et <span class="math inline">\(F(x)\)</span> est entre <span class="math inline">\(j/N\)</span> et <span class="math inline">\((j+1)/N\)</span>. Ainsi, <span class="math inline">\(F_n(x) - F(x)\)</span> est plus grand que <span class="math display">\[ F_n(q_j) - \frac{j}{N} - \frac{1}{N}\]</span> et plus petit que <span class="math display">\[ F_n(q_{j+1})- \frac{j}{n} = F_n(q_{j+1})- \frac{j+1}{N}  + \frac{1}{N}.\]</span> Quoi qu’il arrive, <span class="math inline">\(|F_n(x) - F(x)|\)</span> est plus petit que le plus grand des <span class="math inline">\(|F_n(q_j) - j/N|\)</span> augmenté de <span class="math inline">\(1/N\)</span>, donc <span class="math inline">\(|F_n - F|\)</span> aussi. Pour n’importe quel <span class="math inline">\(t&gt;0\)</span>, nous pouvons utiliser la borne de l’union afin de borner <span class="math inline">\(\mathbb{P}(|F_n - F|_\infty &gt; t)\)</span> par <span id="eq-uniongc"><span class="math display">\[\sum_{j=0}^N\mathbb{P}\left(\frac{1}{N} + |F_n(q_j) - j/N|&gt;t\right). \tag{20.2}\]</span></span> Or, <span class="math inline">\(nF_n(q_j)\)</span> suit une loi <span class="math inline">\(\mathrm{Bin}(n, j/N)\)</span>, donc si<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> <span class="math inline">\(t-1/N&gt;0\)</span> on peut utiliser l’inégalité de Hoeffding :&nbsp; <span class="math display">\[\mathbb{P}\left(\frac{1}{N} + |F_n(q_j) - j/N|&gt;t\right) \leqslant 2\exp\left\lbrace - 2 n\left(t - \frac{1}{N}\right)^2 \right\rbrace.\]</span> En choisissant par exemple <span class="math inline">\(N = \lceil 2/t\rceil\)</span>, le terme entre parenthèses est plus grand que <span class="math inline">\(t/2\)</span>, et la borne devient elle-même plus petite que <span class="math inline">\(2e^{-2nt^2/4}\)</span>. Le terme <a href="#eq-uniongc" class="quarto-xref">Équation&nbsp;<span>20.2</span></a> est alors plus petit que <span class="math inline">\(N 2e^{-nt^2/2}\)</span>, c’est-à-dire <span id="eq-predkw"><span class="math display">\[\mathbb{P}(|F_n - F|_\infty &gt; t) \leqslant \frac{6}{t}e^{-nt^2/2} \tag{20.3}\]</span></span> où on a utilisé la borne très grossière <span class="math inline">\(N \leqslant 3/t\)</span>.</p>
-<p>Si l’on choisit une suite <span class="math inline">\(t_n\)</span> qui tend vers 0, et telle que <span class="math inline">\(\sum_n e^{-nt_n^2/2}/t_n &lt; \infty\)</span>, alors le lemme de Borel-Cantelli permet de conclure :&nbsp;presque sûrement, à partir d’un certain rang, on a <span class="math inline">\(|F - F_n|_\infty \leqslant t_n\)</span>, et donc <span class="math inline">\(|F_n - F|_\infty \to 0\)</span>. N’importe quel choix de type <span class="math inline">\(t_n = n^{0.5 - \varepsilon}\)</span> pour <span class="math inline">\(\varepsilon &gt; 0\)</span> convient, et donne même que <span class="math inline">\(|F_n - F|_\infty = O(n^{0.5-\varepsilon})\)</span>.</p>
-</section>
-<section id="inégalité-dkw" class="level2" data-number="20.4">
-<h2 data-number="20.4" class="anchored" data-anchor-id="inégalité-dkw"><span class="header-section-number">20.4</span> Inégalité DKW</h2>
-<p>Le théorème de Glivenko-Cantelli possède une version beaucoup plus puissante car elle est entièrement quantitative, appelée <em>inégalité DKW</em>.</p>
-<div id="thm-DKW" class="theorem">
-<p><span class="theorem-title"><strong>Théorème 20.2 (Dvoretzky-Kiefer-Wolfowitz)</strong></span> Dans le même contexte, pour tout <span class="math inline">\(t&gt;0\)</span> on a <span id="eq-dkw"><span class="math display">\[\mathbb{P}(|F_n - F|_\infty &gt; t) \leqslant 2e^{-2nt^2}. \tag{20.4}\]</span></span></p>
-</div>
-<p>Il faut comparer ce résultat avec <a href="#eq-predkw" class="quarto-xref">Équation&nbsp;<span>20.3</span></a>, dans lequel la borne est effectivement décroissante en <span class="math inline">\(nt^2\)</span>, mais avec un préfacteur <span class="math inline">\(1/t\)</span> polynomial. L’inégalité DKW donne une décroissance <em>exponentielle</em> en <span class="math inline">\(nt^2\)</span>.</p>
 
 
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p>On rappelle que <span class="math inline">\(|g|_\infty = \sup_{x\in\mathbb{R}}|g(x)|\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Que se passe-t-il si <span class="math inline">\(t\leqslant 1/N\)</span> ?<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
 </section>
 
 </main> <!-- /main -->
@@ -900,13 +910,13 @@ $$
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../content/problemes.html" class="pagination-link" aria-label="Problèmes et sujets">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Problèmes et sujets</span>
+      <a href="../content/ch7_ex.html" class="pagination-link" aria-label="Exercices">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Exercices</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../content/ch7_1.html" class="pagination-link" aria-label="Test de Kolmogorov-Smirnov">
-        <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Test de Kolmogorov-Smirnov</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../content/bayes2.html" class="pagination-link" aria-label="Choix d’un *a priori*">
+        <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Choix d’un <em>a priori</em></span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
