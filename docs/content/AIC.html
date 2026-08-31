@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Exercices – Statistiques Fondamentales</title>
+<title>18&nbsp; Sélection de modèles – Statistiques Fondamentales</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../content/ch5_0.html" rel="next">
-<link href="../content/ch4_2.html" rel="prev">
+<link href="../content/ch6_ex.html" rel="next">
+<link href="../content/ch6_2.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -112,7 +112,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/ch4_ex.html">Exercices</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/AIC.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Sélection de modèles</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Recherche" onclick="window.quartoOpenSearch();">
@@ -233,7 +233,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/ch4_ex.html" class="sidebar-item-text sidebar-link active">
+  <a href="../content/ch4_ex.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercices</span></a>
   </div>
 </li>
@@ -287,7 +287,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/AIC.html" class="sidebar-item-text sidebar-link">
+  <a href="../content/AIC.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Sélection de modèles</span></span></a>
   </div>
 </li>
@@ -415,10 +415,10 @@ window.Quarto = {
     <h2 id="toc-title">Table des matières</h2>
    
   <ul>
-  <li><a href="#questions" id="toc-questions" class="nav-link active" data-scroll-target="#questions">Questions</a></li>
-  <li><a href="#tests-élémentaires" id="toc-tests-élémentaires" class="nav-link" data-scroll-target="#tests-élémentaires">Tests élémentaires</a></li>
-  <li><a href="#exercices" id="toc-exercices" class="nav-link" data-scroll-target="#exercices">Exercices</a></li>
-  <li><a href="#travail-pratique1" id="toc-travail-pratique1" class="nav-link" data-scroll-target="#travail-pratique1">Travail pratique[^1]</a></li>
+  <li><a href="#le-problème" id="toc-le-problème" class="nav-link active" data-scroll-target="#le-problème"><span class="header-section-number">18.1</span> Le problème</a></li>
+  <li><a href="#le-critère-aic" id="toc-le-critère-aic" class="nav-link" data-scroll-target="#le-critère-aic"><span class="header-section-number">18.2</span> Le critère AIC</a></li>
+  <li><a href="#démonstration" id="toc-démonstration" class="nav-link" data-scroll-target="#démonstration"><span class="header-section-number">18.3</span> Démonstration</a></li>
+  <li><a href="#comparer-des-modèles" id="toc-comparer-des-modèles" class="nav-link" data-scroll-target="#comparer-des-modèles"><span class="header-section-number">18.4</span> Comparer des modèles</a></li>
   </ul>
 </nav>
     </div>
@@ -440,7 +440,7 @@ $$
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Exercices</h1>
+<h1 class="title"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Sélection de modèles</span></h1>
 </div>
 
 
@@ -457,175 +457,57 @@ $$
 </header>
 
 
-<section id="questions" class="level2">
-<h2 class="anchored" data-anchor-id="questions">Questions</h2>
+<p>Nous avons vu comment estimer un paramètre <span class="math inline">\(\theta\)</span> dans un modèle <span class="math inline">\((p_\theta)_{\theta \in \Theta}\)</span> par la méthode du maximum de vraisemblance. En pratique, on se trouve presque toujours face à un problème plus large : <em>quel modèle choisir</em> ? Par exemple, dans une régression, faut-il modéliser la relation entre <span class="math inline">\(Y\)</span> et <span class="math inline">\(X\)</span> par une droite, un polynôme de degré 2, ou de degré 10 ? Dans chaque cas, on dispose d’une famille de lois paramétrées, mais le nombre de paramètres — et donc la « complexité » du modèle — varie.</p>
+<p>Le critère d’information d’Akaike (AIC, pour <em>Akaike Information Criterion</em>) propose une réponse simple à cette question.</p>
+<section id="le-problème" class="level2" data-number="18.1">
+<h2 data-number="18.1" class="anchored" data-anchor-id="le-problème"><span class="header-section-number">18.1</span> Le problème</h2>
+<p>Supposons que l’on observe un échantillon <span class="math inline">\(x_1, \dotsc, x_n\)</span> et que l’on compare deux modèles pour la même loi <span class="math inline">\(P\)</span> inconnue. Le modèle « simple » <span class="math inline">\(\mathcal{M}_1\)</span> ne possède qu’un paramètre ; le modèle « riche » <span class="math inline">\(\mathcal{M}_2\)</span> en possède davantage, disons <span class="math inline">\(k\)</span>.</p>
+<p>Pour chaque modèle, on calcule l’estimateur du maximum de vraisemblance <span class="math inline">\(\hat{\theta}\)</span> et la log-vraisemblance maximale <span class="math display">\[\ell(\hat{\theta}) = \max_{\theta \in \Theta} \sum_{i=1}^n \ln p_\theta(x_i).\]</span> Il est presque toujours vrai que <span class="math inline">\(\ell(\hat{\theta}_2) \geqslant \ell(\hat{\theta}_1)\)</span> : un modèle plus flexible s’adapte mieux aux données <em>observées</em>. Mais cela ne signifie pas qu’il prédira mieux de <em>nouvelles</em> observations. Au contraire : en ajoutant des paramètres, on risque de capturer du bruit plutôt que la structure réelle de <span class="math inline">\(P\)</span>. C’est ce qui s’appelle couramment le <em>surajustement</em> (<em>overfitting</em>).</p>
+<p>Le problème de la sélection de modèles consiste donc à trouver un compromis entre</p>
 <ul>
-<li>Quelles sont les erreurs du test consistant à toujours accepter l’hypothèse nulle ?</li>
-<li>Quelles sont les erreurs du test consistant à toujours refuser l’hypothèse nulle ?</li>
-<li>Montrer que la distance en variation totale entre deux mesures de densités <span class="math inline">\(p,q\)</span> peut aussi s’écrire <span class="math inline">\(\int(p/q-1)_+ \mathrm{d}q\)</span>.</li>
-<li>Montrer que si <span class="math inline">\(\mathrm{d}_{\mathrm{KL}}(P_n \mid Q) \to 0\)</span>, alors <span class="math inline">\(P_n\)</span> converge en loi vers <span class="math inline">\(Q\)</span>.</li>
-<li>Calculer la distance en variation totale entre deux lois de Bernoulli de paramètres respectifs <span class="math inline">\(p\)</span> et <span class="math inline">\(q\)</span>.</li>
-<li>Calculer la distance en variation totale entre une loi <span class="math inline">\(\mathrm{Bin}(n,p)\)</span> et une loi <span class="math inline">\(N(\mu,\sigma^2)\)</span>.</li>
-<li>Soient <span class="math inline">\(P,Q\)</span> deux mesures distinctes. Montrer que <span class="math inline">\(\dtv(P^{\otimes n}, Q^{\otimes n})\)</span> tend vers 1.</li>
-<li>Soient <span class="math inline">\(P,Q\)</span> deux mesures. Montrer que <span class="math inline">\(\dkl(P^{\otimes n} \mid Q^{\otimes n}) = n \dkl(P \mid Q)\)</span>.</li>
+<li>un <em>bon ajustement</em> aux données (grande log-vraisemblance) ;</li>
+<li>une <em>bonne parcimonie</em> (peu de paramètres).</li>
 </ul>
 </section>
-<section id="tests-élémentaires" class="level2">
-<h2 class="anchored" data-anchor-id="tests-élémentaires">Tests élémentaires</h2>
-<p>Pour tous les cas suivants, il faut savoir réaliser rapidement un test puissant, voire même optimal au sens qu’il vous plaira.</p>
-<ul>
-<li>Tester <span class="math inline">\(\mu = \mu_0\)</span> contre <span class="math inline">\(\mu = \mu_1\)</span> dans un échantillon <span class="math inline">\(N(\mu, \sigma^2)\)</span> lorsque <span class="math inline">\(\sigma\)</span> est connu.</li>
-<li>Même question lorsque <span class="math inline">\(\sigma\)</span> est inconnu (attention :&nbsp;dans ce cas les hypothèses ne sont pas simples mais composites. Il faut utiliser le rapport des maximums de vraisemblance, que l’on verra plus tard).</li>
-<li>Soient <span class="math inline">\(X_1, \dotsc, X_n\)</span> un échantillon iid <span class="math inline">\(N(\mu_1,\sigma_1^2)\)</span> et <span class="math inline">\(Y_1, \dotsc, Y_m\)</span> (<span class="math inline">\(m\)</span> et <span class="math inline">\(n\)</span> ne sont pas forcément égaux) un échantillon iid de loi <span class="math inline">\(N(\mu_2,\sigma_2^2)\)</span>. Tester <span class="math inline">\(\sigma_1 = \sigma_2\)</span> lorsque <span class="math inline">\(\mu_1\)</span> et <span class="math inline">\(\mu_2\)</span> sont connues.</li>
-<li>Même question lorsque <span class="math inline">\(\mu_1\)</span> et <span class="math inline">\(\mu_2\)</span> ne sont pas connues (même remarque que précédemment).<br>
-</li>
-<li>Donner la forme d’un test sur la valeur de <span class="math inline">\(p\)</span> pour une réalisation d’une loi <span class="math inline">\(\mathrm{Bin}(n,p)\)</span> et calculer son niveau asymptotique quand <span class="math inline">\(n\to\infty\)</span>.</li>
-<li>Donner la forme d’un test sur la valeur de <span class="math inline">\(\lambda\)</span> dans un échantillon de <span class="math inline">\(n\)</span> variables aléatoires de Poisson de paramètre <span class="math inline">\(\lambda\)</span>.</li>
-</ul>
+<section id="le-critère-aic" class="level2" data-number="18.2">
+<h2 data-number="18.2" class="anchored" data-anchor-id="le-critère-aic"><span class="header-section-number">18.2</span> Le critère AIC</h2>
+<div id="def-aic" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 18.1 (Critère d’information d’Akaike)</strong></span> Soit un modèle paramétré par <span class="math inline">\(\theta \in \Theta \subset \mathbb{R}^k\)</span>. On note <span class="math inline">\(\ell(\hat{\theta})\)</span> la log-vraisemblance maximale et <span class="math inline">\(k\)</span> le nombre de paramètres libres du modèle. Le critère AIC est le nombre <span id="eq-aic"><span class="math display">\[\mathrm{AIC} = -2\,\ell(\hat{\theta}) + 2k. \tag{18.1}\]</span></span></p>
+</div>
+<p>Si on a le choix entre plusieurs modèles, on choisit le modèle qui <em>minimise</em> l’AIC.</p>
+<p>Soit <span class="math inline">\(p_{\hat{\theta}}\)</span> la loi estimée par maximum de vraisemblance dans un modèle donné. Si <span class="math inline">\(X\)</span> est une nouvelle observation de loi <span class="math inline">\(P\)</span> (la vraie loi, inconnue), la quantité naturelle à maximiser est l’espérance de la log-vraisemblance prédictive <span class="math display">\[ \mathbb{E}_{X\sim P}\big[\ln p_{\hat{\theta}}(X)\big], \]</span> où l’espérance porte à la fois sur <span class="math inline">\(X\)</span> (nouvelle donnée) et sur l’échantillon ayant servi à calculer <span class="math inline">\(\hat{\theta}\)</span>. On ne peut pas calculer cette quantité directement — on ne connaît pas <span class="math inline">\(P\)</span> — mais on peut l’estimer.</p>
+<p>Évidemment, une tentation est de remplacer <span class="math inline">\(P\)</span> par les données et d’utiliser la log-vraisemblance « empirique » <span class="math inline">\(\ell(\hat{\theta})/n\)</span>. Or cette quantité <em>surestime</em> systématiquement la performance prédictive : le paramètre <span class="math inline">\(\hat{\theta}\)</span> a été choisi précisément pour bien ajuster l’échantillon, et ne se comportera en général pas aussi bien sur des données nouvelles. Il faut donc corriger ce biais.</p>
+<p>Sous des hypothèses de régularité (modèle bien spécifié, EMV asymptotiquement normal comme dans <a href="ch6_1.html#thm-emv-mom" class="quarto-xref">Théorème&nbsp;<span>16.1</span></a>), Akaike montre que le biais de <span class="math inline">\(\ell(\hat{\theta})\)</span> comme estimateur de <span class="math inline">\(n\,\mathbb{E}_P[\ln p_{\hat{\theta}}(X)]\)</span> vaut environ <span class="math inline">\(k\)</span> : <span class="math display">\[\mathbb{E}\big[\ell(\hat{\theta})\big] \approx n\,\mathbb{E}_P\big[\ln p_{\hat{\theta}}(X)\big] + k.\]</span> Chaque paramètre estimé apporte ainsi une « récompense » artificielle d’environ 1 unité de log-vraisemblance, même lorsque ce paramètre ne correspond à rien dans la vraie loi <span class="math inline">\(P\)</span>.</p>
+<p>En prenant l’opposé et en ignorant la normalisation par <span class="math inline">\(n\)</span> (constante dès que l’on compare des modèles sur le même échantillon), on obtient l’estimateur <a href="#eq-aic" class="quarto-xref">Équation&nbsp;<span>18.1</span></a>. Nous démontrons maintenant pourquoi la correction de biais vaut <span class="math inline">\(k\)</span>.</p>
 </section>
-<section id="exercices" class="level2">
-<h2 class="anchored" data-anchor-id="exercices">Exercices</h2>
-<div id="exr-testchideux" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 1</strong></span> Soient <span class="math inline">\(X_1, \dotsc, X_n\)</span> des variables indépendantes de loi <span class="math inline">\(\chi_2(p)\)</span>. On cherche à tester l’hypothèse nulle <span class="math inline">\(p=1\)</span> contre l’hypothèse alternative <span class="math inline">\(p=2\)</span>.</p>
-<ol type="1">
-<li>Écrire la forme de la région de rejet des tests de rapport de vraisemblance.</li>
-<li>Essayer de calculer le niveau de ce test ; si ce n’est pas possible, essayer de le borner.</li>
-</ol>
+<section id="démonstration" class="level2" data-number="18.3">
+<h2 data-number="18.3" class="anchored" data-anchor-id="démonstration"><span class="header-section-number">18.3</span> Démonstration</h2>
+<p>On se place dans le cadre d’un modèle bien spécifié : la vraie loi <span class="math inline">\(P\)</span> appartient à <span class="math inline">\((p_\theta)_{\theta \in \Theta}\)</span>, et l’on note <span class="math inline">\(\theta_0\)</span> le vrai paramètre. On suppose que les hypothèses du <a href="ch6_1.html#thm-emv-mom" class="quarto-xref">Théorème&nbsp;<span>16.1</span></a> sont satisfaites, de sorte que <span class="math inline">\(\sqrt{n}(\hat{\theta} - \theta_0)\)</span> converge en loi vers <span class="math inline">\(\mathcal{N}(0, I(\theta_0)^{-1})\)</span>.</p>
+<p>La quantité que l’on souhaite estimer est la log-vraisemblance <em>prédictive</em> <span class="math display">\[ \psi = \mathbb{E}_{X\sim P}\big[\ln p_{\hat{\theta}}(X)\big], \]</span> où <span class="math inline">\(X\)</span> est une nouvelle observation indépendante de l’échantillon.</p>
+<div id="thm-aic" class="theorem">
+<p><span class="theorem-title"><strong>Théorème 18.1 (Estimation d’Akaike)</strong></span> Sous les hypothèses ci-dessus, <span class="math display">\[ \mathbb{E}\big[\ell(\hat{\theta})] - n\psi = k + o(1). \]</span></p>
 </div>
-<div id="exr-testvar" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 2</strong></span> Soient <span class="math inline">\(X_1, \dotsc, X_n\)</span> des variables indépendantes de loi <span class="math inline">\(N(0,\sigma^2)\)</span>. Proposer un test de niveau <span class="math inline">\(\alpha\)</span> de l’hypothèse <span class="math inline">\(\sigma^2=1\)</span> contre l’hypothèse <span class="math inline">\(\sigma^2 = 1+\varepsilon\)</span>, et estimer sa puissance. Comment varie-t-elle en fonction de <span class="math inline">\(n\)</span> et de <span class="math inline">\(\varepsilon\)</span> ?</p>
+<div class="proof">
+<p><span class="proof-title"><em>Preuve</em>. </span>Notons <span class="math inline">\(g(\theta) = \mathbb{E}_P[\ln p_\theta(X)]\)</span>. Par définition, <span class="math inline">\(\psi = g(\hat{\theta})\)</span> (aléatoire) et <span class="math inline">\(\mathbb{E}[\ell(\theta_0)] = ng(\theta_0)\)</span>.</p>
+<p><strong>Premier développement (dans l’échantillon).</strong> Comme <span class="math inline">\(\hat{\theta}\)</span> maximise <span class="math inline">\(\ell\)</span>, on a <span class="math inline">\(\nabla \ell(\hat{\theta}) = 0\)</span>. En développant <span class="math inline">\(\ell\)</span> au voisinage de <span class="math inline">\(\theta_0\)</span> on a <span class="math display">\[ \ell(\theta_0) - \ell(\hat{\theta}) = \frac{1}{2}(\hat{\theta} - \theta_0)^\top \nabla^2 \ell(\theta_0)(\hat{\theta} - \theta_0) + ... \]</span> Or par le TCL <span class="math inline">\(\nabla^2 \ell(\theta_0) = \sum_{i=1}^n \nabla^2_\theta \ln p_{\theta_0}(x_i) \approx -n\,I(\theta_0)\)</span>. Donc <span class="math display">\[ \ell(\hat{\theta}) - \ell(\theta_0) \approx \frac{n}{2}(\hat{\theta} - \theta_0)^\top I(\theta_0)(\hat{\theta} - \theta_0). \]</span> En prenant l’espérance et en utilisant la normalité asymptotique<span class="math inline">\(\sqrt{n}(\hat{\theta}-\theta_0) \rightsquigarrow \mathcal{N}(0, I(\theta_0)^{-1})\)</span>, on obtient donc <span id="eq-biais-in"><span class="math display">\[ \mathbb{E}\big[\ell(\hat{\theta}) - \ell(\theta_0)\big] \approx \frac{1}{2n}\,\mathbb{E}\big[\chi^2_k\big] = \frac{k}{2}.  \tag{18.2}\]</span></span></p>
+<p><strong>Second développement (hors échantillon).</strong> Développons maintenant <span class="math inline">\(g\)</span> au voisinage de <span class="math inline">\(\theta_0\)</span>. Comme <span class="math inline">\(\nabla_\theta g(\theta_0) = \mathbb{E}_P[\nabla_\theta \ln p_{\theta_0}(X)] = 0\)</span> (le score est centré), la formule de Taylor donne <span class="math display">\[ g(\hat{\theta}) \approx g(\theta_0) + \frac{1}{2}(\hat{\theta} - \theta_0)^\top \nabla^2 g(\theta_0)(\hat{\theta} - \theta_0). \]</span> Mais <span class="math inline">\(\nabla^2 g(\theta_0) = -I(\theta_0)\)</span>, d’où <span class="math display">\[ g(\hat{\theta}) \approx g(\theta_0) - \frac{1}{2}(\hat{\theta} - \theta_0)^\top I(\theta_0)(\hat{\theta} - \theta_0). \]</span> En prenant l’espérance, <span id="eq-biais-out"><span class="math display">\[ \mathbb{E}\big[g(\hat{\theta})\big] \approx g(\theta_0) - \frac{k}{2n}.  \tag{18.3}\]</span></span></p>
+<p><strong>Conclusion.</strong> D’après <a href="#eq-biais-in" class="quarto-xref">Équation&nbsp;<span>18.2</span></a>, <span class="math inline">\(\mathbb{E}[\ell(\hat{\theta})] \approx \mathbb{E}[\ell(\theta_0)] + k/2\)</span>. D’après <a href="#eq-biais-out" class="quarto-xref">Équation&nbsp;<span>18.3</span></a>, <span class="math inline">\(n\,\mathbb{E}[g(\hat{\theta})] \approx ng(\theta_0) - k/2 = \mathbb{E}[\ell(\theta_0)] - k/2\)</span>. En soustrayant ces deux quantités, <span class="math display">\[\begin{align*}
+\mathbb{E}\big[\ell(\hat{\theta})\big] - n\,\mathbb{E}\big[g(\hat{\theta})\big]
+&amp;\approx \left(\mathbb{E}[\ell(\theta_0)] + \frac{k}{2}\right) - \left(\mathbb{E}[\ell(\theta_0)] - \frac{k}{2}\right) = k.
+\end{align*}\]</span> C’est bien le résultat annoncé.</p>
 </div>
-<div id="exr-testrandom" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 3</strong></span> Soient <span class="math inline">\(X_1, \dotsc, X_n\)</span> des variables indépendantes de même loi <span class="math inline">\(P\)</span>. On cherche à tester l’hypothèse nulle <span class="math inline">\(P = N(0,1)\)</span> contre l’hypothèse alternative <span class="math inline">\(P = \mathscr{T}(n)\)</span>.</p>
-<ol type="1">
-<li>Donner le test optimal au sens de l’affinité.</li>
-<li>Donner un autre test, de niveau <span class="math inline">\(1-\alpha\)</span>, et calculer sa puissance.</li>
-<li>Comparer ces deux tests, en particulier dans le régime où <span class="math inline">\(n\)</span> est grand.</li>
-</ol>
-</div>
-<div id="exr-samplecomplexity" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 4</strong></span> Montrer que le nombre de lancers nécessaire pour distinguer une pièce équilibrée <span class="math inline">\((p=1/2)\)</span> d’une pièce légèrement déséquilibrée (<span class="math inline">\(p_1 = 1/2 + \varepsilon\)</span>) est d’ordre <span class="math inline">\(1/\varepsilon^2\)</span>.</p>
-</div>
-<div id="exr-bintest" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 5</strong></span> On note <span class="math inline">\(p\)</span> la probabilité qu’un enfant né vivant soit un garçon. On suppose que les enfants sont de sexe indépendants, et que cette probabilité est la même pour toutes les grossesses.</p>
-<ol type="1">
-<li>Il y a eu en France métropolitaine en 2015 <span class="math inline">\(n=760\,421\)</span> naissances. , dont <span class="math inline">\(389\,181\)</span> garçons. Tester l’hypothèse <span class="math inline">\(p=\frac12\)</span> contre l’alternative pertinente.</li>
-<li>En 1920, il y a eu <span class="math inline">\(838\,137\)</span> naissances dont <span class="math inline">\(432\,044\)</span> garçons. Tester l’hypothèse <span class="math inline">\(p_{2015}=p_{1920}\)</span>.</li>
-</ol>
-</div>
-<div id="exr-testsdivers" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 6</strong></span> Soient <span class="math inline">\(X_1, \dotsc, X_n\)</span> i.i.d de loi <span class="math inline">\(N(\theta,1)\)</span>, où <span class="math inline">\(\theta\)</span> est un paramètre réel.</p>
-<ol type="1">
-<li>Donner un intervalle de confiance pour <span class="math inline">\(\theta\)</span> au niveau de risque <span class="math inline">\(5\%\)</span> de la forme <span class="math inline">\([\hat{\theta}_n, +\infty[\)</span>.</li>
-<li>En déduire un test de niveau <span class="math inline">\(5\%\)</span> pour les hypothèses <span class="math inline">\(H_0: \theta = 0\)</span> et <span class="math inline">\(H_1: \theta &gt;0\)</span>.</li>
-<li>Donner le modèle de l’expérience statistique. Donner l’expression du test de rapport de vraisemblance <span class="math inline">\(T\)</span> pour les hypothèses <span class="math inline">\(H_0: \theta =0\)</span> et <span class="math inline">\(H_1: \theta = \mu\)</span>, où <span class="math inline">\(\mu &gt;0\)</span>. Quel test retrouve-t-on?</li>
-<li>Construire le test de rapport de vraisemblance au niveau <span class="math inline">\(5\%\)</span> pour les hypothèses <span class="math inline">\(H_0: \theta = 0\)</span> et <span class="math inline">\(H_1: \theta &gt;0\)</span>.</li>
-</ol>
-</div>
-<div id="exr-testunif" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 7 (Test sur des lois uniformes)</strong></span> On se donne <span class="math inline">\(X_1, \dots, X_n\)</span> iid de loi <span class="math inline">\(\mathscr{U}(0,\theta)\)</span>, et on note <span class="math inline">\(M_n = \max_{j=1, \dots, n} X_i\)</span>.</p>
-<ol type="1">
-<li>Écrire la fonction de répartition de <span class="math inline">\(M_n\)</span>, puis en déduire un test <span class="math inline">\(T\)</span> de niveau <span class="math inline">\(1-\alpha\)</span> pour les hypothèses <span class="math inline">\(H_0: \theta = 1\)</span> contre <span class="math inline">\(H_1: \theta &lt; 1\)</span>.</li>
-<li>Donner le test du rapport de vraisemblance pour pour les hypothèses <span class="math inline">\(H_0: \theta = 1\)</span> contre <span class="math inline">\(H_1: \theta = \theta_0\)</span>, où <span class="math inline">\(\theta_0&lt;1\)</span>. Calculer sa puissance.</li>
-<li>On cherche à tester <span class="math inline">\(H_0: \theta = 1\)</span> contre <span class="math inline">\(H_1: \theta &lt; 1\)</span>. Comme la seconde hypothèse est composite, on ne peut pas directement appliquer le test du rapport de vraisemblance ; à la place, on utilise un test du <em>maximum</em> de vraisemblance, qui est de la forme <span class="math display">\[ \frac{\sup_{\theta &lt; 1}\rho_\theta(x_1, \dotsc, x_n)}{\rho_1(x_1, \dotsc, x_n)} &gt; z\]</span> où <span class="math inline">\(\rho_\theta\)</span> est la densité d’un échantillon iid de lois <span class="math inline">\(\mathscr{U}[0,\theta]\)</span>. Calculer le supremum dans cette expression, et en déduire la région de rejet.</li>
-<li>Montrer que la puissance de <span class="math inline">\(T\)</span> vaut <span class="math inline">\(\alpha\)</span>.</li>
-<li>En utilisant la même technique, construire le test du rapport de maximum de vraisemblance pour pour les hypothèses <span class="math inline">\(H_0: \theta = 1\)</span> contre <span class="math inline">\(H_1: \theta&gt;1\)</span>, noté <span class="math inline">\(T'\)</span>, au niveau <span class="math inline">\(1-\alpha\)</span>. Calculer sa puissance.</li>
-<li>Donner un test de niveau <span class="math inline">\(1-\alpha\)</span> pour <span class="math inline">\(H_0: \theta = 1\)</span> contre <span class="math inline">\(H_1: \theta&gt;1\)</span>, plus puissant que <span class="math inline">\(T'\)</span> pour n’importe quel <span class="math inline">\(\theta &gt;1\)</span>.</li>
-</ol>
-</div>
-<div id="exr-binomtest" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 8</strong></span> Une réalisation d’une variable aléatoire <span class="math inline">\(X \sim \mathrm{Bin}(20,p)\)</span> donne <span class="math inline">\(X = 8\)</span>.</p>
-<ol type="1">
-<li>Proposer un test du rapport de vraisemblance de l’hypothèse nulle <span class="math inline">\(p=p_0=1/2\)</span> contre l’hypothèse alternative <span class="math inline">\(p=p_1=1/3\)</span>. Donner l’expression de la <span class="math inline">\(p\)</span>-valeur du test.</li>
-<li>On tire des variables aléatoires iid de Bernoulli jusqu’à obtenir 8 succès. Écrire la loi de probabilité du nombre de lancers <span class="math inline">\(N\)</span>.</li>
-<li>Il se trouve que le nombre de lancers nécessaires pour cela était <span class="math inline">\(N=20\)</span>. Proposer un test du rapport de vraisemblance de l’hypothèse nulle <span class="math inline">\(p=p_0=1/2\)</span> contre l’hypothèse alternative <span class="math inline">\(p=p_1=1/3\)</span>. Donner l’expression de la <span class="math inline">\(p\)</span>-valeur du test.</li>
-<li>Pourquoi les deux <span class="math inline">\(p\)</span>-valeurs sont-elles différentes, alors que les deux tests sont identiques ?</li>
-</ol>
-</div>
-<div id="exr-testdé" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 9 (Test d’adéquation du <span class="math inline">\(\chi_2\)</span>)</strong></span> On lance <span class="math inline">\(60\)</span> fois un dé et on obtient les résultats suivants :</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th><strong>Face <span class="math inline">\(k\)</span></strong></th>
-<th style="text-align: center;">1</th>
-<th style="text-align: center;">2</th>
-<th style="text-align: center;">3</th>
-<th style="text-align: center;">4</th>
-<th style="text-align: center;">5</th>
-<th style="text-align: center;">6</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Effectif <span class="math inline">\(N_k\)</span></strong></td>
-<td style="text-align: center;">10</td>
-<td style="text-align: center;">13</td>
-<td style="text-align: center;">8</td>
-<td style="text-align: center;">12</td>
-<td style="text-align: center;">9</td>
-<td style="text-align: center;">8</td>
-</tr>
-</tbody>
-</table>
-<p>Le dé est-il bien équilibré ? À titre indicatif, le quantile d’une loi <span class="math inline">\(\chi^2(5)\)</span> d’ordre <span class="math inline">\(95\%\)</span> est <span class="math inline">\(11.07\)</span>.</p>
-</div>
-<div id="exr-testind" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 10 (Test d’indépendance du <span class="math inline">\(\chi_2\)</span>)</strong></span> On cherche à savoir si les variables « être riche » et « être heureux » sont indépendantes. On interroge un grand échantillon de personnes à ce sujet, et l’on récolte les données suivantes :</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th></th>
-<th>riche</th>
-<th>pauvre</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>heureux</strong></td>
-<td>344</td>
-<td>700</td>
-<td></td>
-</tr>
-<tr class="even">
-<td><strong>triste</strong></td>
-<td>257</td>
-<td>705</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>L’argent fait-il le bonheur ?</p>
-</div>
-<div id="exr-testsmultiples" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 11 (Tests multiples (examen 24))</strong></span> Soient <span class="math inline">\(x_1, \dotsc, x_n\)</span> des variables aléatoires indépendantes gaussiennes dans <span class="math inline">\(\mathbb{R}^d\)</span>, de lois respectives <span class="math inline">\(N(\mu_i, \sigma_i^2 I_d)\)</span>, où <span class="math inline">\(\mu_i \in \mathbb{R}^d\)</span> et <span class="math inline">\(\sigma_i^2 &gt; 0\)</span> sont inconnus. On note <span class="math inline">\(H_{0,i}\)</span> l’hypothèse « <span class="math inline">\(\mu_i = 0\)</span> ».</p>
-<ol type="1">
-<li>Construire un test de <span class="math inline">\(H_{0,i}\)</span> de niveau de confiance <span class="math inline">\(1-\alpha\)</span>. On le notera <span class="math inline">\(T_{\alpha}^{(i)}\)</span>.</li>
-<li>On effectue chacun des tests <span class="math inline">\(T^{(i)}_\alpha\)</span>, indépendamment les uns des autres. Si tous les <span class="math inline">\(\mu_i\)</span> sont simultanément nuls, quelle est la probabilité qu’aucune des hypothèses <span class="math inline">\(H_{0,i}\)</span> ne soit rejetée ? Quelle est la limite de cette probabilité lorsque <span class="math inline">\(n \to \infty\)</span> ?</li>
-<li>Dorénavant, on notera <span class="math inline">\(H_0\)</span> l’hypothèse selon laquelle tous les <span class="math inline">\(\mu_i\)</span> sont nuls. Quel niveau de confiance <span class="math inline">\(1-\delta\)</span> faudrait-il choisir pour que, sous <span class="math inline">\(H_0\)</span>, la probabilité de l’événement « aucun des tests <span class="math inline">\(T^{(i)}_{\delta}\)</span> ne rejette <span class="math inline">\(H_{0,i}\)</span> » soit égale à <span class="math inline">\(1-\alpha\)</span> ?</li>
-<li>On s’intéresse maintenant à la propriété suivante : « sous <span class="math inline">\(H_0\)</span>, la probabilité de l’événement “plus de <span class="math inline">\(k\%\)</span> des tests <span class="math inline">\(T^{(i)}_\delta\)</span> ont rejetés <span class="math inline">\(H_{0,i}\)</span>” est inférieure à <span class="math inline">\(\alpha\)</span> ».
-<ol type="1">
-<li>Sous <span class="math inline">\(H_0\)</span>, quelle est la loi du nombre d’hypothèses <span class="math inline">\(H_{0,i}\)</span> rejetées par <span class="math inline">\(T^{(i)}_{\delta}\)</span> ?</li>
-<li>Trouver un <span class="math inline">\(\delta\)</span> (dépendant de <span class="math inline">\(k,\alpha,n\)</span>) tel que la famille de tests <span class="math inline">\(T_\delta^{(i)}\)</span> vérifie la propriété ci-dessus. (indice : Wassily).</li>
-</ol></li>
-</ol>
+<div id="ex-aic">
+<p>Prenons l’exemple de la régression polynomiale.</p>
+<p>On observe <span class="math inline">\((x_i, y_i)_{i \leqslant n}\)</span> et l’on modélise <span class="math inline">\(Y_i \mid x_i \sim \mathcal{N}(\mu(x_i), \sigma^2)\)</span>. Le modèle de degré <span class="math inline">\(d\)</span> possède <span class="math inline">\(k = d+2\)</span> paramètres (les <span class="math inline">\(d+1\)</span> coefficients du polynôme et <span class="math inline">\(\sigma^2\)</span>). En augmentant <span class="math inline">\(d\)</span>, la log-vraisemblance maximale <span class="math inline">\(\ell(\hat{\theta})\)</span> croît toujours, mais le terme de pénalité <span class="math inline">\(2k\)</span> croît lui aussi. L’AIC sélectionne en général un degré intermédiaire : assez élevé pour capter la structure des données, mais pas au point de modéliser le bruit.</p>
 </div>
 </section>
-<section id="travail-pratique1" class="level1">
-<h1>Travail pratique[^1]</h1>
-<p>Faites un test du chi-deux (indépendance ou adéquation) de votre choix. Vous devez vous-même trouver une question qui vous intéresse. Cela peut être n’importe quoi :</p>
-<ul>
-<li>vérifier la loi de Benford dans je ne sais quel document ou site ou journal ;</li>
-<li>se demander si le département de région d’une personne et ses opinions politiques sont indépendantes ;</li>
-<li>tester une corrélation simple entre la météo à NY et la positivé du rendement du S&amp;P500 (« il pleut à Wall Street » vs « les marchés sont dans le vert ») ;&nbsp;</li>
-<li>se demander si les naissances en France sont uniformément réparties sur les 365 jours de l’année ;</li>
-<li>tester si ChatGPT ou je ne sais quel LLM&nbsp;est capable de générer des échantillons de lois précises (loi uniforme, loi de Poisson, etc). Je serai curieux d’avoir le résultat.</li>
-<li>Etc.</li>
-</ul>
-<p>Trouvez donc une question intéressante, trouvez des données pertinentes (c’est peut-être la partie la moins simple), formulez la question sous la forme d’un test statistique, et réalisez le test avec votre langage de programmation favori (qui n’est pas R, soyez de bon goût). Écrivez quelques lignes pour me dire où vous avez eu les données et comment vous vous adaptez au formalisme du cours. Une page max (snippet de code compris) devrait suffire.</p>
-<p>Pas besoin d’aller chercher très loin, un jeu de données simple suffit ! Amusez-vous bien.</p>
-<p>Vous devez m’envoyer ça avant le 9 février 23h59, avec pour objet du mail votre nom suivi de “chi-deux”.</p>
+<section id="comparer-des-modèles" class="level2" data-number="18.4">
+<h2 data-number="18.4" class="anchored" data-anchor-id="comparer-des-modèles"><span class="header-section-number">18.4</span> Comparer des modèles</h2>
+<p>L’AIC n’a de sens que <em>relativement</em> à d’autres modèles calculés sur le même échantillon. Ce qui importe, ce n’est pas la valeur absolue de l’AIC, mais les <em>différences</em> entre modèles.</p>
+<div id="def-delta-aic" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 18.2 (Écart d’AIC)</strong></span> Soient deux modèles <span class="math inline">\(\mathcal{M}_1\)</span> et <span class="math inline">\(\mathcal{M}_2\)</span> de critères respectifs <span class="math inline">\(\mathrm{AIC}_1\)</span> et <span class="math inline">\(\mathrm{AIC}_2\)</span>. L’écart d’AIC du modèle <span class="math inline">\(i\)</span> par rapport au meilleur modèle est <span class="math display">\[ \Delta_i\,\mathrm{AIC} = \mathrm{AIC}_i - \min_j \mathrm{AIC}_j.\]</span></p>
+</div>
+<p>Par construction, <span class="math inline">\(\Delta_i\,\mathrm{AIC} \geqslant 0\)</span>, et il vaut 0 pour le modèle retenu. On peut aller plus loin et convertir les écarts d’AIC en <em>probabilités relatives</em>. Le <em>poids d’Akaike</em> du modèle <span class="math inline">\(i\)</span> est <span class="math display">\[ w_i = \frac{e^{-\Delta_i\,\mathrm{AIC}/2}}{\sum_j e^{-\Delta_j\,\mathrm{AIC}/2}}.\]</span> Ces poids vérifient <span class="math inline">\(\sum_i w_i = 1\)</span> et <span class="math inline">\(w_i \in [0,1]\)</span>. Le modèle qui a le plus grand poids est celui qui minimise l’AIC. Par exemple, si <span class="math inline">\(\Delta_1\,\mathrm{AIC} = 0\)</span> et <span class="math inline">\(\Delta_2\,\mathrm{AIC} = 4\)</span>, alors <span class="math inline">\(w_1/w_2 = e^2 \approx 7{,}4\)</span> : le premier modèle est environ sept fois plus « crédible » que le second au sens de l’AIC.</p>
 
 
 </section>
@@ -1032,13 +914,13 @@ $$
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../content/ch4_2.html" class="pagination-link" aria-label="Tests du $\chi_2$">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Tests du <span class="math inline">\(\chi_2\)</span></span></span>
+      <a href="../content/ch6_2.html" class="pagination-link" aria-label="L'information de Fisher">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">L’information de Fisher</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../content/ch5_0.html" class="pagination-link" aria-label="Moindres carrés">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Moindres carrés</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../content/ch6_ex.html" class="pagination-link" aria-label="Exercices">
+        <span class="nav-page-text">Exercices</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
