@@ -1,0 +1,121 @@
+# Sélection de modèles
+
+Nous avons vu comment estimer un paramètre $\theta$ dans un modèle $(p_\theta)_{\theta \in \Theta}$ par la méthode du maximum de vraisemblance. En pratique, on se trouve presque toujours face à un problème plus large : *quel modèle choisir* ? Par exemple, dans une régression, faut-il modéliser la relation entre $Y$ et $X$ par une droite, un polynôme de degré 2, ou de degré 10 ? Dans chaque cas, on dispose d'une famille de lois paramétrées, mais le nombre de paramètres — et donc la « complexité » du modèle — varie. 
+
+Le critère d'information d'Akaike (AIC, pour *Akaike Information Criterion*) propose une réponse simple à cette question.
+
+## Le problème
+
+Supposons que l'on observe un échantillon $x_1, \dotsc, x_n$ et que l'on compare deux modèles pour la même loi $P$ inconnue. Le modèle « simple » $\mathcal{M}_1$ ne possède qu'un paramètre ; le modèle « riche » $\mathcal{M}_2$ en possède davantage, disons $k$.
+
+Pour chaque modèle, on calcule l'estimateur du maximum de vraisemblance $\hat{\theta}$ et la log-vraisemblance maximale
+$$\ell(\hat{\theta}) = \max_{\theta \in \Theta} \sum_{i=1}^n \ln p_\theta(x_i).$$
+Il est presque toujours vrai que $\ell(\hat{\theta}_2) \geqslant \ell(\hat{\theta}_1)$ : un modèle plus flexible s'adapte mieux aux données *observées*. Mais cela ne signifie pas qu'il prédira mieux de *nouvelles* observations. Au contraire : en ajoutant des paramètres, on risque de capturer du bruit plutôt que la structure réelle de $P$. C’est ce qui s’appelle couramment le  *surajustement* (*overfitting*).
+
+Le problème de la sélection de modèles consiste donc à trouver un compromis entre
+
+- un *bon ajustement* aux données (grande log-vraisemblance) ;
+- une *bonne parcimonie* (peu de paramètres).
+
+## Le critère AIC
+
+:::{#def-aic}
+
+## Critère d'information d'Akaike
+
+Soit un modèle paramétré par $\theta \in \Theta \subset \mathbb{R}^k$. On note $\ell(\hat{\theta})$ la log-vraisemblance maximale et $k$ le nombre de paramètres libres du modèle. Le critère AIC est le nombre
+$$\mathrm{AIC} = -2\,\ell(\hat{\theta}) + 2k.$${#eq-aic}
+
+:::
+
+Si on a le choix entre plusieurs modèles, on choisit le modèle qui *minimise* l'AIC. 
+
+
+
+
+Soit $p_{\hat{\theta}}$ la loi estimée par maximum de vraisemblance dans un modèle donné. Si $X$ est une nouvelle observation de loi $P$ (la vraie loi, inconnue), la quantité naturelle à maximiser est l'espérance de la log-vraisemblance prédictive
+$$ \mathbb{E}_{X\sim P}\big[\ln p_{\hat{\theta}}(X)\big], $$
+où l'espérance porte à la fois sur $X$ (nouvelle donnée) et sur l'échantillon ayant servi à calculer $\hat{\theta}$. On ne peut pas calculer cette quantité directement — on ne connaît pas $P$ — mais on peut l'estimer.
+
+Évidemment, une tentation est de remplacer $P$ par les données et d'utiliser la log-vraisemblance « empirique » $\ell(\hat{\theta})/n$. Or cette quantité *surestime* systématiquement la performance prédictive : le paramètre $\hat{\theta}$ a été choisi précisément pour bien ajuster l'échantillon, et ne se comportera en général pas aussi bien sur des données nouvelles. Il faut donc corriger ce biais. 
+
+
+Sous des hypothèses de régularité (modèle bien spécifié, EMV asymptotiquement normal comme dans @thm-emv-mom), Akaike montre que le biais de $\ell(\hat{\theta})$ comme estimateur de $n\,\mathbb{E}_P[\ln p_{\hat{\theta}}(X)]$ vaut environ $k$ :
+$$\mathbb{E}\big[\ell(\hat{\theta})\big] \approx n\,\mathbb{E}_P\big[\ln p_{\hat{\theta}}(X)\big] + k.$$
+Chaque paramètre estimé apporte ainsi une « récompense » artificielle d'environ 1 unité de log-vraisemblance, même lorsque ce paramètre ne correspond à rien dans la vraie loi $P$.
+
+En prenant l'opposé et en ignorant la normalisation par $n$ (constante dès que l'on compare des modèles sur le même échantillon), on obtient l'estimateur @eq-aic. Nous démontrons maintenant pourquoi la correction de biais vaut $k$.
+
+## Démonstration 
+
+On se place dans le cadre d'un modèle bien spécifié : la vraie loi $P$ appartient à $(p_\theta)_{\theta \in \Theta}$, et l'on note $\theta_0$ le vrai paramètre. On suppose que les hypothèses du @thm-emv-mom sont satisfaites, de sorte que $\sqrt{n}(\hat{\theta} - \theta_0)$ converge en loi vers $\mathcal{N}(0, I(\theta_0)^{-1})$.
+
+La quantité que l'on souhaite estimer est la log-vraisemblance *prédictive*
+$$ \psi = \mathbb{E}_{X\sim P}\big[\ln p_{\hat{\theta}}(X)\big], $$
+où $X$ est une nouvelle observation indépendante de l'échantillon. 
+
+:::{#thm-aic}
+
+## Estimation d'Akaike
+
+Sous les hypothèses ci-dessus,
+$$ \mathbb{E}\big[\ell(\hat{\theta})] - n\psi = k + o(1). $$
+
+:::
+
+
+
+
+:::{.proof}
+
+Notons $g(\theta) = \mathbb{E}_P[\ln p_\theta(X)]$. Par définition, $\psi = g(\hat{\theta})$ (aléatoire) et $\mathbb{E}[\ell(\theta_0)] = ng(\theta_0)$.
+
+**Premier développement (dans l'échantillon).** Comme $\hat{\theta}$ maximise $\ell$, on a $\nabla \ell(\hat{\theta}) = 0$. En développant $\ell$ au voisinage de $\theta_0$ on a 
+$$ \ell(\theta_0) - \ell(\hat{\theta}) = \frac{1}{2}(\hat{\theta} - \theta_0)^\top \nabla^2 \ell(\theta_0)(\hat{\theta} - \theta_0) + ... $$
+Or par le TCL $\nabla^2 \ell(\theta_0) = \sum_{i=1}^n \nabla^2_\theta \ln p_{\theta_0}(x_i) \approx -n\,I(\theta_0)$. Donc
+$$ \ell(\hat{\theta}) - \ell(\theta_0) \approx \frac{n}{2}(\hat{\theta} - \theta_0)^\top I(\theta_0)(\hat{\theta} - \theta_0). $$
+En prenant l'espérance et en utilisant la normalité asymptotique$\sqrt{n}(\hat{\theta}-\theta_0) \rightsquigarrow \mathcal{N}(0, I(\theta_0)^{-1})$, on obtient donc
+$$ \mathbb{E}\big[\ell(\hat{\theta}) - \ell(\theta_0)\big] \approx \frac{1}{2n}\,\mathbb{E}\big[\chi^2_k\big] = \frac{k}{2}. $${#eq-biais-in}
+
+**Second développement (hors échantillon).** Développons maintenant $g$ au voisinage de $\theta_0$. Comme $\nabla_\theta g(\theta_0) = \mathbb{E}_P[\nabla_\theta \ln p_{\theta_0}(X)] = 0$ (le score est centré), la formule de Taylor donne
+$$ g(\hat{\theta}) \approx g(\theta_0) + \frac{1}{2}(\hat{\theta} - \theta_0)^\top \nabla^2 g(\theta_0)(\hat{\theta} - \theta_0). $$
+Mais $\nabla^2 g(\theta_0) = -I(\theta_0)$, d'où
+$$ g(\hat{\theta}) \approx g(\theta_0) - \frac{1}{2}(\hat{\theta} - \theta_0)^\top I(\theta_0)(\hat{\theta} - \theta_0). $$
+En prenant l'espérance,
+$$ \mathbb{E}\big[g(\hat{\theta})\big] \approx g(\theta_0) - \frac{k}{2n}. $${#eq-biais-out}
+
+**Conclusion.** D'après @eq-biais-in, $\mathbb{E}[\ell(\hat{\theta})] \approx \mathbb{E}[\ell(\theta_0)] + k/2$. D'après @eq-biais-out, $n\,\mathbb{E}[g(\hat{\theta})] \approx ng(\theta_0) - k/2 = \mathbb{E}[\ell(\theta_0)] - k/2$. En soustrayant ces deux quantités,
+\begin{align*}
+\mathbb{E}\big[\ell(\hat{\theta})\big] - n\,\mathbb{E}\big[g(\hat{\theta})\big]
+&\approx \left(\mathbb{E}[\ell(\theta_0)] + \frac{k}{2}\right) - \left(\mathbb{E}[\ell(\theta_0)] - \frac{k}{2}\right) = k.
+\end{align*}
+C'est bien le résultat annoncé. 
+
+:::
+
+
+:::{#ex-aic}
+
+Prenons l’exemple de la régression polynomiale. 
+
+On observe $(x_i, y_i)_{i \leqslant n}$ et l'on modélise $Y_i \mid x_i \sim \mathcal{N}(\mu(x_i), \sigma^2)$. Le modèle de degré $d$ possède $k = d+2$ paramètres (les $d+1$ coefficients du polynôme et $\sigma^2$). En augmentant $d$, la log-vraisemblance maximale $\ell(\hat{\theta})$ croît toujours, mais le terme de pénalité $2k$ croît lui aussi. L'AIC sélectionne en général un degré intermédiaire : assez élevé pour capter la structure des données, mais pas au point de modéliser le bruit.
+
+:::
+
+## Comparer des modèles
+
+L'AIC n'a de sens que *relativement* à d'autres modèles calculés sur le même échantillon. Ce qui importe, ce n'est pas la valeur absolue de l'AIC, mais les *différences* entre modèles.
+
+:::{#def-delta-aic}
+
+## Écart d'AIC
+
+Soient deux modèles $\mathcal{M}_1$ et $\mathcal{M}_2$ de critères respectifs $\mathrm{AIC}_1$ et $\mathrm{AIC}_2$. L'écart d'AIC du modèle $i$ par rapport au meilleur modèle est
+$$ \Delta_i\,\mathrm{AIC} = \mathrm{AIC}_i - \min_j \mathrm{AIC}_j.$$
+
+:::
+
+Par construction, $\Delta_i\,\mathrm{AIC} \geqslant 0$, et il vaut 0 pour le modèle retenu. On peut aller plus loin et convertir les écarts d'AIC en *probabilités relatives*. Le *poids d'Akaike* du modèle $i$ est
+$$ w_i = \frac{e^{-\Delta_i\,\mathrm{AIC}/2}}{\sum_j e^{-\Delta_j\,\mathrm{AIC}/2}}.$$
+Ces poids vérifient $\sum_i w_i = 1$ et $w_i \in [0,1]$. Le modèle qui a le plus grand poids est celui qui minimise l'AIC. Par exemple, si $\Delta_1\,\mathrm{AIC} = 0$ et $\Delta_2\,\mathrm{AIC} = 4$, alors $w_1/w_2 = e^2 \approx 7{,}4$ : le premier modèle est environ sept fois plus « crédible » que le second au sens de l'AIC.
+
